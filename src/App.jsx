@@ -11,9 +11,10 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 // Components
-import { Login, PrivateRoute } from "./components/routes";
+import { Login, PrivateRoute, appRoutes } from "./components/routes";
 import Layout from "./Layout";
 
+// Routes
 const App = props => {
   return (
     <Provider store={store}>
@@ -34,8 +35,8 @@ const App = props => {
             <hr />
 
             <Switch>
-              <PrivateRoute exact path="/" component={Layout} />
-              <Route exact path="/login" component={Login} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute path="/" component={Layout} routes={appRoutes} />
               <Redirect to="/login" />
             </Switch>
           </div>
