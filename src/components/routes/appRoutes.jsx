@@ -1,5 +1,8 @@
 import React from "react";
 
+// Components
+import Inventario from "./Inventario";
+
 const appRoutes = [
   {
     name: "Inicio",
@@ -23,7 +26,7 @@ const appRoutes = [
     name: "Inventario",
     path: "/inventario",
     exact: true,
-    component: <p>Soy Inventario!</p>
+    component: <Inventario />
   },
   {
     name: "Reportes",

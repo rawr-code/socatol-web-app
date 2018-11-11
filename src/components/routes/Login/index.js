@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import { loggedIn } from "../../../ducks/Auth";
 const mapDispatchToProps = dispatch => {
   return {
-    loggedIn: login => dispatch(loggedIn())
+    loggedIn() {
+      dispatch(loggedIn());
+    }
   };
 };
 

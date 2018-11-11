@@ -15,12 +15,12 @@ const theme = createMuiTheme({
     secondary: {
       main: "#fff"
     },
-    background: { default: "#f8f8f8" }
+    background: { default: "#eceff1" }
   },
   typography: {
     useNextVariants: true
   },
-  drawerWidth: 250
+  drawerWidth: 260
 });
 
 const MUICustomTheme = ({ children }) => {

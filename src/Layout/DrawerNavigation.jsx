@@ -13,7 +13,7 @@ import {
 import { Inbox, Mail } from "@material-ui/icons";
 
 // React Router
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Styles
 import classNames from "classnames";
@@ -27,12 +27,7 @@ const DrawerNavigation = ({
   const drawer = (
     <List classes={{ root: classes.listItem }}>
       {routes.map(({ name, path, exact }, index) => (
-        <Link
-          to={path}
-          exact={exact.toString()}
-          key={name}
-          className={classes.link}
-        >
+        <NavLink to={path} exact={exact} key={name} className={classes.link}>
           <ListItem
             selected={itemSelected === index}
             onClick={event => handleNavigation(event, index)}
@@ -54,7 +49,7 @@ const DrawerNavigation = ({
               }}
             />
           </ListItem>
-        </Link>
+        </NavLink>
       ))}
     </List>
   );
@@ -75,7 +70,7 @@ const DrawerNavigation = ({
           {drawer}
         </Drawer>
       </Hidden>
-      <Hidden xsDown implementation="css">
+      <Hidden smDown implementation="css">
         <Drawer
           classes={{
             paper: classes.drawerPaper

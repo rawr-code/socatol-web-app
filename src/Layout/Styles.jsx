@@ -1,4 +1,10 @@
 const Styles = theme => ({
+  root: {
+    display: "flex"
+  },
+  article: {
+    width: "100%"
+  },
   textWhite: {
     color: "white",
     fontFamily: "Google Sans"
@@ -17,6 +23,7 @@ const Styles = theme => ({
       justifyContent: "flex-end"
     }
   },
+  mixin: theme.mixins.toolbar,
   menuButton: {
     marginRight: 20,
     [theme.breakpoints.up("md")]: {

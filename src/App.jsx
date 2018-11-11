@@ -4,7 +4,7 @@ import React from "react";
 import MUICustomTheme from "./MUICustomTheme";
 
 // React router
-import { BrowserRouter, Route, Redirect, Switch, Link } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 // Redux & Store
 import { Provider } from "react-redux";
@@ -20,26 +20,13 @@ const App = props => {
     <Provider store={store}>
       <BrowserRouter>
         <MUICustomTheme>
-          <h1>Login</h1>
-
-          <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
-
-            <hr />
-
+          <main>
             <Switch>
               <Route path="/login" component={Login} />
               <PrivateRoute path="/" component={Layout} routes={appRoutes} />
               <Redirect to="/login" />
             </Switch>
-          </div>
+          </main>
         </MUICustomTheme>
       </BrowserRouter>
     </Provider>

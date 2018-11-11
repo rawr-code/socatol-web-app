@@ -1,3 +1,4 @@
 import Auth from "./Auth";
+import Inventario from "./Inventario";
 
-export { Auth };
+export { Auth, Inventario };

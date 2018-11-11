@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 
 // React Router
 import { Route, Switch, Redirect } from "react-router-dom";
@@ -25,7 +25,7 @@ class Layout extends Component {
     const { classes, routes } = this.props;
     const { navigationSelectedIndex } = this.state;
     return (
-      <Fragment>
+      <section className={classes.root}>
         <Navbar classes={classes} />
         <DrawerNavigation
           classes={classes}
@@ -33,8 +33,8 @@ class Layout extends Component {
           handleNavigation={this.handleNavigationItemClick.bind(this)}
           itemSelected={navigationSelectedIndex}
         />
-        <main style={{ marginLeft: 260 }}>
-          <h1>i am layout</h1>
+        <article className={classes.article}>
+          <div className={classes.mixin} />
           <Switch>
             {routes.map(route => {
               const { exact, path, component, name } = route;
@@ -49,8 +49,8 @@ class Layout extends Component {
             })}
             <Redirect to="/" />
           </Switch>
-        </main>
-      </Fragment>
+        </article>
+      </section>
     );
   }
 }
