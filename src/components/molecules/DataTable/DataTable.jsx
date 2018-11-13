@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
 
 // React Router
 import { Link } from "react-router-dom";
@@ -52,21 +53,27 @@ function getSorting(order, orderBy) {
     : (a, b) => -desc(a, b, orderBy);
 }
 
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
 class DataTable extends Component {
+  static defaultProps = {
+    data: []
+  };
+
   state = {
     order: "asc",
     orderBy: "name",
     rows: [
+      {
+        id: "name",
+        label: "Nombre"
+      },
+      {
+        id: "code",
+        label: "Codigo"
+      }
       // {
       //   id: "name",
       //   numeric: false,
-      //   disablePadding: true,
+      //   disablePadding: false,
       //   label: "Name"
       // },
       // {
@@ -85,6 +92,7 @@ class DataTable extends Component {
       // }
     ],
     data: [
+      // createData("Almacencito", "Almen-00")
       // createData("Cupcake", 305, 3.7, 67, 4.3),
       // createData("Donut", 452, 25.0, 51, 4.9),
       // createData("Eclair", 262, 16.0, 24, 6.0),
@@ -103,6 +111,21 @@ class DataTable extends Component {
     rowsPerPage: 5
   };
 
+  componentWillMount() {
+    let data = this.props.data;
+    data = this.createData(data);
+    this.setState({ data });
+  }
+  createData(data) {
+    console.log(data);
+    let id = 0;
+    const rows = data.map(({ name, code }) => {
+      const row = { id, name, code };
+      id += 1;
+      return row;
+    });
+    return rows;
+  }
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property);
   };
@@ -132,39 +155,41 @@ class DataTable extends Component {
     return (
       <div className={classes.root}>
         <Paper classes={{ root: classes.paper }}>
-          <div className={classes.imgContainer}>
-            <img
-              alt="Almacén icon"
-              src="https://img.icons8.com/dusk/2x/warehouse.png"
-              style={{ height: 128, width: 128 }}
-            />
-            <div className={classes.info}>
-              <div className={classes.titleContainer}>
-                <Typography
-                  component="h2"
-                  variant="h6"
-                  className={classes.title}
+          {data.length === 0 && (
+            <div className={classes.imgContainer}>
+              <img
+                alt="Almacén icon"
+                src="https://img.icons8.com/dusk/2x/warehouse.png"
+                style={{ height: 128, width: 128 }}
+              />
+              <div className={classes.info}>
+                <div className={classes.titleContainer}>
+                  <Typography
+                    component="h2"
+                    variant="h6"
+                    className={classes.title}
+                  >
+                    No tienes almacenes registrados.
+                  </Typography>
+                  <Typography
+                    component="p"
+                    variant="subtitle1"
+                    className={classes.subtitle}
+                  >
+                    Sin almacenes no podras guardar tus productos.
+                  </Typography>
+                </div>
+                <Button
+                  component={MyLink}
+                  variant="contained"
+                  size="medium"
+                  color="primary"
                 >
-                  No tienes almacenes registrados.
-                </Typography>
-                <Typography
-                  component="p"
-                  variant="subtitle1"
-                  className={classes.title}
-                >
-                  Sin almacenes no podras tus productos.
-                </Typography>
+                  {addButtonTitle}
+                </Button>
               </div>
-              <Button
-                component={MyLink}
-                variant="contained"
-                size="medium"
-                color="primary"
-              >
-                {addButtonTitle}
-              </Button>
             </div>
-          </div>
+          )}
           {data.length > 0 && (
             <Fragment>
               <Toolbar classes={{ root: classes.toolbar }}>
@@ -190,9 +215,12 @@ class DataTable extends Component {
               </Toolbar>
               <div className={classes.tableContainer}>
                 <Table classes={{ root: classes.table }}>
-                  <TableHead className={classes.tableHead}>
+                  <TableHead
+                    className={classes.tableHead}
+                    colSpan={rows.length}
+                  >
                     <TableRow>
-                      {rows.map(row => {
+                      {rows.map((row, key) => {
                         return (
                           <TableCell
                             key={row.id}
@@ -237,10 +265,7 @@ class DataTable extends Component {
                             <TableCell component="th" scope="row">
                               {n.name}
                             </TableCell>
-                            <TableCell numeric>{n.calories}</TableCell>
-                            <TableCell numeric>{n.fat}</TableCell>
-                            <TableCell numeric>{n.carbs}</TableCell>
-                            <TableCell numeric>{n.protein}</TableCell>
+                            <TableCell>{n.code}</TableCell>
                           </TableRow>
                         );
                       })}

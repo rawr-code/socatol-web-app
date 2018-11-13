@@ -6,10 +6,16 @@ import { Link, Route, Switch, Redirect } from "react-router-dom";
 // Routes
 import { Home, Create } from "./routes";
 
-const Inventario = ({ selectedTabIndex, handleChangeTab, match, routes }) => {
+const Inventario = ({
+  selectedTabIndex,
+  handleChangeTab,
+  newAlmacen,
+  almacenes,
+  match,
+  routes
+}) => {
   return (
     <Fragment>
-      {/* <Link to={`${match.path}/prueba`}>prueba</Link> */}
       <Switch>
         <Route
           exact
@@ -21,6 +27,7 @@ const Inventario = ({ selectedTabIndex, handleChangeTab, match, routes }) => {
               buttonUrl={`${match.path}/almacen/nuevo`}
               selectedTabIndex={selectedTabIndex}
               handleChangeTab={handleChangeTab}
+              almacenes={almacenes}
             />
           )}
         />
@@ -29,8 +36,9 @@ const Inventario = ({ selectedTabIndex, handleChangeTab, match, routes }) => {
           path={`${match.path}/almacen/nuevo`}
           render={({ history }) => (
             <Create
-              history={history}
               arrowBack
+              history={history}
+              handleCreate={newAlmacen}
               title="Nuevo Almacén"
               formTitle="Almacén"
             />

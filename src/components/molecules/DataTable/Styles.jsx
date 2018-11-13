@@ -62,6 +62,10 @@ const Styles = theme => ({
     textAlign: "center"
   },
   title: {
+    textTransform: "uppercase",
+    fontWeight: 600
+  },
+  subTitle: {
     fontWeight: 400
   },
   titleContainer: {

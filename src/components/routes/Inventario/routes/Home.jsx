@@ -9,7 +9,8 @@ const Home = props => {
     handleChangeTab,
     buttonUrl,
     title,
-    addButtonTitle
+    addButtonTitle,
+    almacenes
   } = props;
   return (
     <Fragment>
@@ -20,7 +21,11 @@ const Home = props => {
         handleChange={handleChangeTab}
       />
       {selectedTabIndex === 0 && (
-        <DataTable buttonUrl={buttonUrl} addButtonTitle={addButtonTitle} />
+        <DataTable
+          buttonUrl={buttonUrl}
+          addButtonTitle={addButtonTitle}
+          data={almacenes}
+        />
       )}
       {selectedTabIndex === 1 && <h1>Soy Productos</h1>}
       {selectedTabIndex === 2 && <h1>Soy Proveedores</h1>}

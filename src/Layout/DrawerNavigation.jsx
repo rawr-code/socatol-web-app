@@ -10,8 +10,6 @@ import {
   ListItemText
 } from "@material-ui/core";
 
-import { Inbox, Mail } from "@material-ui/icons";
-
 // React Router
 import { NavLink } from "react-router-dom";
 
@@ -26,7 +24,7 @@ const DrawerNavigation = ({
 }) => {
   const drawer = (
     <List classes={{ root: classes.listItem }}>
-      {routes.map(({ name, path, exact }, index) => (
+      {routes.map(({ name, path, exact, icon }, index) => (
         <NavLink to={path} exact={exact} key={name} className={classes.link}>
           <ListItem
             selected={itemSelected === index}
@@ -37,7 +35,7 @@ const DrawerNavigation = ({
             }}
           >
             <ListItemIcon classes={{ root: classes.itemIcon }}>
-              {index % 2 === 0 ? <Inbox /> : <Mail />}
+              {icon}
             </ListItemIcon>
             <ListItemText
               primary={name}

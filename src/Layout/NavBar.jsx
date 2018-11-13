@@ -2,7 +2,8 @@ import React from "react";
 
 //Material UI
 import { AppBar, Toolbar, IconButton, Button } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { Menu, Notifications, DateRange } from "@material-ui/icons";
+import { Bell } from "react-feather";
 
 const NavBar = ({ classes }) => {
   return (
@@ -15,7 +16,15 @@ const NavBar = ({ classes }) => {
         >
           <Menu />
         </IconButton>
-        <Button color="inherit">Login</Button>
+        {/* <Button color="inherit">Login</Button> */}
+        <div>
+          <IconButton color="inherit" aria-label="Calendario">
+            <DateRange />
+          </IconButton>
+          <IconButton color="inherit" aria-label="Notificaciones">
+            <Notifications />
+          </IconButton>
+        </div>
       </Toolbar>
     </AppBar>
   );

@@ -12,7 +12,7 @@ const Styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderRadius: 8,
-    paddingTop: 10
+    padding: "15px 0"
   },
   imgContainer: {
     textAlign: "center"

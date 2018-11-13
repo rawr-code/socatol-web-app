@@ -3,16 +3,19 @@ import Inventario from "./Inventario";
 import { connect } from "react-redux";
 
 // Actions Creators
-import { handleChangeTab } from "../../../ducks/Inventario";
+import { handleChangeTab, newAlmancen } from "../../../ducks/Inventario";
 
-const mapStateToProps = ({ Inventario: { selectedTabIndex } }) => {
-  return { selectedTabIndex };
+const mapStateToProps = ({ Inventario: { selectedTabIndex, almacenes } }) => {
+  return { selectedTabIndex, almacenes };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     handleChangeTab(event, index) {
       dispatch(handleChangeTab(index));
+    },
+    newAlmacen: data => {
+      dispatch(newAlmancen(data));
     }
   };
 };
