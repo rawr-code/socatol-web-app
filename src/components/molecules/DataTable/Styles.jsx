@@ -53,7 +53,10 @@ const Styles = theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: 100
+    padding: 100,
+    [theme.breakpoints.down("xs")]: {
+      padding: 30
+    }
   },
   info: {
     textAlign: "center"

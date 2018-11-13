@@ -145,7 +145,7 @@ class DataTable extends Component {
                   variant="h6"
                   className={classes.title}
                 >
-                  Lo sentimos, no tiene almacenes registrados.
+                  No tienes almacenes registrados.
                 </Typography>
                 <Typography
                   component="p"
