@@ -22,7 +22,7 @@ class Layout extends Component {
   };
 
   render() {
-    const { classes, routes } = this.props;
+    const { classes, routes, match } = this.props;
     const { navigationSelectedIndex } = this.state;
     return (
       <section className={classes.root}>
@@ -37,17 +37,22 @@ class Layout extends Component {
           <div className={classes.mixin} />
           <Switch>
             {routes.map(route => {
-              const { exact, path, component, name } = route;
+              const { name, path, component, exact } = route;
+              const Po = component;
               return (
                 <Route
                   key={name}
-                  exact={exact}
                   path={path}
-                  render={() => component}
+                  exact={exact}
+                  render={
+                    typeof component === "function"
+                      ? props => <Po {...props} />
+                      : () => component
+                  }
                 />
               );
             })}
-            <Redirect to="/" />
+            <Redirect to={match.url} />
           </Switch>
         </article>
       </section>

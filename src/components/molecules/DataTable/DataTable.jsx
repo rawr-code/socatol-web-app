@@ -1,19 +1,29 @@
 import React, { Component } from "react";
 
+// React Router
+import { Link } from "react-router-dom";
+
 // Material UI
 import {
   Paper,
   Toolbar,
+  Button,
+  IconButton,
   Table,
   TableHead,
   TableBody,
-  TableFooter,
   TableRow,
   TableCell,
   TableSortLabel,
   TablePagination,
   Tooltip
 } from "@material-ui/core";
+
+import { Add, Search, Print } from "@material-ui/icons";
+
+// Styles
+import Styles from "./Styles";
+import { withStyles } from "@material-ui/core/styles";
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -115,77 +125,111 @@ class DataTable extends Component {
     this.setState({ rowsPerPage: event.target.value });
   };
   render() {
+    const { classes, buttonUrl, addButtonTitle } = this.props;
     const { data, order, orderBy, rowsPerPage, page, rows } = this.state;
-
+    const MyLink = props => <Link to={buttonUrl} {...props} />;
     return (
-      <Paper style={{ margin: 50 }}>
-        <Toolbar>askjdhasd</Toolbar>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {rows.map(row => {
-                return (
-                  <TableCell
-                    key={row.id}
-                    numeric={row.numeric}
-                    sortDirection={orderBy === row.id ? order : false}
-                  >
-                    <Tooltip
-                      title="Ordenar"
-                      placement={row.numeric ? "bottom-end" : "bottom-start"}
-                      enterDelay={300}
-                    >
-                      <TableSortLabel
-                        active={orderBy === row.id}
-                        direction={order}
-                        onClick={event => this.handleRequestSort(event, row.id)}
+      <div className={classes.root}>
+        <Paper classes={{ root: classes.paper }}>
+          <Toolbar classes={{ root: classes.toolbar }}>
+            {/* <IconButton classes={{ root: classes.iconButton }}>
+              <Search className={classes.icon} />
+            </IconButton> */}
+            <Button
+              component={MyLink}
+              variant="contained"
+              size="medium"
+              color="primary"
+            >
+              {addButtonTitle}
+            </Button>
+            <div>
+              <IconButton classes={{ root: classes.iconButton }}>
+                <Search className={classes.icon} />
+              </IconButton>
+              <IconButton classes={{ root: classes.iconButton }}>
+                <Print className={classes.icon} />
+              </IconButton>
+            </div>
+          </Toolbar>
+          <div className={classes.tableContainer}>
+            <Table classes={{ root: classes.table }}>
+              <TableHead className={classes.tableHead}>
+                <TableRow>
+                  {rows.map(row => {
+                    return (
+                      <TableCell
+                        key={row.id}
+                        numeric={row.numeric}
+                        sortDirection={orderBy === row.id ? order : false}
                       >
-                        {row.label}
-                      </TableSortLabel>
-                    </Tooltip>
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stableSort(data, getSorting(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(n => {
-                return (
-                  <TableRow hover key={n.id}>
-                    <TableCell component="th" scope="row">
-                      {n.name}
-                    </TableCell>
-                    <TableCell numeric>{n.calories}</TableCell>
-                    <TableCell numeric>{n.fat}</TableCell>
-                    <TableCell numeric>{n.carbs}</TableCell>
-                    <TableCell numeric>{n.protein}</TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                colSpan={6}
-                count={data.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={this.handleChangePage}
-                onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                labelRowsPerPage="Filas por página:"
-                rowsPerPageOptions={[5, 25, 50, 100]}
-                labelDisplayedRows={({ from, to, count }) =>
-                  `${from} a ${to} de ${count}`
-                }
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </Paper>
+                        <Tooltip
+                          title="Ordenar"
+                          placement={
+                            row.numeric ? "bottom-end" : "bottom-start"
+                          }
+                          enterDelay={300}
+                        >
+                          <TableSortLabel
+                            active={orderBy === row.id}
+                            direction={order}
+                            onClick={event =>
+                              this.handleRequestSort(event, row.id)
+                            }
+                          >
+                            {row.label}
+                          </TableSortLabel>
+                        </Tooltip>
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {stableSort(data, getSorting(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(n => {
+                    return (
+                      <TableRow
+                        hover
+                        key={n.id}
+                        classes={{ hover: classes.tableRowHover }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {n.name}
+                        </TableCell>
+                        <TableCell numeric>{n.calories}</TableCell>
+                        <TableCell numeric>{n.fat}</TableCell>
+                        <TableCell numeric>{n.carbs}</TableCell>
+                        <TableCell numeric>{n.protein}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </div>
+          <TablePagination
+            classes={{
+              toolbar: classes.pagination,
+              caption: classes.paginationCaption
+            }}
+            component="div"
+            colSpan={rows.length}
+            count={data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={this.handleChangePage}
+            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            labelRowsPerPage="Filas por página:"
+            rowsPerPageOptions={[5, 25, 50, 100]}
+            labelDisplayedRows={({ from, to, count }) =>
+              `${from} a ${to} de ${count}`
+            }
+          />
+        </Paper>
+      </div>
     );
   }
 }
 
-export default DataTable;
+export default withStyles(Styles)(DataTable);

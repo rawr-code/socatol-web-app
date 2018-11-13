@@ -32,8 +32,15 @@ class Login extends Component {
     return (
       <Paper className={classes.root}>
         <form className={classes.form}>
-          <Typography variant="h6" component="h1">
-            Login
+          <Typography variant="h6" component="h1" className={classes.title}>
+            SocatolWebApp
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h1"
+            className={classes.titleLogin}
+          >
+            Iniciar Sesión
           </Typography>
           <FormControl margin="normal" fullWidth>
             <InputLabel htmlFor="user">Usuario</InputLabel>

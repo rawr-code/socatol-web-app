@@ -1,4 +1,5 @@
 import Inventario from "./Inventario";
+
 import { connect } from "react-redux";
 
 // Actions Creators
@@ -15,6 +16,7 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

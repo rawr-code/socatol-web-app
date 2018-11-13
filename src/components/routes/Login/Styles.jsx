@@ -20,6 +20,15 @@ const Styles = theme => ({
   },
   button: {
     marginTop: theme.spacing.unit * 3
+  },
+  title: {
+    fontFamily: "Google Sans",
+    fontSize: "2rem",
+    marginTop: 20
+  },
+  titleLogin: {
+    fontFamily: "Google Sans",
+    fontSize: "1.5rem"
   }
 });
 

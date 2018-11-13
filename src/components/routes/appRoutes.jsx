@@ -13,25 +13,21 @@ const appRoutes = [
   {
     name: "Banco",
     path: "/banco",
-    exact: true,
     component: <p>Soy Banco!</p>
   },
   {
     name: "Facturar",
     path: "/facturar",
-    exact: true,
     component: <p>Soy Facturar!</p>
   },
   {
     name: "Inventario",
     path: "/inventario",
-    exact: true,
-    component: <Inventario />
+    component: Inventario
   },
   {
     name: "Reportes",
     path: "/reportes",
-    exact: true,
     component: <p>Soy Reportes!</p>
   }
 ];

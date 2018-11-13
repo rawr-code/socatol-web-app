@@ -1,18 +1,39 @@
 import React from "react";
 
 // Material UI
-import { AppBar, Typography, Tab, Tabs } from "@material-ui/core";
-
+import { AppBar, Typography, Tab, Tabs, IconButton } from "@material-ui/core";
+import { ArrowBack } from "@material-ui/icons";
+import classNames from "classnames";
 // Styles
 import Styles from "./Styles";
 import { withStyles } from "@material-ui/core/styles";
 
-const TabsHeader = ({ classes, title, tabs, selectedIndex, handleChange }) => {
+const TabsHeader = ({
+  classes,
+  title,
+  tabs,
+  selectedIndex,
+  handleChange,
+  arrowBack,
+  history
+}) => {
   return (
     <AppBar position="static" classes={{ root: classes.root }}>
-      <Typography variant="h3" component="h1" className={classes.title}>
-        {title}
-      </Typography>
+      <div
+        className={classNames(
+          classes.titleContainer,
+          arrowBack && classes.arrow
+        )}
+      >
+        {arrowBack && (
+          <IconButton color="secondary" onClick={() => history.goBack()}>
+            <ArrowBack className={classes.icon} />
+          </IconButton>
+        )}
+        <Typography variant="h3" component="h1" className={classes.title}>
+          {title}
+        </Typography>
+      </div>
       {tabs && (
         <Tabs
           value={selectedIndex}
