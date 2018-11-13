@@ -48,6 +48,21 @@ const Styles = theme => ({
     [theme.breakpoints.down(350)]: {
       flexShrink: 0.1
     }
+  },
+  imgContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: 100
+  },
+  info: {
+    textAlign: "center"
+  },
+  title: {
+    fontWeight: 400
+  },
+  titleContainer: {
+    margin: "20px 0"
   }
 });
 
