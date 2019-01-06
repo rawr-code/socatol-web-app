@@ -7,10 +7,10 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#27c24c",
-      light: "#69f67b",
-      dark: "#27c24c",
-      contrastText: "#fff"
+      main: "#ffffff",
+      light: "#ffffff",
+      dark: "#ffffff",
+      contrastText: "#000000a6"
     },
     secondary: {
       main: "#ffffff",
@@ -18,12 +18,12 @@ const theme = createMuiTheme({
       dark: "rgb(178, 178, 178)",
       contrastText: "rgba(0, 0, 0, 0.87)"
     },
-    background: { default: "#eceff1" }
+    background: { default: "#f0f2f5" }
   },
   typography: {
     useNextVariants: true
   },
-  drawerWidth: 260
+  drawerWidth: 256
 });
 
 const MUICustomTheme = ({ children }) => {

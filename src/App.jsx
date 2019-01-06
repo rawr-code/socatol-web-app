@@ -1,21 +1,18 @@
 import React from "react";
-
-// Material UI Custom Theme
-import MUICustomTheme from "./MUICustomTheme";
-
-// React router
+import { Provider } from "react-redux";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
-// Redux & Store
-import { Provider } from "react-redux";
-import store from "./store";
+// Configuration
+import { MUICustomTheme, store } from "./config";
 
 // Components
 import { Login, PrivateRoute, appRoutes } from "./components/routes";
-import Layout from "./Layout";
+// import Layout from "./Layout";
 
+// DevComponents
+import Layout from "./components/organisms/Layout/Layout";
 // Routes
-const App = props => {
+const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
