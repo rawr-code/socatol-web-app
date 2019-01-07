@@ -52,25 +52,27 @@ class MiniDrawer extends React.Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Switch>
-            {routes.map(route => {
-              const { name, path, component, exact } = route;
-              const Po = component;
-              return (
-                <Route
-                  key={name}
-                  path={path}
-                  exact={exact}
-                  render={
-                    typeof component === "function"
-                      ? props => <Po {...props} />
-                      : () => component
-                  }
-                />
-              );
-            })}
-            <Redirect to={match.url} />
-          </Switch>
+          <section>
+            <Switch>
+              {routes.map(route => {
+                const { name, path, component, exact } = route;
+                const Po = component;
+                return (
+                  <Route
+                    key={name}
+                    path={path}
+                    exact={exact}
+                    render={
+                      typeof component === "function"
+                        ? props => <Po {...props} />
+                        : () => component
+                    }
+                  />
+                );
+              })}
+              <Redirect to={match.url} />
+            </Switch>
+          </section>
         </article>
 
         {/* <main className={classes.content}>

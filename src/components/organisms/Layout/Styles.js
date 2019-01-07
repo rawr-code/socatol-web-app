@@ -21,7 +21,7 @@ const styles = theme => ({
     })
   },
   menuButton: {
-    padding: "21px 24px",
+    padding: "20px 24px",
     borderRadius: 0
   },
   hide: {

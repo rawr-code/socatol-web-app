@@ -1,7 +1,6 @@
 const Styles = theme => ({
   root: {
     maxWidth: 736,
-    margin: "0 auto",
     borderRadius: 8,
     [theme.breakpoints.down("md")]: {
       width: "100%",

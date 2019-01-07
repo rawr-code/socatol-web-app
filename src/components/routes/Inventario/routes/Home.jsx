@@ -14,12 +14,12 @@ const Home = props => {
   } = props;
   return (
     <Fragment>
-      <TabsHeader
+      {/* <TabsHeader
         tabs
         title={title}
         selectedIndex={selectedTabIndex}
         handleChange={handleChangeTab}
-      />
+      /> */}
       {selectedTabIndex === 0 && (
         <DataTable
           buttonUrl={buttonUrl}
