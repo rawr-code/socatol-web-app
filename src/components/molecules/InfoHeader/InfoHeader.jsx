@@ -32,7 +32,7 @@ const InfoHeader = props => {
           <Typography component="p" variant="h4" className={classes.number}>
             3
           </Typography>
-          <after className={classes.after} />
+          <div className={classes.after} />
         </div>
         <div className={classes.item}>
           <Typography variant="body2" className={classes.itemTitle}>
@@ -41,7 +41,7 @@ const InfoHeader = props => {
           <Typography component="p" variant="h4" className={classes.number}>
             795
           </Typography>
-          <after className={classes.after} />
+          <div className={classes.after} />
         </div>
         <div className={classes.item}>
           <Typography variant="body2" className={classes.itemTitle}>

@@ -1,4 +1,5 @@
-import TabsHeader from "./TabsHeader";
 import DataTable from "./DataTable";
+import MediaBlock from "./MediaBlock";
+import MediaBlockHeader from "./MediaBlockHeader";
 
-export { TabsHeader, DataTable };
+export { DataTable, MediaBlock, MediaBlockHeader };

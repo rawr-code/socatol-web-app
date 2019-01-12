@@ -56,6 +56,9 @@ const styles = theme => ({
   link: {
     textDecoration: "none"
   },
+  linkIcon: {
+    margin: "0 8px"
+  },
   toolbar: {
     display: "flex",
     alignItems: "center",
