@@ -1,14 +1,7 @@
 import React from "react";
 
 // Feather Icons
-import {
-  Package,
-  DollarSign,
-  FileText,
-  Printer,
-  Activity,
-  Grid
-} from "react-feather";
+import { Package, DollarSign, FileText, Printer, Grid } from "react-feather";
 
 // Components
 import Inventario from "./Inventario";

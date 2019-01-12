@@ -35,7 +35,7 @@ const LayoutDrawer = props => {
     >
       <List>
         <ListItem button>
-          <ListItemIcon>
+          <ListItemIcon className={classes.linkIcon}>
             <InboxIcon />
           </ListItemIcon>
           <ListItemText primary="Socatol" />
@@ -46,7 +46,7 @@ const LayoutDrawer = props => {
         {routes.map(({ name, path, exact, icon }, index) => (
           <NavLink to={path} exact={exact} key={name} className={classes.link}>
             <ListItem selected={itemSelected === index}>
-              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemIcon className={classes.linkIcon}>{icon}</ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
           </NavLink>

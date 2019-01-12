@@ -1,8 +1,4 @@
 import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-
-// React Router
-import { Link } from "react-router-dom";
 
 // Material UI
 import {
@@ -21,7 +17,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { Add, Search, Print } from "@material-ui/icons";
+import { Search } from "@material-ui/icons";
 
 // Styles
 import Styles from "./Styles";
@@ -149,9 +145,9 @@ class DataTable extends Component {
     this.setState({ rowsPerPage: event.target.value });
   };
   render() {
-    const { classes, buttonUrl, addButtonTitle } = this.props;
-    const { data, order, orderBy, rowsPerPage, page, rows } = this.state;
-    const MyLink = props => <Link to={buttonUrl} {...props} />;
+    const { classes, data } = this.props;
+    const { order, orderBy, rowsPerPage, page, rows } = this.state;
+
     return (
       <div className={classes.root}>
         <Paper classes={{ root: classes.paper }}>
@@ -179,38 +175,29 @@ class DataTable extends Component {
                     Sin almacenes no podras guardar tus productos.
                   </Typography>
                 </div>
-                <Button
-                  component={MyLink}
-                  variant="contained"
-                  size="medium"
-                  color="primary"
-                >
-                  {addButtonTitle}
-                </Button>
               </div>
             </div>
           )}
           {data.length > 0 && (
             <Fragment>
               <Toolbar classes={{ root: classes.toolbar }}>
-                {/* <IconButton classes={{ root: classes.iconButton }}>
-              <Search className={classes.icon} />
-            </IconButton> */}
-                <Button
-                  component={MyLink}
-                  variant="contained"
-                  size="medium"
-                  color="primary"
+                <Typography
+                  component="h2"
+                  variant="subtitle1"
+                  // className={classes.subtitle}
                 >
-                  {addButtonTitle}
-                </Button>
+                  Productos
+                </Typography>
                 <div>
                   <IconButton classes={{ root: classes.iconButton }}>
                     <Search className={classes.icon} />
                   </IconButton>
-                  <IconButton classes={{ root: classes.iconButton }}>
+                  {/* <IconButton classes={{ root: classes.iconButton }}>
                     <Print className={classes.icon} />
-                  </IconButton>
+                  </IconButton> */}
+                  <Button variant="contained" size="medium" color="primary">
+                    añadir
+                  </Button>
                 </div>
               </Toolbar>
               <div className={classes.tableContainer}>
@@ -256,6 +243,7 @@ class DataTable extends Component {
                         page * rowsPerPage + rowsPerPage
                       )
                       .map(n => {
+                        console.log(n);
                         return (
                           <TableRow
                             hover

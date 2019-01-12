@@ -4,7 +4,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // MaterialUI Components
-import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton } from "@material-ui/core";
 
 import LayoutDrawer from "./LayoutDrawer";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -52,27 +52,25 @@ class MiniDrawer extends React.Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <section>
-            <Switch>
-              {routes.map(route => {
-                const { name, path, component, exact } = route;
-                const Po = component;
-                return (
-                  <Route
-                    key={name}
-                    path={path}
-                    exact={exact}
-                    render={
-                      typeof component === "function"
-                        ? props => <Po {...props} />
-                        : () => component
-                    }
-                  />
-                );
-              })}
-              <Redirect to={match.url} />
-            </Switch>
-          </section>
+          <Switch>
+            {routes.map(route => {
+              const { name, path, component, exact } = route;
+              const Po = component;
+              return (
+                <Route
+                  key={name}
+                  path={path}
+                  exact={exact}
+                  render={
+                    typeof component === "function"
+                      ? props => <Po {...props} />
+                      : () => component
+                  }
+                />
+              );
+            })}
+            <Redirect to={match.url} />
+          </Switch>
         </article>
 
         {/* <main className={classes.content}>

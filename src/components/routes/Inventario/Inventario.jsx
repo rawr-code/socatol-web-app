@@ -1,86 +1,88 @@
 import React, { Fragment } from "react";
 
-// React Router
-import { Route, Switch, Redirect } from "react-router-dom";
-
-// Components
-import InfoHeader from "../../../components/molecules/InfoHeader";
+import { MediaBlockHeader } from "../../molecules";
+import { MediaBlockList } from "../../organisms";
 
 // MaterialUI Components
 import { Grid } from "@material-ui/core";
-// Routes
-import { Home, Create } from "./routes";
 
 const Inventario = ({ selectedTabIndex, handleChangeTab, almacenes }) => {
+  const data = [
+    {
+      title: "producto1",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto2",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto3",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto4",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto5",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto6",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto7",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto8",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto9",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto10",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto11",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto12",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto13",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto14",
+      description: "descripcion del producto"
+    },
+    {
+      title: "producto15",
+      description: "descripcion del producto"
+    }
+  ];
   return (
     <Fragment>
-      <InfoHeader
-        title="Gestion de Inventario"
-        description="Listado de almacenes, productos y proveedores."
-      />
-      <article style={{ margin: "24px 24px 0" }}>
-        <Grid container spacing={24}>
-          <Grid item xs={8}>
-            <Home
-              title="Inventario"
-              addButtonTitle="Añadir almacén"
-              buttonUrl="/almacen/nuevo"
-              selectedTabIndex={selectedTabIndex}
-              handleChangeTab={handleChangeTab}
-              almacenes={almacenes}
-            />
-            <Home
-              title="Inventario"
-              addButtonTitle="Añadir almacén"
-              buttonUrl="/almacen/nuevo"
-              selectedTabIndex={selectedTabIndex}
-              handleChangeTab={handleChangeTab}
-              almacenes={almacenes}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Home
-              title="Inventario"
-              addButtonTitle="Añadir almacén"
-              buttonUrl="/almacen/nuevo"
-              selectedTabIndex={selectedTabIndex}
-              handleChangeTab={handleChangeTab}
-              almacenes={almacenes}
-            />
-          </Grid>
+      <Grid container spacing={0}>
+        <Grid item xs={4} component="section">
+          <MediaBlockHeader title="Productos" />
+          <MediaBlockList
+            data={data}
+            // img="https://img.icons8.com/dusk/64/000000/product.png"
+          />
         </Grid>
-
-        {/* <Switch>
-          <Route
-            exact
-            path={`${match.path}`}
-            render={() => (
-              <Home
-                title="Inventario"
-                addButtonTitle="Añadir almacén"
-                buttonUrl={`${match.path}/almacen/nuevo`}
-                selectedTabIndex={selectedTabIndex}
-                handleChangeTab={handleChangeTab}
-                almacenes={almacenes}
-              />
-            )}
-          />
-          <Route
-            exact
-            path={`${match.path}/almacen/nuevo`}
-            render={({ history }) => (
-              <Create
-                arrowBack
-                history={history}
-                handleCreate={newAlmacen}
-                title="Nuevo Almacén"
-                formTitle="Almacén"
-              />
-            )}
-          />
-          <Redirect to={`${match.url}`} />
-        </Switch> */}
-      </article>
+        <Grid item xs={8} component="section">
+          detalles
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };
