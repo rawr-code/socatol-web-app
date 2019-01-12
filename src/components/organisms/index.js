@@ -1,3 +1,4 @@
-import MediaBlockList from "./MediaBlockList";
+import BlockItemsList from "./BlockItemsList";
+import BlockInfo from "./BlockInfo";
 
-export { MediaBlockList };
+export { BlockItemsList, BlockInfo };

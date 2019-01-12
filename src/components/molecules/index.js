@@ -1,5 +1,5 @@
 import DataTable from "./DataTable";
-import MediaBlock from "./MediaBlock";
-import MediaBlockHeader from "./MediaBlockHeader";
+import BlockListItem from "./BlockListItem";
+import BlockHeader from "./BlockHeader";
 
-export { DataTable, MediaBlock, MediaBlockHeader };
+export { DataTable, BlockListItem, BlockHeader };

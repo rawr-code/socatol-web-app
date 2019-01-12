@@ -7,9 +7,9 @@ import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
 // Molecules
-import { MediaBlock } from "../../molecules";
+import { BlockListItem } from "../../molecules";
 
-const MediaBlockList = props => {
+const BlockItemList = props => {
   const { classes, data, img } = props;
   return (
     <List className={classes.root}>
@@ -17,7 +17,7 @@ const MediaBlockList = props => {
         data.map((item, key) => {
           const { title, description } = item;
           return (
-            <MediaBlock
+            <BlockListItem
               key={key}
               img={img}
               title={title}
@@ -29,4 +29,4 @@ const MediaBlockList = props => {
   );
 };
 
-export default withStyles(styles)(MediaBlockList);
+export default withStyles(styles)(BlockItemList);

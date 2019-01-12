@@ -7,7 +7,7 @@ import { MoreVert } from "@material-ui/icons";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
-const MediaBlock = props => {
+const BlockListItem = props => {
   const { classes, img, title, description } = props;
   return (
     <ListItem className={classes.root}>
@@ -20,4 +20,4 @@ const MediaBlock = props => {
   );
 };
 
-export default withStyles(styles)(MediaBlock);
+export default withStyles(styles)(BlockListItem);

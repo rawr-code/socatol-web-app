@@ -1,12 +1,18 @@
 import React, { Fragment } from "react";
 
-import { MediaBlockHeader } from "../../molecules";
-import { MediaBlockList } from "../../organisms";
+import { BlockHeader } from "../../molecules";
+import { BlockItemsList, BlockInfo } from "../../organisms";
 
 // MaterialUI Components
 import { Grid } from "@material-ui/core";
 
 const Inventario = ({ selectedTabIndex, handleChangeTab, almacenes }) => {
+  const details = {
+    title: "Veneno 3 en 1",
+    description:
+      "esta hecho para matar gente así no mas si te caen mal pos pum!",
+    warehouse: "Biologicos"
+  };
   const data = [
     {
       title: "producto1",
@@ -73,14 +79,14 @@ const Inventario = ({ selectedTabIndex, handleChangeTab, almacenes }) => {
     <Fragment>
       <Grid container spacing={0}>
         <Grid item xs={4} component="section">
-          <MediaBlockHeader title="Productos" />
-          <MediaBlockList
+          <BlockHeader title="Productos" />
+          <BlockItemsList
             data={data}
             // img="https://img.icons8.com/dusk/64/000000/product.png"
           />
         </Grid>
         <Grid item xs={8} component="section">
-          detalles
+          <BlockInfo data={details} />
         </Grid>
       </Grid>
     </Fragment>

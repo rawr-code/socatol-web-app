@@ -7,7 +7,7 @@ import { Typography } from "@material-ui/core";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
 
-const MediaBlockHeader = props => {
+const BlockHeader = props => {
   const { classes, title } = props;
   return (
     <header className={classes.root}>
@@ -18,4 +18,4 @@ const MediaBlockHeader = props => {
   );
 };
 
-export default withStyles(styles)(MediaBlockHeader);
+export default withStyles(styles)(BlockHeader);
