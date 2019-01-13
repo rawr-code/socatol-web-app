@@ -11,10 +11,12 @@
     "react-feather": "^1.1.5",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
+    "react-swipeable-views": "^0.13.0",
     "redux": "^4.0.1"
   },
   "scripts": {
-    "webpack-dev": "webpack-dev-server --open --mode development"
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,6 +33,7 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^1.0.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.1",
     "favicons-webpack-plugin": "^0.0.9",
@@ -39,6 +42,7 @@
     "prettier": "^1.15.3",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "webpackbar": "^3.1.4"
   }
 }

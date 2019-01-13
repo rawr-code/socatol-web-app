@@ -1,5 +1,4 @@
-import DataTable from "./DataTable";
-import BlockListItem from "./BlockListItem";
-import BlockHeader from "./BlockHeader";
+import MiniCard from "./MiniCard";
+import BoardTabs from "./BoardTabs";
 
-export { DataTable, BlockListItem, BlockHeader };
+export { MiniCard, BoardTabs };

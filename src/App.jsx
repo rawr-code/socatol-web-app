@@ -10,7 +10,8 @@ import { Login, PrivateRoute, appRoutes } from "./components/routes";
 // import Layout from "./Layout";
 
 // DevComponents
-import Layout from "./components/organisms/Layout/Layout";
+import Layout from "./Layout";
+
 // Routes
 const App = () => {
   return (

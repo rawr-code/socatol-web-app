@@ -14,10 +14,11 @@ import styles from "./Styles";
 import { withStyles } from "@material-ui/core/styles";
 
 // routes
-import { appRoutes } from "../../../components/routes";
+import { appRoutes } from "Routes";
+
 class MiniDrawer extends React.Component {
   state = {
-    open: true
+    open: false
   };
 
   handleDrawerOpen = () => {

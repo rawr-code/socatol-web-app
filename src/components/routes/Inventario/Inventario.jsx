@@ -1,96 +1,75 @@
-import React, { Fragment } from "react";
-
-import { BlockHeader } from "../../molecules";
-import { BlockItemsList, BlockInfo } from "../../organisms";
+import React, { Fragment, Component } from "react";
 
 // MaterialUI Components
-import { Grid } from "@material-ui/core";
 
-const Inventario = ({ selectedTabIndex, handleChangeTab, almacenes }) => {
-  const details = {
-    title: "Veneno 3 en 1",
-    description:
-      "esta hecho para matar gente así no mas si te caen mal pos pum!",
-    warehouse: "Biologicos"
+import SwipeableViews from "react-swipeable-views";
+
+import { BoardTabs } from "Molecules";
+import { MiniCardBoard } from "Organisms";
+
+class Inventario extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+  }
+
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
-  const data = [
-    {
-      title: "producto1",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto2",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto3",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto4",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto5",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto6",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto7",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto8",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto9",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto10",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto11",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto12",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto13",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto14",
-      description: "descripcion del producto"
-    },
-    {
-      title: "producto15",
-      description: "descripcion del producto"
-    }
-  ];
-  return (
-    <Fragment>
-      <Grid container spacing={0}>
-        <Grid item xs={4} component="section">
-          <BlockHeader title="Productos" />
-          <BlockItemsList
-            data={data}
-            // img="https://img.icons8.com/dusk/64/000000/product.png"
-          />
-        </Grid>
-        <Grid item xs={8} component="section">
-          <BlockInfo data={details} />
-        </Grid>
-      </Grid>
-    </Fragment>
-  );
-};
+
+  handleChangeIndex = index => {
+    this.setState({ value: index });
+  };
+
+  render() {
+    const { value } = this.state;
+    const { selectedTabIndex, handleChangeTab, almacenes } = this.props;
+    const tabs = [
+      {
+        title: "Productos"
+      },
+      {
+        title: "Proveedores"
+      }
+    ];
+    const data = [
+      {
+        title: "Shrimp and Chorizo Paella",
+        description: "September 14, 2016"
+      },
+      {
+        title: "Shrimp and Chorizo Paella",
+        description: "September 14, 2016"
+      },
+      {
+        title: "Shrimp and Chorizo Paella",
+        description: "September 14, 2016"
+      },
+      {
+        title: "Shrimp and Chorizo Paella",
+        description: "September 14, 2016"
+      },
+      {
+        title: "Shrimp and Chorizo Paella",
+        description: "September 14, 2016"
+      }
+    ];
+    return (
+      <Fragment>
+        <BoardTabs data={tabs} value={value} handleChange={this.handleChange} />
+        <SwipeableViews
+          axis="x"
+          index={value}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          <MiniCardBoard data={data} />
+          <MiniCardBoard />
+        </SwipeableViews>
+      </Fragment>
+    );
+  }
+}
 
 export default Inventario;

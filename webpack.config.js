@@ -1,12 +1,12 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const WebpackBar = require("webpackbar");
+const path = require("path");
 
 const HtmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
   filename: "index.html"
-  // meta: {
-  //   viewport: "width=device-width, initial-scale=1, shrink-to-fit=no"
-  // }
 });
 
 const FaviconPlugin = new FaviconsWebpackPlugin({
@@ -49,7 +49,40 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      Molecules: path.resolve(__dirname, "src/components/molecules"),
+      Organisms: path.resolve(__dirname, "src/components/organisms"),
+      Routes: path.resolve(__dirname, "src/components/routes")
+    }
   },
-  plugins: [FaviconPlugin, HtmlPlugin]
+  plugins: [
+    new WebpackBar(),
+    new CleanWebpackPlugin(["dist"]),
+    FaviconPlugin,
+    HtmlPlugin
+  ],
+  devServer: {
+    contentBase: "./dist",
+    compress: true,
+    port: 3000,
+    historyApiFallback: true,
+    publicPath: "/",
+    stats: {
+      colors: true,
+      hash: false,
+      version: false,
+      timings: false,
+      assets: false,
+      chunks: false,
+      modules: false,
+      reasons: false,
+      children: false,
+      source: false,
+      errors: true,
+      errorDetails: true,
+      warnings: true,
+      publicPath: false
+    }
+  }
 };
