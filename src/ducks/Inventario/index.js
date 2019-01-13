@@ -1,6 +1,7 @@
 // Actions
 const CREATE_ALMACEN = "/app/components/routes/Inventario/routes/Create";
 
+// Actions Creators
 export function newAlmancen(data) {
   return { type: CREATE_ALMACEN, data: data };
 }

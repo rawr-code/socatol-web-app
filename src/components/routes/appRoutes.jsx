@@ -4,7 +4,7 @@ import React from "react";
 import { Package, DollarSign, FileText, Printer, Grid } from "react-feather";
 
 // Components
-import Inventario from "./Inventario";
+import Inventario from "../../containers/InventoryManagement/WarehouseContainer";
 
 const appRoutes = [
   {

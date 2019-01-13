@@ -15,6 +15,12 @@ class Inventario extends Component {
     };
   }
 
+  componentDidMount() {
+    const { actions } = this.props;
+    const { warehouse } = actions;
+    console.log(actions, warehouse);
+    warehouse.GET_ALL();
+  }
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -34,28 +40,6 @@ class Inventario extends Component {
         title: "Proveedores"
       }
     ];
-    const data = [
-      {
-        title: "Shrimp and Chorizo Paella",
-        description: "September 14, 2016"
-      },
-      {
-        title: "Shrimp and Chorizo Paella",
-        description: "September 14, 2016"
-      },
-      {
-        title: "Shrimp and Chorizo Paella",
-        description: "September 14, 2016"
-      },
-      {
-        title: "Shrimp and Chorizo Paella",
-        description: "September 14, 2016"
-      },
-      {
-        title: "Shrimp and Chorizo Paella",
-        description: "September 14, 2016"
-      }
-    ];
     return (
       <Fragment>
         <BoardTabs data={tabs} value={value} handleChange={this.handleChange} />
@@ -64,7 +48,7 @@ class Inventario extends Component {
           index={value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <MiniCardBoard data={data} />
+          <MiniCardBoard />
           <MiniCardBoard />
         </SwipeableViews>
       </Fragment>

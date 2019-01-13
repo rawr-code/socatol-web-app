@@ -5,7 +5,7 @@ const styles = theme => ({
     minHeight: 0
   },
   indicator: {
-    height: 3,
+    height: 2,
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3
   },

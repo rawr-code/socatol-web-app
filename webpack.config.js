@@ -59,8 +59,8 @@ module.exports = {
   plugins: [
     new WebpackBar(),
     new CleanWebpackPlugin(["dist"]),
-    FaviconPlugin,
-    HtmlPlugin
+    HtmlPlugin,
+    FaviconPlugin
   ],
   devServer: {
     contentBase: "./dist",
