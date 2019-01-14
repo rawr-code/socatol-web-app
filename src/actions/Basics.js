@@ -42,6 +42,18 @@ export const ActionsCreatorsCreator = (Actions, name) => {
   };
 
   const Methods = {
+    GET: (url, id) => async dispatch => {
+      dispatch(ActionsList.Started());
+      const result = await axios.get(`${url}/${id}`);
+      if (result) {
+        dispatch(ActionsList.Success());
+        // Modificar Action
+        setTimeout(() => {
+          dispatch(ActionsList.GetAll(result.data));
+        }, 2000);
+      }
+    },
+
     GET_ALL: url => async dispatch => {
       dispatch(ActionsList.Started());
       const result = await axios.get(url);
@@ -51,43 +63,44 @@ export const ActionsCreatorsCreator = (Actions, name) => {
           dispatch(ActionsList.GetAll(result.data));
         }, 2000);
       }
+    },
+
+    NEW: (url, payload) => async dispatch => {
+      dispatch(ActionsList.Started());
+      const result = await axios.post(url, payload);
+      if (result) {
+        dispatch(ActionsList.Success());
+        // Modificar Action
+        setTimeout(() => {
+          dispatch(ActionsList.GetAll(result.data));
+        }, 2000);
+      }
+    },
+
+    UPDATE: (url, id, payload) => async dispatch => {
+      dispatch(ActionsList.Started());
+      const result = await axios.patch(`${url}/${id}`, payload);
+      if (result) {
+        dispatch(ActionsList.Success());
+        // Modificar Action
+        setTimeout(() => {
+          dispatch(ActionsList.GetAll(result.data));
+        }, 2000);
+      }
+    },
+
+    DELETE: (url, id) => async dispatch => {
+      dispatch(ActionsList.Started());
+      const result = await axios.delete(url, id);
+      if (result) {
+        dispatch(ActionsList.Success());
+        // Modificar Action
+        setTimeout(() => {
+          dispatch(ActionsList.GetAll(result.data));
+        }, 2000);
+      }
     }
   };
 
   return Methods;
 };
-
-// Actions Types
-export const STATUS = {
-  STARTED: "STARTED",
-  SUCCESS: "SUCCESS",
-  FAILURE: "FAILURE"
-};
-
-export const API = {
-  GET_ALL: ({ name, url, started }) => async dispatch => {
-    dispatch(started);
-  }
-  // return async dispatch => {
-  //   dispatch(Started());
-  //   const result = await axios.get("http://localhost:5000/api/product");
-  //   if (result) {
-  //     dispatch(Success());
-  //     setTimeout(() => {
-  //       dispatch({
-  //         type: `Warehouse_GET_ALL`,
-  //         payload: result.data
-  //       });
-  //     }, 2000);
-  //   }
-  // };
-};
-// GET: "GET",
-// NEW: "NEW",
-// UPDATE: "UPDATE",
-// DELETE: "DELETE"
-
-// Status Actions
-export const Started = createAction(STATUS.STARTED);
-export const Success = createAction(STATUS.SUCCESS);
-export const Failure = createAction(STATUS.FAILURE);
