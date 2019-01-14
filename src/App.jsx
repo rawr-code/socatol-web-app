@@ -6,7 +6,10 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { MUICustomTheme, store } from "./config";
 
 // Components
-import { Login, PrivateRoute, appRoutes } from "./components/routes";
+import { PrivateRoute, appRoutes } from "./components/routes";
+
+import Login from "./containers/Auth/AuthContainer";
+
 // import Layout from "./Layout";
 
 // DevComponents

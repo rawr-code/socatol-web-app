@@ -18,7 +18,6 @@ class Inventario extends Component {
   componentDidMount() {
     const { actions } = this.props;
     const { warehouse } = actions;
-    console.log(actions, warehouse);
     warehouse.GET_ALL();
   }
   handleChange = (event, value) => {
@@ -31,7 +30,9 @@ class Inventario extends Component {
 
   render() {
     const { value } = this.state;
-    const { selectedTabIndex, handleChangeTab, almacenes } = this.props;
+    const { InventoryManagement } = this.props;
+    const { Warehouse } = InventoryManagement;
+
     const tabs = [
       {
         title: "Productos"
@@ -48,7 +49,7 @@ class Inventario extends Component {
           index={value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <MiniCardBoard />
+          <MiniCardBoard avatar="box" data={Warehouse.warehouses} />
           <MiniCardBoard />
         </SwipeableViews>
       </Fragment>

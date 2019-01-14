@@ -1,8 +1,8 @@
+const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const WebpackBar = require("webpackbar");
-const path = require("path");
 
 const HtmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
@@ -32,7 +32,10 @@ const FaviconPlugin = new FaviconsWebpackPlugin({
   }
 });
 
+const APP_DIR = path.resolve(__dirname, "src");
+
 module.exports = {
+  entry: ["@babel/polyfill", APP_DIR],
   module: {
     rules: [
       {
