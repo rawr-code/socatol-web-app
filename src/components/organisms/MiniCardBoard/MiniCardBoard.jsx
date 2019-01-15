@@ -7,7 +7,7 @@ import { MiniCard } from "Molecules";
 import { withStyles } from "@material-ui/core/styles";
 
 const MiniCardBoard = props => {
-  const { classes, data, avatar } = props;
+  const { classes, data, avatar, onClick } = props;
   return (
     <section className={classes.root}>
       {data && data.length > 0 ? (
@@ -16,6 +16,7 @@ const MiniCardBoard = props => {
           return (
             <MiniCard
               key={key}
+              onClick={onClick}
               avatar={avatar}
               title={name}
               description={description}

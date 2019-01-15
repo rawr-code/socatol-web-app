@@ -3,7 +3,7 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     padding: 12,
-    justifyContent: "space-evenly"
+    justifyContent: "center"
   }
 });
 

@@ -1,17 +1,41 @@
 import React, { Fragment, Component } from "react";
-
-// MaterialUI Components
-
 import SwipeableViews from "react-swipeable-views";
 
-import { BoardTabs } from "Molecules";
+// MaterialUI Components
+import { Typography } from "@material-ui/core";
+
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  dense: {
+    marginTop: 16
+  },
+  menu: {
+    width: 200
+  }
+});
+
+// Warehouse Forms
+import { WarehouseForms } from "./forms";
+import { withStyles } from "@material-ui/core/styles";
+
+import classNames from "classnames";
+import { BoardTabs, InfoHeader, FormCardSimple } from "Molecules";
 import { MiniCardBoard } from "Organisms";
 
 class Inventario extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      value: 0,
+      open: false,
+      type: "new"
     };
   }
 
@@ -20,6 +44,15 @@ class Inventario extends Component {
     const { warehouse } = actions;
     warehouse.GET_ALL();
   }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -29,11 +62,14 @@ class Inventario extends Component {
   };
 
   render() {
-    const { value } = this.state;
-    const { InventoryManagement } = this.props;
+    const { value, type } = this.state;
+    const { classes, InventoryManagement } = this.props;
     const { Warehouse } = InventoryManagement;
 
     const tabs = [
+      {
+        title: "Almacenes"
+      },
       {
         title: "Productos"
       },
@@ -43,18 +79,40 @@ class Inventario extends Component {
     ];
     return (
       <Fragment>
-        <BoardTabs data={tabs} value={value} handleChange={this.handleChange} />
+        <header>
+          {/* <InfoHeader /> */}
+          <BoardTabs
+            data={tabs}
+            value={value}
+            handleChange={this.handleChange}
+          />
+        </header>
+        <FormCardSimple
+          open={this.state.open}
+          handleClose={this.handleClose}
+          title="Almacen"
+          subtitle="Nuevo Registro"
+        >
+          {type === "new" && <WarehouseForms.NEW />}
+          {/* {type === "details" && "details"}
+          {type === "update" && "update"} */}
+        </FormCardSimple>
         <SwipeableViews
           axis="x"
           index={value}
           onChangeIndex={this.handleChangeIndex}
         >
+          <MiniCardBoard
+            avatar="home"
+            data={Warehouse.warehouses}
+            onClick={this.handleClickOpen}
+          />
           <MiniCardBoard avatar="box" data={Warehouse.warehouses} />
-          <MiniCardBoard />
+          <MiniCardBoard avatar="user" data={Warehouse.warehouses} />
         </SwipeableViews>
       </Fragment>
     );
   }
 }
 
-export default Inventario;
+export default withStyles(styles)(Inventario);

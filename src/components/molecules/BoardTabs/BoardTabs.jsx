@@ -10,11 +10,11 @@ const BoardTabs = props => {
   return (
     <Tabs
       value={value}
-      indicatorColor="secondary"
-      textColor="secondary"
+      indicatorColor="primary"
+      textColor="primary"
       onChange={handleChange}
       classes={{
-        flexContainer: classes.flexContainer,
+        root: classes.root,
         indicator: classes.indicator
       }}
     >
@@ -29,7 +29,7 @@ const BoardTabs = props => {
               disabled={disabled}
               disableRipple
               classes={{
-                root: classes.root,
+                root: classes.tabRoot,
                 labelContainer: classes.labelContainer
               }}
             />

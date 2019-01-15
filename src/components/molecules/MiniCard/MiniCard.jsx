@@ -6,11 +6,12 @@ import { Card, CardHeader, Avatar } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Icons
-import { User, Box, AlertOctagon } from "react-feather";
+import { User, Package, Home, AlertOctagon } from "react-feather";
 
 const variantIcon = {
-  box: Box,
+  box: Package,
   user: User,
+  home: Home,
   alert: AlertOctagon
 };
 
@@ -19,12 +20,13 @@ const MiniCard = props => {
     classes,
     avatar = "box",
     title = "Shrimp and Chorizo Paella",
-    description = "September 14, 2016"
+    description = "September 14, 2016",
+    onClick
   } = props;
 
   const Icon = variantIcon[avatar];
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={onClick}>
       <CardHeader
         classes={{ root: classes.cardHeader }}
         avatar={

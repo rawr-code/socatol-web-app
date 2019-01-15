@@ -67,7 +67,7 @@ const styles = theme => ({
     ...theme.mixins.toolbar
   },
   toolbarRoot: {
-    boxShadow: "0 1px 4px rgba(0,21,41,.08)"
+    // boxShadow: "0 1px 4px rgba(0,21,41,.08)"
   },
   content: {
     flexGrow: 1,

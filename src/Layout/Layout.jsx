@@ -36,6 +36,7 @@ class MiniDrawer extends React.Component {
 
         <article className={classes.article}>
           <AppBar
+            color="secondary"
             classes={{ root: classes.appBarRoot }}
             position="static"
             className={classNames(classes.appBar, {
@@ -43,14 +44,14 @@ class MiniDrawer extends React.Component {
             })}
           >
             <Toolbar disableGutters={true} className={classes.toolbarRoot}>
-              <IconButton
+              {/* <IconButton
                 color="inherit"
                 aria-label="Open drawer"
                 onClick={this.handleDrawerOpen}
                 className={classes.menuButton}
               >
                 <MenuIcon />
-              </IconButton>
+              </IconButton> */}
             </Toolbar>
           </AppBar>
           <Switch>
