@@ -114,4 +114,10 @@ class Inventario extends Component {
   }
 }
 
+// const AJA = () => (
+//   <div>
+//     <div>hola</div>
+//   </div>
+// );
+
 export default withStyles(styles)(Inventario);
