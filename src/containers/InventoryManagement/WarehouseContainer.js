@@ -1,26 +1,22 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 // Components
-import { Inventario } from "Routes";
+import { Inventario } from 'Routes';
 
 // Actions Creators
-import { GET_ALL } from "../../actions/InventoryManagement/WarehouseActions";
+import { GET_ALL } from '../../actions/InventoryManagement/WarehouseActions';
 
-const mapStateToProps = ({ InventoryManagement }) => {
-  return { InventoryManagement };
-};
+const mapStateToProps = ({ InventoryManagement }) => ({ InventoryManagement });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: {
-      warehouse: {
-        GET_ALL: e => {
-          dispatch(GET_ALL());
-        }
-      }
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    warehouse: {
+      GET_ALL: () => {
+        dispatch(GET_ALL());
+      },
+    },
+  },
+});
 
 export default connect(
   mapStateToProps,

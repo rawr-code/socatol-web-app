@@ -1,10 +1,10 @@
-import { ActionsTypes } from "../../actions/InventoryManagement/WarehouseActions";
+import { ActionsTypes } from '../../actions/InventoryManagement/WarehouseActions';
 
 // Initial State
 const INITIAL_STATE = {
   loading: false,
   warehouses: [],
-  error: null
+  error: null,
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -13,26 +13,26 @@ export default function reducer(state = INITIAL_STATE, action) {
     case ActionsTypes.started:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case ActionsTypes.success:
       return {
         ...state,
         loading: false,
-        error: null
+        error: null,
       };
     case ActionsTypes.failure:
       return {
         ...state,
         loading: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
     // -------------------------
 
     case ActionsTypes.GET_ALL:
       return {
         ...state,
-        warehouses: action.payload
+        warehouses: action.payload,
       };
 
     default:

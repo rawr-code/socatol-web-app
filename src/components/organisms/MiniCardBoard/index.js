@@ -1,3 +1,3 @@
-import MiniCardBoard from "./MiniCardBoard";
+import MiniCardBoard from './MiniCardBoard';
 
 export default MiniCardBoard;

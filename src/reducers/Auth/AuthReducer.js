@@ -1,9 +1,9 @@
-import { LOGIN } from "../../actions/Auth/AuthActions";
+import { LOGIN } from '../../actions/Auth/AuthActions';
 
 // Initial States
 const INITIAL_STATE = {
   loggedIn: false,
-  user: {}
+  user: {},
 };
 
 // Reducer

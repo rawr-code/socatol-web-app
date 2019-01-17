@@ -1,3 +1,3 @@
-import FormCardSimple from "./FormCardSimple";
+import FormCardSimple from './FormCardSimple';
 
 export default FormCardSimple;

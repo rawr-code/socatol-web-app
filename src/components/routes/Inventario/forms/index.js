@@ -1,3 +1,3 @@
-import * as WarehouseForms from "./WarehouseForms";
+import * as WarehouseForms from './WarehouseForms';
 
-export { WarehouseForms };
+export default WarehouseForms;

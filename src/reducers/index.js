@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import Auth from "./Auth";
-import InventoryManagement from "./InventoryManagement";
+import Auth from './Auth';
+import InventoryManagement from './InventoryManagement';
 
 const reducers = combineReducers({ Auth, InventoryManagement });
 

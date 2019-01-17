@@ -1,3 +1,3 @@
-import InfoHeader from "./InfoHeader";
+import InfoHeader from './InfoHeader';
 
 export default InfoHeader;

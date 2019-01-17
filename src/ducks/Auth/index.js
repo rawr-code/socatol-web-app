@@ -1,5 +1,5 @@
 // Actions
-const LOGIN = "app/components/routes/Login";
+const LOGIN = 'app/components/routes/Login';
 
 // Action Creators
 export function loggedIn() {
@@ -9,7 +9,7 @@ export function loggedIn() {
 // Initial States
 const INITIAL_STATE = {
   loggedIn: false,
-  user: {}
+  user: {},
 };
 
 // Reducer

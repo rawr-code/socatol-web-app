@@ -1,8 +1,6 @@
-import PrivateRoute from "./PrivateRoute";
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import PrivateRoute from './PrivateRoute';
 
-const mapStateToProps = ({ Auth }) => {
-  return { loggedIn: Auth.loggedIn };
-};
+const mapStateToProps = ({ Auth }) => ({ loggedIn: Auth.loggedIn });
 
 export default connect(mapStateToProps)(PrivateRoute);

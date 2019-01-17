@@ -1,3 +1,3 @@
-import BoardTabs from "./BoardTabs";
+import BoardTabs from './BoardTabs';
 
 export default BoardTabs;

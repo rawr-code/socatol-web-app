@@ -1,16 +1,14 @@
-import { Login } from "Routes";
-import { connect } from "react-redux";
+import { Login } from 'Routes';
+import { connect } from 'react-redux';
 
 // Actions
-import { loggedIn } from "../../actions/Auth/AuthActions";
+import { loggedIn } from '../../actions/Auth/AuthActions';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loggedIn() {
-      dispatch(loggedIn());
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  loggedIn() {
+    dispatch(loggedIn());
+  },
+});
 
 export default connect(
   null,

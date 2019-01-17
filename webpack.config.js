@@ -1,76 +1,88 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const WebpackBar = require("webpackbar");
+const path = require('path');
+const WebpackBar = require('webpackbar');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WebappWebpackPlugin = require('webapp-webpack-plugin');
 
 const HtmlPlugin = new HtmlWebPackPlugin({
-  template: "./public/index.html",
-  filename: "index.html"
+  template: './public/index.html',
+  filename: 'index.html',
 });
 
-const FaviconPlugin = new FaviconsWebpackPlugin({
-  logo: "./public/favicon.png",
-  prefix: "icons-[hash]/",
-  emitStats: false,
-  statsFilename: "iconstats-[hash].json",
-  persistentCache: true,
+const FaviconPlugin = new WebappWebpackPlugin({
+  logo: './public/favicon.png',
+  prefix: '[hash]/',
+  cache: true,
   inject: true,
-  background: "#000000",
-  title: "SEO Title App",
-  icons: {
-    android: true,
-    appleIcon: true,
-    appleStartup: true,
-    coast: false,
-    favicons: true,
-    firefox: true,
-    opengraph: true,
-    twitter: true,
-    yandex: true,
-    windows: false
-  }
+  favicons: {
+    path: 'favicons/',
+    scope: '/',
+    start_url: '/',
+    appName: 'SocatolWebApp',
+    appDescription: 'Aplicacion administrativa',
+    developerName: 'Emmanuel Villegas | Front-end Developer',
+    developerURL: 'https://github.com/EmmanuelVillegas',
+    lang: 'es-ES',
+    background: '#fff',
+    theme_color: '#333',
+    appleStatusBarStyle: 'black-translucent',
+    display: 'standalone',
+    icons: {
+      android: true,
+      appleIcon: true,
+      appleStartup: true,
+      coast: true,
+      favicons: true,
+      firefox: true,
+      windows: true,
+      yandex: true,
+    },
+  },
 });
 
-const APP_DIR = path.resolve(__dirname, "src");
+const APP_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
-  entry: ["@babel/polyfill", APP_DIR],
+  entry: ['@babel/polyfill', APP_DIR],
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.html$/,
-        loader: "html-loader"
-      }
-    ]
+        loader: 'html-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
     alias: {
-      Molecules: path.resolve(__dirname, "src/components/molecules"),
-      Organisms: path.resolve(__dirname, "src/components/organisms"),
-      Routes: path.resolve(__dirname, "src/components/routes")
-    }
+      Molecules: path.resolve(__dirname, 'src/components/molecules'),
+      Organisms: path.resolve(__dirname, 'src/components/organisms'),
+      Routes: path.resolve(__dirname, 'src/components/routes'),
+    },
   },
   plugins: [
     new WebpackBar(),
-    new CleanWebpackPlugin(["dist"]),
+    new CleanWebpackPlugin(['dist']),
     HtmlPlugin,
-    FaviconPlugin
+    FaviconPlugin,
   ],
   devServer: {
-    contentBase: "./dist",
+    contentBase: './dist',
     compress: true,
+    open: true,
+    host: '0.0.0.0',
     port: 3000,
+    public: 'localhost:3000',
+    disableHostCheck: true,
     historyApiFallback: true,
-    publicPath: "/",
+    publicPath: '/',
     stats: {
       colors: true,
       hash: false,
@@ -85,7 +97,7 @@ module.exports = {
       errors: true,
       errorDetails: true,
       warnings: true,
-      publicPath: false
-    }
-  }
+      publicPath: false,
+    },
+  },
 };

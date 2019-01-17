@@ -1,6 +1,6 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import Warehouse from "./WarehouseReducer";
+import Warehouse from './WarehouseReducer';
 
 const InventoryManagement = combineReducers({ Warehouse });
 

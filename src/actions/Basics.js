@@ -1,5 +1,5 @@
-import axios from "axios";
-import { createAction, createActions } from "redux-actions";
+import axios from 'axios';
+import { createActions } from 'redux-actions';
 
 // Action Types Creator
 export const ActionsTypesCreator = name => ({
@@ -10,7 +10,7 @@ export const ActionsTypesCreator = name => ({
   NEW: `${name}_NEW`,
   GET_ALL: `${name}_GET_ALL`,
   UPDATE: `${name}_UPDATE`,
-  DELETE: `${name}_DELETE`
+  DELETE: `${name}_DELETE`,
 });
 
 // Actions Creator
@@ -38,7 +38,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
     GetNew: Actions[`${nameLower}New`],
     GetAll: Actions[`${nameLower}GetAll`],
     Update: Actions[`${nameLower}Update`],
-    Delete: Actions[`${nameLower}Delete`]
+    Delete: Actions[`${nameLower}Delete`],
   };
 
   const Methods = {
@@ -99,7 +99,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
           dispatch(ActionsList.GetAll(result.data));
         }, 2000);
       }
-    }
+    },
   };
 
   return Methods;

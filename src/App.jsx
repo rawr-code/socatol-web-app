@@ -1,23 +1,22 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 // Configuration
-import { MUICustomTheme, store } from "./config";
+import { MUICustomTheme, store } from './config';
 
 // Components
-import { PrivateRoute, appRoutes } from "./components/routes";
+import { PrivateRoute, appRoutes } from './components/routes';
 
-import Login from "./containers/Auth/AuthContainer";
+import Login from './containers/Auth/AuthContainer';
 
 // import Layout from "./Layout";
 
 // DevComponents
-import Layout from "./Layout";
+import Layout from './Layout';
 
 // Routes
-const App = () => {
-  return (
+const App = () => (
     <Provider store={store}>
       <BrowserRouter>
         <MUICustomTheme>
@@ -32,6 +31,5 @@ const App = () => {
       </BrowserRouter>
     </Provider>
   );
-};
 
 export default App;

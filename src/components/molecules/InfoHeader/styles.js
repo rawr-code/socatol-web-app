@@ -1,10 +1,10 @@
-const styles = theme => ({
+const styles = () => ({
   root: {
-    justifyContent: "space-between"
+    justifyContent: 'space-between',
   },
   container: {
-    display: "flex"
-  }
+    display: 'flex',
+  },
 });
 
 export default styles;

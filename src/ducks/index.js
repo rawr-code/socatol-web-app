@@ -1,4 +1,3 @@
-import Auth from "./Auth";
-import Inventario from "./Inventario";
+import Auth from './Auth';
 
-export { Auth, Inventario };
+export default Auth;
