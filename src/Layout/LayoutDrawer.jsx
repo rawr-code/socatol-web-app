@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 // React Router
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 // MaterialUI Components
 import {
@@ -10,11 +10,11 @@ import {
   Divider,
   ListItem,
   ListItemIcon,
-  ListItemText
-} from "@material-ui/core";
+  ListItemText,
+} from '@material-ui/core';
 
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import classNames from "classnames";
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import classNames from 'classnames';
 
 const LayoutDrawer = props => {
   const { classes, open, routes, itemSelected } = props;
@@ -23,13 +23,13 @@ const LayoutDrawer = props => {
       variant="permanent"
       className={classNames(classes.drawer, {
         [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open
+        [classes.drawerClose]: !open,
       })}
       classes={{
         paper: classNames(
           { [classes.drawerOpen]: open, [classes.drawerClose]: !open },
           classes.drawerPaper
-        )
+        ),
       }}
       open={open}
     >

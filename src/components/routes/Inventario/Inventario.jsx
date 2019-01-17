@@ -1,33 +1,32 @@
-import React, { Fragment, Component } from "react";
-import SwipeableViews from "react-swipeable-views";
+import React, { Fragment, Component } from 'react';
+import SwipeableViews from 'react-swipeable-views';
 
 // MaterialUI Components
-import { Typography } from "@material-ui/core";
+// import { Typography } from "@material-ui/core";
+
+// Warehouse Forms
+import { withStyles } from '@material-ui/core/styles';
+
+import { BoardTabs, FormCardSimple } from 'Molecules';
+import MiniCardBoard from 'Organisms';
+import WarehouseForms from './forms';
 
 const styles = theme => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap',
   },
   textField: {
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
   },
   dense: {
-    marginTop: 16
+    marginTop: 16,
   },
   menu: {
-    width: 200
-  }
+    width: 200,
+  },
 });
-
-// Warehouse Forms
-import { WarehouseForms } from "./forms";
-import { withStyles } from "@material-ui/core/styles";
-
-import classNames from "classnames";
-import { BoardTabs, InfoHeader, FormCardSimple } from "Molecules";
-import { MiniCardBoard } from "Organisms";
 
 class Inventario extends Component {
   constructor(props) {
@@ -35,7 +34,7 @@ class Inventario extends Component {
     this.state = {
       value: 0,
       open: false,
-      type: "new"
+      type: 'new',
     };
   }
 
@@ -62,20 +61,20 @@ class Inventario extends Component {
   };
 
   render() {
-    const { value, type } = this.state;
-    const { classes, InventoryManagement } = this.props;
+    const { value, type, open } = this.state;
+    const { InventoryManagement } = this.props;
     const { Warehouse } = InventoryManagement;
 
     const tabs = [
       {
-        title: "Almacenes"
+        title: 'Almacenes',
       },
       {
-        title: "Productos"
+        title: 'Productos',
       },
       {
-        title: "Proveedores"
-      }
+        title: 'Proveedores',
+      },
     ];
     return (
       <Fragment>
@@ -88,12 +87,12 @@ class Inventario extends Component {
           />
         </header>
         <FormCardSimple
-          open={this.state.open}
+          open={open}
           handleClose={this.handleClose}
           title="Almacen"
           subtitle="Nuevo Registro"
         >
-          {type === "new" && <WarehouseForms.NEW />}
+          {type === 'new' && <WarehouseForms.NEW />}
           {/* {type === "details" && "details"}
           {type === "update" && "update"} */}
         </FormCardSimple>

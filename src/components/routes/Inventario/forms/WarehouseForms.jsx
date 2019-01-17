@@ -1,12 +1,12 @@
-import React from "react";
-import styles from "./styles";
+import React from 'react';
 
 // MaterialUI Components
-import { Grid, TextField } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
-export const NEW = withStyles(styles)(props => {
-  const { classes, data } = props;
+const NEW = withStyles(styles)(props => {
+  const { classes } = props;
   return (
     <form noValidate autoComplete="off" className={classes.flexColumn}>
       <TextField
@@ -28,3 +28,5 @@ export const NEW = withStyles(styles)(props => {
     </form>
   );
 });
+
+export default NEW;

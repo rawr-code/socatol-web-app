@@ -1,5 +1,4 @@
-import React from "react";
-import styles from "./styles";
+import React from 'react';
 
 // MaterialUI Components
 import {
@@ -8,10 +7,11 @@ import {
   DialogTitle,
   DialogActions,
   Typography,
-  Button
-} from "@material-ui/core";
+  Button,
+} from '@material-ui/core';
 
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
 const FormCardSimple = props => {
   const { classes, open, handleClose, title, subtitle, children } = props;

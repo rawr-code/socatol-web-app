@@ -1,27 +1,27 @@
-import React from "react";
-import styles from "./styles";
+import React from 'react';
 
 // MaterialUI Components
-import { Card, CardHeader, Avatar } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { Card, CardHeader, Avatar } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 // Icons
-import { User, Package, Home, AlertOctagon } from "react-feather";
+import { User, Package, Home, AlertOctagon } from 'react-feather';
+import styles from './styles';
 
 const variantIcon = {
   box: Package,
   user: User,
   home: Home,
-  alert: AlertOctagon
+  alert: AlertOctagon,
 };
 
 const MiniCard = props => {
   const {
     classes,
-    avatar = "box",
-    title = "Shrimp and Chorizo Paella",
-    description = "September 14, 2016",
-    onClick
+    avatar = 'box',
+    title = 'Shrimp and Chorizo Paella',
+    description = 'September 14, 2016',
+    onClick,
   } = props;
 
   const Icon = variantIcon[avatar];

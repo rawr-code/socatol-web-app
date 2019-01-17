@@ -1,28 +1,26 @@
-import React from "react";
+import React from 'react';
 
 // React Router
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // MaterialUI Components
-import { AppBar, Toolbar, IconButton } from "@material-ui/core";
+import { AppBar, Toolbar } from '@material-ui/core';
 
-import LayoutDrawer from "./LayoutDrawer";
-import MenuIcon from "@material-ui/icons/Menu";
-
-import classNames from "classnames";
-import styles from "./Styles";
-import { withStyles } from "@material-ui/core/styles";
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
 
 // routes
-import { appRoutes } from "Routes";
+import { appRoutes } from 'Routes';
+import styles from './Styles';
+import LayoutDrawer from './LayoutDrawer';
 
 class MiniDrawer extends React.Component {
   state = {
-    open: false
+    open: false,
   };
 
   handleDrawerOpen = () => {
-    const open = !this.state.open;
+    const { open } = !this.state;
     this.setState({ open });
   };
 
@@ -40,10 +38,10 @@ class MiniDrawer extends React.Component {
             classes={{ root: classes.appBarRoot }}
             position="static"
             className={classNames(classes.appBar, {
-              [classes.appBarShift]: open
+              [classes.appBarShift]: open,
             })}
           >
-            <Toolbar disableGutters={true} className={classes.toolbarRoot}>
+            <Toolbar disableGutters className={classes.toolbarRoot}>
               {/* <IconButton
                 color="inherit"
                 aria-label="Open drawer"
@@ -64,7 +62,7 @@ class MiniDrawer extends React.Component {
                   path={path}
                   exact={exact}
                   render={
-                    typeof component === "function"
+                    typeof component === 'function'
                       ? props => <Po {...props} />
                       : () => component
                   }

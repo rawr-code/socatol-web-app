@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 // Material UI
 import {
@@ -7,24 +7,19 @@ import {
   FormControl,
   Button,
   Input,
-  InputLabel
-} from "@material-ui/core";
+  InputLabel,
+} from '@material-ui/core';
 
 // Styles
-import Styles from "./Styles";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
+import Styles from './Styles';
 
 class Login extends Component {
-  state = {
-    user: "",
-    password: ""
-  };
-
   handleSubmit = event => {
     const { loggedIn, history } = this.props;
     event.preventDefault();
     loggedIn();
-    history.push("/");
+    history.push('/');
   };
 
   render() {
