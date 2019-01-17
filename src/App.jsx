@@ -17,19 +17,19 @@ import Layout from './Layout';
 
 // Routes
 const App = () => (
-    <Provider store={store}>
-      <BrowserRouter>
-        <MUICustomTheme>
-          <main>
-            <Switch>
-              <Route path="/login" component={Login} />
-              <PrivateRoute path="/" component={Layout} routes={appRoutes} />
-              <Redirect to="/login" />
-            </Switch>
-          </main>
-        </MUICustomTheme>
-      </BrowserRouter>
-    </Provider>
-  );
+  <Provider store={store}>
+    <BrowserRouter>
+      <MUICustomTheme>
+        <main>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <PrivateRoute path="/" component={Layout} routes={appRoutes} />
+            <Redirect to="/login" />
+          </Switch>
+        </main>
+      </MUICustomTheme>
+    </BrowserRouter>
+  </Provider>
+);
 
 export default App;

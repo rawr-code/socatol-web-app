@@ -3,6 +3,7 @@ const WebpackBar = require('webpackbar');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const WebappWebpackPlugin = require('webapp-webpack-plugin');
+const Pretty = require('eslint-formatter-pretty');
 
 const HtmlPlugin = new HtmlWebPackPlugin({
   template: './public/index.html',
@@ -49,9 +50,15 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'eslint-loader',
+            options: { formatter: Pretty },
+          },
+        ],
       },
       {
         test: /\.html$/,
