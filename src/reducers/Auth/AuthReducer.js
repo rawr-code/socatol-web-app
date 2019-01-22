@@ -2,7 +2,7 @@ import { LOGIN } from '../../actions/Auth/AuthActions';
 
 // Initial States
 const INITIAL_STATE = {
-  loggedIn: false,
+  loggedIn: true,
   user: {},
 };
 

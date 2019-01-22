@@ -1,39 +1,34 @@
 const styles = theme => ({
   root: {
-    display: 'flex',
-  },
-  article: {
+    flexGrow: 1,
     width: '100%',
   },
-  appBarRoot: {
-    boxShadow: 'none',
-  },
   appBar: {
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    zIndex: theme.zIndex.drawer + 1,
   },
-  appBarShift: {
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  bar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexGrow: 1,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing.unit * 3,
+  },
+  grow: {
+    flexGrow: 1,
   },
   menuButton: {
-    padding: '20px 24px',
-    borderRadius: 0,
-  },
-  hide: {
-    display: 'none',
+    marginLeft: -12,
+    marginRight: 20,
   },
   drawer: {
     width: theme.drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
   },
   drawerPaper: {
-    boxShadow: '2px 0 8px 0 rgba(29,35,41,.05)',
+    width: theme.drawerWidth,
+    overflowX: 'hidden',
   },
   drawerOpen: {
     width: theme.drawerWidth,
@@ -47,32 +42,18 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
+    width: 0,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing.unit * 9 + 1,
     },
   },
-  link: {
-    textDecoration: 'none',
-  },
-  linkIcon: {
+  listItemIcon: {
     margin: '0 8px',
   },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+  logo: {
+    width: theme.drawerWidth,
   },
-  toolbarRoot: {
-    // boxShadow: "0 1px 4px rgba(0,21,41,.08)"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
+  toolbar: theme.mixins.toolbar,
 });
 
 export default styles;

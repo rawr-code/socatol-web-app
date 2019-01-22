@@ -38,7 +38,7 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
-  drawerWidth: 256,
+  drawerWidth: 250,
 });
 
 const MUICustomTheme = ({ children }) => (
