@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 // Components
-import { Inventario } from 'Routes';
+import { Inventario } from '../../components/routes';
 
 // Actions Creators
 import { GET_ALL } from '../../actions/InventoryManagement/WarehouseActions';
@@ -13,9 +13,9 @@ const mapDispatchToProps = dispatch => ({
     warehouse: {
       GET_ALL: () => {
         dispatch(GET_ALL());
-      },
-    },
-  },
+      }
+    }
+  }
 });
 
 export default connect(

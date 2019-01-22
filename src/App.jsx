@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 
 // Configuration
-import { PrivateRoute, PublicRoute } from 'Routes';
+import { PrivateRoute, PublicRoute } from './components/routes';
 import { MUICustomTheme, store } from './config';
 
 // Components
