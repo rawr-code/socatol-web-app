@@ -15,7 +15,7 @@ const MiniCardBoard = props => {
           const { name, description } = item;
           return (
             <MiniCard
-              key={`${name}_id`}
+              key={`${name}_`}
               onClick={onClick}
               avatar={avatar}
               title={name}

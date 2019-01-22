@@ -1,15 +1,15 @@
 import React, { Fragment, Component } from 'react';
 import SwipeableViews from 'react-swipeable-views';
+import XLSX from 'xlsx';
 
 // MaterialUI Components
-// import { Typography } from "@material-ui/core";
+import { Button, Card, CardContent } from '@material-ui/core';
 
 // Warehouse Forms
 import { withStyles } from '@material-ui/core/styles';
 
-import { BoardTabs, FormCardSimple } from 'Molecules';
+import { BoardTabs } from 'Molecules';
 import MiniCardBoard from 'Organisms';
-import WarehouseForms from './forms';
 
 const styles = theme => ({
   container: {
@@ -33,8 +33,7 @@ class Inventario extends Component {
     super(props);
     this.state = {
       value: 0,
-      open: false,
-      type: 'new',
+      data: [],
     };
   }
 
@@ -44,14 +43,6 @@ class Inventario extends Component {
     warehouse.GET_ALL();
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -60,8 +51,12 @@ class Inventario extends Component {
     this.setState({ value: index });
   };
 
+  cambio = data => {
+    this.setState({ data });
+  };
+
   render() {
-    const { value, type, open } = this.state;
+    const { value, data } = this.state;
     const { InventoryManagement } = this.props;
     const { Warehouse } = InventoryManagement;
 
@@ -75,27 +70,20 @@ class Inventario extends Component {
       {
         title: 'Proveedores',
       },
+      {
+        title: 'Movimientos',
+      },
     ];
     return (
       <Fragment>
         <header>
-          {/* <InfoHeader /> */}
           <BoardTabs
             data={tabs}
             value={value}
             handleChange={this.handleChange}
           />
         </header>
-        <FormCardSimple
-          open={open}
-          handleClose={this.handleClose}
-          title="Almacen"
-          subtitle="Nuevo Registro"
-        >
-          {type === 'new' && <WarehouseForms.NEW />}
-          {/* {type === "details" && "details"}
-          {type === "update" && "update"} */}
-        </FormCardSimple>
+
         <SwipeableViews
           axis="x"
           index={value}
@@ -108,16 +96,122 @@ class Inventario extends Component {
           />
           <MiniCardBoard avatar="box" data={Warehouse.warehouses} />
           <MiniCardBoard avatar="user" data={Warehouse.warehouses} />
+          <CardContent>
+            <input
+              style={{ display: 'none' }}
+              accept=".xlsx,.csv"
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={e => {
+                const files = e.target.files;
+                let i;
+                let f;
+                // Loop through files
+                for (i = 0, f = files[i]; i != files.length; ++i) {
+                  const name = f.name;
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    /* Parse data */
+                    const bstr = e.target.result;
+                    const wb = XLSX.read(bstr, { type: 'binary' });
+                    /* Get first worksheet */
+                    const wsname = wb.SheetNames[0];
+                    const ws = wb.Sheets[wsname];
+                    /* Convert array of arrays */
+                    const data1 = XLSX.utils.sheet_to_json(ws, { header: 1 });
+                    /* Update state */
+                    console.table(data1);
+                    this.cambio(data1);
+                  };
+                  reader.readAsBinaryString(f);
+                }
+              }}
+            />
+            <label htmlFor="contained-button-file">
+              <Button
+                variant="contained"
+                component="span"
+                onChange={() => console.log('button')}
+              >
+                Cargar Movimientos desde Excel
+              </Button>
+            </label>
+            <div>
+              {data &&
+                data.length > 0 &&
+                data.map(
+                  (item, i) =>
+                    i > 0 &&
+                    typeof item[0] === 'string' && (
+                      <Card
+                        style={{
+                          maxWidth: 500,
+                          minWidth: 500,
+                          margin: '0 auto',
+                          marginBottom: 20,
+                          position: 'relative',
+                        }}
+                      >
+                        <CardContent>
+                          <div
+                            style={{
+                              color: 'rgba(0, 0, 0, 0.54)',
+                              fontSize: 14,
+                            }}
+                          >
+                            {item[0]}
+                          </div>
+                          <div
+                            style={{
+                              color: 'rgba(0, 0, 0, 0.87)',
+                              fontSize: 20,
+                              fontFamily: 'Roboto',
+                              fontWeight: 400,
+                              lineHeight: 1.33,
+                              letterSpacing: 0,
+                              margin: '5px 0',
+                            }}
+                          >
+                            {item[2]}
+                          </div>
+                          <div
+                            style={{
+                              color: 'rgba(0, 0, 0, 0.87)',
+                              fontSize: '0.875rem',
+                              fontFamily: 'Roboto',
+                              fontWeight: 400,
+                              lineHeight: 1.5,
+                              letterSpacing: '0.01071em',
+                            }}
+                          >
+                            {item[1]}
+                          </div>
+                          <div
+                            style={{
+                              position: 'absolute',
+                              right: 0,
+                              top: 0,
+                              padding: 50,
+                              fontSize: 24,
+                            }}
+                          >
+                            {item[3] > 0 ? (
+                              <p style={{ color: 'red' }}>`-{item[3]} Bs.S`</p>
+                            ) : (
+                              <p style={{ color: 'green' }}>{item[4]} Bs.S</p>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    )
+                )}
+            </div>
+          </CardContent>
         </SwipeableViews>
       </Fragment>
     );
   }
 }
-
-// const AJA = () => (
-//   <div>
-//     <div>hola</div>
-//   </div>
-// );
 
 export default withStyles(styles)(Inventario);
