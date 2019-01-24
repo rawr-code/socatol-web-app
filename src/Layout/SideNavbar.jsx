@@ -7,7 +7,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
+  ListItemText
 } from '@material-ui/core';
 
 import { Inbox } from '@material-ui/icons';
@@ -19,7 +19,7 @@ class SideNavbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
+      open: true
     };
   }
 
@@ -37,17 +37,17 @@ class SideNavbar extends Component {
           variant="permanent"
           className={classNames(classes.drawer, {
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerClose]: !open
           })}
           classes={{
             paper: classNames(classes.drawerPaper, {
               [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            }),
+              [classes.drawerClose]: !open
+            })
           }}
           open={open}
         >
-          <div className={classes.toolbar} />
+          <div className={classes.mixin} />
 
           <List>
             <ListItem button onClick={this.handleDrawer}>

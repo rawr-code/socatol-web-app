@@ -6,7 +6,7 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
+  Button
 } from '@material-ui/core';
 
 import { Menu } from '@material-ui/icons';
@@ -19,22 +19,20 @@ const Navbar = props => {
   return (
     // <div className={classes.root}>
     <AppBar position="fixed" className={classes.appBar}>
-      <Toolbar>
-        <div className={classes.logo}>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            News
-          </Typography>
-        </div>
-        <div className={classes.bar}>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-          >
-            <Menu />
-          </IconButton>
-          <Button color="inherit">Login</Button>
-        </div>
+      <div className={classes.logo}>
+        <Typography variant="h6" color="inherit" className={classes.grow}>
+          News
+        </Typography>
+      </div>
+      <Toolbar className={classes.toolbar}>
+        <IconButton
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="Menu"
+        >
+          <Menu />
+        </IconButton>
+        <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
     // </div>

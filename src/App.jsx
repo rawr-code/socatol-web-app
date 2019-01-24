@@ -6,9 +6,11 @@ import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import { PrivateRoute, PublicRoute } from './components/routes';
 import { MUICustomTheme, store } from './config';
 
-// Components
 import Layout from './Layout';
-import Login from './containers/Auth/AuthContainer';
+
+const Aja = () => {
+  return <div>interfaz</div>;
+};
 
 // Routes
 const App = () => (
@@ -16,7 +18,7 @@ const App = () => (
     <BrowserRouter>
       <MUICustomTheme>
         <Switch>
-          <PublicRoute path="/login" component={Login} />
+          <PublicRoute path="/login" component={Aja} />
           <PrivateRoute path="/" component={Layout} />
           <Redirect to="/login" />
         </Switch>
