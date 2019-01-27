@@ -1,10 +1,9 @@
-import axios from 'axios';
+import API from '../API';
 
 export default function setAuthorizationToken(token) {
   if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    axios.defaults.baseURL = 'http://localhost:5000/api/';
+    API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   } else {
-    delete axios.defaults.headers.common['Authorization'];
+    delete API.defaults.headers.common['Authorization'];
   }
 }

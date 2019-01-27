@@ -6,13 +6,21 @@ import { MUICustomTheme } from './config';
 
 // Components
 import Layout from './components/Layout';
+import ListItems from './components/ListItems';
+import ItemDetails from './components/ItemDetails';
+
 import { PublicRoute, PrivateRoute } from './components';
 
 // Containers
 import { Login } from './containers/Auth';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div style={{ display: 'flex' }}>
+      <ListItems />
+      <ItemDetails />
+    </div>
+  );
 };
 
 const App = props => {
