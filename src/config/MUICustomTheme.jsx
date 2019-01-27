@@ -24,21 +24,22 @@ const theme = createMuiTheme({
       main: '#1890ff',
       light: '#096dd9',
       dark: '#40a9ff',
-      contrastText: '#ffffff',
+      contrastText: '#ffffff'
     },
     secondary: {
       main: '#ffffff',
       light: '#ffffff',
       dark: '#cccccc',
-      contrastText: '#000000a6',
+      contrastText: '#000000a6'
     },
-    background: { default: '#f0f2f5' },
+    background: { default: '#f0f2f5' }
     // ----------------------------
   },
   typography: {
     useNextVariants: true,
+    fontFamily: 'Roboto, "Google Sans"'
   },
-  drawerWidth: 250,
+  drawerWidth: 250
 });
 
 const MUICustomTheme = ({ children }) => (

@@ -10,6 +10,8 @@ const styles = theme => ({
   },
   appBar: {
     marginLeft: theme.drawerWidth,
+    padding: '3px 0',
+    // backgroundColor: '#2a3e52',
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${theme.drawerWidth}px)`
     }

@@ -5,7 +5,7 @@ import ReduxThunk from 'redux-thunk';
 import ReduxPromise from 'redux-promise';
 
 // Reducers
-import rootReducer from '../others/reducers';
+import rootReducer from './../reducers';
 
 // ReduxDevTools Chrome Extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

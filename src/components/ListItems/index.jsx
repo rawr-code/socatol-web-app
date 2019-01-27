@@ -8,85 +8,86 @@ import {
   Avatar,
   ListItemText,
   TextField,
-  Fab
+  Button
 } from '@material-ui/core';
 
-import { Package, Plus } from 'react-feather';
 import { withStyles } from '@material-ui/core/styles';
+
+import { Package } from 'react-feather';
 
 const ListItems = props => {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <div className={classes.search}>
+      <div className={classes.searchBox}>
         <TextField
           styles={{ width: '100%' }}
           id="standard-name"
-          className={classes.textField}
+          className={classes.searchBoxTextField}
           margin="normal"
           placeholder="Buscar Producto"
         />
       </div>
       <List className={classes.list}>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Photos" secondary="Jan 9, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Work" secondary="Jan 7, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Vacation" secondary="July 20, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Photos" secondary="Jan 9, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Work" secondary="Jan 7, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Vacation" secondary="July 20, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Photos" secondary="Jan 9, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Work" secondary="Jan 7, 2014" />
         </ListItem>
         <ListItem>
-          <Avatar>
+          <Avatar className={classes.avatar}>
             <Package />
           </Avatar>
           <ListItemText primary="Vacation" secondary="July 20, 2014" />
         </ListItem>
+        <li className={classes.li} />
       </List>
-      <Fab variant="extended" aria-label="Delete" className={classes.fab}>
-        <Plus className={classes.extendedIcon} />
-        Añadir Nuevo
-      </Fab>
+      <Button variant="contained" color="primary" className={classes.addBotton}>
+        Añadir Producto
+      </Button>
     </div>
   );
 };

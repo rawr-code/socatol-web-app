@@ -4,28 +4,35 @@ const styles = theme => ({
     maxWidth: 300,
     backgroundColor: theme.palette.background.paper
   },
-  extendedIcon: {
-    marginRight: theme.spacing.unit
+  addBotton: {
+    margin: 0,
+    padding: 20,
+    borderRadius: 0,
+    width: '100%',
+    boxShadow: 'none'
   },
-  fab: {
-    margin: theme.spacing.unit,
-    position: 'absolute',
-    top: 30,
-    right: 40,
-    zIndex: theme.zIndex.appBar + 1,
-    backgroundColor: 'white',
-    color: theme.palette.primary.main
+  avatar: {
+    // backgroundColor: theme.palette.primary.main
   },
   list: {
-    borderTop: '1px solid rgba(0,0,0,0.12)'
+    height: 550,
+    maxHeight: 550,
+    paddingBottom: 0,
+    borderTop: '1px solid rgba(0,0,0,0.12)',
+    overflowY: 'auto'
   },
-  textField: {
+  li: {
+    height: 8
+  },
+  searchBox: {
+    padding: 8,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  searchBoxTextField: {
     marginLeft: 20,
     paddingRight: 20,
     width: 'calc(100% - 20px)'
-  },
-  search: {
-    padding: 8
   }
 });
 
