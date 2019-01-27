@@ -1,4 +1,4 @@
-import axios from 'axios';
+import API from '../API';
 import { createActions } from 'redux-actions';
 
 // Action Types Creator
@@ -10,7 +10,7 @@ export const ActionsTypesCreator = name => ({
   NEW: `${name}_NEW`,
   GET_ALL: `${name}_GET_ALL`,
   UPDATE: `${name}_UPDATE`,
-  DELETE: `${name}_DELETE`,
+  DELETE: `${name}_DELETE`
 });
 
 // Actions Creator
@@ -38,13 +38,13 @@ export const ActionsCreatorsCreator = (Actions, name) => {
     GetNew: Actions[`${nameLower}New`],
     GetAll: Actions[`${nameLower}GetAll`],
     Update: Actions[`${nameLower}Update`],
-    Delete: Actions[`${nameLower}Delete`],
+    Delete: Actions[`${nameLower}Delete`]
   };
 
   const Methods = {
     GET: (url, id) => async dispatch => {
       dispatch(ActionsList.Started());
-      const result = await axios.get(`${url}/${id}`);
+      const result = await API.get(`${url}/${id}`);
       if (result) {
         dispatch(ActionsList.Success());
         // Modificar Action
@@ -56,7 +56,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
 
     GET_ALL: url => async dispatch => {
       dispatch(ActionsList.Started());
-      const result = await axios.get(url);
+      const result = await API.get(url);
       if (result) {
         dispatch(ActionsList.Success());
         setTimeout(() => {
@@ -67,7 +67,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
 
     NEW: (url, payload) => async dispatch => {
       dispatch(ActionsList.Started());
-      const result = await axios.post(url, payload);
+      const result = await API.post(url, payload);
       if (result) {
         dispatch(ActionsList.Success());
         // Modificar Action
@@ -79,7 +79,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
 
     UPDATE: (url, id, payload) => async dispatch => {
       dispatch(ActionsList.Started());
-      const result = await axios.patch(`${url}/${id}`, payload);
+      const result = await API.patch(`${url}/${id}`, payload);
       if (result) {
         dispatch(ActionsList.Success());
         // Modificar Action
@@ -91,7 +91,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
 
     DELETE: (url, id) => async dispatch => {
       dispatch(ActionsList.Started());
-      const result = await axios.delete(url, id);
+      const result = await API.delete(url, id);
       if (result) {
         dispatch(ActionsList.Success());
         // Modificar Action
@@ -99,7 +99,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
           dispatch(ActionsList.GetAll(result.data));
         }, 2000);
       }
-    },
+    }
   };
 
   return Methods;
