@@ -1,8 +1,8 @@
 import {
   ActionsTypesCreator,
   ActionsCreator,
-  ActionsCreatorsCreator,
-} from '../Basics';
+  ActionsCreatorsCreator
+} from '../utils/Basics';
 
 // Actions
 export const Actions = ActionsCreator('Warehouse');

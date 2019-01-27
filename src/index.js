@@ -4,10 +4,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // Utils
-import { setAuthorizationToken } from './utils';
+import setAuthorizationToken from './utils/setAuthorizationToken';
 
 // Configuration
-import { store } from './config';
+import store from './store';
 
 import { setCurrentUser } from './actions/Auth';
 import App from './App';

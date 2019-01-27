@@ -1,5 +1,5 @@
 import API from '../API';
-import { setAuthorizationToken } from '../utils';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
@@ -14,7 +14,6 @@ export function LoggedIn(payload) {
     const result = await API.post('user/login', payload);
     if (result) {
       const token = result.data.token;
-      console.log(token);
       localStorage.setItem('JWToken', token);
       setAuthorizationToken(token);
       dispatch(setCurrentUser(token));

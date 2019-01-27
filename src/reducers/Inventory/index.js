@@ -1,4 +1,4 @@
-const ActionsTypes = '../../actions/InventoryManagement/WarehouseActions';
+import { ActionsTypes } from '../../actions/Warehouse';
 
 // Initial State
 const INITIAL_STATE = {
