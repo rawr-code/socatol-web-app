@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../../actions/Auth';
+import { SET_CURRENT_USER } from '../actions/Auth';
 
 const INITIAL_STATE = {
   isAuthenticated: false,

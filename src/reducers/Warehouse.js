@@ -1,4 +1,4 @@
-import { ActionsTypes } from '../../actions/Warehouse';
+import { ActionsTypes } from '../actions/Warehouse';
 
 // Initial State
 const INITIAL_STATE = {
@@ -27,8 +27,8 @@ export default function reducer(state = INITIAL_STATE, action) {
         loading: false,
         error: action.payload.error
       };
-    // -------------------------
 
+    // -------------------------
     case ActionsTypes.GET_ALL:
       return {
         ...state,

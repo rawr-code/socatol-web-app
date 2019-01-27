@@ -12,7 +12,8 @@ const styles = theme => ({
     boxShadow: 'none'
   },
   avatar: {
-    // backgroundColor: theme.palette.primary.main
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.paper
   },
   list: {
     height: 550,

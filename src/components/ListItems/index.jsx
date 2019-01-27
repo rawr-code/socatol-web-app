@@ -16,7 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Package } from 'react-feather';
 
 const ListItems = props => {
-  const { classes } = props;
+  const { classes, data } = props;
   return (
     <div className={classes.root}>
       <div className={classes.searchBox}>
@@ -29,60 +29,18 @@ const ListItems = props => {
         />
       </div>
       <List className={classes.list}>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Work" secondary="Jan 7, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Vacation" secondary="July 20, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Work" secondary="Jan 7, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Vacation" secondary="July 20, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Work" secondary="Jan 7, 2014" />
-        </ListItem>
-        <ListItem>
-          <Avatar className={classes.avatar}>
-            <Package />
-          </Avatar>
-          <ListItemText primary="Vacation" secondary="July 20, 2014" />
-        </ListItem>
+        {data &&
+          data.map(item => {
+            const { _id, name } = item;
+            return (
+              <ListItem key={_id}>
+                <Avatar className={classes.avatar}>
+                  <Package />
+                </Avatar>
+                <ListItemText primary={name} secondary="Tipo: Biologico" />
+              </ListItem>
+            );
+          })}
         <li className={classes.li} />
       </List>
       <Button variant="contained" color="primary" className={classes.addBotton}>

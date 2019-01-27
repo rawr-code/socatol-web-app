@@ -6,22 +6,14 @@ import MUICustomTheme from './MUICustomTheme';
 
 // Components
 import Layout from './components/Layout';
-import ListItems from './components/ListItems';
-import ItemDetails from './components/ItemDetails';
 
 import { PublicRoute, PrivateRoute } from './components';
 
 // Containers
 import { Login } from './containers/Auth';
+import Products from './containers/Products';
 
-const Home = () => {
-  return (
-    <div style={{ display: 'flex' }}>
-      <ListItems />
-      <ItemDetails />
-    </div>
-  );
-};
+// const Home = () => <div>Home</div>;
 
 const App = props => {
   return (
@@ -29,7 +21,7 @@ const App = props => {
       <Switch>
         <PublicRoute path="/login" component={Login} />
         <Layout>
-          <PrivateRoute path="/" component={Home} />
+          <PrivateRoute path="/" component={Products} />
         </Layout>
       </Switch>
     </MUICustomTheme>

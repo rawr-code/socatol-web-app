@@ -5,9 +5,9 @@ import {
 } from '../utils/Basics';
 
 // Actions
-export const Actions = ActionsCreator('Warehouse');
-export const ActionsTypes = ActionsTypesCreator('Warehouse');
-export const ActionsCreators = ActionsCreatorsCreator(Actions, 'Warehouse');
+export const Actions = ActionsCreator('warehouse');
+export const ActionsTypes = ActionsTypesCreator('warehouse');
+export const ActionsCreators = ActionsCreatorsCreator(Actions, 'warehouse');
 
 // Actions Creators
 export function GET_ALL() {
