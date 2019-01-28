@@ -50,7 +50,7 @@ class ProductContainer extends Component {
   }
 
   render() {
-    const { state, actions } = this.props;
+    const { state } = this.props;
     return (
       <Product
         state={state}

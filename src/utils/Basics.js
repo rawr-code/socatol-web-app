@@ -72,7 +72,6 @@ export const ActionsCreatorsCreator = (Actions, name) => {
       try {
         dispatch(ActionsList.Started());
         const result = await API.post(url, payload);
-        console.log(result.data);
         if (result) {
           dispatch(ActionsList.Success());
           dispatch(ActionsList.GetAll());
