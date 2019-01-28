@@ -25,6 +25,9 @@ const styles = theme => ({
   listItem: {
     cursor: 'pointer'
   },
+  listItemText: {
+    wordWrap: 'break-word'
+  },
   li: {
     height: 8
   },

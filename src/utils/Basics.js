@@ -69,14 +69,16 @@ export const ActionsCreatorsCreator = (Actions, name) => {
     },
 
     NEW: (url, payload) => async dispatch => {
-      dispatch(ActionsList.Started());
-      const result = await API.post(url, payload);
-      if (result) {
-        dispatch(ActionsList.Success());
-        // Modificar Action
-        setTimeout(() => {
-          dispatch(ActionsList.GetAll(result.data));
-        }, 2000);
+      try {
+        dispatch(ActionsList.Started());
+        const result = await API.post(url, payload);
+        console.log(result.data);
+        if (result) {
+          dispatch(ActionsList.Success());
+          dispatch(ActionsList.GetAll());
+        }
+      } catch (err) {
+        dispatch(ActionsList.Failure(err.message));
       }
     },
 

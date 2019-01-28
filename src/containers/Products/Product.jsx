@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './styles';
 
 // Material UI
-import { withStyles } from '@material-ui/core';
+import { withStyles, Paper } from '@material-ui/core';
 
 // Components
 import ListItems from '../../components/ListItems';
@@ -17,11 +17,12 @@ const Product = props => {
     handleClick,
     handleClickOpenModal,
     modalOpen,
-    handleCloseModal
+    handleCloseModal,
+    handleAdd
   } = props;
-  const { products, product } = props.state;
+  const { products, product, warehouses } = props.state;
   return (
-    <div className={classes.root}>
+    <Paper className={classes.root}>
       <ListItems
         data={products}
         onClick={handleClick}
@@ -32,8 +33,10 @@ const Product = props => {
         title="Nuevo Producto"
         open={modalOpen}
         handleClose={handleCloseModal}
+        inputSelectOptions={warehouses}
+        onSubmit={handleAdd}
       />
-    </div>
+    </Paper>
   );
 };
 

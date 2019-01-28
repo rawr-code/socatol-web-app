@@ -15,3 +15,7 @@ export const GET_ALL = ActionsCreators.GET_ALL('product');
 export function GET(id) {
   return ActionsCreators.GET('product', id);
 }
+
+export function NEW(payload) {
+  return ActionsCreators.NEW('product', payload);
+}

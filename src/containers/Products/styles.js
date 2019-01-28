@@ -1,8 +1,6 @@
 const styles = theme => ({
   root: {
-    display: 'flex',
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: 8
+    display: 'flex'
   }
 });
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // Material UI
 import {
@@ -9,7 +9,6 @@ import {
   TextField,
   MenuItem
 } from '@material-ui/core';
-import { InfoOutlined } from '@material-ui/icons';
 
 export const FieldMaterialUI = props => {
   const {
@@ -26,15 +25,6 @@ export const FieldMaterialUI = props => {
   );
 };
 
-// component={FieldMaterialUI}
-//             id="inputName"
-//             name="Nombre"
-//             label="Nombre"
-//             margin="dense"
-//             variant="outlined"
-//             fullWidth
-//             type="text"
-
 const renderFromHelper = ({ touched, error }) => {
   if (!(touched && error)) {
     return;
@@ -44,13 +34,12 @@ const renderFromHelper = ({ touched, error }) => {
 };
 
 export const FieldMaterialUISelect = props => {
-  console.log(props);
   const {
     input,
     label,
     name,
+    children,
     meta: { touched, error },
-    options,
     ...custom
   } = props;
   return (
@@ -64,12 +53,7 @@ export const FieldMaterialUISelect = props => {
           id: `input${input.name}`
         }}
       >
-        {options &&
-          options.map((item, index) => (
-            <MenuItem key={`${item.name}_${index}`} value={item.value}>
-              {item.name}
-            </MenuItem>
-          ))}
+        {children ? children : <MenuItem value="">No hay registros.</MenuItem>}
       </Select>
       {renderFromHelper({ touched, error })}
     </FormControl>

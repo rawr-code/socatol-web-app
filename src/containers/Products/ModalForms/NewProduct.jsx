@@ -14,25 +14,21 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  MenuItem,
   withStyles
 } from '@material-ui/core';
 
 const NewProduct = props => {
-  const { classes, title, open, handleClose } = props;
-  const options = [
-    {
-      name: 'Red',
-      value: 'ff0000'
-    },
-    {
-      name: 'Green',
-      value: '00ff00'
-    },
-    {
-      name: 'Blue',
-      value: '0000ff'
-    }
-  ];
+  const {
+    classes,
+    title,
+    open,
+    handleClose,
+    inputSelectOptions,
+    handleSubmit,
+    pristine,
+    submitting
+  } = props;
   return (
     <Dialog
       open={open}
@@ -41,8 +37,8 @@ const NewProduct = props => {
       maxWidth="xs"
     >
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
+        <DialogContent>
           <Field
             className={classes.field}
             component={FieldMaterialUI}
@@ -65,30 +61,38 @@ const NewProduct = props => {
           />
           <Field
             className={classes.field}
-            name="warehouse"
+            name="warehouseId"
             component={FieldMaterialUISelect}
             label="Almacen"
-            options={options}
-          />
-        </form>
-      </DialogContent>
-      <DialogActions>
-        <Button
-          onClick={handleClose}
-          color="primary"
-          style={{ textTransform: 'capitalize' }}
-        >
-          Cancelar
-        </Button>
-        <Button
-          onClick={handleClose}
-          color="primary"
-          variant="contained"
-          style={{ textTransform: 'capitalize' }}
-        >
-          Añadir
-        </Button>
-      </DialogActions>
+          >
+            {inputSelectOptions &&
+              inputSelectOptions.length > 0 &&
+              inputSelectOptions.map(item => (
+                <MenuItem key={item._id} value={item._id}>
+                  {item.name}
+                </MenuItem>
+              ))}
+          </Field>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleClose}
+            color="primary"
+            style={{ textTransform: 'capitalize' }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            style={{ textTransform: 'capitalize' }}
+            disabled={pristine || submitting}
+          >
+            Añadir
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

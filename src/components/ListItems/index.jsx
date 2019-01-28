@@ -41,7 +41,11 @@ const ListItems = props => {
                 <Avatar className={classes.avatar}>
                   <Package />
                 </Avatar>
-                <ListItemText primary={name} secondary="Tipo: Biologico" />
+                <ListItemText
+                  primary={name}
+                  secondary="Tipo: Biologico"
+                  classes={{ root: classes.listItemText }}
+                />
               </ListItem>
             );
           })}
