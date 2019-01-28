@@ -5,7 +5,11 @@ import { CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
+  shape: {
+    borderRadius: 8
+  },
   palette: {
+    // Socatol Colors
     // primary: {
     //   main: "#27c24c",
     //   light: "#69f67b",
@@ -33,6 +37,7 @@ const theme = createMuiTheme({
       contrastText: '#000000a6'
     },
     background: { default: '#f0f2f5' }
+
     // ----------------------------
   },
   typography: {
