@@ -6,6 +6,21 @@ import { Typography, Tabs, Tab, Zoom, Fab } from '@material-ui/core';
 import { Add, Edit, PersonAdd } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
+const fabs = [
+  {
+    name: 'edit',
+    icon: <Edit />
+  },
+  {
+    name: 'add',
+    icon: <Add />
+  },
+  {
+    name: 'personAdd',
+    icon: <PersonAdd />
+  }
+];
+
 class ItemDetails extends React.Component {
   state = {
     value: 0
@@ -16,31 +31,18 @@ class ItemDetails extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, item } = this.props;
     const { value } = this.state;
+
     const transitionDuration = {
       enter: theme.transitions.duration.enteringScreen,
       exit: theme.transitions.duration.leavingScreen
     };
-    const fabs = [
-      {
-        name: 'edit',
-        icon: <Edit />
-      },
-      {
-        name: 'add',
-        icon: <Add />
-      },
-      {
-        name: 'personAdd',
-        icon: <PersonAdd />
-      }
-    ];
 
     return (
       <div className={classes.root}>
         <header className={classes.header}>
-          <Typography variant="h5">Details</Typography>
+          <Typography variant="h5">{item.name}</Typography>
         </header>
         <Tabs
           className={classes.tabs}
@@ -53,9 +55,9 @@ class ItemDetails extends React.Component {
           <Tab label="Presentaciones" disableRipple />
           <Tab label="Proveedores" disableRipple />
         </Tabs>
-        <div style={{ padding: 20 }}>
-          {value === 0 && <div>Item One</div>}
-          {value === 1 && <div>Item Two</div>}
+        <div className={classes.container}>
+          {value === 0 && <div>{item.description}</div>}
+          {value === 1 && <div>{item.presentations}</div>}
           {value === 2 && <div>Item Three</div>}
         </div>
         {fabs.map((fab, index) => (

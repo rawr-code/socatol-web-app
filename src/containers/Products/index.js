@@ -5,16 +5,49 @@ import { connect } from 'react-redux';
 import Product from './Product';
 
 // Actions
-import { GET_ALL } from '../../actions/Product';
+import { GET_ALL, GET } from '../../actions/Product';
 
 class ProductContainer extends Component {
-  componentWillMount() {
-    this.props.getAll();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      itemSelected: null,
+      modalOpen: false,
+      modalType: null
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
+  componentWillMount() {
+    this.props.actions.getAll();
+  }
+
+  handleClick(id) {
+    this.props.actions.get(id);
+  }
+
+  handleClickOpenModal = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ modalOpen: false });
+  };
 
   render() {
     const { state } = this.props;
-    return <Product state={state} />;
+    return (
+      <Product
+        state={state}
+        handleClick={this.handleClick}
+        modalOpen={this.state.modalOpen}
+        handleClickOpenModal={this.handleClickOpenModal}
+        handleCloseModal={this.handleCloseModal}
+      />
+    );
   }
 }
 
@@ -23,7 +56,10 @@ const mapStateToProps = ({ Product }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getAll: () => dispatch(GET_ALL)
+  actions: {
+    getAll: () => dispatch(GET_ALL),
+    get: id => dispatch(GET(id))
+  }
 });
 
 export default connect(

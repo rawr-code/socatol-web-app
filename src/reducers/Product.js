@@ -4,28 +4,29 @@ import { ActionsTypes } from '../actions/Product';
 const INITIAL_STATE = {
   loading: false,
   products: [],
+  product: {},
   error: null
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     // Status
-    case ActionsTypes.started:
+    case ActionsTypes.STARTED:
       return {
         ...state,
         loading: true
       };
-    case ActionsTypes.success:
+    case ActionsTypes.SUCCESS:
       return {
         ...state,
         loading: false,
         error: null
       };
-    case ActionsTypes.failure:
+    case ActionsTypes.FAILURE:
       return {
         ...state,
         loading: false,
-        error: action.payload.error
+        error: action.payload
       };
 
     // -------------------------
@@ -33,6 +34,12 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         products: action.payload
+      };
+
+    case ActionsTypes.GET:
+      return {
+        ...state,
+        product: action.payload
       };
 
     default:

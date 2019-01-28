@@ -16,7 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Package } from 'react-feather';
 
 const ListItems = props => {
-  const { classes, data } = props;
+  const { classes, data, onClick, newItem } = props;
   return (
     <div className={classes.root}>
       <div className={classes.searchBox}>
@@ -33,7 +33,11 @@ const ListItems = props => {
           data.map(item => {
             const { _id, name } = item;
             return (
-              <ListItem key={_id}>
+              <ListItem
+                key={_id}
+                onClick={() => onClick(_id)}
+                className={classes.listItem}
+              >
                 <Avatar className={classes.avatar}>
                   <Package />
                 </Avatar>
@@ -43,7 +47,12 @@ const ListItems = props => {
           })}
         <li className={classes.li} />
       </List>
-      <Button variant="contained" color="primary" className={classes.addBotton}>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.addBotton}
+        onClick={newItem}
+      >
         Añadir Producto
       </Button>
     </div>

@@ -43,25 +43,28 @@ export const ActionsCreatorsCreator = (Actions, name) => {
 
   const Methods = {
     GET: (url, id) => async dispatch => {
-      dispatch(ActionsList.Started());
-      const result = await API.get(`${url}/${id}`);
-      if (result) {
-        dispatch(ActionsList.Success());
-        // Modificar Action
-        setTimeout(() => {
-          dispatch(ActionsList.GetAll(result.data));
-        }, 2000);
+      try {
+        dispatch(ActionsList.Started());
+        const result = await API.get(`${url}/${id}`);
+        if (result) {
+          dispatch(ActionsList.Success());
+          dispatch(ActionsList.Get(result.data));
+        }
+      } catch (err) {
+        dispatch(ActionsList.Failure(err.message));
       }
     },
 
     GET_ALL: url => async dispatch => {
-      dispatch(ActionsList.Started());
-      const result = await API.get(url);
-      if (result) {
-        dispatch(ActionsList.Success());
-        setTimeout(() => {
+      try {
+        dispatch(ActionsList.Started());
+        const result = await API.get(url);
+        if (result) {
+          dispatch(ActionsList.Success());
           dispatch(ActionsList.GetAll(result.data));
-        }, 2000);
+        }
+      } catch (err) {
+        dispatch(ActionsList.Failure(err.message));
       }
     },
 

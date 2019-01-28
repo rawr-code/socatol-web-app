@@ -10,18 +10,18 @@ const INITIAL_STATE = {
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     // Status
-    case ActionsTypes.started:
+    case ActionsTypes.STARTED:
       return {
         ...state,
         loading: true
       };
-    case ActionsTypes.success:
+    case ActionsTypes.SUCCESS:
       return {
         ...state,
         loading: false,
         error: null
       };
-    case ActionsTypes.failure:
+    case ActionsTypes.FAILURE:
       return {
         ...state,
         loading: false,
