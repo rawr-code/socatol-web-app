@@ -1,9 +1,7 @@
 const styles = theme => ({
   root: {
-    width: '100%'
-  },
-  paper: {
-    display: 'flex'
+    width: '100%',
+    maxWidth: 300
   },
   addBotton: {
     margin: 0,
@@ -25,11 +23,6 @@ const styles = theme => ({
   },
   listItem: {
     cursor: 'pointer'
-  },
-  listItemRoot: {
-    width: '100%',
-    maxWidth: 300,
-    borderRight: '1px solid rgba(0,0,0,0.12)'
   },
   listItemText: {
     wordWrap: 'break-word'
@@ -60,6 +53,31 @@ const styles = theme => ({
     paddingRight: 20,
     marginBottom: 8,
     width: 'calc(100% - 20px)'
+  },
+  detailsRoot: {
+    width: '100%',
+    position: 'relative'
+  },
+  detailsEmpty: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  container: {
+    padding: 24
+  },
+  fab: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    margin: 24
+  },
+  header: {
+    padding: 24
+  },
+  tabs: {
+    borderBottom: '1px solid rgba(0,0,0,0.12)'
   }
 });
 

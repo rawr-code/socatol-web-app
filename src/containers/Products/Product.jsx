@@ -2,45 +2,16 @@ import React from 'react';
 import styles from './styles';
 
 // Material UI
-import { withStyles, Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 
 // Components
-import ListItems from '../../components/ListItems';
-import ItemDetails from '../../components/ItemDetails';
-import TableBoard from '../../components/TableBoard';
-
-// Forms
-import NewProduct from './ModalForms/NewProduct';
+import ProductList from '../../components/ProductList';
 
 const Product = props => {
-  const {
-    classes,
-    handleClick,
-    handleClickOpenModal,
-    modalOpen,
-    handleCloseModal,
-    handleAdd
-  } = props;
-  const { products, product, warehouses } = props.state;
   return (
     <div>
-      <TableBoard />
+      <ProductList data={props.state.products} />
     </div>
-    // <Paper className={classes.root}>
-    //   <ListItems
-    //     data={products}
-    //     onClick={handleClick}
-    //     newItem={handleClickOpenModal}
-    //   />
-    //   <ItemDetails item={product} />
-    //   <NewProduct
-    //     title="Nuevo Producto"
-    //     open={modalOpen}
-    //     handleClose={handleCloseModal}
-    //     inputSelectOptions={warehouses}
-    //     onSubmit={handleAdd}
-    //   />
-    // </Paper>
   );
 };
 

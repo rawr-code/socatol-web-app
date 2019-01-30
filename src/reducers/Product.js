@@ -3,8 +3,8 @@ import { ActionsTypes } from '../actions/Product';
 // Initial State
 const INITIAL_STATE = {
   loading: false,
-  products: [],
-  product: {},
+  products: null,
+  product: null,
   error: null
 };
 

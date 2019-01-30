@@ -3,33 +3,28 @@ import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
 // Components
-import Product from './Product';
+import ProductList from '../../components/ProductList';
 
 // Actions
 import { GET_ALL as GET_ALL_WAREHOUSE } from '../../actions/Warehouse';
-import { GET_ALL, GET, NEW } from '../../actions/Product';
+import { GET_ALL, NEW } from '../../actions/Product';
 
 class ProductContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      itemSelected: null,
       modalOpen: false,
       modalType: null
     };
 
-    this.handleClick = this.handleClick.bind(this);
     this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
-  componentWillMount() {
-    this.props.actions.getAll();
-  }
 
-  handleClick(id) {
-    this.props.actions.get(id);
+  async componentDidMount() {
+    await this.props.actions.getAll();
   }
 
   handleClickOpenModal = () => {
@@ -50,24 +45,20 @@ class ProductContainer extends Component {
   }
 
   render() {
-    const { state } = this.props;
-    return (
-      <Product
-        state={state}
-        handleClick={this.handleClick}
-        modalOpen={this.state.modalOpen}
-        handleClickOpenModal={this.handleClickOpenModal}
-        handleCloseModal={this.handleCloseModal}
-        handleAdd={this.handleAdd}
-      />
-    );
+    const {
+      state: { products },
+      isLoading
+    } = this.props;
+
+    return <ProductList data={products} isLoading={isLoading} />;
   }
 }
 
 const mapStateToProps = ({
-  Product: { product, products },
+  Product: { product, products, loading },
   Warehouse: { warehouses }
 }) => ({
+  isLoading: loading,
   state: {
     product,
     products,
@@ -80,7 +71,6 @@ const mapDispatchToProps = dispatch => ({
     resetForm: name => dispatch(reset(name)),
     getAllWarehouse: () => dispatch(GET_ALL_WAREHOUSE),
     getAll: () => dispatch(GET_ALL),
-    get: id => dispatch(GET(id)),
     new: payload => dispatch(NEW(payload))
   }
 });
