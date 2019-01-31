@@ -44,7 +44,7 @@ const theme = createMuiTheme({
     useNextVariants: true,
     fontFamily: 'Roboto, "Google Sans"'
   },
-  drawerWidth: 250
+  drawerWidth: 260
 });
 
 const MUICustomTheme = ({ children }) => (
