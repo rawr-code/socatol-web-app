@@ -20,10 +20,8 @@ const App = props => {
     <MUICustomTheme>
       <Switch>
         <PublicRoute path="/login" component={Login} />
-        <Layout>
-          <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute path="/productos" component={Products} />
-        </Layout>
+        <PrivateRoute exact path="/" component={Home} layout={Layout} />
+        <PrivateRoute path="/productos" component={Products} layout={Layout} />
       </Switch>
     </MUICustomTheme>
   );
