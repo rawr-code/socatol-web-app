@@ -19,7 +19,9 @@ const styles = theme => ({
     alignItems: 'center'
   },
   paper: {
-    display: 'flex'
+    display: 'flex',
+    margin: '0 auto',
+    maxWidth: 1140
   },
   container: {
     padding: 24
