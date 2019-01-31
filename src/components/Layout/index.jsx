@@ -1,15 +1,16 @@
 import React from 'react';
 import styles from './styles';
+import { NavLink } from 'react-router-dom';
 
 // Material UI Components
 import {
   Hidden,
   Drawer,
-  Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
   AppBar,
   Toolbar,
   IconButton,
@@ -17,6 +18,7 @@ import {
 } from '@material-ui/core';
 
 import { Inbox, Menu } from '@material-ui/icons';
+import { Package } from 'react-feather';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -34,23 +36,52 @@ class Layout extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <Inbox />
-            </ListItemIcon>
-            <ListItemText primary="Titulo" />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <Inbox />
-            </ListItemIcon>
-            <ListItemText primary="Titulo" />
-          </ListItem>
+        <List
+          className={classes.list}
+          component="nav"
+          subheader={
+            <ListSubheader component="span">
+              Gestion de inventario
+            </ListSubheader>
+          }
+        >
+          <NavLink to="/" className={classes.navLink}>
+            <ListItem className={classes.listItem} component="div">
+              <ListItemIcon className={classes.listItemIcon}>
+                <Inbox />
+              </ListItemIcon>
+
+              <ListItemText
+                primary="Almacenes"
+                className={classes.navLinkText}
+              />
+            </ListItem>
+          </NavLink>
+          <NavLink to="/productos" className={classes.navLink}>
+            <ListItem className={classes.listItemActive}>
+              <ListItemIcon className={classes.listItemIcon}>
+                <Package />
+              </ListItemIcon>
+
+              <ListItemText
+                primary="Productos"
+                className={classes.navLinkText}
+                classes={{ primary: classes.listItemIcon }}
+              />
+            </ListItem>
+          </NavLink>
+          <NavLink to="/" className={classes.navLink}>
+            <ListItem className={classes.listItem}>
+              <ListItemIcon className={classes.listItemIcon}>
+                <Inbox />
+              </ListItemIcon>
+
+              <ListItemText
+                primary="Proveedores"
+                className={classes.navLinkText}
+              />
+            </ListItem>
+          </NavLink>
         </List>
       </div>
     );

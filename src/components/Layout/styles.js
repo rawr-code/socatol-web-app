@@ -16,11 +16,32 @@ const styles = theme => ({
       width: `calc(100% - ${theme.drawerWidth}px)`
     }
   },
+  list: {
+    padding: 15
+  },
+  listItemActive: {
+    margin: '8px 0',
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: 8,
+    boxShadow: `0 3px 0 0 ${theme.palette.primary.main}, 0 2px 8px 0 ${
+      theme.palette.primary.main
+    }, 0 4px 10px 0 rgba(33,7,77,.5)`
+  },
+  listItemIcon: {
+    color: '#fff',
+    margin: '0 8px'
+  },
   menuButton: {
     marginRight: 20,
     [theme.breakpoints.up('sm')]: {
       display: 'none'
     }
+  },
+  navLink: {
+    textDecoration: 'none'
+  },
+  navLinkText: {
+    height: '100%'
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
