@@ -13,15 +13,15 @@ import { setCurrentUser } from './actions/Auth';
 import App from './App';
 
 if (localStorage.JWToken) {
-  setAuthorizationToken(localStorage.JWToken);
-  store.dispatch(setCurrentUser(localStorage.JWToken));
+	setAuthorizationToken(localStorage.JWToken);
+	store.dispatch(setCurrentUser(localStorage.JWToken));
 }
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById('root')
+	<Provider store={store}>
+		<Router>
+			<App />
+		</Router>
+	</Provider>,
+	document.getElementById('root')
 );

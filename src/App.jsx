@@ -16,15 +16,15 @@ import Products from './containers/Products';
 const Home = () => <div>Home</div>;
 
 const App = props => {
-  return (
-    <MUICustomTheme>
-      <Switch>
-        <PublicRoute path="/login" component={Login} />
-        <PrivateRoute exact path="/" component={Home} layout={Layout} />
-        <PrivateRoute path="/productos" component={Products} layout={Layout} />
-      </Switch>
-    </MUICustomTheme>
-  );
+	return (
+		<MUICustomTheme>
+			<Switch>
+				<PublicRoute path="/login" component={Login} />
+				<PrivateRoute exact path="/" component={Home} layout={Layout} />
+				<PrivateRoute path="/productos" component={Products} layout={Layout} />
+			</Switch>
+		</MUICustomTheme>
+	);
 };
 
 export default App;
