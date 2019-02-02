@@ -49,13 +49,30 @@ class TableBoard extends PureComponent {
 					);
 				})
 			) : (
-				<Typography variant="body1" component="li">
-					No hay registros.
-				</Typography>
+				<div className={classes.loadingContainer}>
+					<div className={classes.infoEmptyContainer}>
+						{Icon && <Icon size={36} />}
+						<Package size={56} className={classes.infoEmptyIcon} />
+						<Typography
+							variant="h6"
+							component="h2"
+							className={classes.infoEmpty}
+						>
+							No se encontraron datos
+						</Typography>
+						<Typography
+							variant="body2"
+							component="p"
+							className={classes.infoSubtitle}
+						>
+							Añada un producto para comenzar.
+						</Typography>
+					</div>
+				</div>
 			);
 		return (
 			<div className={classes.root}>
-				<div className={classes.sideListRoot}>
+				<section className={classes.sideListRoot}>
 					<div className={classes.searchBox}>
 						<TextField
 							id="standard-name"
@@ -87,11 +104,11 @@ class TableBoard extends PureComponent {
 					>
 						Añadir Producto
 					</Button>
-				</div>
+				</section>
 				{selectedItem ? (
 					children
 				) : (
-					<div className={classes.infoContainer}>
+					<section className={classes.infoContainer}>
 						<Typography
 							variant="h6"
 							component="h2"
@@ -106,7 +123,7 @@ class TableBoard extends PureComponent {
 						>
 							Elije uno de tus productos existentes o añade uno nuevo.
 						</Typography>
-					</div>
+					</section>
 				)}
 			</div>
 		);

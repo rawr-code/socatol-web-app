@@ -28,6 +28,21 @@ const styles = theme => ({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
+	infoEmptyContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center'
+	},
+	infoEmpty: {
+		fontFamily: 'Google Sans',
+		fontWeight: 600,
+		fontSize: 20,
+		color: theme.palette.primary.main
+	},
+	infoEmptyIcon: {
+		marginBottom: 8,
+		color: theme.palette.primary.main
+	},
 	infoTitle: {
 		fontFamily: 'Google Sans',
 		fontWeight: 600,
