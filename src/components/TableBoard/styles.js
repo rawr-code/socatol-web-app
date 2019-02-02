@@ -28,11 +28,6 @@ const styles = theme => ({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	infoEmptyContainer: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center'
-	},
 	infoEmpty: {
 		fontFamily: 'Google Sans',
 		fontWeight: 600,
@@ -68,13 +63,6 @@ const styles = theme => ({
 	},
 	li: {
 		height: 8
-	},
-	loadingContainer: {
-		width: '100%',
-		height: '100%',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center'
 	},
 	loadingIcon: {
 		color: theme.palette.primary.main,

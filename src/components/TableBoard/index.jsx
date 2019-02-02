@@ -16,17 +16,24 @@ import { Package } from 'react-feather';
 
 import styles from './styles';
 
+// const config = {
+// 	icon: 'icon',
+// 	labels: {
+// 		empty: {
+// 			title: '',
+// 			subtitle: ''
+// 		},
+// 		details: {
+// 			title: '',
+// 			subtitle: ''
+// 		}
+// 	}
+// };
+
 class TableBoard extends PureComponent {
 	render() {
-		const {
-			classes,
-			data,
-			onClick,
-			icon: Icon,
-			selectedItem,
-			isLoading,
-			children
-		} = this.props;
+		const { classes, data, selectedItem, onClick, isLoading } = this.props;
+		const { icon: Icon, labels, children } = this.props;
 		const listItems =
 			data && data.length > 0 ? (
 				data.map(item => {
@@ -49,25 +56,18 @@ class TableBoard extends PureComponent {
 					);
 				})
 			) : (
-				<div className={classes.loadingContainer}>
-					<div className={classes.infoEmptyContainer}>
-						{Icon && <Icon size={36} />}
-						<Package size={56} className={classes.infoEmptyIcon} />
-						<Typography
-							variant="h6"
-							component="h2"
-							className={classes.infoEmpty}
-						>
-							No se encontraron datos
-						</Typography>
-						<Typography
-							variant="body2"
-							component="p"
-							className={classes.infoSubtitle}
-						>
-							Añada un producto para comenzar.
-						</Typography>
-					</div>
+				<div className={classes.infoContainer}>
+					{Icon && <Icon size={56} className={classes.infoEmptyIcon} />}
+					<Typography variant="h6" component="h2" className={classes.infoEmpty}>
+						{labels.empty.title}
+					</Typography>
+					<Typography
+						variant="body2"
+						component="p"
+						className={classes.infoSubtitle}
+					>
+						{labels.empty.subtitle}
+					</Typography>
 				</div>
 			);
 		return (
@@ -75,23 +75,26 @@ class TableBoard extends PureComponent {
 				<section className={classes.sideListRoot}>
 					<div className={classes.searchBox}>
 						<TextField
-							id="standard-name"
+							id="inputSearch"
 							className={classes.searchBoxTextField}
 							margin="normal"
-							placeholder="Buscar Producto"
+							placeholder={labels.inputSearchPlaceholder}
 						/>
 					</div>
 					<List className={classes.list} disablePadding>
 						{isLoading ? (
-							<div className={classes.loadingContainer}>
+							<div className={classes.infoContainer}>
 								<div className={classes.loadingIconContainer}>
 									<CircularProgress size={72} />
-									{Icon ? (
-										<Icon size={36} className={classes.loadingIcon} />
-									) : (
-										<Package size={36} className={classes.loadingIcon} />
-									)}
+									{Icon && <Icon size={36} className={classes.loadingIcon} />}
 								</div>
+								<Typography
+									variant="body2"
+									component="span"
+									className={classes.infoSubtitle}
+								>
+									Consultando...
+								</Typography>
 							</div>
 						) : (
 							listItems
@@ -102,10 +105,10 @@ class TableBoard extends PureComponent {
 						color="primary"
 						className={classes.addBotton}
 					>
-						Añadir Producto
+						{labels.button}
 					</Button>
 				</section>
-				{selectedItem ? (
+				{selectedItem !== null ? (
 					children
 				) : (
 					<section className={classes.infoContainer}>
@@ -114,14 +117,14 @@ class TableBoard extends PureComponent {
 							component="h2"
 							className={classes.infoTitle}
 						>
-							No tienes ningún producto seleccionado
+							{labels.info.title}
 						</Typography>
 						<Typography
 							variant="body2"
 							component="p"
 							className={classes.infoSubtitle}
 						>
-							Elije uno de tus productos existentes o añade uno nuevo.
+							{labels.info.subtitle}
 						</Typography>
 					</section>
 				)}

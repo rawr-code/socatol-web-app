@@ -10,11 +10,11 @@ import {
 	Fab,
 	Zoom,
 	Typography,
-	CircularProgress,
 	withStyles
 } from '@material-ui/core';
 
 import { Add, Edit, PersonAdd } from '@material-ui/icons';
+import { Package } from 'react-feather';
 
 // Components
 import TableBoard from '../TableBoard';
@@ -61,17 +61,28 @@ class ProductList extends PureComponent {
 			enter: theme.transitions.duration.enteringScreen,
 			exit: theme.transitions.duration.leavingScreen
 		};
-		return isLoading ? (
-			<div className={classes.loading}>
-				<CircularProgress size={56} />
-			</div>
-		) : (
+		const tableBoardLabels = {
+			empty: {
+				title: 'No se encontraron productos',
+				subtitle: 'Añada un producto para comenzar.'
+			},
+			info: {
+				title: 'No has seleccionado ningún producto',
+				subtitle:
+					'Selecciona uno de los productos existentes o añade uno nuevo.'
+			},
+			button: 'Añadir Producto',
+			inputSearchPlaceholder: 'Buscar Producto'
+		};
+		return (
 			<Paper className={classes.paper}>
 				<TableBoard
 					data={data}
 					onClick={this.handleSelectItem}
 					selectedItem={selectedItem}
 					isLoading={isLoading}
+					labels={tableBoardLabels}
+					icon={Package}
 				>
 					{selectedItem && selectedItem.length > 0 && (
 						<div className={classes.root}>
