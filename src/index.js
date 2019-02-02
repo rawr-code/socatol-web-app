@@ -25,5 +25,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 );
-
-// this is a comment line
