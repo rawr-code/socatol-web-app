@@ -46,14 +46,12 @@ class Layout extends React.Component {
 			},
 			{
 				label: 'Facturación',
-				// to: '/facturacion'
-				to: '/',
+				to: '/facturacion',
 				icon: <FileText />
 			},
 			{
 				label: 'Banco',
-				// to: '/banco'
-				to: '/',
+				to: '/banco',
 				icon: <DollarSign />
 			},
 			{

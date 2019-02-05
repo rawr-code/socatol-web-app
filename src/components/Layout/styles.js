@@ -47,7 +47,7 @@ const styles = theme => ({
 		textDecoration: 'none'
 	},
 	navLinkText: {
-		height: '100%'
+		height: 20
 	},
 	toolbar: theme.mixins.toolbar,
 	drawerPaper: {
@@ -56,7 +56,9 @@ const styles = theme => ({
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
-		marginTop: 24
+		marginTop: 24,
+		maxWidth: 1140,
+		margin: '0 auto'
 	}
 });
 export default styles;

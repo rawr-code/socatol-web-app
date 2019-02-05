@@ -4,7 +4,7 @@ import React from 'react';
 import { CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
 	shape: {
 		borderRadius: 8
 	},

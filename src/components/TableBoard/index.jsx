@@ -10,6 +10,7 @@ import {
 	Typography,
 	TextField,
 	CircularProgress,
+	Paper,
 	withStyles
 } from '@material-ui/core';
 import { Package } from 'react-feather';
@@ -71,7 +72,7 @@ class TableBoard extends PureComponent {
 				</div>
 			);
 		return (
-			<div className={classes.root}>
+			<Paper className={classes.root}>
 				<section className={classes.sideListRoot}>
 					<div className={classes.searchBox}>
 						<TextField
@@ -128,7 +129,7 @@ class TableBoard extends PureComponent {
 						</Typography>
 					</section>
 				)}
-			</div>
+			</Paper>
 		);
 	}
 }

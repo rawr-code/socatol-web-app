@@ -1,6 +1,7 @@
 const styles = theme => ({
 	root: {
 		width: '100%',
+		height: 700,
 		display: 'flex'
 	},
 	sideListRoot: {
@@ -30,17 +31,16 @@ const styles = theme => ({
 	},
 	infoEmpty: {
 		fontFamily: 'Google Sans',
-		fontWeight: 600,
 		fontSize: 20,
 		color: theme.palette.primary.main
 	},
 	infoEmptyIcon: {
+		strokeWidth: 1,
 		marginBottom: 8,
 		color: theme.palette.primary.main
 	},
 	infoTitle: {
 		fontFamily: 'Google Sans',
-		fontWeight: 600,
 		fontSize: 24,
 		color: theme.palette.primary.main
 	},
@@ -50,8 +50,7 @@ const styles = theme => ({
 		color: theme.palette.text.secondary
 	},
 	list: {
-		height: 550,
-		maxHeight: 550,
+		height: 'calc(100% - 64px - 72px)',
 		borderTop: '1px solid rgba(0,0,0,0.12)',
 		overflowY: 'auto'
 	},
@@ -65,6 +64,7 @@ const styles = theme => ({
 		height: 8
 	},
 	loadingIcon: {
+		strokeWidth: 1,
 		color: theme.palette.primary.main,
 		position: 'absolute',
 		top: 18,

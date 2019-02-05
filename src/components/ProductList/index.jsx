@@ -4,7 +4,6 @@ import styles from './styles';
 
 // MaterialUI
 import {
-	Paper,
 	Tab,
 	Tabs,
 	Fab,
@@ -69,13 +68,13 @@ class ProductList extends PureComponent {
 			info: {
 				title: 'No has seleccionado ningún producto',
 				subtitle:
-					'Selecciona uno de los productos existentes o añade uno nuevo.'
+					'Seleccione uno de los productos existentes o añada uno nuevo.'
 			},
 			button: 'Añadir Producto',
 			inputSearchPlaceholder: 'Buscar Producto'
 		};
 		return (
-			<Paper className={classes.paper}>
+			<div className={classes.root}>
 				<TableBoard
 					data={data}
 					onClick={this.handleSelectItem}
@@ -85,7 +84,7 @@ class ProductList extends PureComponent {
 					icon={Package}
 				>
 					{selectedItem && selectedItem.length > 0 && (
-						<div className={classes.root}>
+						<div className={classes.sectionContainer}>
 							<header className={classes.header}>
 								<Typography variant="h5">{selectedItem.name}</Typography>
 							</header>
@@ -125,7 +124,7 @@ class ProductList extends PureComponent {
 						</div>
 					)}
 				</TableBoard>
-			</Paper>
+			</div>
 		);
 	}
 }
