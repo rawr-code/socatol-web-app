@@ -5,15 +5,13 @@ import { Switch } from 'react-router-dom';
 import MUICustomTheme from './MUICustomTheme';
 
 // Components
-import Layout from './components/Layout';
-
 import { PublicRoute, PrivateRoute } from './components';
 
 // Containers
 import { Login } from './containers/Auth';
+import Layout from './containers/Layout';
 import Products from './containers/Products';
 import Invoicing from './containers/Invoicing';
-
 import Treasury from './containers/Treasury';
 
 const Home = () => <div>Home</div>;
