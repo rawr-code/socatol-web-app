@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import SwipeableViews from 'react-swipeable-views';
 
 // Actions
 import { setTabs, setHeaderTitle } from '../../actions/Layout';
+
+// Components
+import Warehouses from './Warehouses';
+import Products from './Products';
 
 class InventoryContainer extends Component {
 	componentDidMount = () => {
@@ -24,8 +29,10 @@ class InventoryContainer extends Component {
 
 		return (
 			<div style={{ marginTop: 48 }}>
-				{tabSelected === 0 && <p>Almacenes</p>}
-				{tabSelected === 1 && <p>Productos</p>}
+				<SwipeableViews index={tabSelected}>
+					<Warehouses />
+					<Products />
+				</SwipeableViews>
 			</div>
 		);
 	}
