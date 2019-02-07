@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI
-import { AppBar, Tabs, Tab, withStyles } from '@material-ui/core';
+import { Tabs, Tab, withStyles } from '@material-ui/core';
 
 // Components
 import styles from './styles';

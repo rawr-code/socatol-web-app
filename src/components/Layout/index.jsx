@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styles from './styles';
 
@@ -14,13 +15,18 @@ import {
 	AppBar,
 	Toolbar,
 	IconButton,
-	Typography
+	Typography,
+	withStyles
 } from '@material-ui/core';
 
 import { Menu } from '@material-ui/icons';
 import { Package, DollarSign, Printer, Grid, FileText } from 'react-feather';
 
-import { withStyles } from '@material-ui/core/styles';
+// Components
+import HeaderTabs from '../HeaderTabs';
+
+// Actions
+import { selectHeaderTab } from '../../actions/Layout';
 
 class Layout extends React.Component {
 	state = {
@@ -38,7 +44,9 @@ class Layout extends React.Component {
 	};
 
 	render() {
-		const { classes, children } = this.props;
+		const { classes, children, state, actions } = this.props;
+		const { headerTitle, headerTabs, headerTabSelected } = state;
+		const { changeTab } = actions;
 		const navigation = [
 			{
 				label: 'Inicio',
@@ -117,16 +125,16 @@ class Layout extends React.Component {
 							<Menu />
 						</IconButton>
 						<Typography variant="h6" color="inherit" noWrap>
-							title
+							{headerTitle ? headerTitle : 'Title'}
 						</Typography>
 					</Toolbar>
-					{/* {headerTabs && (
+					{headerTabs && (
 						<HeaderTabs
-							value={0}
-							onChange={e => console.log(e)}
-							options={[{ name: 'primero' }, { name: 'segundo' }]}
+							value={headerTabSelected}
+							onChange={changeTab}
+							options={headerTabs}
 						/>
-					)} */}
+					)}
 				</AppBar>
 				<nav className={classes.drawer}>
 					<Hidden smUp implementation="css">
@@ -163,4 +171,19 @@ class Layout extends React.Component {
 	}
 }
 
-export default withStyles(styles)(Layout);
+const mapStateToProps = ({ Layout }) => ({
+	state: { ...Layout }
+});
+
+const mapDispatchToProps = dispatch => ({
+	actions: {
+		changeTab: (e, value) => {
+			return dispatch(selectHeaderTab(value));
+		}
+	}
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withStyles(styles)(Layout));

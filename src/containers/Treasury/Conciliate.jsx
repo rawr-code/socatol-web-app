@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Material UI
-import { AccountBalanceOutlined } from '@material-ui/icons';
+import { FileText } from 'react-feather';
 
 // Components
 import TableBoard from '../../components/TableBoard';
@@ -26,7 +26,7 @@ const Bank = props => {
 			onClick={props.handleSelectItem}
 			selectedItem={null}
 			labels={tableBoardLabels}
-			icon={AccountBalanceOutlined}
+			icon={FileText}
 		/>
 	);
 };

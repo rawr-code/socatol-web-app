@@ -1,32 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // Components
 import Bank from './Bank';
 import Conciliate from './Conciliate';
 
+// Actions
+import { headerTabs, renameHeader } from '../../actions/Layout';
+
 class TreasuryContainer extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			selectedTab: 0
-		};
-	}
-
 	handleChangeTab = (e, selectedTab) => {
 		this.setState({ selectedTab });
 	};
 
+	componentDidMount = () => {
+		const { headerTabs, changeTitle } = this.props.actions;
+		changeTitle('Tesoreria');
+		headerTabs([{ name: 'Cuentas Bancarias' }, { name: 'Conciliar Cuentas' }]);
+	};
+
+	componentWillUnmount = () => {
+		const { headerTabs } = this.props.actions;
+		headerTabs(null);
+	};
+
 	render() {
-		const { selectedTab } = this.state;
+		const { state } = this.props;
+		const { headerTabSelected } = state;
 
 		return (
 			<div style={{ marginTop: 48 }}>
-				{selectedTab === 0 && <Bank />}
-				{selectedTab === 1 && <Conciliate />}
+				{headerTabSelected === 0 && <Bank />}
+				{headerTabSelected === 1 && <Conciliate />}
 			</div>
 		);
 	}
 }
 
-export default TreasuryContainer;
+const mapStateToProps = ({ Layout }) => ({
+	state: {
+		...Layout
+	}
+});
+
+const mapDispatchToProps = dispatch => ({
+	actions: {
+		headerTabs: value => {
+			return dispatch(headerTabs(value));
+		},
+		changeTitle: title => dispatch(renameHeader(title))
+	}
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(TreasuryContainer);

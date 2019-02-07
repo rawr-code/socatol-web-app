@@ -2,6 +2,7 @@ export const HEADER_TABS = 'HEADER_TABS';
 export const HEADER_RENAME = 'HEADER_RENAME';
 export const OPEN_SIDENAV = 'OPEN_SIDENAV';
 export const CLOSE_SIDENAV = 'CLOSE_SIDENAV';
+export const SELECT_HEADER_TAB = 'SELECT_HEADER_TAB';
 
 export function headerTabs(payload) {
 	return {
@@ -22,8 +23,16 @@ export function openSideNav() {
 		type: OPEN_SIDENAV
 	};
 }
+
 export function closeSideNav() {
 	return {
 		type: CLOSE_SIDENAV
+	};
+}
+
+export function selectHeaderTab(payload) {
+	return {
+		type: SELECT_HEADER_TAB,
+		payload
 	};
 }
