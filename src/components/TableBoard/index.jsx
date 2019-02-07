@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-// MaterialUI
+// Material UI
 import {
 	Button,
 	Avatar,
@@ -13,28 +13,13 @@ import {
 	Paper,
 	withStyles
 } from '@material-ui/core';
-import { Package } from 'react-feather';
 
 import styles from './styles';
-
-// const config = {
-// 	icon: 'icon',
-// 	labels: {
-// 		empty: {
-// 			title: '',
-// 			subtitle: ''
-// 		},
-// 		details: {
-// 			title: '',
-// 			subtitle: ''
-// 		}
-// 	}
-// };
 
 class TableBoard extends PureComponent {
 	render() {
 		const { classes, data, selectedItem, onClick, isLoading } = this.props;
-		const { icon: Icon, labels, children } = this.props;
+		const { icon: Icon, labels, children, secondButton } = this.props;
 		const listItems =
 			data && data.length > 0 ? (
 				data.map(item => {
@@ -46,7 +31,7 @@ class TableBoard extends PureComponent {
 							className={classes.listItem}
 						>
 							<Avatar className={classes.avatar}>
-								<Package />
+								<Icon />
 							</Avatar>
 							<ListItemText
 								primary={name}
@@ -74,6 +59,7 @@ class TableBoard extends PureComponent {
 		return (
 			<Paper className={classes.root}>
 				<section className={classes.sideListRoot}>
+					{/* Search Box */}
 					<div className={classes.searchBox}>
 						<TextField
 							id="inputSearch"
@@ -82,6 +68,7 @@ class TableBoard extends PureComponent {
 							placeholder={labels.inputSearchPlaceholder}
 						/>
 					</div>
+					{/* List Items */}
 					<List className={classes.list} disablePadding>
 						{isLoading ? (
 							<div className={classes.infoContainer}>
@@ -101,14 +88,24 @@ class TableBoard extends PureComponent {
 							listItems
 						)}
 					</List>
-					<Button
-						variant="contained"
-						color="primary"
-						className={classes.addBotton}
-					>
-						{labels.button}
-					</Button>
+					{/* Buttons */}
+					<div className={classes.buttonsContainer}>
+						<Button variant="text" color="primary" className={classes.button}>
+							{labels.button}
+						</Button>
+						{secondButton && (
+							<Button
+								variant="text"
+								color="primary"
+								className={classes.button}
+								onClick={secondButton.onClick}
+							>
+								{secondButton.title}
+							</Button>
+						)}
+					</div>
 				</section>
+				{/* Info */}
 				{selectedItem !== null ? (
 					children
 				) : (

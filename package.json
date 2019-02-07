@@ -20,7 +20,8 @@
     "redux-form": "^8.1.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "why-did-you-update": "1.0.6"
+    "why-did-you-update": "1.0.6",
+    "xlsx": "^0.14.1"
   },
   "scripts": {
     "start": "react-scripts start",

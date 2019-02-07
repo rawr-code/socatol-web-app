@@ -6,20 +6,24 @@ const styles = theme => ({
 	},
 	sideListRoot: {
 		width: '100%',
-		maxWidth: 300,
+		maxWidth: 340,
 		borderRight: '1px solid rgba(0,0,0,0.12)'
-	},
-	addBotton: {
-		margin: 0,
-		padding: 20,
-		borderRadius: 0,
-		width: '100%',
-		boxShadow: 'none',
-		borderBottomLeftRadius: 8
 	},
 	avatar: {
 		color: theme.palette.primary.main,
 		backgroundColor: 'transparent'
+	},
+	button: {
+		margin: 0,
+		height: 64,
+		borderRadius: 0,
+		width: '100%',
+		color: '#fff'
+	},
+	buttonsContainer: {
+		display: 'flex',
+		backgroundColor: theme.palette.primary.main,
+		borderBottomLeftRadius: 8
 	},
 	infoContainer: {
 		height: '100%',
@@ -37,6 +41,7 @@ const styles = theme => ({
 	infoEmptyIcon: {
 		strokeWidth: 1,
 		marginBottom: 8,
+		fontSize: 56,
 		color: theme.palette.primary.main
 	},
 	infoTitle: {
@@ -68,7 +73,8 @@ const styles = theme => ({
 		color: theme.palette.primary.main,
 		position: 'absolute',
 		top: 18,
-		left: 18
+		left: 18,
+		fontSize: 36
 	},
 	loadingIconContainer: {
 		position: 'relative'

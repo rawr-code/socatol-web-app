@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './styles';
 import { NavLink } from 'react-router-dom';
+import styles from './styles';
 
 // Material UI Components
 import {
@@ -29,7 +29,8 @@ class Layout extends React.Component {
 	};
 
 	handleDrawerToggle = () => {
-		this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+		const { mobileOpen } = this.state;
+		this.setState({ mobileOpen: !mobileOpen });
 	};
 
 	handleListItemClick = selectedItem => {
@@ -50,8 +51,8 @@ class Layout extends React.Component {
 				icon: <FileText />
 			},
 			{
-				label: 'Banco',
-				to: '/banco',
+				label: 'Tesoreria',
+				to: '/tesoreria',
 				icon: <DollarSign />
 			},
 			{
@@ -110,15 +111,22 @@ class Layout extends React.Component {
 						<IconButton
 							color="inherit"
 							aria-label="Open drawer"
-							onClick={this.handleDrawerToggle}
+							onClick={() => this.handleDrawerToggle()}
 							className={classes.menuButton}
 						>
 							<Menu />
 						</IconButton>
 						<Typography variant="h6" color="inherit" noWrap>
-							Responsive drawer
+							title
 						</Typography>
 					</Toolbar>
+					{/* {headerTabs && (
+						<HeaderTabs
+							value={0}
+							onChange={e => console.log(e)}
+							options={[{ name: 'primero' }, { name: 'segundo' }]}
+						/>
+					)} */}
 				</AppBar>
 				<nav className={classes.drawer}>
 					<Hidden smUp implementation="css">
@@ -147,7 +155,7 @@ class Layout extends React.Component {
 					</Hidden>
 				</nav>
 				<main className={classes.content}>
-					<div className={classes.toolbar} />
+					{/* <div className={classes.toolbar} /> */}
 					{children}
 				</main>
 			</div>

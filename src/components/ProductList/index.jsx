@@ -83,7 +83,7 @@ class ProductList extends PureComponent {
 					labels={tableBoardLabels}
 					icon={Package}
 				>
-					{selectedItem && selectedItem.length > 0 && (
+					{selectedItem && (
 						<div className={classes.sectionContainer}>
 							<header className={classes.header}>
 								<Typography variant="h5">{selectedItem.name}</Typography>

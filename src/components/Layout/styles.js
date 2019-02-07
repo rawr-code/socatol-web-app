@@ -10,7 +10,7 @@ const styles = theme => ({
 	},
 	appBar: {
 		marginLeft: theme.drawerWidth,
-		padding: '3px 0',
+		// padding: '3px 0',
 		// backgroundColor: '#2a3e52',
 		[theme.breakpoints.up('sm')]: {
 			width: `calc(100% - ${theme.drawerWidth}px)`
@@ -56,7 +56,7 @@ const styles = theme => ({
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing.unit * 3,
-		marginTop: 24,
+		marginTop: 64,
 		maxWidth: 1140,
 		margin: '0 auto'
 	}
