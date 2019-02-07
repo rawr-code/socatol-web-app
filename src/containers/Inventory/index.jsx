@@ -4,19 +4,12 @@ import { connect } from 'react-redux';
 // Actions
 import { setTabs, setHeaderTitle } from '../../actions/Layout';
 
-// Components
-// import Bank from './Bank';
-// import Conciliate from './Conciliate';
-
-class TreasuryContainer extends Component {
+class InventoryContainer extends Component {
 	componentDidMount = () => {
 		const { actions } = this.props;
 		const { setHeaderTitle, setHeaderTabs } = actions.layout;
-		setHeaderTitle('Tesoreria');
-		setHeaderTabs([
-			{ name: 'Cuentas Bancarias' },
-			{ name: 'Conciliar Cuentas' }
-		]);
+		setHeaderTitle('Inventario');
+		setHeaderTabs([{ name: 'Almacenes' }, { name: 'Productos' }]);
 	};
 
 	componentWillUnmount = () => {
@@ -31,8 +24,8 @@ class TreasuryContainer extends Component {
 
 		return (
 			<div style={{ marginTop: 48 }}>
-				{tabSelected === 0 && <p>Banco</p>}
-				{tabSelected === 1 && <p>Conciliar</p>}
+				{tabSelected === 0 && <p>Almacenes</p>}
+				{tabSelected === 1 && <p>Productos</p>}
 			</div>
 		);
 	}
@@ -56,4 +49,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(TreasuryContainer);
+)(InventoryContainer);

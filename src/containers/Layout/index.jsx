@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from './styles';
 
@@ -10,9 +10,9 @@ import NavBar from './NavBar';
 import SideNav from './SideNav';
 
 // Actions
-import { selectHeaderTab } from '../../actions/Layout';
+import { selectTab } from '../../actions/Layout';
 
-class Layout extends React.Component {
+class Layout extends Component {
 	constructor(props) {
 		super(props);
 
@@ -36,16 +36,16 @@ class Layout extends React.Component {
 	render() {
 		const { selectedItem, mobileOpen } = this.state;
 		const { classes, children, state, actions } = this.props;
-		const { headerTitle, headerTabs, headerTabSelected } = state;
+		const { title, tabs, tabSelected } = state;
 		const { changeTab } = actions;
 
 		return (
 			<div className={classes.root}>
 				<NavBar
 					classes={classes}
-					title={headerTitle}
-					tabs={headerTabs}
-					tabSelected={headerTabSelected}
+					title={title}
+					tabs={tabs}
+					tabSelected={tabSelected}
 					changeTab={changeTab}
 					navOpen={this.handleDrawerToggle}
 				/>
@@ -69,7 +69,7 @@ const mapStateToProps = ({ Layout }) => ({
 const mapDispatchToProps = dispatch => ({
 	actions: {
 		changeTab: (e, value) => {
-			return dispatch(selectHeaderTab(value));
+			return dispatch(selectTab(value));
 		}
 	}
 });

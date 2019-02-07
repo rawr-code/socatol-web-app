@@ -23,7 +23,7 @@ const navigation = [
 	},
 	{
 		label: 'Facturación',
-		to: '/facturacion',
+		to: '/',
 		icon: <FileText />
 	},
 	{
@@ -32,8 +32,8 @@ const navigation = [
 		icon: <DollarSign />
 	},
 	{
-		label: 'Productos',
-		to: '/productos',
+		label: 'Inventario',
+		to: '/inventario',
 		icon: <Package />
 	},
 	{

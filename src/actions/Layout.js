@@ -1,20 +1,27 @@
-export const HEADER_TABS = 'HEADER_TABS';
-export const HEADER_RENAME = 'HEADER_RENAME';
+export const SET_HEADER_TITLE = 'SET_HEADER_TITLE';
+export const SET_TABS = 'SET_TABS';
+export const SELECT_TAB = 'SELECT_TAB';
 export const OPEN_SIDENAV = 'OPEN_SIDENAV';
 export const CLOSE_SIDENAV = 'CLOSE_SIDENAV';
-export const SELECT_HEADER_TAB = 'SELECT_HEADER_TAB';
 
-export function headerTabs(payload) {
+export function setHeaderTitle(title) {
 	return {
-		type: HEADER_TABS,
-		payload
+		type: SET_HEADER_TITLE,
+		payload: title
 	};
 }
 
-export function renameHeader(payload) {
+export function setTabs(tabs) {
 	return {
-		type: HEADER_RENAME,
-		payload
+		type: SET_TABS,
+		payload: tabs
+	};
+}
+
+export function selectTab(index) {
+	return {
+		type: SELECT_TAB,
+		payload: index
 	};
 }
 
@@ -27,12 +34,5 @@ export function openSideNav() {
 export function closeSideNav() {
 	return {
 		type: CLOSE_SIDENAV
-	};
-}
-
-export function selectHeaderTab(payload) {
-	return {
-		type: SELECT_HEADER_TAB,
-		payload
 	};
 }

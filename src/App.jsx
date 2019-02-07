@@ -10,8 +10,7 @@ import { PublicRoute, PrivateRoute } from './components';
 // Containers
 import { Login } from './containers/Auth';
 import Layout from './containers/Layout';
-import Products from './containers/Products';
-import Invoicing from './containers/Invoicing';
+import Inventory from './containers/Inventory';
 import Treasury from './containers/Treasury';
 
 const Home = () => <div>Home</div>;
@@ -22,13 +21,12 @@ const App = props => {
 			<Switch>
 				<PublicRoute path="/login" component={Login} />
 				<PrivateRoute exact path="/" component={Home} layout={Layout} />
-				<PrivateRoute path="/productos" component={Products} layout={Layout} />
-				<PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
 				<PrivateRoute
-					path="/facturacion"
-					component={Invoicing}
+					path="/inventario"
+					component={Inventory}
 					layout={Layout}
 				/>
+				<PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
 			</Switch>
 		</MUICustomTheme>
 	);
