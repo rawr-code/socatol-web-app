@@ -6,23 +6,27 @@ import { AccountBalanceOutlined } from '@material-ui/icons';
 // Components
 import TableBoard from '../../components/TableBoard';
 
-const Bank = props => {
+const BankAccounts = props => {
 	const tableBoardLabels = {
-		empty: {
+		listHeader: {
+			inputSearchPlaceholder: 'Buscar Cuenta'
+		},
+		listEmpty: {
 			title: 'No se encontraron cuentas',
 			subtitle: 'Añada un cuenta para comenzar.'
 		},
-		info: {
+		listButtons: {
+			button: 'Añadir Cuenta'
+		},
+		asideInfo: {
 			title: 'No has seleccionado ninguna cuenta',
 			subtitle: 'Seleccione una de las cuentas existentes o añada una nueva.'
-		},
-		button: 'Añadir Cuenta',
-		inputSearchPlaceholder: 'Buscar Cuenta'
+		}
 	};
 	return (
 		<TableBoard
 			// data={data}
-			onClick={props.handleSelectItem}
+			// onClick={props.handleSelectItem}
 			selectedItem={null}
 			labels={tableBoardLabels}
 			icon={AccountBalanceOutlined}
@@ -30,4 +34,4 @@ const Bank = props => {
 	);
 };
 
-export default Bank;
+export default BankAccounts;

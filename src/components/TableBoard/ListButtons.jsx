@@ -5,22 +5,28 @@ import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 
 const ListButtons = props => {
-	const { classes, labels } = props;
+	const { classes, labels, buttons } = props;
 	return (
 		<div className={classes.buttonsContainer}>
 			<Button variant="text" color="primary" className={classes.button}>
 				{labels.button}
 			</Button>
-			{/* {secondButton && (
-				<Button
-					variant="text"
-					color="primary"
-					className={classes.button}
-					onClick={secondButton.onClick}
-				>
-					{secondButton.title}
-				</Button>
-			)} */}
+			{buttons && (
+				<>
+					<input
+						accept=""
+						style={{ display: 'none' }}
+						id="text-button-file"
+						type="file"
+						onChange={buttons.onChange}
+					/>
+					<label htmlFor="text-button-file" style={{ width: '100%' }}>
+						<Button component="span" className={classes.button}>
+							{buttons.title}
+						</Button>
+					</label>
+				</>
+			)}
 		</div>
 	);
 };

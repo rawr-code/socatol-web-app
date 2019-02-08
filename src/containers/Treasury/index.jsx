@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { setTabs, setHeaderTitle } from '../../actions/Layout';
 
 // Components
-// import Bank from './Bank';
-// import Conciliate from './Conciliate';
+import BankAccounts from './BankAccounts';
+import Conciliate from './Conciliate';
 
 class TreasuryContainer extends Component {
 	componentDidMount = () => {
@@ -31,8 +31,8 @@ class TreasuryContainer extends Component {
 
 		return (
 			<div style={{ marginTop: 48 }}>
-				{tabSelected === 0 && <p>Banco</p>}
-				{tabSelected === 1 && <p>Conciliar</p>}
+				{tabSelected === 0 && <BankAccounts />}
+				{tabSelected === 1 && <Conciliate />}
 			</div>
 		);
 	}

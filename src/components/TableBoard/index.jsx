@@ -15,8 +15,8 @@ import styles from './styles';
 
 class TableBoard extends PureComponent {
 	render() {
-		const { classes, data, selectedItem, isLoading } = this.props;
-		const { icon, labels, listItemConfig, children } = this.props;
+		const { classes, data, selectedItem, isLoading, otherButton } = this.props;
+		const { icon, labels, listItemConfig, children, bank } = this.props;
 		const { listItemClick } = this.props;
 		return (
 			<Paper className={classes.root}>
@@ -27,6 +27,7 @@ class TableBoard extends PureComponent {
 							<Loading classes={classes} icon={icon} />
 						) : data && data.length > 0 ? (
 							<ListItems
+								bank={bank}
 								classes={classes}
 								config={listItemConfig}
 								data={data}
@@ -41,7 +42,11 @@ class TableBoard extends PureComponent {
 							/>
 						)}
 					</List>
-					<ListButtons classes={classes} labels={labels.listButtons} />
+					<ListButtons
+						classes={classes}
+						labels={labels.listButtons}
+						buttons={otherButton}
+					/>
 				</section>
 				{selectedItem ? (
 					children

@@ -24,6 +24,7 @@ class BankContainer extends Component {
 		const files = e.target.files;
 		this.handleFile(files[0]);
 	}
+
 	handleChangeTab = (event, selectedTab) => {
 		this.setState({ selectedTab });
 	};
@@ -73,6 +74,7 @@ class BankContainer extends Component {
 					<Tab label="Cuentas Bancarias" disableRipple />
 					<Tab label="Conciliar" disableRipple />
 				</Tabs>
+
 				<TableBoard
 					data={this.state.data}
 					isLoading={false}
