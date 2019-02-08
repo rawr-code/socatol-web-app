@@ -11,15 +11,14 @@ import Warehouses from './Warehouses';
 import Products from './Products';
 
 class InventoryContainer extends PureComponent {
-	componentDidMount = async () => {
+	componentDidMount = () => {
 		const { setHeaderTitle, setHeaderTabs } = this.props.actions;
 		setHeaderTitle('Inventario');
 		setHeaderTabs([{ name: 'Almacenes' }, { name: 'Productos' }]);
 	};
 
 	componentWillUnmount = () => {
-		const { actions } = this.props;
-		const { setHeaderTabs } = actions.layout;
+		const { setHeaderTabs } = this.props.actions;
 		setHeaderTabs(null);
 	};
 

@@ -19,7 +19,7 @@ export default function reducer(state = INITIAL_STATE, action) {
 			return { ...state, title: action.payload };
 		}
 		case SET_TABS: {
-			return { ...state, tabs: action.payload };
+			return { ...state, tabs: action.payload, tabSelected: 0 };
 		}
 		case SELECT_TAB: {
 			return { ...state, tabSelected: action.payload };

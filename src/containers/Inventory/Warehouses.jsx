@@ -40,13 +40,14 @@ class Warehouses extends PureComponent {
 		};
 
 		return (
-			<div>
+			<div style={{ padding: 8 }}>
 				<TableBoard
 					icon={Home}
 					labels={tableBoardLabels}
 					isLoading={false}
 					listItemConfig={dataConfig}
 					data={state.warehouses}
+					listItemClick={e => console.log(e)}
 				/>
 			</div>
 		);

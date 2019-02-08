@@ -17,7 +17,7 @@ class TableBoard extends PureComponent {
 	render() {
 		const { classes, data, selectedItem, isLoading } = this.props;
 		const { icon, labels, listItemConfig, children } = this.props;
-
+		const { listItemClick } = this.props;
 		return (
 			<Paper className={classes.root}>
 				<section className={classes.sideListRoot}>
@@ -31,6 +31,7 @@ class TableBoard extends PureComponent {
 								config={listItemConfig}
 								data={data}
 								icon={icon}
+								onClick={listItemClick}
 							/>
 						) : (
 							<ListEmpty
