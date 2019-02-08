@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { reset } from 'redux-form';
 import SwipeableViews from 'react-swipeable-views';
 
 // Actions
@@ -9,10 +10,9 @@ import { setTabs, setHeaderTitle } from '../../actions/Layout';
 import Warehouses from './Warehouses';
 import Products from './Products';
 
-class InventoryContainer extends Component {
-	componentDidMount = () => {
-		const { actions } = this.props;
-		const { setHeaderTitle, setHeaderTabs } = actions.layout;
+class InventoryContainer extends PureComponent {
+	componentDidMount = async () => {
+		const { setHeaderTitle, setHeaderTabs } = this.props.actions;
 		setHeaderTitle('Inventario');
 		setHeaderTabs([{ name: 'Almacenes' }, { name: 'Productos' }]);
 	};
@@ -25,11 +25,10 @@ class InventoryContainer extends Component {
 
 	render() {
 		const { state } = this.props;
-		const { tabSelected } = state.layout;
 
 		return (
 			<div style={{ marginTop: 48 }}>
-				<SwipeableViews index={tabSelected}>
+				<SwipeableViews index={state.tabSelected}>
 					<Warehouses />
 					<Products />
 				</SwipeableViews>
@@ -40,16 +39,15 @@ class InventoryContainer extends Component {
 
 const mapStateToProps = ({ Layout }) => ({
 	state: {
-		layout: Layout
+		...Layout
 	}
 });
 
 const mapDispatchToProps = dispatch => ({
 	actions: {
-		layout: {
-			setHeaderTabs: value => dispatch(setTabs(value)),
-			setHeaderTitle: title => dispatch(setHeaderTitle(title))
-		}
+		resetForm: name => dispatch(reset(name)),
+		setHeaderTabs: value => dispatch(setTabs(value)),
+		setHeaderTitle: title => dispatch(setHeaderTitle(title))
 	}
 });
 

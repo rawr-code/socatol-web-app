@@ -16,7 +16,7 @@ import styles from './styles';
 class TableBoard extends PureComponent {
 	render() {
 		const { classes, data, selectedItem, isLoading } = this.props;
-		const { icon, labels, children } = this.props;
+		const { icon, labels, listItemConfig, children } = this.props;
 
 		return (
 			<Paper className={classes.root}>
@@ -25,8 +25,13 @@ class TableBoard extends PureComponent {
 					<List className={classes.list} disablePadding>
 						{isLoading ? (
 							<Loading classes={classes} icon={icon} />
-						) : data ? (
-							<ListItems classes={classes} />
+						) : data && data.length > 0 ? (
+							<ListItems
+								classes={classes}
+								config={listItemConfig}
+								data={data}
+								icon={icon}
+							/>
 						) : (
 							<ListEmpty
 								classes={classes}
