@@ -68,6 +68,7 @@ class Conciliate extends PureComponent {
 				selectedItem={null}
 				labels={tableBoardLabels}
 				icon={FileText}
+				listItemClick={e => console.log(e)}
 				otherButton={{
 					title: 'Importar',
 					onClick: e => console.log(e),
