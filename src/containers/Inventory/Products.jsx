@@ -1,43 +1,26 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import styles from './styles';
 
 // MaterialUI
 import {
-	Tab,
-	Tabs,
-	Fab,
-	Zoom,
-	Typography,
+	Button,
+	Paper,
+	Table,
+	TableHead,
+	TableRow,
+	TableCell,
+	TableBody,
+	IconButton,
 	withStyles
 } from '@material-ui/core';
 
-import { Add, Edit, PersonAdd } from '@material-ui/icons';
+// Icons
+import { ChevronDown } from 'react-feather';
 
 // Actions
 import { GET_ALL, NEW } from '../../actions/Product';
-
-// Icons
-import { Package } from 'react-feather';
-
-// Components
-import TableBoard from '../../components/TableBoard';
-
-const fabs = [
-	{
-		name: 'edit',
-		icon: <Edit />
-	},
-	{
-		name: 'add',
-		icon: <Add />
-	},
-	{
-		name: 'personAdd',
-		icon: <PersonAdd />
-	}
-];
 
 class Products extends PureComponent {
 	constructor(props) {
@@ -64,83 +47,56 @@ class Products extends PureComponent {
 	};
 
 	render() {
-		const { classes, theme, data } = this.props;
-		const { selectedItem, selectedTab } = this.state;
-		const transitionDuration = {
-			enter: theme.transitions.duration.enteringScreen,
-			exit: theme.transitions.duration.leavingScreen
-		};
-		const dataConfig = { primary: 'name', secondary: 'description' };
-		const tableBoardLabels = {
-			listHeader: {
-				inputSearchPlaceholder: 'Buscar Producto'
-			},
-			listEmpty: {
-				title: 'No se encontraron productos',
-				subtitle: 'Añada un producto para comenzar.'
-			},
-			listButtons: {
-				button: 'Añadir Producto'
-			},
-			asideInfo: {
-				title: 'No has seleccionado ningún producto',
-				subtitle:
-					'Seleccione uno de los productos existentes o añade uno nuevo.'
-			}
-		};
+		// const { classes, theme, data } = this.props;
 
 		return (
-			<div style={{ padding: 8 }}>
-				<TableBoard
-					icon={Package}
-					labels={tableBoardLabels}
-					listItemConfig={dataConfig}
-					data={data.products}
-					selectedItem={selectedItem}
-					listItemClick={this.handleSelectItem}
+			<Fragment>
+				<header
+					style={{
+						display: 'flex',
+						justifyContent: 'flex-end',
+						marginBottom: 16
+					}}
 				>
-					{selectedItem && (
-						<div className={classes.sectionContainer}>
-							<header className={classes.header}>
-								<Typography variant="h5">{selectedItem.name}</Typography>
-							</header>
-							<Tabs
-								className={classes.tabs}
-								value={selectedTab}
-								onChange={this.handleChangeTab}
-								indicatorColor="primary"
-								textColor="primary"
-							>
-								<Tab label="Información" disableRipple />
-								<Tab label="Presentaciones" disableRipple />
-								<Tab label="Proveedores" disableRipple />
-							</Tabs>
-							<div className={classes.container}>
-								{selectedTab === 0 && <div>{selectedItem.description}</div>}
-								{selectedTab === 1 && <div>Presentaciones</div>}
-								{selectedTab === 2 && <div>Proveedores</div>}
-							</div>
-							{fabs.map((fab, index) => (
-								<Zoom
-									key={fab.name}
-									in={selectedTab === index}
-									timeout={transitionDuration}
-									style={{
-										transitionDelay: `${
-											selectedTab === index ? transitionDuration.exit : 0
-										}ms`
-									}}
-									unmountOnExit
-								>
-									<Fab color="primary" className={classes.fab}>
-										{fab.icon}
-									</Fab>
-								</Zoom>
-							))}
-						</div>
-					)}
-				</TableBoard>
-			</div>
+					<Button variant="contained" color="primary">
+						Agregar Producto
+					</Button>
+				</header>
+				<Paper>
+					<Table>
+						<TableHead>
+							<TableRow>
+								<TableCell>Nombre</TableCell>
+								<TableCell>Stock</TableCell>
+								<TableCell>Proveedores</TableCell>
+								<TableCell>IVA</TableCell>
+								<TableCell align="right" style={{ paddingRight: 0 }}>
+									Precio
+								</TableCell>
+								<TableCell />
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							<TableRow>
+								<TableCell component="th" scope="row">
+									Veneno tipo 1
+								</TableCell>
+								<TableCell>40</TableCell>
+								<TableCell>3</TableCell>
+								<TableCell>12%</TableCell>
+								<TableCell align="right" style={{ paddingRight: 0 }}>
+									885,00 Bs S
+								</TableCell>
+								<TableCell style={{ width: 1, padding: '0 16px' }}>
+									<IconButton>
+										<ChevronDown size={15} />
+									</IconButton>
+								</TableCell>
+							</TableRow>
+						</TableBody>
+					</Table>
+				</Paper>
+			</Fragment>
 		);
 	}
 }

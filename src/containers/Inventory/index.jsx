@@ -1,56 +1,32 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
-import SwipeableViews from 'react-swipeable-views';
 
 // Actions
 import { setTabs, setHeaderTitle } from '../../actions/Layout';
 
 // Components
-import Warehouses from './Warehouses';
 import Products from './Products';
 
 class InventoryContainer extends PureComponent {
 	componentDidMount = () => {
-		const { setHeaderTitle, setHeaderTabs } = this.props.actions;
-		setHeaderTitle('Inventario');
-		setHeaderTabs([{ name: 'Almacenes' }, { name: 'Productos' }]);
-	};
-
-	componentWillUnmount = () => {
-		const { setHeaderTabs } = this.props.actions;
-		setHeaderTabs(null);
+		const { setHeaderTitle } = this.props.actions;
+		setHeaderTitle('Productos');
 	};
 
 	render() {
-		const { state } = this.props;
-
-		return (
-			<div style={{ marginTop: 48 }}>
-				<SwipeableViews index={state.tabSelected}>
-					<Warehouses />
-					<Products />
-				</SwipeableViews>
-			</div>
-		);
+		return <Products />;
 	}
 }
-
-const mapStateToProps = ({ Layout }) => ({
-	state: {
-		...Layout
-	}
-});
 
 const mapDispatchToProps = dispatch => ({
 	actions: {
 		resetForm: name => dispatch(reset(name)),
-		setHeaderTabs: value => dispatch(setTabs(value)),
 		setHeaderTitle: title => dispatch(setHeaderTitle(title))
 	}
 });
 
 export default connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps
 )(InventoryContainer);

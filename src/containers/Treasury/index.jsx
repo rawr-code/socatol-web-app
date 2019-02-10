@@ -13,10 +13,7 @@ class TreasuryContainer extends Component {
 		const { actions } = this.props;
 		const { setHeaderTitle, setHeaderTabs } = actions.layout;
 		setHeaderTitle('Tesoreria');
-		setHeaderTabs([
-			{ name: 'Cuentas Bancarias' },
-			{ name: 'Conciliar Cuentas' }
-		]);
+		setHeaderTabs([{ name: 'Cuentas Bancarias' }, { name: 'Conciliar' }]);
 	};
 
 	componentWillUnmount = () => {

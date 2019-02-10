@@ -32,8 +32,8 @@ const navigation = [
 		icon: <DollarSign />
 	},
 	{
-		label: 'Inventario',
-		to: '/inventario',
+		label: 'Productos',
+		to: '/productos',
 		icon: <Package />
 	},
 	{

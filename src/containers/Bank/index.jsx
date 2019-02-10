@@ -37,7 +37,7 @@ class BankContainer extends Component {
 			const wb = XLSX.read(bstr, { type: rABS ? 'binary' : 'array' });
 			const wsname = wb.SheetNames[0];
 			const ws = wb.Sheets[wsname];
-			const data = XLSX.utils.sheet_to_json(ws, { header: 2 });
+			const data = XLSX.utils.sheet_to_json(ws, { header: 16 });
 			console.log(data);
 			this.setState({ data });
 		};

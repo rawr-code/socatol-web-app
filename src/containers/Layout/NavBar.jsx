@@ -23,7 +23,7 @@ const NavBar = props => {
 				>
 					<Menu />
 				</IconButton>
-				<Typography variant="h6" color="inherit" noWrap>
+				<Typography variant="h6" color="inherit" noWrap component="h1">
 					{title ? title : 'Title'}
 				</Typography>
 			</Toolbar>

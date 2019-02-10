@@ -21,11 +21,7 @@ const App = props => {
 			<Switch>
 				<PublicRoute path="/login" component={Login} />
 				<PrivateRoute exact path="/" component={Home} layout={Layout} />
-				<PrivateRoute
-					path="/inventario"
-					component={Inventory}
-					layout={Layout}
-				/>
+				<PrivateRoute path="/productos" component={Inventory} layout={Layout} />
 				<PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
 			</Switch>
 		</MUICustomTheme>
