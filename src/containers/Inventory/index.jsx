@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
 // Actions
-import { setTabs, setHeaderTitle } from '../../actions/Layout';
+import { setHeaderTitle } from '../../actions/Layout';
 
 // Components
 import Products from './Products';

@@ -26,7 +26,7 @@ const ListItems = props => {
 				/>
 			</ListItem>
 		) : (
-			typeof item.Fecha === 'string' && (
+			typeof item.date === 'string' && (
 				<ListItem
 					key={index}
 					onClick={() => onClick(item)}
@@ -40,9 +40,9 @@ const ListItems = props => {
 								width: '100%'
 							}}
 						>
-							<Typography>{item.Fecha}</Typography>
+							<Typography>{item.date}</Typography>
 
-							{item.Crédito > 0 ? (
+							{item.ammount > 0 ? (
 								<Typography
 									style={{
 										fontSize: 14,
@@ -52,7 +52,7 @@ const ListItems = props => {
 										color: 'green'
 									}}
 								>
-									+{item.Crédito} Bs
+									{item.ammount} Bs
 								</Typography>
 							) : (
 								<Typography
@@ -64,13 +64,13 @@ const ListItems = props => {
 										color: 'red'
 									}}
 								>
-									-{item.Débito} Bs
+									{item.ammount} Bs
 								</Typography>
 							)}
 						</div>
 						<ListItemText
-							primary={item.Descripción}
-							secondary={item.Referencia}
+							primary={item.description}
+							secondary={item.ref}
 							classes={{
 								root: classes.listItemText
 							}}

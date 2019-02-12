@@ -71,6 +71,7 @@ class Conciliate extends PureComponent {
 					return dat;
 				});
 			console.table(data);
+			this.setState({ data });
 		};
 		reader.readAsBinaryString(file);
 		// const reader = new FileReader();

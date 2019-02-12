@@ -8,11 +8,15 @@ import Layout from './Layout';
 import Warehouse from './Warehouse';
 import Product from './Product';
 
-const Inventory = combineReducers({ Warehouse, Product });
+// Treasury
+import BankAccount from './BankAccount';
 
+const Inventory = combineReducers({ Warehouse, Product });
+const Treasury = combineReducers({ BankAccount });
 export default combineReducers({
 	Auth,
 	form: FormReducer,
 	Inventory,
-	Layout
+	Layout,
+	Treasury
 });

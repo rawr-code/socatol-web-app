@@ -7,8 +7,21 @@ import { setTabs, setHeaderTitle } from '../../actions/Layout';
 // Components
 import BankAccounts from './BankAccounts';
 import Conciliate from './Conciliate';
+import NewBankAccount from './NewBankAccount';
 
 class TreasuryContainer extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			modalOpen: false,
+			modalType: null
+		};
+
+		this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
+		this.handleCloseModal = this.handleCloseModal.bind(this);
+	}
+
 	componentDidMount = () => {
 		const { actions } = this.props;
 		const { setHeaderTitle, setHeaderTabs } = actions.layout;
@@ -22,13 +35,24 @@ class TreasuryContainer extends Component {
 		setHeaderTabs(null);
 	};
 
+	handleClickOpenModal = () => {
+		this.setState({ modalOpen: true });
+		// this.props.actions.getAllWarehouse();
+		// this.props.actions.resetForm('newProduct');
+	};
+
+	handleCloseModal = () => {
+		this.setState({ modalOpen: false });
+	};
 	render() {
 		const { state } = this.props;
 		const { tabSelected } = state.layout;
 
 		return (
 			<div style={{ marginTop: 48 }}>
-				{tabSelected === 0 && <BankAccounts />}
+				{tabSelected === 0 && (
+					<BankAccounts openModal={this.handleClickOpenModal} />
+				)}
 				{tabSelected === 1 && <Conciliate />}
 			</div>
 		);

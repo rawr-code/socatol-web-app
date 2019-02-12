@@ -10,72 +10,73 @@ import { GET_ALL as GET_ALL_WAREHOUSE } from '../../actions/Warehouse';
 import { GET_ALL, NEW } from '../../actions/Product';
 
 class ProductContainer extends Component {
-  constructor(props) {
-    super(props);
+	constructor(props) {
+		super(props);
 
-    this.state = {
-      modalOpen: false,
-      modalType: null
-    };
+		this.state = {
+			modalOpen: false,
+			modalType: null
+		};
 
-    this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
-  }
+		this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
+		this.handleCloseModal = this.handleCloseModal.bind(this);
+		this.handleAdd = this.handleAdd.bind(this);
+	}
+	componentDidMount = async () => {
+		const { getAll } = this.props.actions;
 
-  async componentDidMount() {
-    await this.props.actions.getAll();
-  }
+		await getAll();
+	};
 
-  handleClickOpenModal = () => {
-    this.setState({ modalOpen: true });
-    this.props.actions.getAllWarehouse();
-    this.props.actions.resetForm('newProduct');
-  };
+	handleClickOpenModal = () => {
+		this.setState({ modalOpen: true });
+		this.props.actions.getAllWarehouse();
+		this.props.actions.resetForm('newProduct');
+	};
 
-  handleCloseModal = () => {
-    this.setState({ modalOpen: false });
-  };
+	handleCloseModal = () => {
+		this.setState({ modalOpen: false });
+	};
 
-  handleAdd(payload) {
-    this.props.actions.new(payload);
-    this.props.actions.getAll();
-    // this.setState({ modalOpen: false });
-    // this.props.actions.resetForm('newProduct');
-  }
+	handleAdd(payload) {
+		this.props.actions.new(payload);
+		this.props.actions.getAll();
+		// this.setState({ modalOpen: false });
+		// this.props.actions.resetForm('newProduct');
+	}
 
-  render() {
-    const {
-      state: { products },
-      isLoading
-    } = this.props;
+	render() {
+		const {
+			state: { products },
+			isLoading
+		} = this.props;
 
-    return <ProductList data={products} isLoading={isLoading} />;
-  }
+		return <ProductList data={products} isLoading={isLoading} />;
+	}
 }
 
 const mapStateToProps = ({
-  Product: { product, products, loading },
-  Warehouse: { warehouses }
+	Product: { product, products, loading },
+	Warehouse: { warehouses }
 }) => ({
-  isLoading: loading,
-  state: {
-    product,
-    products,
-    warehouses
-  }
+	isLoading: loading,
+	state: {
+		product,
+		products,
+		warehouses
+	}
 });
 
 const mapDispatchToProps = dispatch => ({
-  actions: {
-    resetForm: name => dispatch(reset(name)),
-    getAllWarehouse: () => dispatch(GET_ALL_WAREHOUSE),
-    getAll: () => dispatch(GET_ALL),
-    new: payload => dispatch(NEW(payload))
-  }
+	actions: {
+		resetForm: name => dispatch(reset(name)),
+		getAllWarehouse: () => dispatch(GET_ALL_WAREHOUSE),
+		getAll: () => dispatch(GET_ALL),
+		new: payload => dispatch(NEW(payload))
+	}
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(ProductContainer);
