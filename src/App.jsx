@@ -15,17 +15,17 @@ import Treasury from './containers/Treasury';
 
 const Home = () => <div>Home</div>;
 
-const App = props => {
-	return (
-		<MUICustomTheme>
-			<Switch>
-				<PublicRoute path="/login" component={Login} />
-				<PrivateRoute exact path="/" component={Home} layout={Layout} />
-				<PrivateRoute path="/productos" component={Inventory} layout={Layout} />
-				<PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
-			</Switch>
-		</MUICustomTheme>
-	);
+const App = () => {
+  return (
+    <MUICustomTheme>
+      <Switch>
+        <PublicRoute path="/login" component={Login} />
+        <PrivateRoute exact path="/" component={Home} layout={Layout} />
+        <PrivateRoute path="/productos" component={Inventory} layout={Layout} />
+        <PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
+      </Switch>
+    </MUICustomTheme>
+  );
 };
 
 export default App;

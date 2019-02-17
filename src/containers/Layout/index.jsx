@@ -9,72 +9,49 @@ import { withStyles } from '@material-ui/core';
 import NavBar from './NavBar';
 import SideNav from './SideNav';
 
-// Actions
-import { selectTab } from '../../actions/Layout';
-
 class Layout extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.state = {
-			mobileOpen: false,
-			selectedItem: 0
-		};
-		this.handleListItemClick = this.handleListItemClick.bind(this);
-		this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
-	}
+    this.state = {
+      mobileOpen: false,
+      selectedItem: 0
+    };
+    this.handleListItemClick = this.handleListItemClick.bind(this);
+    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
+  }
 
-	handleDrawerToggle = () => {
-		const { mobileOpen } = this.state;
-		this.setState({ mobileOpen: !mobileOpen });
-	};
+  handleDrawerToggle = () => {
+    const { mobileOpen } = this.state;
+    this.setState({ mobileOpen: !mobileOpen });
+  };
 
-	handleListItemClick = selectedItem => {
-		this.setState({ selectedItem });
-	};
+  handleListItemClick = selectedItem => {
+    this.setState({ selectedItem });
+  };
 
-	render() {
-		const { selectedItem, mobileOpen } = this.state;
-		const { classes, children, state, actions } = this.props;
-		const { title, tabs, tabSelected } = state;
-		const { changeTab } = actions;
+  render() {
+    const { selectedItem, mobileOpen } = this.state;
+    const { classes, children } = this.props;
 
-		return (
-			<div className={classes.root}>
-				<NavBar
-					classes={classes}
-					title={title}
-					tabs={tabs}
-					tabSelected={tabSelected}
-					changeTab={changeTab}
-					navOpen={this.handleDrawerToggle}
-				/>
-				<SideNav
-					classes={classes}
-					selectedItem={selectedItem}
-					mobileOpen={mobileOpen}
-					handleClick={this.handleListItemClick}
-					handleDrawerToggle={this.handleDrawerToggle}
-				/>
-				<main className={classes.content}>{children}</main>
-			</div>
-		);
-	}
+    return (
+      <div className={classes.root}>
+        <NavBar classes={classes} navOpen={this.handleDrawerToggle} />
+        <SideNav
+          classes={classes}
+          selectedItem={selectedItem}
+          mobileOpen={mobileOpen}
+          handleClick={this.handleListItemClick}
+          handleDrawerToggle={this.handleDrawerToggle}
+        />
+        <main className={classes.content}>{children}</main>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ Layout }) => ({
-	state: { ...Layout }
+  state: { ...Layout }
 });
 
-const mapDispatchToProps = dispatch => ({
-	actions: {
-		changeTab: (e, value) => {
-			return dispatch(selectTab(value));
-		}
-	}
-});
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(withStyles(styles)(Layout));
+export default connect(mapStateToProps)(withStyles(styles)(Layout));
