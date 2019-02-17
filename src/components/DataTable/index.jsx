@@ -20,7 +20,7 @@ import {
   IntegratedGrouping
 } from '@devexpress/dx-react-grid';
 
-// DX React Grid Material
+// DX React Grid Material1
 import {
   Grid,
   Table,
