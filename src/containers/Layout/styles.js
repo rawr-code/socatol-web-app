@@ -59,10 +59,10 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    marginTop: 64,
-    maxWidth: 1140,
-    margin: '0 auto'
+    // padding: theme.spacing.unit * 3,
+    marginTop: 208,
+    width: '100%'
+    // margin: '0 auto'
   }
 });
 export default styles;
