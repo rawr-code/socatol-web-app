@@ -4,10 +4,11 @@ import styles from './styles';
 //  Material UI
 import { Typography, withStyles } from '@material-ui/core';
 
-const HeaderImage = ({ classes, img, title, subtitle }) => {
+const HeaderImage = ({ classes, img, title, subtitle, alt }) => {
   return (
     <header className={classes.root}>
       <img
+        alt={alt ? alt : 'headerImage'}
         src={
           img
             ? img

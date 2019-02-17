@@ -12,6 +12,7 @@ import { Login } from './containers/Auth';
 import Layout from './containers/Layout';
 import Inventory from './containers/Inventory';
 import Treasury from './containers/Treasury';
+import Billing from './containers/Billing';
 
 const Home = () => <div>Home</div>;
 
@@ -23,6 +24,7 @@ const App = () => {
         <PrivateRoute exact path="/" component={Home} layout={Layout} />
         <PrivateRoute path="/productos" component={Inventory} layout={Layout} />
         <PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
+        <PrivateRoute path="/facturacion" component={Billing} layout={Layout} />
       </Switch>
     </MUICustomTheme>
   );

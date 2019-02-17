@@ -3,7 +3,7 @@ const styles = theme => ({
     backgroundColor: '#fff',
     position: 'absolute',
     top: 64,
-    width: '100%',
+    width: `calc(100% - ${theme.drawerWidth}px)`,
     height: 120,
     display: 'flex',
     alignItems: 'center',
