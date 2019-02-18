@@ -14,9 +14,9 @@ class BillingContainer extends Component {
           title="Facturación"
           subtitle="Gestión de ingresos y gastos"
         />
-        <button>Ingresos</button>
-        <button>Gastos</button>
-        <div style={{ padding: 24 }}>
+        {/* <button>Ingresos</button>
+        <button>Gastos</button> */}
+        <div style={{ padding: 24, paddingTop: 0 }}>
           <Income />
         </div>
       </div>

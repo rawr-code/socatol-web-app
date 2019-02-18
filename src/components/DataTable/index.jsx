@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { theme } from '../../MUICustomTheme';
 
 // Material UI
-import { Paper, MuiThemeProvider } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 
 // DX React Grid
 import {
@@ -20,7 +19,7 @@ import {
   IntegratedGrouping
 } from '@devexpress/dx-react-grid';
 
-// DX React Grid Material1
+// DX React Grid Material
 import {
   Grid,
   Table,
