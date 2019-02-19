@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Material UI
-import { AppBar, Toolbar, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 
 // Icons
 import { Menu } from 'react-feather';
@@ -19,6 +19,13 @@ const NavBar = props => {
           className={classes.menuButton}>
           <Menu />
         </IconButton>
+        <Typography
+          variant="h5"
+          component="h1"
+          color="inherit"
+          className={classes.navbarTitle}>
+          SocatolWeb
+        </Typography>
       </Toolbar>
     </AppBar>
   );

@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 
-// Material UI
-import { Paper } from '@material-ui/core';
-
 // DX React Grid
 import {
   // Sorting
   SortingState,
   IntegratedSorting,
-  // Pagination
-  PagingState,
-  IntegratedPaging,
   // Search
   SearchState,
   IntegratedFiltering,
@@ -22,11 +16,9 @@ import {
 // DX React Grid Material
 import {
   Grid,
-  Table,
+  VirtualTable,
   Toolbar,
   TableHeaderRow,
-  // Pagination
-  PagingPanel,
   // Search
   SearchPanel,
   // GroupRow
@@ -40,7 +32,6 @@ class DataTable extends Component {
     super(props);
 
     this.state = {
-      pageSizes: [5, 10, 15, 0],
       columns: [
         { name: 'name', title: 'Name' },
         { name: 'sex', title: 'Sex' },
@@ -86,33 +77,37 @@ class DataTable extends Component {
     };
   }
   render() {
-    const { rows, columns, pageSizes } = this.state;
+    const { rows, columns } = this.state;
     return (
-      <Paper>
-        <Grid rows={rows} columns={columns}>
-          <DragDropProvider />
-          <SearchState />
-          <SortingState
-            defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
-          />
-          <GroupingState />
-          <PagingState defaultCurrentPage={0} defaultPageSize={5} />
+      <Grid rows={rows} columns={columns} style={{ height: '100%' }}>
+        <DragDropProvider />
+        <SearchState />
+        <SortingState
+          defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
+        />
+        <GroupingState />
 
-          <IntegratedSorting />
-          <IntegratedFiltering />
-          <IntegratedGrouping />
-          <IntegratedPaging />
+        <IntegratedSorting />
+        <IntegratedFiltering />
+        <IntegratedGrouping />
 
-          <Table />
-          <TableHeaderRow showSortingControls />
-          <TableGroupRow />
+        <VirtualTable height={700} />
+        <TableHeaderRow
+          showSortingControls
+          messages={{ sortingHint: 'Ordenar' }}
+        />
+        <TableGroupRow />
 
-          <Toolbar />
-          <SearchPanel />
-          <GroupingPanel showGroupingControls />
-          <PagingPanel pageSizes={pageSizes} />
-        </Grid>
-      </Paper>
+        <Toolbar />
+        <SearchPanel messages={{ searchPlaceholder: 'Buscar...' }} />
+        <GroupingPanel
+          showGroupingControls
+          messages={{
+            groupByColumn:
+              'Arrastre un encabezado de columna aquí para agrupar por esa columna'
+          }}
+        />
+      </Grid>
     );
   }
 }

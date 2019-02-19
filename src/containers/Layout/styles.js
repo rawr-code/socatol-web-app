@@ -51,7 +51,7 @@ const styles = theme => ({
   },
   navbarTitle: {
     fontFamily: 'Google Sans',
-    fontWeight: 400
+    fontWeight: 200
   },
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
@@ -60,7 +60,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     // padding: theme.spacing.unit * 3,
-    marginTop: 208,
+    marginTop: 64,
     width: '100%'
     // margin: '0 auto'
   }
