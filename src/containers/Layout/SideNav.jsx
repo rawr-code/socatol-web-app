@@ -13,34 +13,92 @@ import {
 } from '@material-ui/core';
 
 // Icons
-import { Package, DollarSign, Printer, Grid, FileText } from 'react-feather';
+import {
+  Package,
+  Home,
+  Printer,
+  FilePlus,
+  FileMinus,
+  Users,
+  Activity
+} from 'react-feather';
 
+import { AccountBalanceOutlined } from '@material-ui/icons';
 const navigation = [
+  // {
+  //   label: 'Inicio',
+  //   to: '/',
+  //   icon: <Grid />
+  // },
   {
-    label: 'Inicio',
-    to: '/',
-    icon: <Grid />
+    title: 'Tesorería',
+    childs: [
+      {
+        label: 'Estadisticas',
+        to: '/',
+        icon: <Activity />
+      },
+      {
+        label: 'Cuentas Bancarias',
+        to: '/tesoreria',
+        icon: <AccountBalanceOutlined />
+      }
+    ]
   },
   {
-    label: 'Facturación',
-    to: '/facturacion',
-    icon: <FileText />
+    title: 'Facturación',
+    childs: [
+      {
+        label: 'Compras',
+        to: '/compras',
+        icon: <FileMinus />
+      },
+      {
+        label: 'Ventas',
+        to: '/ventas',
+        icon: <FilePlus />
+      }
+    ]
   },
   {
-    label: 'Tesoreria',
-    to: '/tesoreria',
-    icon: <DollarSign />
+    title: 'Inventario',
+    childs: [
+      {
+        label: 'Almacenes',
+        to: '/almacenes',
+        icon: <Home />
+      },
+      {
+        label: 'Productos',
+        to: '/productos',
+        icon: <Package />
+      }
+    ]
   },
   {
-    label: 'Productos',
-    to: '/productos',
-    icon: <Package />
+    title: 'Contactos',
+    childs: [
+      {
+        label: 'Clientes',
+        to: '/clientes',
+        icon: <Users />
+      },
+      {
+        label: 'Proveedores',
+        to: '/proveedores',
+        icon: <Users />
+      }
+    ]
   },
   {
-    label: 'Reportes',
-    // to: '/reportes'
-    to: '/',
-    icon: <Printer />
+    title: 'Administración',
+    childs: [
+      {
+        label: 'Reportes',
+        to: '/',
+        icon: <Printer />
+      }
+    ]
   }
 ];
 
@@ -55,10 +113,34 @@ const SideNav = props => {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <List
+      {navigation.map((item, index) => (
+        <List
+          key={index}
+          component="nav"
+          subheader={
+            <ListSubheader component="span">{item.title}</ListSubheader>
+          }>
+          {item.childs.map(child => (
+            <NavLink
+              to={child.to}
+              className={classes.navLink}
+              key={child.label}>
+              <ListItem
+                component="div"
+                selected={selectedItem === child.label}
+                onClick={() => handleClick(child.label)}>
+                <ListItemIcon>{child.icon}</ListItemIcon>
+
+                <ListItemText primary={child.label} />
+              </ListItem>
+            </NavLink>
+          ))}
+        </List>
+      ))}
+      {/* <List
         className={classes.list}
         component="nav"
-        subheader={<ListSubheader component="span">Menu</ListSubheader>}>
+        subheader={<ListSubheader component="span">Facturación</ListSubheader>}>
         {navigation.map((item, index) => (
           <NavLink to={item.to} className={classes.navLink} key={item.label}>
             <ListItem
@@ -84,7 +166,7 @@ const SideNav = props => {
             </ListItem>
           </NavLink>
         ))}
-      </List>
+      </List> */}
     </div>
   );
   return (

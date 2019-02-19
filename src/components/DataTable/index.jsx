@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// Material UI
+import { TableRow } from '@material-ui/core';
+
 // DX React Grid
 import {
   // Sorting
@@ -77,7 +80,8 @@ class DataTable extends Component {
     };
   }
   render() {
-    const { rows, columns } = this.state;
+    // const { rows, columns } = this.state;
+    const { rows = [], columns = [] } = this.props;
     return (
       <Grid rows={rows} columns={columns} style={{ height: '100%' }}>
         <DragDropProvider />
@@ -91,7 +95,19 @@ class DataTable extends Component {
         <IntegratedFiltering />
         <IntegratedGrouping />
 
-        <VirtualTable height={700} />
+        <VirtualTable
+          height={600}
+          rowComponent={({ children, row }) => (
+            <TableRow
+              hover
+              onClick={e => {
+                console.log(row);
+              }}>
+              {children}
+            </TableRow>
+          )}
+        />
+        {/* rowComponent */}
         <TableHeaderRow
           showSortingControls
           messages={{ sortingHint: 'Ordenar' }}

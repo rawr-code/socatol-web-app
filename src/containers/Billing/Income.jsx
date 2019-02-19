@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-// Material UI
-import { Typography, Button } from '@material-ui/core';
-
 // Components
 import DataTableHeader from '../../components/DataTableHeader';
 import DataTable from '../../components/DataTable';
@@ -12,9 +9,10 @@ class IncomeContainer extends Component {
     return (
       <div>
         <DataTableHeader
+          img="https://img.icons8.com/dusk/64/000000/purchase-order.png"
           title="Compras"
           subtitle="Lista de facturas de compras"
-          bottonLabel="Facturar Compra"
+          buttonLabel="Facturar Compra"
         />
         <DataTable />
       </div>

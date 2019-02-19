@@ -4,15 +4,15 @@ import React, { Component } from 'react';
 import DataTableHeader from '../../components/DataTableHeader';
 import DataTable from '../../components/DataTable';
 
-class ExpensesContainer extends Component {
+class SupplidersContainer extends Component {
   render() {
     return (
       <div>
         <DataTableHeader
-          img="https://img.icons8.com/dusk/64/000000/purchase-order.png"
-          title="Ventas"
-          subtitle="Lista de facturas de venta"
-          buttonLabel="Facturar Venta"
+          img="https://img.icons8.com/dusk/64/000000/supplier.png"
+          title="Proveedores"
+          subtitle="Lista de proveedores"
+          buttonLabel="Agregar Proveedor"
         />
         <DataTable />
       </div>
@@ -20,4 +20,4 @@ class ExpensesContainer extends Component {
   }
 }
 
-export default ExpensesContainer;
+export default SupplidersContainer;

@@ -1,8 +1,6 @@
 const styles = theme => ({
   root: {
     backgroundColor: '#fff',
-    position: 'absolute',
-    top: 64,
     width: `calc(100% - ${theme.drawerWidth}px)`,
     height: 120,
     display: 'flex',

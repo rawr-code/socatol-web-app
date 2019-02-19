@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 // Components
 import BankAccounts from './BankAccounts';
 // import Conciliate from './Conciliate';
-import HeaderImage from '../../components/HeaderImage';
 
 class TreasuryContainer extends Component {
   constructor(props) {
@@ -31,11 +30,8 @@ class TreasuryContainer extends Component {
   render() {
     return (
       <div>
-        <HeaderImage />
-        <div style={{ margin: '0 auto', maxWidth: 1000 }}>
-          <BankAccounts openModal={this.handleClickOpenModal} />
-          {/* <Conciliate /> */}
-        </div>
+        <BankAccounts openModal={this.handleClickOpenModal} />
+        {/* <Conciliate /> */}
       </div>
     );
   }

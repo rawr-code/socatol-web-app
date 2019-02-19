@@ -12,6 +12,19 @@ const styles = theme => ({
   },
   button: {
     maxHeight: 40
+  },
+  content: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  image: {
+    height: 64,
+    width: 64
+  },
+  textContainer: {
+    marginLeft: 24,
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 
