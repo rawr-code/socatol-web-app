@@ -10,7 +10,6 @@ import { PublicRoute, PrivateRoute } from './components';
 // Containers
 import { Login } from './containers/Auth';
 import Layout from './containers/Layout';
-import Inventory from './containers/Inventory';
 import Treasury from './containers/Treasury';
 
 // Billing

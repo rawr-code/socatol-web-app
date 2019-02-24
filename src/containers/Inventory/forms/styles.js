@@ -1,6 +1,6 @@
 const styles = () => ({
   field: {
-    marginBottom: 24
+    marginBottom: 16
   }
 });
 

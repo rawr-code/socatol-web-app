@@ -1,10 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
-import styles from './styles';
 
-// MaterialUI
-import { withStyles, Dialog } from '@material-ui/core';
+// Material UI
+import { Dialog } from '@material-ui/core';
 
 // Actions
 import { GET_ALL as GET_ALL_WAREHOUSE } from '../../actions/Warehouse';
@@ -16,21 +15,10 @@ import DataTable from '../../components/DataTable';
 import NewProduct from './forms/NewProduct';
 
 class Products extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedItem: null,
-      selectedTab: 0,
-      modalOpen: false,
-      modalType: null,
-      anchorEl: null,
-      item: null
-    };
-
-    this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
+  state = {
+    modalOpen: false,
+    modalForm: null
+  };
 
   componentDidMount = async () => {
     const { getAll } = this.props.actions;
@@ -38,71 +26,27 @@ class Products extends PureComponent {
     await getAll();
   };
 
-  handleSelectItem = listItem => {
-    this.setState({ selectedItem: listItem });
-    this.setState({ selectedTab: 0 });
-  };
-
-  handleChangeTab = (e, selectedTab) => {
-    this.setState({ selectedTab });
-  };
-
-  handleClickOpenModal = () => {
+  handleClickOpen = async () => {
+    await this.props.actions.getAllWarehouse();
+    const { warehouses } = this.props.data.warehouse;
     this.setState({ modalOpen: true });
-    this.props.actions.getAllWarehouse();
-    this.props.actions.resetForm('newProduct');
-  };
-
-  handleCloseModal = () => {
-    this.setState({ modalOpen: false });
-  };
-
-  handleAdd = async payload => {
-    await this.props.actions.new(payload);
-    await this.props.actions.getAll();
-    this.setState({ modalOpen: false });
-    this.props.actions.resetForm('newProduct');
-  };
-  handleUpdate = async (id, payload) => {
-    await this.props.actions.update(id, payload);
-    await this.props.actions.getAll();
-    this.setState({ modalOpen: false });
-    this.props.actions.resetForm('newProduct');
-  };
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
+    const component = (
+      <NewProduct
+        warehouses={warehouses}
+        // initialValues={{ name: 'emma' }}
+        onSubmit={values => console.log(values)}
+        title="Nuevo producto"
+        open={this.state.modalOpen}
+        handleClose={this.handleClose.bind(this)}
+      />
+    );
+    this.setState({ modalForm: component });
   };
 
   handleClose = () => {
-    this.setState({ anchorEl: null });
+    this.setState({ modalOpen: false });
   };
 
-  handleDelete = async id => {
-    const { deleteItem, getAll } = this.props.actions;
-    await deleteItem(id);
-    await getAll();
-  };
-
-  handleChangeData = data => {
-    this.setState({ selectedItem: data });
-  };
-  crear = data => {
-    const cmp = data ? (
-      <NewProduct
-        info={data}
-        title="EDITAR PRODUCTO"
-        handleClose={this.handleCloseModal}
-        onSubmit={values => this.handleUpdate(data._id, values)}
-      />
-    ) : (
-      <NewProduct
-        title="NUEVA PRODUCTO"
-        handleClose={this.handleCloseModal}
-        onSubmit={values => this.handleAdd(values)}
-      />
-    );
-    this.setState({ item: cmp });
-  };
   render() {
     const { data } = this.props;
     const { products } = data.product;
@@ -122,36 +66,50 @@ class Products extends PureComponent {
       {
         name: 'price',
         title: 'Precio'
+      },
+      {
+        name: 'warehouse',
+        title: 'Almacen'
       }
     ];
     return (
       <Fragment>
         <DataTableHeader
-          img="https://img.icons8.com/dusk/64/000000/move-by-trolley.png"
-          onClick={() =>
-            this.handleClose() & this.crear() & this.handleClickOpenModal()
-          }
+          img="https://img.icons8.com/dusk/64/000000/product.png"
           title="Productos"
+          onClick={this.handleClickOpen}
           subtitle="Listado de productos"
+          button
           buttonLabel="Añadir Producto"
         />
-        <DataTable columns={columns} rows={products ? products : []} />
+        <DataTable
+          columns={columns}
+          rows={products ? products : []}
+          openModal={e => console.log('soy la funcion')}
+        />
         <Dialog
           open={this.state.modalOpen}
+          onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
           maxWidth="xs">
-          <div>{this.state.item}</div>
+          <DataTableHeader
+            img="https://img.icons8.com/dusk/64/000000/product.png"
+            title="Producto"
+            subtitle="Formulario de registro"
+          />
+          {this.state.modalForm}
         </Dialog>
       </Fragment>
     );
   }
 }
 
-Products = withStyles(styles, { withTheme: true })(Products);
-
-const mapStateToProps = ({ Inventory: { Product: product } }) => ({
+const mapStateToProps = ({
+  Inventory: { Product: product, Warehouse: warehouse }
+}) => ({
   data: {
-    product
+    product,
+    warehouse
   }
 });
 

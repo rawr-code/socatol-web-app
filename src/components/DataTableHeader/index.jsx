@@ -10,7 +10,8 @@ const HeaderDataTable = ({
   title,
   subtitle,
   buttonLabel,
-  onClick
+  onClick,
+  button
 }) => {
   return (
     <header className={classes.root}>
@@ -38,13 +39,15 @@ const HeaderDataTable = ({
         </div>
       </div>
 
-      <Button
-        color="primary"
-        variant="contained"
-        className={classes.button}
-        onClick={onClick}>
-        {buttonLabel}
-      </Button>
+      {button && (
+        <Button
+          color="primary"
+          variant="contained"
+          className={classes.button}
+          onClick={onClick}>
+          {buttonLabel}
+        </Button>
+      )}
     </header>
   );
 };

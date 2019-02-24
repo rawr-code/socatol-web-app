@@ -1,26 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
-
-// Material UI
-import {
-  Typography,
-  Card,
-  CardContent,
-  Avatar,
-  IconButton,
-  Grid,
-  Button
-} from '@material-ui/core';
 
 // Actions
 import { GET_ALL, NEW } from '../../actions/Warehouse';
 
-// Icons
-import { Home, MoreVertical, Plus } from 'react-feather';
-
 // Components
 import DataTableHeader from '../../components/DataTableHeader';
+import DataTable from '../../components/DataTable';
 
 class Warehouses extends PureComponent {
   componentDidMount = async () => {
@@ -30,61 +17,32 @@ class Warehouses extends PureComponent {
   };
 
   render() {
-    // const { state } = this.props;
-
+    const { data } = this.props;
+    const { warehouses } = data.warehouse;
+    const columns = [
+      {
+        name: 'name',
+        title: 'Nombre'
+      }
+    ];
     return (
-      <div>
+      <Fragment>
         <DataTableHeader
           img="https://img.icons8.com/dusk/64/000000/warehouse.png"
           title="Almacenes"
           subtitle="Listado de almacenes"
+          button
           buttonLabel="Añadir Almacen"
         />
-        <Grid container spacing={24} justify="center">
-          <Grid item xs={3}>
-            <Card style={{ maxWidth: 300 }}>
-              <header
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  position: 'relative'
-                }}>
-                <Avatar
-                  style={{
-                    width: 72,
-                    height: 72,
-                    marginTop: 16,
-                    backgroundColor: '#1890ff'
-                  }}>
-                  <Home size={40} />
-                </Avatar>
-                <IconButton
-                  style={{ position: 'absolute', top: 0, right: 0, margin: 8 }}>
-                  <MoreVertical />
-                </IconButton>
-              </header>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography component="h2" variant="h6">
-                  Almacen de repuestos
-                </Typography>
-                <Typography
-                  component="span"
-                  variant="subtitle1"
-                  color="textSecondary">
-                  500 productos
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </div>
+        <DataTable columns={columns} rows={warehouses ? warehouses : []} />
+      </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ Inventory: { Warehouse } }) => ({
-  state: {
-    ...Warehouse
+const mapStateToProps = ({ Inventory: { Warehouse: warehouse } }) => ({
+  data: {
+    warehouse
   }
 });
 

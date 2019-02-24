@@ -2,7 +2,8 @@ const styles = theme => ({
   root: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: 24
+    padding: 24,
+    paddingBottom: 0
   },
   title: {
     color: theme.palette.primary.main

@@ -13,6 +13,7 @@ class ExpensesContainer extends Component {
           title="Ventas"
           subtitle="Lista de facturas de venta"
           buttonLabel="Facturar Venta"
+          button
         />
         <DataTable />
       </div>
