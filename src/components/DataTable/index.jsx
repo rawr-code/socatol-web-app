@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
 // Material UI
-import { TableRow } from '@material-ui/core';
+import { TableRow, IconButton } from '@material-ui/core';
+
+// Icons
+import { ChevronDown } from 'react-feather';
 
 // DX React Grid
 import {
@@ -15,6 +18,14 @@ import {
   GroupingState,
   IntegratedGrouping
 } from '@devexpress/dx-react-grid';
+
+import {
+  PluginHost,
+  Plugin,
+  Getter,
+  Template,
+  TemplateConnector
+} from '@devexpress/dx-react-core';
 
 // DX React Grid Material
 import {
@@ -31,11 +42,49 @@ import {
 } from '@devexpress/dx-react-grid-material-ui';
 
 class DataTable extends Component {
+  state = {
+    rows: [],
+    columns: [],
+    tableColumnExtensions: [
+      // { columnName: 'price', align: 'right' },
+      { columnName: 'options', width: 70 }
+    ]
+  };
+
+  componentDidUpdate = prevProps => {
+    const { columns, rows } = this.props;
+    if (rows !== prevProps.rows) {
+      if (rows.length > 0) {
+        console.log('hola');
+        console.table(rows);
+        this.addOptions(columns, rows);
+      }
+    }
+  };
+
+  addOptions = (columns, rows) => {
+    let newRows = [];
+    const newColumns = [...columns, { name: 'options', title: ' ' }];
+    rows.map(row => {
+      newRows.push({
+        ...row,
+        options: (
+          <IconButton>
+            <ChevronDown size={16} />
+          </IconButton>
+        )
+      });
+    });
+    console.log(newRows);
+    this.setState({ columns: newColumns, rows: newRows });
+  };
+
   render() {
-    const { rows = [], columns = [], openModal } = this.props;
+    const { columns = [] } = this.state;
+    const { rows = [] } = this.state;
     return (
       <Grid rows={rows} columns={columns} style={{ height: '100%' }}>
-        <DragDropProvider />
+        {columns.length > 2 && <DragDropProvider />}
         <SearchState />
         <SortingState
           defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
@@ -49,14 +98,10 @@ class DataTable extends Component {
         <IntegratedGrouping />
 
         <VirtualTable
+          columnExtensions={this.state.tableColumnExtensions}
           height={600}
           rowComponent={({ children, row }) => (
-            <TableRow
-              hover
-              style={{ cursor: 'pointer' }}
-              onClick={e => {
-                console.log(row);
-              }}>
+            <TableRow hover style={{ cursor: 'pointer' }}>
               {children}
             </TableRow>
           )}
