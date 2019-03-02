@@ -6,6 +6,7 @@ import { reset } from 'redux-form';
 import { GET_ALL, NEW } from '../../actions/Warehouse';
 
 // Components
+import CardContainer from '../../components/CardContainer';
 import DataTableHeader from '../../components/DataTableHeader';
 import DataTable from '../../components/DataTable';
 
@@ -26,7 +27,7 @@ class Warehouses extends PureComponent {
       }
     ];
     return (
-      <Fragment>
+      <CardContainer>
         <DataTableHeader
           img="https://img.icons8.com/dusk/64/000000/warehouse.png"
           title="Almacenes"
@@ -35,7 +36,7 @@ class Warehouses extends PureComponent {
           buttonLabel="Añadir Almacen"
         />
         <DataTable columns={columns} rows={warehouses ? warehouses : []} />
-      </Fragment>
+      </CardContainer>
     );
   }
 }

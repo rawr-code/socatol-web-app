@@ -19,14 +19,6 @@ import {
   IntegratedGrouping
 } from '@devexpress/dx-react-grid';
 
-import {
-  PluginHost,
-  Plugin,
-  Getter,
-  Template,
-  TemplateConnector
-} from '@devexpress/dx-react-core';
-
 // DX React Grid Material
 import {
   Grid,
@@ -54,18 +46,16 @@ class DataTable extends Component {
   componentDidUpdate = prevProps => {
     const { columns, rows } = this.props;
     if (rows !== prevProps.rows) {
-      if (rows.length > 0) {
-        console.log('hola');
-        console.table(rows);
-        this.addOptions(columns, rows);
-      }
+      rows && rows.length > 0 && this.addOptions(rows);
+    }
+    if (columns !== prevProps.columns) {
+      this.setState({ columns: [...columns, { name: 'options', title: ' ' }] });
     }
   };
 
-  addOptions = (columns, rows) => {
+  addOptions = rows => {
     let newRows = [];
-    const newColumns = [...columns, { name: 'options', title: ' ' }];
-    rows.map(row => {
+    rows.map(row =>
       newRows.push({
         ...row,
         options: (
@@ -73,10 +63,9 @@ class DataTable extends Component {
             <ChevronDown size={16} />
           </IconButton>
         )
-      });
-    });
-    console.log(newRows);
-    this.setState({ columns: newColumns, rows: newRows });
+      })
+    );
+    this.setState({ rows: newRows });
   };
 
   render() {
@@ -115,13 +104,15 @@ class DataTable extends Component {
 
         <Toolbar />
         <SearchPanel messages={{ searchPlaceholder: 'Buscar...' }} />
-        <GroupingPanel
-          showGroupingControls
-          messages={{
-            groupByColumn:
-              'Arrastre un encabezado de columna aquí para agrupar por esa columna'
-          }}
-        />
+        {columns.length > 2 && (
+          <GroupingPanel
+            showGroupingControls
+            messages={{
+              groupByColumn:
+                'Arrastre un encabezado de columna aquí para agrupar por esa columna'
+            }}
+          />
+        )}
       </Grid>
     );
   }

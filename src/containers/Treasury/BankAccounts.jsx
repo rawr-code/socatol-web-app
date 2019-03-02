@@ -12,6 +12,7 @@ import { Dialog } from '@material-ui/core';
 import NewBankAccount from './NewBankAccount';
 
 // Components
+import CardContainer from '../../components/CardContainer';
 import DataTableHeader from '../../components/DataTableHeader';
 import DataTable from '../../components/DataTable';
 
@@ -106,12 +107,13 @@ class BankAccounts extends PureComponent {
       }
     ];
     return (
-      <Fragment>
+      <CardContainer>
         <DataTableHeader
           img="https://img.icons8.com/dusk/64/000000/merchant-account.png"
           title="Cuentas Bancarias"
           subtitle="Listado de cuentas bancarias"
           buttonLabel="Añadir Cuenta"
+          button
         />
         <DataTable columns={columns} rows={bankAccounts ? bankAccounts : []} />
         <Dialog
@@ -120,7 +122,7 @@ class BankAccounts extends PureComponent {
           maxWidth="xs">
           <div>{this.state.item}</div>
         </Dialog>
-      </Fragment>
+      </CardContainer>
     );
   }
 }
