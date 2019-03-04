@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 // Components
-import CardContainer from '../../components/CardContainer';
-import DataTableHeader from '../../components/DataTableHeader';
-import DataTable from '../../components/DataTable';
+import CardContainer from "../../components/CardContainer";
+import DataTableHeader from "../../components/DataTableHeader";
+import DataTable from "../../components/DataTable";
 
 class ExpensesContainer extends Component {
   render() {

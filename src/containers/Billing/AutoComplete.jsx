@@ -1,19 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import deburr from 'lodash/deburr';
-import Autosuggest from 'react-autosuggest';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import MenuItem from '@material-ui/core/MenuItem';
-import Popper from '@material-ui/core/Popper';
-import { withStyles } from '@material-ui/core/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import deburr from "lodash/deburr";
+import Autosuggest from "react-autosuggest";
+import match from "autosuggest-highlight/match";
+import parse from "autosuggest-highlight/parse";
+import TextField from "@material-ui/core/TextField";
+import Paper from "@material-ui/core/Paper";
+import MenuItem from "@material-ui/core/MenuItem";
+import Popper from "@material-ui/core/Popper";
+import { withStyles } from "@material-ui/core/styles";
 
 const suggestions = [
-  { label: 'Emmanuel Villegas Gonzalez' },
-  { label: 'Ivan Figueroa' },
-  { label: 'Prueba 1' }
+  { label: "Emmanuel Villegas Gonzalez" },
+  { label: "Ivan Figueroa" },
+  { label: "Prueba 1" }
 ];
 
 function renderInputComponent(inputProps) {
@@ -89,22 +89,22 @@ const styles = theme => ({
     flexGrow: 1
   },
   container: {
-    position: 'relative'
+    position: "relative"
   },
   suggestionsContainerOpen: {
-    position: 'absolute',
+    position: "absolute",
     zIndex: 1,
     marginTop: theme.spacing.unit,
     left: 0,
     right: 0
   },
   suggestion: {
-    display: 'block'
+    display: "block"
   },
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: 'none'
+    listStyleType: "none"
   },
   divider: {
     height: theme.spacing.unit * 2
@@ -113,8 +113,8 @@ const styles = theme => ({
 
 class IntegrationAutosuggest extends React.Component {
   state = {
-    single: '',
-    popper: '',
+    single: "",
+    popper: "",
     suggestions: []
   };
 
@@ -175,10 +175,10 @@ class IntegrationAutosuggest extends React.Component {
           {...autosuggestProps}
           inputProps={{
             classes,
-            label: 'Proveedor',
-            placeholder: 'Seleccione un proveedor',
+            label: "Proveedor",
+            placeholder: "Seleccione un proveedor",
             value: this.state.popper,
-            onChange: this.handleChange('popper'),
+            onChange: this.handleChange("popper"),
             inputRef: node => {
               this.popperNode = node;
             },
@@ -197,7 +197,8 @@ class IntegrationAutosuggest extends React.Component {
                 {...options.containerProps}
                 style={{
                   width: this.popperNode ? this.popperNode.clientWidth : null
-                }}>
+                }}
+              >
                 {options.children}
               </Paper>
             </Popper>

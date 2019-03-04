@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
 // Material UI
-import { Dialog, Paper } from '@material-ui/core';
+import { Dialog } from '@material-ui/core';
 
 // Actions
 import { GET_ALL as GET_ALL_WAREHOUSE } from '../../actions/Warehouse';

@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 // Components
 import CardContainer from '../../components/CardContainer';
-import DataTableHeader from '../../components/DataTableHeader';
-import DataTable from '../../components/DataTable';
-import AutoComplete from './AutoComplete';
-import AutoComplete1 from './AutoComplete.1';
-import Lista from './Lista';
+// import DataTableHeader from '../../components/DataTableHeader';
+// import DataTable from '../../components/DataTable';
+// import AutoComplete from "./AutoComplete";
+// import AutoComplete1 from "./AutoComplete.1";
+// import Lista from "./Lista";
 
-import { Grid, TextField, Typography, Button } from '@material-ui/core';
+// import { Grid, TextField, Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 class IncomeContainer extends Component {
   render() {
@@ -23,15 +24,16 @@ class IncomeContainer extends Component {
           button
         />
         <DataTable /> */}
-          <Grid
-            style={{ display: 'flex', flexDirection: 'column', padding: 24 }}
-            container>
+          {/* <Grid
+            style={{ display: "flex", flexDirection: "column", padding: 24 }}
+            container
+          >
             <Grid item xs={12}>
               <Grid item xs={4}>
                 <TextField
                   id="standard-name2"
                   label="N° de factura"
-                  value={'000005'}
+                  value={"000005"}
                   margin="normal"
                   disabled
                 />
@@ -64,12 +66,13 @@ class IncomeContainer extends Component {
               <div
                 style={{
                   marginTop: 20,
-                  borderTop: '1px solid rgba(0,0,0,0.12)'
-                }}>
+                  borderTop: "1px solid rgba(0,0,0,0.12)"
+                }}
+              >
                 <Lista />
               </div>
             </Grid>
-          </Grid>
+          </Grid> */}
           <div
             style={{
               padding: 20,

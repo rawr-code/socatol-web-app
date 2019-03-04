@@ -72,7 +72,7 @@ class DataTable extends Component {
     const { columns = [] } = this.state;
     const { rows = [] } = this.state;
     return (
-      <Grid rows={rows} columns={columns} style={{ height: '100%' }}>
+      <Grid rows={rows} columns={columns}>
         {columns.length > 2 && <DragDropProvider />}
         <SearchState />
         <SortingState
@@ -88,7 +88,7 @@ class DataTable extends Component {
 
         <VirtualTable
           columnExtensions={this.state.tableColumnExtensions}
-          height={600}
+          // height={600}
           rowComponent={({ children, row }) => (
             <TableRow hover style={{ cursor: 'pointer' }}>
               {children}

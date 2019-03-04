@@ -1,30 +1,101 @@
 // Material UI Theme
 import { createMuiTheme } from '@material-ui/core/styles';
 
-// Ant Design Pro Colors
-const theme = createMuiTheme({
+let theme = createMuiTheme({
   palette: {
     primary: {
       main: '#2196f3',
       light: '#64b5f6',
       dark: '#1976d2',
       contrastText: '#fff'
-    },
-    secondary: {
-      main: '#fff',
-      light: '#fff',
-      dark: '#ccc',
-      contrastText: 'rgba(0,0,0,0.65)'
     }
   },
-  // shape: {
-  //   borderRadius: 4
-  // },
+  shape: {
+    borderRadius: 8
+  },
   typography: {
     useNextVariants: true,
-    fontFamily: 'Roboto, Google Sans'
+    fontFamily: 'Roboto, Google Sans',
+    h5: {
+      fontFamily: 'Google Sans',
+      fontWeight: 500,
+      fontSize: '1.625rem',
+      letterSpacing: 0
+    },
+    body1: {
+      fontSize: '0.875rem',
+      textTransform: 'initial'
+    }
   },
   drawerWidth: 260
 });
+
+const overrides = {
+  MuiButton: {
+    label: {
+      textTransform: 'initial'
+    },
+    contained: {
+      '&:active': {
+        boxShadow: 'none'
+      }
+    }
+  },
+  MuiIconButton: {
+    root: {
+      padding: theme.spacing.unit,
+      '&:hover': {
+        backgroundColor: 'transparent'
+      }
+    }
+  },
+  MuiTabs: {
+    root: {
+      marginLeft: theme.spacing.unit
+    },
+    indicator: {
+      height: 3,
+      borderTopLeftRadius: 3,
+      borderTopRightRadius: 3,
+      backgroundColor: theme.palette.common.white
+    }
+  },
+  MuiTab: {
+    root: {
+      textTransform: 'initial',
+      fontSize: '0.8125rem',
+      margin: '0 16px',
+      minWidth: 0,
+      [theme.breakpoints.up('md')]: {
+        minWidth: 0
+      }
+    },
+    labelContainer: {
+      padding: 0,
+      [theme.breakpoints.up('md')]: {
+        padding: 0
+      }
+    }
+  },
+  MuiTooltip: {
+    tooltip: {
+      borderRadius: 4
+    }
+  }
+};
+
+const props = {
+  MuiTab: {
+    disableRipple: true
+  }
+};
+
+const mixins = {
+  ...theme.mixins,
+  toolbar: {
+    minHeight: 48
+  }
+};
+theme = { ...theme, overrides, props, mixins };
 
 export default theme;

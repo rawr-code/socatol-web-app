@@ -2,14 +2,21 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 
 // Material UI Custom Theme
-import MUICustomTheme from './MUICustomTheme';
+import { CssBaseline } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { Blue } from './themes';
 
 // Components
 import { PublicRoute, PrivateRoute } from './components';
+import Appbar from './components/Appbar';
+import SideNav from './components/SideNav';
+import MainContainer from './components/MainContainer';
+import FeatureBar from './components/FeatureBar';
+import TabsBar from './components/TabsBar';
+import HeaderTabs from './components/paperbase/Header';
 
 // Containers
 import { Login } from './containers/Auth';
-import Layout from './containers/Layout';
 import Treasury from './containers/Treasury';
 
 // Billing
@@ -28,30 +35,29 @@ const Home = () => <div>Home</div>;
 
 const App = () => {
   return (
-    <MUICustomTheme>
-      <Switch>
-        <PublicRoute path="/login" component={Login} />
-        <PrivateRoute exact path="/" component={Home} layout={Layout} />
-        <PrivateRoute path="/tesoreria" component={Treasury} layout={Layout} />
-        {/* Invnetory */}
-        <PrivateRoute
-          path="/almacenes"
-          component={Warehouses}
-          layout={Layout}
-        />
-        <PrivateRoute path="/productos" component={Products} layout={Layout} />
-        {/* Billing */}
-        <PrivateRoute path="/compras" component={Income} layout={Layout} />
-        <PrivateRoute path="/ventas" component={Expenses} layout={Layout} />
-        {/* Contacts */}
-        <PrivateRoute path="/clientes" component={Clients} layout={Layout} />
-        <PrivateRoute
-          path="/proveedores"
-          component={Suppliders}
-          layout={Layout}
-        />
-      </Switch>
-    </MUICustomTheme>
+    <MuiThemeProvider theme={Blue}>
+      <CssBaseline />
+      <SideNav />
+      <MainContainer>
+        <Appbar title="Socatol" />
+        <FeatureBar />
+        <TabsBar />
+        <Switch>
+          <PublicRoute path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute path="/tesoreria" component={Treasury} />
+          {/* Inventory */}
+          <PrivateRoute path="/almacenes" component={Warehouses} />
+          <PrivateRoute path="/productos" component={Products} />
+          {/* Billing */}
+          <PrivateRoute path="/compras" component={Income} />
+          <PrivateRoute path="/ventas" component={Expenses} />
+          {/* Contacts */}
+          <PrivateRoute path="/clientes" component={Clients} />
+          <PrivateRoute path="/proveedores" component={Suppliders} />
+        </Switch>
+      </MainContainer>
+    </MuiThemeProvider>
   );
 };
 
