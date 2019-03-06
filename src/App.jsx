@@ -37,11 +37,11 @@ const App = () => {
   return (
     <MuiThemeProvider theme={Blue}>
       <CssBaseline />
-      <SideNav />
+      <SideNav selectedItem={0} />
       <MainContainer>
         <Appbar title="Socatol" />
-        <FeatureBar />
-        <TabsBar />
+        <FeatureBar backArrow />
+        {/* <TabsBar /> */}
         <Switch>
           <PublicRoute path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Home} />

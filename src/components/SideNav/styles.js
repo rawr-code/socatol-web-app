@@ -8,53 +8,36 @@ const styles = theme => ({
       flexShrink: 0
     }
   },
+  drawerPaper: {
+    width: theme.drawerWidth
+  },
   list: {
-    padding: 15
-  },
-  listItem: {
-    margin: '8px 0'
-  },
-  listItemActive: {
-    margin: '8px 0',
-    borderRadius: 8,
-    backgroundColor: `${theme.palette.primary.main} !important`,
-    boxShadow: `0 3px 0 0 ${theme.palette.primary.main}, 0 2px 8px 0 ${
-      theme.palette.primary.main
-    }, 0 4px 10px 0 rgba(33,7,77,.5)`
-  },
-  listItemPrimary: {
-    margin: '0 8px'
-  },
-  listItemIcon: {
-    color: '#fff',
-    margin: '0 8px'
-  },
-  menuButton: {
-    marginRight: 20,
-    [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
+    padding: 15,
+    marginTop: 250
   },
   navLink: {
     textDecoration: 'none'
   },
-  navLinkText: {
-    height: 20
+  selected: {
+    backgroundColor: `${theme.palette.primary.main} !important`,
+    borderRadius: theme.shape.borderRadius,
+    boxShadow: `0 3px 0 0 ${theme.palette.primary.main}, 0 2px 8px 0 ${
+      theme.palette.primary.main
+    }, 0 4px 10px 0 rgba(33,7,77,.5)`
   },
-  navbarTitle: {
-    fontFamily: 'Google Sans',
-    fontWeight: 200
+  icon: {
+    color: 'white'
   },
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: theme.drawerWidth
+  text: {
+    fontSize: 16,
+    fontFamily: 'Google Sans'
   },
-  content: {
-    flexGrow: 1,
-    // padding: theme.spacing.unit * 3,
-    marginTop: 64,
-    width: '100%'
-    // margin: '0 auto'
-  }
+  textWhite: {
+    color: 'white'
+  },
+  listItemText: {
+    color: '#4b4b4b'
+  },
+  toolbar: theme.mixins.toolbar
 });
 export default styles;
