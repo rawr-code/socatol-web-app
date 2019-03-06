@@ -3,11 +3,13 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 // Socatol Colors
 const theme = createMuiTheme({
-  primary: {
-    main: '#27c24c',
-    light: '#69f67b',
-    dark: '#00901b',
-    contrastText: '#ffffff'
+  palette: {
+    primary: {
+      main: '#27c24c',
+      light: '#69f67b',
+      dark: '#00901b',
+      contrastText: '#ffffff'
+    }
   },
   secondary: {
     main: '#ffffff',
