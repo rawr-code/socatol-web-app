@@ -11,9 +11,26 @@ const styles = theme => ({
   drawerPaper: {
     width: theme.drawerWidth
   },
+  logoWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 8,
+    marginBottom: 20
+  },
+  username: {
+    fontFamily: 'Google Sans',
+    fontSize: 16,
+    marginTop: 8
+  },
+  userType: {
+    fontFamily: 'monospace',
+    fontSize: 14,
+    lineHeight: 1
+  },
   list: {
-    padding: 15,
-    marginTop: 250
+    padding: 15
   },
   navLink: {
     textDecoration: 'none'

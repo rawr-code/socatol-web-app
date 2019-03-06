@@ -10,6 +10,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
   withStyles
 } from '@material-ui/core';
 
@@ -62,6 +63,20 @@ const SideNav = props => {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
+      <div className={classes.logoWrapper}>
+        <img
+          src="https://img.icons8.com/cotton/64/000000/computer.png"
+          alt="logo"
+          width={80}
+          height={80}
+        />
+        <Typography variant="h6" color="primary" className={classes.username}>
+          Emmanuel Villegas
+        </Typography>
+        <Typography variant="subtitle2" className={classes.userType}>
+          Adminitrador
+        </Typography>
+      </div>
       <List component="nav" className={classes.list}>
         {navigation.map((item, index) => (
           <NavLink to={item.to} className={classes.navLink} key={item.label}>

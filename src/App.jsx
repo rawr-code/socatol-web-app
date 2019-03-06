@@ -40,8 +40,8 @@ const App = () => {
       <SideNav selectedItem={0} />
       <MainContainer>
         <Appbar title="Socatol" />
-        <FeatureBar backArrow />
-        {/* <TabsBar /> */}
+        <FeatureBar />
+        <TabsBar />
         <Switch>
           <PublicRoute path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Home} />
