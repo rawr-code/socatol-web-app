@@ -35,7 +35,7 @@ const navigation = [
 
   {
     label: 'Inventario',
-    to: '/productos',
+    to: '/inventario',
     icon: <Package />
   },
 

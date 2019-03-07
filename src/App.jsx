@@ -11,12 +11,11 @@ import { PublicRoute, PrivateRoute } from './components';
 import Appbar from './components/Appbar';
 import SideNav from './components/SideNav';
 import MainContainer from './components/MainContainer';
-import FeatureBar from './components/FeatureBar';
-import TabsBar from './components/TabsBar';
-import HeaderTabs from './components/paperbase/Header';
 
 // Containers
 import { Login } from './containers/Auth';
+import Inventory from './containers/Inventory';
+
 import Treasury from './containers/Treasury';
 
 // Billing
@@ -39,14 +38,13 @@ const App = () => {
       <CssBaseline />
       <SideNav selectedItem={0} />
       <MainContainer>
-        <Appbar title="Socatol" />
-        <FeatureBar />
-        <TabsBar />
+        <Appbar />
         <Switch>
           <PublicRoute path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/tesoreria" component={Treasury} />
           {/* Inventory */}
+          <PrivateRoute path="/inventario" component={Inventory} />
           <PrivateRoute path="/almacenes" component={Warehouses} />
           <PrivateRoute path="/productos" component={Products} />
           {/* Billing */}

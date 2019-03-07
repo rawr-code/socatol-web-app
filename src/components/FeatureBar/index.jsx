@@ -16,7 +16,7 @@ import styles from './styles';
 import Crumbs from './Crumbs';
 
 const FeatureBar = props => {
-  const { classes, backArrow } = props;
+  const { classes, backArrow, title } = props;
   return (
     <AppBar component="div" color="primary" position="static" elevation={0}>
       {backArrow && <Crumbs classes={classes} />}
@@ -30,7 +30,7 @@ const FeatureBar = props => {
                 </IconButton>
               )}
               <Typography color="inherit" variant="h5">
-                Gestión de inventario
+                {title ? title : ''}
               </Typography>
             </Grid>
           </Grid>
