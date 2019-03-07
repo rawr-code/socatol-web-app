@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
 
-// Material UI
-import { TableRow, IconButton } from '@material-ui/core';
-
-// Icons
-import { ChevronDown } from 'react-feather';
-
 // DX React Grid
 import {
   // Sorting
@@ -33,6 +27,15 @@ import {
   DragDropProvider
 } from '@devexpress/dx-react-grid-material-ui';
 
+// Material UI
+import {
+  TableRow,
+  TableCell,
+  Toolbar as MuiToolbar,
+  withStyles
+} from '@material-ui/core';
+import styles from './styles';
+
 class DataTable extends Component {
   state = {
     rows: [],
@@ -43,55 +46,33 @@ class DataTable extends Component {
     ]
   };
 
-  componentDidUpdate = prevProps => {
-    const { columns, rows } = this.props;
-    if (rows !== prevProps.rows) {
-      rows && rows.length > 0 && this.addOptions(rows);
-    }
-    if (columns !== prevProps.columns) {
-      this.setState({ columns: [...columns, { name: 'options', title: ' ' }] });
-    }
-  };
-
-  addOptions = rows => {
-    let newRows = [];
-    rows.map(row =>
-      newRows.push({
-        ...row,
-        options: (
-          <IconButton>
-            <ChevronDown size={16} />
-          </IconButton>
-        )
-      })
-    );
-    this.setState({ rows: newRows });
-  };
-
   render() {
-    const { columns = [] } = this.state;
-    const { rows = [] } = this.state;
+    const { classes, columns, rows } = this.props;
     return (
       <Grid rows={rows} columns={columns}>
-        {columns.length > 2 && <DragDropProvider />}
+        <DragDropProvider />
         <SearchState />
         <SortingState
           defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
         />
-        <GroupingState
-          columnExtensions={[{ columnName: 'options', groupingEnabled: false }]}
-        />
+        <GroupingState />
 
         <IntegratedSorting />
         <IntegratedFiltering />
         <IntegratedGrouping />
 
         <VirtualTable
-          columnExtensions={this.state.tableColumnExtensions}
-          // height={600}
+          height={500}
           rowComponent={({ children, row }) => (
             <TableRow hover style={{ cursor: 'pointer' }}>
               {children}
+            </TableRow>
+          )}
+          noDataRowComponent={() => (
+            <TableRow>
+              <TableCell className={classes.noData}>
+                <big>No se encontraron datos</big>
+              </TableCell>
             </TableRow>
           )}
         />
@@ -102,20 +83,22 @@ class DataTable extends Component {
         />
         <TableGroupRow />
 
-        <Toolbar />
+        <Toolbar
+          rootComponent={({ children }) => (
+            <MuiToolbar className={classes.toolbar}>{children}</MuiToolbar>
+          )}
+        />
         <SearchPanel messages={{ searchPlaceholder: 'Buscar...' }} />
-        {columns.length > 2 && (
-          <GroupingPanel
-            showGroupingControls
-            messages={{
-              groupByColumn:
-                'Arrastre un encabezado de columna aquí para agrupar por esa columna'
-            }}
-          />
-        )}
+        <GroupingPanel
+          showGroupingControls
+          messages={{
+            groupByColumn:
+              'Arrastre un encabezado de columna aquí para agrupar por esa columna'
+          }}
+        />
       </Grid>
     );
   }
 }
 
-export default DataTable;
+export default withStyles(styles)(DataTable);

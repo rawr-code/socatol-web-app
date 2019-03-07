@@ -79,7 +79,7 @@ class Products extends PureComponent {
         />
         <DataTable
           columns={columns}
-          rows={products}
+          rows={products ? products : []}
           openModal={e => console.log('soy la funcion')}
           handleEdit={e => console.log(e)}
           handleRemove={e => console.log(e)}
