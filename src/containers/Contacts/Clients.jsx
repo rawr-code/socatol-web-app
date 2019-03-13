@@ -7,6 +7,24 @@ import DataTable from '../../components/DataTable';
 
 class ClientsContainer extends Component {
   render() {
+    const columns = [
+      {
+        name: 'name',
+        title: 'Nombre'
+      },
+      {
+        name: 'stock',
+        title: 'Stock'
+      },
+      {
+        name: 'iva',
+        title: 'IVA'
+      },
+      {
+        name: 'price',
+        title: 'Precio'
+      }
+    ];
     return (
       <CardContainer>
         <DataTableHeader
@@ -16,7 +34,7 @@ class ClientsContainer extends Component {
           buttonLabel="Agregar Cliente"
           button
         />
-        <DataTable />
+        <DataTable columns={columns} rows={[]} />
       </CardContainer>
     );
   }

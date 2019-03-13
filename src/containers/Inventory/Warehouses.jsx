@@ -3,14 +3,7 @@ import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
 // Material UI
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  Button,
-  Typography,
-  Grid
-} from '@material-ui/core';
+import { Card, CardHeader, Button, Grid } from '@material-ui/core';
 
 // Actions
 import { GET_ALL, NEW } from '../../actions/Warehouse';
@@ -31,7 +24,6 @@ class Warehouses extends PureComponent {
   render() {
     const { data } = this.props;
     const { warehouses } = data.warehouse;
-    console.log(warehouses);
     return (
       <MainContainer type="secondary">
         <header style={{ marginBottom: 16 }}>

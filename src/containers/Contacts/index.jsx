@@ -5,10 +5,10 @@ import FeatureBar from '../../components/FeatureBar';
 import TabsBar from '../../components/TabsBar';
 
 // Containers
-import Warehouses from './Warehouses';
-import Products from './Products';
+import Clients from './Clients';
+import Suppliders from './Suppliders';
 
-class Inventory extends Component {
+class Contacts extends Component {
   state = {
     value: 0
   };
@@ -19,20 +19,20 @@ class Inventory extends Component {
 
   render() {
     const { value } = this.state;
-    const labels = ['Almacenes', 'Productos'];
+    const labels = ['Clientes', 'Proveedores'];
     return (
       <Fragment>
-        <FeatureBar title="Inventario" />
+        <FeatureBar title="Contactos" />
         <TabsBar
           value={value}
           handleChange={this.handleChange}
           labels={labels}
         />
-        {value === 0 && <Warehouses />}
-        {value === 1 && <Products />}
+        {value === 0 && <Clients />}
+        {value === 1 && <Suppliders />}
       </Fragment>
     );
   }
 }
 
-export default Inventory;
+export default Contacts;

@@ -11,23 +11,13 @@ import { PublicRoute, PrivateRoute } from './components';
 import MainContainer from './components/MainContainer';
 
 // Containers
-import { Login } from './containers/Auth';
 import Layout from './containers/Layout';
-import Inventory from './containers/Inventory';
 
+import { Login } from './containers/Auth';
 import Treasury from './containers/Treasury';
-
-// Billing
-import Income from './containers/Billing/Income';
-import Expenses from './containers/Billing/Expenses';
-
-// Inventory
-import Products from './containers/Inventory/Products';
-import Warehouses from './containers/Inventory/Warehouses';
-
-// Contacts
-import Clients from './containers/Contacts/Clients';
-import Suppliders from './containers/Contacts/Suppliders';
+import Billing from './containers/Billing';
+import Inventory from './containers/Inventory';
+import Contacts from './containers/Contacts';
 
 const Home = () => <div>Home</div>;
 
@@ -41,16 +31,9 @@ const App = () => {
           <PublicRoute path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/tesoreria" component={Treasury} />
-          {/* Inventory */}
+          <PrivateRoute path="/facturacion" component={Billing} />
           <PrivateRoute path="/inventario" component={Inventory} />
-          <PrivateRoute path="/almacenes" component={Warehouses} />
-          <PrivateRoute path="/productos" component={Products} />
-          {/* Billing */}
-          <PrivateRoute path="/compras" component={Income} />
-          <PrivateRoute path="/ventas" component={Expenses} />
-          {/* Contacts */}
-          <PrivateRoute path="/clientes" component={Clients} />
-          <PrivateRoute path="/proveedores" component={Suppliders} />
+          <PrivateRoute path="/contactos" component={Contacts} />
         </Switch>
       </MainContainer>
     </MuiThemeProvider>

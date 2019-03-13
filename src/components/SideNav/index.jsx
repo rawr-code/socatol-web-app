@@ -22,14 +22,19 @@ import styles from './styles';
 
 const navigation = [
   {
-    label: 'Tesorería',
+    label: 'Inicio',
     to: '/',
+    icon: <AccountBalanceOutlined />
+  },
+  {
+    label: 'Tesorería',
+    to: '/tesoreria',
     icon: <AccountBalanceOutlined />
   },
 
   {
     label: 'Facturación',
-    to: '/',
+    to: '/facturacion',
     icon: <FileText />
   },
 
@@ -41,13 +46,13 @@ const navigation = [
 
   {
     label: 'Contactos',
-    to: '/',
+    to: '/contactos',
     icon: <Users />
   },
 
   {
     label: 'Reportes',
-    to: '/',
+    to: '/reportes',
     icon: <Printer />
   }
 ];

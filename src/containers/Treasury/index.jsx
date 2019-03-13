@@ -1,46 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react';
 
 // Components
+import FeatureBar from '../../components/FeatureBar';
+import TabsBar from '../../components/TabsBar';
+
+// Containers
 import BankAccounts from './BankAccounts';
-// import Conciliate from './Conciliate';
+import NewBankAccount from './NewBankAccount';
 
-class TreasuryContainer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modalOpen: false,
-      modalType: null
-    };
-
-    this.handleClickOpenModal = this.handleClickOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-  }
-
-  handleClickOpenModal = () => {
-    this.setState({ modalOpen: true });
-    // this.props.actions.getAllWarehouse();
-    // this.props.actions.resetForm('newProduct');
+class Treasury extends Component {
+  state = {
+    value: 0
   };
 
-  handleCloseModal = () => {
-    this.setState({ modalOpen: false });
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
+
   render() {
+    const { value } = this.state;
+    const labels = ['Cuentas bancarias', 'otras cuentas'];
     return (
-      <div>
-        <BankAccounts openModal={this.handleClickOpenModal} />
-        {/* <Conciliate /> */}
-      </div>
+      <Fragment>
+        <FeatureBar title="Tesorería" />
+        <TabsBar
+          value={value}
+          handleChange={this.handleChange}
+          labels={labels}
+        />
+        {value === 0 && <BankAccounts />}
+        {value === 1 && <NewBankAccount />}
+      </Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ Layout }) => ({
-  state: {
-    layout: Layout
-  }
-});
-
-export default connect(mapStateToProps)(TreasuryContainer);
+export default Treasury;

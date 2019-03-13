@@ -7,6 +7,24 @@ import DataTable from '../../components/DataTable';
 
 class SupplidersContainer extends Component {
   render() {
+    const columns = [
+      {
+        name: 'name',
+        title: 'Nombre'
+      },
+      {
+        name: 'stock',
+        title: 'Stock'
+      },
+      {
+        name: 'iva',
+        title: 'IVA'
+      },
+      {
+        name: 'price',
+        title: 'Precio'
+      }
+    ];
     return (
       <CardContainer>
         <DataTableHeader
@@ -16,7 +34,7 @@ class SupplidersContainer extends Component {
           buttonLabel="Agregar Proveedor"
           button
         />
-        <DataTable />
+        <DataTable columns={columns} rows={[]} />
       </CardContainer>
     );
   }
