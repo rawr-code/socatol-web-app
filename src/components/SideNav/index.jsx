@@ -114,7 +114,7 @@ const SideNav = props => {
         </Drawer>
       </Hidden>
       {/* DesktopNav */}
-      <Hidden xsDown implementation="css">
+      <Hidden mdDown implementation="css">
         <Drawer
           classes={{
             paper: classes.drawerPaper
