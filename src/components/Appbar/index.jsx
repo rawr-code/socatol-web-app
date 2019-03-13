@@ -1,11 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+
+// Material UI
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  IconButton,
+  Hidden,
+  withStyles
+} from '@material-ui/core';
+
+// Icons
+import { Menu } from '@material-ui/icons';
 
 const styles = {
   menuButton: {
@@ -19,21 +25,26 @@ const ButtonAppBar = props => {
   return (
     <AppBar color="primary" position="sticky" elevation={0}>
       <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <IconButton
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="Menu"
-          onClick={openSideNav}>
-          <MenuIcon />
-        </IconButton>
-        <Button color="inherit">Login</Button>
+        <Hidden mdUp implementation="css">
+          <IconButton
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Menu"
+            onClick={openSideNav}>
+            <Menu />
+          </IconButton>
+        </Hidden>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'flex-end'
+          }}>
+          <Button color="inherit">Login</Button>
+        </div>
       </Toolbar>
     </AppBar>
   );
-};
-
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(ButtonAppBar);
