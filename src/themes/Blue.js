@@ -63,7 +63,7 @@ const overrides = {
   MuiTab: {
     root: {
       textTransform: 'initial',
-      fontSize: '0.8125rem',
+      fontSize: '14px !important',
       margin: '0 16px',
       minWidth: 0,
       [theme.breakpoints.up('md')]: {
