@@ -3,6 +3,11 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       marginLeft: theme.drawerWidth
     }
+  },
+  secondary: {
+    margin: '0 auto',
+    maxWidth: 1000,
+    marginTop: 48
   }
 });
 
