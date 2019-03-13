@@ -53,13 +53,7 @@ const navigation = [
 ];
 
 const SideNav = props => {
-  const {
-    classes,
-    selectedItem,
-    handleClick,
-    mobileOpen,
-    handleDrawerToggle
-  } = props;
+  const { classes, selectedItem, handleClick, mobileOpen, handleClose } = props;
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -83,7 +77,7 @@ const SideNav = props => {
             <ListItem
               component="div"
               selected={selectedItem === index}
-              // onClick={() => handleClick(index)}
+              onClick={() => handleClick(index)}
               classes={{ selected: classes.selected }}>
               <ListItemIcon className={classes.icon}>{item.icon}</ListItemIcon>
 
@@ -112,7 +106,7 @@ const SideNav = props => {
         <Drawer
           variant="temporary"
           open={mobileOpen}
-          onClose={handleDrawerToggle}
+          onClose={handleClose}
           classes={{
             paper: classes.drawerPaper
           }}>

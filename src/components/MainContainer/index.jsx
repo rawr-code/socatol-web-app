@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core';
 import styles from './styles';
 
 const MainContainer = ({ classes, children }) => (
-  <main className={classes.root}>{children}</main>
+  <div className={classes.root}>{children}</div>
 );
 
 export default withStyles(styles)(MainContainer);

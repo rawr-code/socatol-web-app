@@ -4,13 +4,13 @@ import {
   Toolbar,
   Grid,
   Typography,
-  Button,
-  Tooltip,
+  // Button,
+  // Tooltip,
   IconButton,
   withStyles
 } from '@material-ui/core';
 
-import { Help } from '@material-ui/icons';
+// import { Help } from '@material-ui/icons';
 import { ArrowLeft } from 'react-feather';
 import styles from './styles';
 import Crumbs from './Crumbs';
@@ -34,7 +34,7 @@ const FeatureBar = props => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button
               className={classes.button}
               variant="outlined"
@@ -42,14 +42,14 @@ const FeatureBar = props => {
               size="small">
               Web setup
             </Button>
-          </Grid>
-          <Grid item>
+          </Grid> */}
+          {/* <Grid item>
             <Tooltip title="Help">
               <IconButton color="inherit">
                 <Help />
               </IconButton>
             </Tooltip>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Toolbar>
     </AppBar>

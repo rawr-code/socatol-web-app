@@ -8,12 +8,11 @@ import { Blue } from './themes';
 
 // Components
 import { PublicRoute, PrivateRoute } from './components';
-import Appbar from './components/Appbar';
-import SideNav from './components/SideNav';
 import MainContainer from './components/MainContainer';
 
 // Containers
 import { Login } from './containers/Auth';
+import Layout from './containers/Layout';
 import Inventory from './containers/Inventory';
 
 import Treasury from './containers/Treasury';
@@ -36,9 +35,8 @@ const App = () => {
   return (
     <MuiThemeProvider theme={Blue}>
       <CssBaseline />
-      <SideNav selectedItem={0} />
       <MainContainer>
-        <Appbar />
+        <Layout />
         <Switch>
           <PublicRoute path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Home} />

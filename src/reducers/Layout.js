@@ -1,7 +1,12 @@
-import { OPEN_SIDENAV, CLOSE_SIDENAV } from '../actions/Layout';
+import {
+  OPEN_SIDENAV,
+  CLOSE_SIDENAV,
+  SELECT_ITEM_MENU
+} from '../actions/Layout';
 
 const INITIAL_STATE = {
-  sideNavOpen: false
+  sideNavOpen: false,
+  menuSelectedItem: 0
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -11,6 +16,9 @@ export default function reducer(state = INITIAL_STATE, action) {
     }
     case CLOSE_SIDENAV: {
       return { ...state, sideNavOpen: false };
+    }
+    case SELECT_ITEM_MENU: {
+      return { ...state, menuSelectedItem: action.payload };
     }
     default:
       return state;
