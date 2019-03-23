@@ -1,38 +1,20 @@
 import React, { Component, Fragment } from 'react';
-
-// Components
-import FeatureBar from '../../components/FeatureBar';
-import TabsBar from '../../components/TabsBar';
+import { Route } from 'react-router-dom';
 
 // Containers
-import Warehouses from './Warehouses';
-import Products from './Products';
+import Inventory from './Inventory';
+import NewWarehouse from './NewWarehouse';
 
-class Inventory extends Component {
-  state = {
-    value: 0
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
+class InventoryRouter extends Component {
   render() {
-    const { value } = this.state;
-    const labels = ['Almacenes', 'Productos'];
+    const { match } = this.props;
     return (
       <Fragment>
-        <FeatureBar title="Inventario" />
-        <TabsBar
-          value={value}
-          handleChange={this.handleChange}
-          labels={labels}
-        />
-        {value === 0 && <Warehouses />}
-        {value === 1 && <Products />}
+        <Route path={`${match.path}/almacen/nuevo`} component={NewWarehouse} />
+        <Route exact path={match.path} component={Inventory} />
       </Fragment>
     );
   }
 }
 
-export default Inventory;
+export default InventoryRouter;

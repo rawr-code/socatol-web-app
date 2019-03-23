@@ -3,18 +3,20 @@ import { Typography } from '@material-ui/core';
 import { ChevronRight } from 'react-feather';
 
 const Crumbs = props => {
-  const { classes } = props;
-  const data = [
-    {
-      name: 'Inicio'
-    },
-    {
-      name: 'Inventario'
-    },
-    {
-      name: 'Productos'
-    }
-  ];
+  const {
+    classes,
+    data = [
+      {
+        name: 'Inicio'
+      },
+      {
+        name: 'Inventario'
+      },
+      {
+        name: 'Productos'
+      }
+    ]
+  } = props;
   return (
     <div className={classes.rootCrumbs}>
       {data.map((item, index) => (

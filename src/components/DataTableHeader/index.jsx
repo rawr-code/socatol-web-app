@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles';
+import { Link } from 'react-router-dom';
 
 // Material UI
 import { Typography, Button, withStyles } from '@material-ui/core';
@@ -10,8 +11,8 @@ const HeaderDataTable = ({
   title,
   subtitle,
   buttonLabel,
-  onClick,
-  button
+  button,
+  buttonURL
 }) => {
   return (
     <header className={classes.root}>
@@ -44,7 +45,8 @@ const HeaderDataTable = ({
           color="primary"
           variant="contained"
           className={classes.button}
-          onClick={onClick}>
+          component={Link}
+          to={buttonURL ? buttonURL : '/'}>
           {buttonLabel}
         </Button>
       )}

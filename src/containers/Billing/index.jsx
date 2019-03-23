@@ -1,38 +1,20 @@
 import React, { Component, Fragment } from 'react';
-
-// Components
-import FeatureBar from '../../components/FeatureBar';
-import TabsBar from '../../components/TabsBar';
+import { Route } from 'react-router-dom';
 
 // Containers
-import Income from './Income';
-import Expenses from './Expenses';
+import Billing from './Billing';
+import NewIncome from './NewIncome';
 
-class Billing extends Component {
-  state = {
-    value: 0
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
+class BillingRouter extends Component {
   render() {
-    const { value } = this.state;
-    const labels = ['Compras', 'Ventas'];
+    const { match } = this.props;
     return (
       <Fragment>
-        <FeatureBar title="Facturación" />
-        <TabsBar
-          value={value}
-          handleChange={this.handleChange}
-          labels={labels}
-        />
-        {value === 0 && <Income />}
-        {value === 1 && <Expenses />}
+        <Route path={`${match.path}/compra/nuevo`} component={NewIncome} />
+        <Route exact path={match.path} component={Billing} />
       </Fragment>
     );
   }
 }
 
-export default Billing;
+export default BillingRouter;

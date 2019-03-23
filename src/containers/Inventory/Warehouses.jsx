@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
@@ -10,9 +11,6 @@ import { GET_ALL, NEW } from '../../actions/Warehouse';
 
 // Components
 import MainContainer from '../../components/MainContainer';
-// import CardContainer from '../../components/CardContainer';
-// import DataTableHeader from '../../components/DataTableHeader';
-// import DataTable from '../../components/DataTable';
 
 class Warehouses extends PureComponent {
   componentDidMount = async () => {
@@ -30,7 +28,8 @@ class Warehouses extends PureComponent {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => console.log('hola')}>
+            component={Link}
+            to="inventario/almacen/nuevo">
             Añadir almacén
           </Button>
         </header>

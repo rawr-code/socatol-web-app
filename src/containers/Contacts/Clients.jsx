@@ -32,6 +32,7 @@ class ClientsContainer extends Component {
           title="Clientes"
           subtitle="Lista de clientes"
           buttonLabel="Agregar Cliente"
+          buttonURL="/contactos/cliente/nuevo"
           button
         />
         <DataTable columns={columns} rows={[]} />

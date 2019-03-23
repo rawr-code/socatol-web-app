@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -16,16 +17,24 @@ import styles from './styles';
 import Crumbs from './Crumbs';
 
 const FeatureBar = props => {
-  const { classes, backArrow, title } = props;
+  const { classes, backArrow, title, history } = props;
   return (
     <AppBar component="div" color="primary" position="static" elevation={0}>
-      {backArrow && <Crumbs classes={classes} />}
+      {backArrow && (
+        <Crumbs
+          classes={classes}
+          data={[{ name: 'Inicio' }, { name: 'Facturación' }]}
+        />
+      )}
       <Toolbar className={backArrow ? classes.toolbar : ''}>
         <Grid container alignItems="center" spacing={8}>
           <Grid item xs>
             <Grid container direction="row" alignItems="center">
               {backArrow && (
-                <IconButton color="inherit" className={classes.backArrow}>
+                <IconButton
+                  color="inherit"
+                  className={classes.backArrow}
+                  onClick={history.goBack}>
                   <ArrowLeft siez={24} />
                 </IconButton>
               )}
@@ -56,4 +65,4 @@ const FeatureBar = props => {
   );
 };
 
-export default withStyles(styles)(FeatureBar);
+export default withRouter(withStyles(styles)(FeatureBar));

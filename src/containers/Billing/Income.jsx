@@ -32,6 +32,7 @@ class IncomeContainer extends Component {
           title="Compras"
           subtitle="Lista de facturas de compras"
           buttonLabel="Facturar Compra"
+          buttonURL="/facturacion/compra/nuevo"
           button
         />
         <DataTable columns={columns} rows={[]} />

@@ -1,38 +1,20 @@
 import React, { Component, Fragment } from 'react';
-
-// Components
-import FeatureBar from '../../components/FeatureBar';
-import TabsBar from '../../components/TabsBar';
+import { Route } from 'react-router-dom';
 
 // Containers
-import Clients from './Clients';
-import Suppliders from './Suppliders';
+import Contacts from './Contacts';
+import NewClient from './NewClient';
 
-class Contacts extends Component {
-  state = {
-    value: 0
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
+class ContactsRouter extends Component {
   render() {
-    const { value } = this.state;
-    const labels = ['Clientes', 'Proveedores'];
+    const { match } = this.props;
     return (
       <Fragment>
-        <FeatureBar title="Contactos" />
-        <TabsBar
-          value={value}
-          handleChange={this.handleChange}
-          labels={labels}
-        />
-        {value === 0 && <Clients />}
-        {value === 1 && <Suppliders />}
+        <Route path={`${match.path}/cliente/nuevo`} component={NewClient} />
+        <Route exact path={match.path} component={Contacts} />
       </Fragment>
     );
   }
 }
 
-export default Contacts;
+export default ContactsRouter;

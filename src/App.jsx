@@ -28,7 +28,7 @@ const App = () => {
       <MainContainer>
         <Layout />
         <Switch>
-          <PublicRoute path="/login" component={Login} />
+          <PublicRoute exact path="/login" component={Login} />
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/tesoreria" component={Treasury} />
           <PrivateRoute path="/facturacion" component={Billing} />
