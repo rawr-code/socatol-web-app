@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 // Utils
 import setAuthorizationToken from './utils/setAuthorizationToken';
 
-// Configuration
+// Redux Store
 import store from './store';
 
 import { setCurrentUser, Logout } from './store/actions/Auth';

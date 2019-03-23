@@ -15,25 +15,27 @@ import {
 } from '@material-ui/core';
 
 // Icons
-import { Package, Printer, ShoppingCart, CreditCard } from 'react-feather';
 import {
-  AccountBalanceOutlined
-  // CreditCard,
-  // ShoppingCart
-} from '@material-ui/icons';
+  PieChart,
+  Package,
+  Printer,
+  ShoppingCart,
+  ShoppingBag
+} from 'react-feather';
+import { AccountBalanceOutlined } from '@material-ui/icons';
 
 import styles from './styles';
 
 const navigation = [
   {
-    label: 'Inicio',
+    label: 'Resumen',
     to: '/',
-    icon: <AccountBalanceOutlined />
+    icon: <PieChart />
   },
   {
     label: 'Ventas',
     to: '/ventas',
-    icon: <CreditCard />
+    icon: <ShoppingBag />
   },
   {
     label: 'Compras',

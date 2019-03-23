@@ -4,10 +4,13 @@ import { Switch } from 'react-router-dom';
 // Material UI Custom Theme
 import { CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { Blue } from './themes';
+import theme from './themes/Blue';
 
 // Routes
 import { PublicRoute, PrivateRoute } from './routes';
+
+// Layout
+import Layout from './components/Layout';
 
 // Atoms
 import MainContainer from './components/Atoms/MainContainer';
@@ -22,14 +25,11 @@ import Purchases from './pages/Purchases';
 import Inventory from './pages/Inventory';
 import Treasury from './pages/Treasury';
 
-// Containers
-import Layout from './components/Layout';
-
 const Home = () => <div>Home</div>;
 
 const App = () => {
   return (
-    <MuiThemeProvider theme={Blue}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <MainContainer>
         <Layout />
