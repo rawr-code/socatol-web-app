@@ -15,14 +15,7 @@ import {
 } from '@material-ui/core';
 
 // Icons
-import {
-  Package,
-  Printer,
-  FileText,
-  Users,
-  ShoppingCart,
-  CreditCard
-} from 'react-feather';
+import { Package, Printer, ShoppingCart, CreditCard } from 'react-feather';
 import {
   AccountBalanceOutlined
   // CreditCard,
