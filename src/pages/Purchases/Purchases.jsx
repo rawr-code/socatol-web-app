@@ -22,7 +22,7 @@ class Purchases extends Component {
     const labels = ['Facturas', 'Proveedores'];
     return (
       <Fragment>
-        <FeatureBar title="Gestión de compras" />
+        <FeatureBar title="Compras" />
         <TabsBar
           value={value}
           handleChange={this.handleChange}

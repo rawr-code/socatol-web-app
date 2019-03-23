@@ -22,7 +22,7 @@ class Sales extends Component {
     const labels = ['Facturas', 'Clientes'];
     return (
       <Fragment>
-        <FeatureBar title="Gestión de ventas" />
+        <FeatureBar title="Ventas" />
         <TabsBar
           value={value}
           handleChange={this.handleChange}

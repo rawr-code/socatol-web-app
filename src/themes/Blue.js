@@ -64,6 +64,7 @@ const overrides = {
     root: {
       textTransform: 'initial',
       fontSize: '14px !important',
+      letterSpacing: '.25px',
       margin: '0 16px',
       minWidth: 0,
       [theme.breakpoints.up('md')]: {

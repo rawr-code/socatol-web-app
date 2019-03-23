@@ -22,7 +22,7 @@ class Inventory extends Component {
     const labels = ['Almacenes', 'Productos'];
     return (
       <Fragment>
-        <FeatureBar title="Gestión de inventario" />
+        <FeatureBar title="Inventario" />
         <TabsBar
           value={value}
           handleChange={this.handleChange}

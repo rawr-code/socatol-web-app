@@ -18,10 +18,10 @@ class Treasury extends Component {
 
   render() {
     const { value } = this.state;
-    const labels = ['Cuentas Bancarias', 'Conciliar'];
+    const labels = ['Cuentas bancarias', 'Conciliar'];
     return (
       <Fragment>
-        <FeatureBar title="Gestión de Tesorería" />
+        <FeatureBar title="Tesorería" />
         <TabsBar
           value={value}
           handleChange={this.handleChange}
