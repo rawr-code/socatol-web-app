@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 
 // Actions
-import { GET_ALL, NEW, DELETE, UPDATE } from '../../actions/BankAccount';
+import { GET_ALL, NEW, DELETE, UPDATE } from '../../store/actions/BankAccount';
 
 // Material UI
 import { Dialog } from '@material-ui/core';

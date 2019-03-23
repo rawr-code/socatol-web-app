@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // Components
 import { Login } from '../../components';
-import { LoggedIn } from '../../actions/Auth';
+import { LoggedIn } from '../../store/actions/Auth';
 
 const LoginContainer = ({ handleSubmit }) => <Login onSubmit={handleSubmit} />;
 

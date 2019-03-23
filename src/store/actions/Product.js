@@ -1,8 +1,8 @@
 import {
-	ActionsTypesCreator,
-	ActionsCreator,
-	ActionsCreatorsCreator
-} from '../utils/Basics';
+  ActionsTypesCreator,
+  ActionsCreator,
+  ActionsCreatorsCreator
+} from '../../utils/Basics';
 
 // Actions
 export const Actions = ActionsCreator('product');
@@ -13,17 +13,17 @@ export const ActionsCreators = ActionsCreatorsCreator(Actions, 'product');
 export const GET_ALL = ActionsCreators.GET_ALL('product');
 
 export function GET(id) {
-	return ActionsCreators.GET('product', id);
+  return ActionsCreators.GET('product', id);
 }
 
 export function NEW(payload) {
-	return ActionsCreators.NEW('product', payload);
+  return ActionsCreators.NEW('product', payload);
 }
 
 export function UPDATE(id, payload) {
-	return ActionsCreators.UPDATE('product', id, payload);
+  return ActionsCreators.UPDATE('product', id, payload);
 }
 
 export function DELETE(payload) {
-	return ActionsCreators.DELETE('product', payload);
+  return ActionsCreators.DELETE('product', payload);
 }

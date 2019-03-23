@@ -7,7 +7,7 @@ import { reset } from 'redux-form';
 import { Card, CardHeader, Button, Grid } from '@material-ui/core';
 
 // Actions
-import { GET_ALL, NEW } from '../../actions/Warehouse';
+import { GET_ALL, NEW } from '../../store/actions/Warehouse';
 
 // Components
 import MainContainer from '../../components/MainContainer';

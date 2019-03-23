@@ -10,7 +10,7 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 // Configuration
 import store from './store';
 
-import { setCurrentUser, Logout } from './actions/Auth';
+import { setCurrentUser, Logout } from './store/actions/Auth';
 import App from './App';
 
 if (localStorage.token) {

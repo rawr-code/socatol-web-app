@@ -10,7 +10,7 @@ import {
   openSideNav,
   closeSideNav,
   selectItemMenu
-} from '../../actions/Layout';
+} from '../../store/actions/Layout';
 
 class LayoutContainer extends Component {
   render() {

@@ -6,8 +6,8 @@ import { reset } from 'redux-form';
 import { Dialog } from '@material-ui/core';
 
 // Actions
-import { GET_ALL as GET_ALL_WAREHOUSE } from '../../actions/Warehouse';
-import { GET_ALL, NEW, DELETE, UPDATE } from '../../actions/Product';
+import { GET_ALL as GET_ALL_WAREHOUSE } from '../../store/actions/Warehouse';
+import { GET_ALL, NEW, DELETE, UPDATE } from '../../store/actions/Product';
 
 // Components
 import CardContainer from '../../components/CardContainer';
