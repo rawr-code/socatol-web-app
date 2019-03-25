@@ -10,6 +10,7 @@ class SalesInvoices extends Component {
       title: 'Facturas',
       subtitle: 'Listado de facturas de venta',
       buttonLabel: 'Facturar Venta',
+      buttonURL: '/ventas/facturar/nuevo',
       button: true
     };
     const columns = [

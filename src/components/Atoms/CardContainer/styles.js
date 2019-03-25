@@ -3,8 +3,9 @@ const styles = theme => ({
     maxWidth: 1000,
     margin: '0 auto',
     [theme.breakpoints.down('sm')]: {
-      borderRadius: 0,
-      width: '100%'
+      width: '100%',
+      borderRadius: 0
+      // boxShadow: 'none'
     },
     [theme.breakpoints.up('md')]: {
       marginTop: 24
