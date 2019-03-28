@@ -5,13 +5,13 @@ import FeatureBar from '../../../components/Layout/FeatureBar';
 
 import Form from './Form';
 
-const NewSaleInvoice = props => {
+const NewClient = props => {
   return (
     <Fragment>
-      <FeatureBar title="Facturar Venta" backArrow />
+      <FeatureBar title="Nuevo Cliente" backArrow />
       <Form />
     </Fragment>
   );
 };
 
-export default NewSaleInvoice;
+export default NewClient;

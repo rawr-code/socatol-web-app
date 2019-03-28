@@ -10,6 +10,7 @@ class BankAccounts extends Component {
       title: 'Cuentas Bancarias',
       subtitle: 'Listado de cuentas bancarias',
       buttonLabel: 'Agregar Cuenta',
+      buttonURL: '/tesoreria/cuenta/nuevo',
       button: true
     };
     const columns = [

@@ -3,7 +3,7 @@ const styles = theme => ({
     maxWidth: 1000,
     margin: '0 auto',
     [theme.breakpoints.down('sm')]: {
-      width: '100%',
+      width: '100% !important',
       borderRadius: 0
       // boxShadow: 'none'
     },

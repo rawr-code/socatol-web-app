@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 // Material UI
 import { Typography, Button, withStyles } from '@material-ui/core';
@@ -13,10 +14,14 @@ const HeaderDataTable = ({
   buttonLabel,
   button,
   buttonURL,
-  match
+  noPaddingTop
 }) => {
   return (
-    <header className={classes.root}>
+    <header
+      className={classNames(
+        classes.root,
+        noPaddingTop && classes.noPaddingTop
+      )}>
       <div className={classes.content}>
         <img
           alt="headerImage"

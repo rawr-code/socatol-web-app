@@ -5,6 +5,9 @@ const styles = theme => ({
     padding: 24,
     paddingBottom: 0
   },
+  noPaddingTop: {
+    paddingTop: 0
+  },
   title: {
     color: theme.palette.primary.main
   },

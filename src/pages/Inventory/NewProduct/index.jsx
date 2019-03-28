@@ -8,7 +8,7 @@ import Form from './Form';
 const NewSaleInvoice = props => {
   return (
     <Fragment>
-      <FeatureBar title="Facturar Venta" backArrow />
+      <FeatureBar title="Nuevo Producto" backArrow />
       <Form />
     </Fragment>
   );

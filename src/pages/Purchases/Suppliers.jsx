@@ -10,6 +10,7 @@ class Suppliers extends Component {
       title: 'Proveedores',
       subtitle: 'Listado de proveedores',
       buttonLabel: 'Agregar Proveedor',
+      buttonURL: '/compras/proveedor/nuevo',
       button: true
     };
     const columns = [

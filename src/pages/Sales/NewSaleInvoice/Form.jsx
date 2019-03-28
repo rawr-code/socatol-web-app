@@ -14,87 +14,57 @@ import ProductsTable from './ProductsTable';
 
 const Form = props => {
   const { handleSubmit } = props;
-  const headerPropsDate = {
+  const headerProps = {
     img: 'https://img.icons8.com/dusk/64/000000/planner.png',
-    title: 'Fechas',
-    subtitle: 'Fechas de emisión y expiración'
-  };
-  const headerPropsAddress = {
-    img: 'https://img.icons8.com/dusk/64/000000/address.png',
-    title: 'Dirección',
-    subtitle: 'Destino de los productos'
-  };
-  const headerPropsClient = {
-    img: 'https://img.icons8.com/dusk/64/000000/user-group-man-woman.png',
-    title: 'Cliente',
-    subtitle: 'Persona natural'
-  };
-  const headerPropsProducts = {
-    img: 'https://img.icons8.com/dusk/64/000000/sell.png',
-    title: 'Productos',
-    subtitle: 'Lista de productos a facturar'
+    title: 'Factura',
+    subtitle: 'Detalles de la factura'
   };
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <CardContainer>
-        <DataTableHeader {...headerPropsDate} />
-        <CardContent>
-          <Field
-            component={ReduxInputField}
-            label="Fecha de emisión"
-            name="emitted"
-            variant="outlined"
-            dense
-          />
-          <Field
-            component={ReduxInputField}
-            label="Fecha de expiración"
-            name="expired"
-            variant="outlined"
-            dense
-          />
-        </CardContent>
-      </CardContainer>
-      <CardContainer>
-        <DataTableHeader {...headerPropsAddress} />
-        <CardContent>
-          <Field
-            component={ReduxInputField}
-            label="Estado"
-            name="state"
-            variant="outlined"
-          />
-          <Field
-            component={ReduxInputField}
-            label="Municipio"
-            name="municipality"
-            variant="outlined"
-          />
-          <Field
-            component={ReduxInputField}
-            label="Localidad"
-            name="address"
-            variant="outlined"
-          />
-        </CardContent>
-      </CardContainer>
-      <CardContainer>
-        <DataTableHeader {...headerPropsClient} />
-        <CardContent>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <DataTableHeader {...headerProps} noPaddingTop />
+          <CardContent>
             <Field
               component={ReduxInputField}
-              name="client"
-              label="Cliente"
+              label="Fecha de emisión"
+              name="emitted"
               variant="outlined"
-              style={{ width: 350 }}
+              dense
             />
-          </div>
+            <Field
+              component={ReduxInputField}
+              label="Fecha de expiración"
+              name="expired"
+              variant="outlined"
+              dense
+            />
+          </CardContent>
+        </div>
+        <CardContent>
+          <Typography variant="h6" component="h1" color="primary">
+            Cliente
+          </Typography>
+          <Field
+            component={ReduxInputField}
+            name="client"
+            label="Tipo de cliente"
+            variant="outlined"
+            style={{ width: 350 }}
+            dense
+          />
+          <Field
+            component={ReduxInputField}
+            name="client1"
+            label="DNI"
+            variant="outlined"
+            style={{ width: 350 }}
+            dense
+          />
         </CardContent>
       </CardContainer>
       <CardContainer>
-        <DataTableHeader {...headerPropsProducts} />
         <FieldArray name="products" component={ProductsTable} />
       </CardContainer>
       <div style={{ marginBottom: 64 }} />

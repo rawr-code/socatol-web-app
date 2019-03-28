@@ -18,7 +18,7 @@ class Treasury extends Component {
 
   render() {
     const { value } = this.state;
-    const labels = ['Cuentas bancarias', 'Conciliar'];
+    const labels = ['Cuentas bancarias'];
     return (
       <Fragment>
         <FeatureBar title="Tesorería" />
@@ -28,7 +28,6 @@ class Treasury extends Component {
           labels={labels}
         />
         {value === 0 && <BankAccounts />}
-        {value === 1 && <div>Conciliar</div>}
       </Fragment>
     );
   }

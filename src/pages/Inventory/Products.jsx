@@ -10,6 +10,7 @@ class Products extends Component {
       title: 'Productos',
       subtitle: 'Listado de productos',
       buttonLabel: 'Agregar Producto',
+      buttonURL: 'inventario/producto/nuevo',
       button: true
     };
     const columns = [

@@ -10,6 +10,7 @@ class Clients extends Component {
       title: 'Clientes',
       subtitle: 'Listado de clientes',
       buttonLabel: 'Agregar Cliente',
+      buttonURL: '/ventas/cliente/nuevo',
       button: true
     };
     const columns = [
