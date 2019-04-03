@@ -1,11 +1,11 @@
 import React from 'react';
-import { TextField, withStyles } from '@material-ui/core';
+import { TextField, MenuItem, withStyles } from '@material-ui/core';
 import classNames from 'classnames';
 
 import styles from './styles';
 
 const InputField = props => {
-  const { classes, dense, noMargin, ...rest } = props;
+  const { classes, dense, noMargin, select, options, ...rest } = props;
   const config = {
     className:
       rest.variant === 'outlined'
@@ -13,7 +13,18 @@ const InputField = props => {
         : classNames(!noMargin && classes.root, dense && classes.outLinedDense),
     margin: dense ? 'dense' : 'normal'
   };
-  return <TextField {...config} {...rest} />;
+  const input = select ? (
+    <TextField {...config} {...rest} select>
+      {options.map(option => (
+        <MenuItem key={option} value={option}>
+          {option}
+        </MenuItem>
+      ))}
+    </TextField>
+  ) : (
+    <TextField {...config} {...rest} />
+  );
+  return input;
 };
 
 export default withStyles(styles)(InputField);

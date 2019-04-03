@@ -1,17 +1,20 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { CardContent, CardActions, Button, Grid } from '@material-ui/core';
+import { CardContent, Button } from '@material-ui/core';
 
 // Atoms
 import CardContainer from '../../../components/Atoms/CardContainer';
 import ReduxInputField from '../../../components/Atoms/ReduxInputField';
+import FormActions from '../../../components/Atoms/FormActions';
 
 // Molecules
 import DataTableHeader from '../../../components/Molecules/DataTableHeader';
 
+import validate from './FormValidations';
+
 const Form = props => {
-  const { handleSubmit, pristine, submitting } = props;
+  const { handleSubmit, valid, pristine, submitting } = props;
   const headerProps = {
     img: 'https://img.icons8.com/dusk/64/000000/product.png',
     title: 'Producto',
@@ -23,86 +26,71 @@ const Form = props => {
       <CardContainer style={{ width: 350 }}>
         <DataTableHeader {...headerProps} />
         <CardContent>
-          <Grid container spacing={24}>
-            <Grid item md={12}>
-              <Field
-                component={ReduxInputField}
-                label="Nombre"
-                name="name"
-                variant="outlined"
-                placeholder="Nombre del producto"
-                fullWidth
-                dense
-              />
-            </Grid>
-            <Grid item md={12}>
-              <Field
-                component={ReduxInputField}
-                label="Precio"
-                name="price"
-                variant="outlined"
-                placeholder="0"
-                fullWidth
-                dense
-              />
-            </Grid>
-            <Grid item md={6}>
-              <Field
-                component={ReduxInputField}
-                label="Cantidad"
-                name="quantity"
-                variant="outlined"
-                placeholder="0"
-                fullWidth
-                dense
-              />
-            </Grid>
-            <Grid item md={6}>
-              <Field
-                component={ReduxInputField}
-                label="IVA%"
-                name="iva"
-                variant="outlined"
-                placeholder="0"
-                fullWidth
-                dense
-              />
-            </Grid>
-            <Grid item md={12}>
-              <Field
-                component={ReduxInputField}
-                label="Almacén"
-                name="warehouse"
-                variant="outlined"
-                placeholder="Almacén"
-                fullWidth
-                dense
-              />
-            </Grid>
-          </Grid>
+          <Field
+            component={ReduxInputField}
+            label="Nombre"
+            name="name"
+            variant="outlined"
+            fullWidth
+            dense
+          />
+          <div style={{ display: 'flex' }}>
+            <Field
+              component={ReduxInputField}
+              label="Cantidad"
+              name="quantity"
+              variant="outlined"
+              placeholder="0"
+              fullWidth
+              dense
+            />
+            <Field
+              component={ReduxInputField}
+              label="IVA%"
+              name="iva"
+              variant="outlined"
+              placeholder="0"
+              fullWidth
+              dense
+              select
+              options={['Excento', '5%', '12%']}
+            />
+          </div>
+
+          <Field
+            component={ReduxInputField}
+            label="Precio"
+            name="price"
+            variant="outlined"
+            placeholder="0"
+            fullWidth
+            dense
+          />
+          <Field
+            component={ReduxInputField}
+            label="Almacén"
+            name="warehouse"
+            variant="outlined"
+            placeholder="Almacén"
+            fullWidth
+            dense
+            select
+            options={['almacen uno']}
+          />
         </CardContent>
-        <CardActions
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            padding: 12
-            // paddingTop: 8
-          }}>
+        <FormActions>
           <Button color="primary">Limpiar campos</Button>
           <Button
             type="submit"
             variant="contained"
             color="primary"
-            disabled={pristine || submitting}>
+            disabled={!valid ? true : pristine || submitting}>
             Guardar
           </Button>
-        </CardActions>
+        </FormActions>
       </CardContainer>
     </form>
   );
 };
 
-export default reduxForm({
-  form: 'NewSaleInvoice',
-  initialValues: { products: [{}] }
-})(Form);
+export default reduxForm({ form: 'NewProduct', validate })(Form);

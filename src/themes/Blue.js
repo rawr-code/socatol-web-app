@@ -10,9 +10,6 @@ let theme = createMuiTheme({
       contrastText: '#fff'
     }
   },
-  shape: {
-    borderRadius: 8
-  },
   typography: {
     useNextVariants: true,
     fontFamily: 'Roboto, Google Sans',

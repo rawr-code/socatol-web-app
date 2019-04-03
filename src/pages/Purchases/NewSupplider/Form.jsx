@@ -6,6 +6,7 @@ import { CardContent, CardActions, Button, Grid } from '@material-ui/core';
 // Atoms
 import CardContainer from '../../../components/Atoms/CardContainer';
 import ReduxInputField from '../../../components/Atoms/ReduxInputField';
+import ReduxSelectField from '../../../components/Atoms/ReduxSelectField';
 
 // Molecules
 import DataTableHeader from '../../../components/Molecules/DataTableHeader';
@@ -13,7 +14,7 @@ import DataTableHeader from '../../../components/Molecules/DataTableHeader';
 const Form = props => {
   const { handleSubmit, pristine, submitting } = props;
   const headerProps = {
-    img: 'https://img.icons8.com/dusk/64/000000/supplier.png',
+    img: 'https://img.icons8.com/dusk/64/000000/conference.png',
     title: 'Proveedor',
     subtitle: 'Detalles del proveedor'
   };
@@ -26,9 +27,28 @@ const Form = props => {
           <Grid container spacing={24}>
             <Grid item md={6}>
               <Field
+                component={ReduxSelectField}
+                label="Tipo de proveedor"
+                name="type"
+                options={['Persona natural', 'Persona juridica']}
+              />
+            </Grid>
+            <Grid item md={6}>
+              <Field
+                component={ReduxInputField}
+                label="Cedula"
+                name="dni"
+                variant="outlined"
+                placeholder="0"
+                fullWidth
+                dense
+              />
+            </Grid>
+            <Grid item md={6}>
+              <Field
                 component={ReduxInputField}
                 label="Nombres"
-                name="name"
+                name="firstname"
                 variant="outlined"
                 placeholder="Nombres"
                 fullWidth
@@ -48,9 +68,17 @@ const Form = props => {
             </Grid>
             <Grid item md={6}>
               <Field
+                component={ReduxSelectField}
+                label="Sexo"
+                name="gender"
+                options={['Masculino', 'Femenino']}
+              />
+            </Grid>
+            <Grid item md={6}>
+              <Field
                 component={ReduxInputField}
-                label="Cedula"
-                name="price"
+                label="Telefono"
+                name="phone"
                 variant="outlined"
                 placeholder="0"
                 fullWidth
@@ -60,10 +88,10 @@ const Form = props => {
             <Grid item md={6}>
               <Field
                 component={ReduxInputField}
-                label="Telefono"
-                name="quantity"
+                label="Correo Electronico"
+                name="email"
                 variant="outlined"
-                placeholder="0"
+                placeholder="correo@correo.com"
                 fullWidth
                 dense
               />
@@ -72,7 +100,7 @@ const Form = props => {
               <Field
                 component={ReduxInputField}
                 label="Dirección"
-                name="warehouse"
+                name="address"
                 variant="outlined"
                 placeholder="Dirección"
                 fullWidth
@@ -103,6 +131,5 @@ const Form = props => {
 };
 
 export default reduxForm({
-  form: 'NewSaleInvoice',
-  initialValues: { products: [{}] }
+  form: 'NewSupplider'
 })(Form);

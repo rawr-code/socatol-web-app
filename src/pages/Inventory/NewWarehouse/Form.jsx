@@ -1,17 +1,20 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { CardContent, CardActions, Button } from '@material-ui/core';
+import { Paper, CardContent, Button, withStyles } from '@material-ui/core';
 
 // Atoms
-import CardContainer from '../../../components/Atoms/CardContainer';
 import ReduxInputField from '../../../components/Atoms/ReduxInputField';
+import FormActions from '../../../components/Atoms/FormActions';
 
 // Molecules
 import DataTableHeader from '../../../components/Molecules/DataTableHeader';
 
+import styles from './styles';
+import validate from './FormValidations';
+
 const Form = props => {
-  const { handleSubmit, pristine, submitting } = props;
+  const { classes, handleSubmit, valid, pristine, submitting } = props;
   const headerProps = {
     img: 'https://img.icons8.com/dusk/64/000000/warehouse.png',
     title: 'Almacén',
@@ -20,7 +23,7 @@ const Form = props => {
 
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
-      <CardContainer style={{ width: 320 }}>
+      <Paper className={classes.root}>
         <DataTableHeader {...headerProps} />
         <CardContent>
           <Field
@@ -38,30 +41,26 @@ const Form = props => {
             variant="outlined"
             fullWidth
             dense
+            multiline
+            rows="4"
+            rowsMax="4"
           />
         </CardContent>
-        <CardActions
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            padding: 12
-            // paddingTop: 8
-          }}>
+        <FormActions>
           <Button color="primary">Limpiar campos</Button>
           <Button
             type="submit"
             variant="contained"
             color="primary"
-            disabled={pristine || submitting}>
+            disabled={!valid ? true : pristine || submitting}>
             Guardar
           </Button>
-        </CardActions>
-      </CardContainer>
+        </FormActions>
+      </Paper>
     </form>
   );
 };
 
-export default reduxForm({
-  form: 'NewSaleInvoice',
-  initialValues: { products: [{}] }
-})(Form);
+const FormStyles = withStyles(styles)(Form);
+
+export default reduxForm({ form: 'NewWarehouse', validate })(FormStyles);

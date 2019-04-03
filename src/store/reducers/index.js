@@ -11,12 +11,18 @@ import Product from './Product';
 // Treasury
 import BankAccount from './BankAccount';
 
+// Sales
+import Client from './Client';
+
 const Inventory = combineReducers({ Warehouse, Product });
 const Treasury = combineReducers({ BankAccount });
+const Sales = combineReducers({ Client });
+
 export default combineReducers({
-	Auth,
-	form: FormReducer,
-	Inventory,
-	Layout,
-	Treasury
+  Auth,
+  form: FormReducer,
+  Inventory,
+  Layout,
+  Treasury,
+  Sales
 });

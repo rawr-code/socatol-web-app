@@ -75,9 +75,11 @@ export const ActionsCreatorsCreator = (Actions, name) => {
         if (result) {
           dispatch(ActionsList.Success());
           dispatch(ActionsList.GetAll());
+          return result.data;
         }
       } catch (err) {
         dispatch(ActionsList.Failure(err.message));
+        return err;
       }
     },
 

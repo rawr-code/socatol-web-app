@@ -3,7 +3,7 @@ import React from 'react';
 // Atoms
 import InputField from './InputField';
 
-const MuiTextField = props => {
+const ReduxMuiTextField = props => {
   const {
     input,
     meta: { touched, invalid, error },
@@ -20,4 +20,4 @@ const MuiTextField = props => {
   );
 };
 
-export default MuiTextField;
+export default ReduxMuiTextField;

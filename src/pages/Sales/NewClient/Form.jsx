@@ -27,8 +27,31 @@ const Form = props => {
             <Grid item md={6}>
               <Field
                 component={ReduxInputField}
+                label="Tipo de cliente"
+                name="type"
+                options={['Persona natural', 'Persona juridica']}
+                variant="outlined"
+                select
+                fullWidth
+                dense
+              />
+            </Grid>
+            <Grid item md={6}>
+              <Field
+                component={ReduxInputField}
+                label="Cedula"
+                name="dni"
+                variant="outlined"
+                placeholder="0"
+                fullWidth
+                dense
+              />
+            </Grid>
+            <Grid item md={6}>
+              <Field
+                component={ReduxInputField}
                 label="Nombres"
-                name="name"
+                name="firstname"
                 variant="outlined"
                 placeholder="Nombres"
                 fullWidth
@@ -49,8 +72,20 @@ const Form = props => {
             <Grid item md={6}>
               <Field
                 component={ReduxInputField}
-                label="Cedula"
-                name="price"
+                label="Sexo"
+                name="gender"
+                options={['Masculino', 'Femenino']}
+                variant="outlined"
+                select
+                fullWidth
+                dense
+              />
+            </Grid>
+            <Grid item md={6}>
+              <Field
+                component={ReduxInputField}
+                label="Telefono"
+                name="phone"
                 variant="outlined"
                 placeholder="0"
                 fullWidth
@@ -60,10 +95,10 @@ const Form = props => {
             <Grid item md={6}>
               <Field
                 component={ReduxInputField}
-                label="Telefono"
-                name="quantity"
+                label="Correo Electronico"
+                name="email"
                 variant="outlined"
-                placeholder="0"
+                placeholder="correo@correo.com"
                 fullWidth
                 dense
               />
@@ -72,7 +107,7 @@ const Form = props => {
               <Field
                 component={ReduxInputField}
                 label="Dirección"
-                name="warehouse"
+                name="address"
                 variant="outlined"
                 placeholder="Dirección"
                 fullWidth
@@ -103,6 +138,5 @@ const Form = props => {
 };
 
 export default reduxForm({
-  form: 'NewSaleInvoice',
-  initialValues: { products: [{}] }
+  form: 'NewClient'
 })(Form);

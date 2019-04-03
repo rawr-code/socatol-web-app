@@ -9,7 +9,7 @@ const NewSaleInvoice = props => {
   return (
     <Fragment>
       <FeatureBar title="Nuevo Almacén" backArrow />
-      <Form />
+      <Form onSubmit={values => console.log(values)} />
     </Fragment>
   );
 };
