@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import styles from './styles';
 
 const InputField = props => {
-  const { classes, dense, noMargin, select, options, ...rest } = props;
+  const { classes, dense, noMargin, select, children, ...rest } = props;
   const config = {
     className:
       rest.variant === 'outlined'
@@ -15,11 +15,13 @@ const InputField = props => {
   };
   const input = select ? (
     <TextField {...config} {...rest} select>
-      {options.map(option => (
-        <MenuItem key={option} value={option}>
-          {option}
+      {children ? (
+        children
+      ) : (
+        <MenuItem disabled value="">
+          No hay registros
         </MenuItem>
-      ))}
+      )}
     </TextField>
   ) : (
     <TextField {...config} {...rest} />

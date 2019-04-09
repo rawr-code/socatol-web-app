@@ -15,9 +15,13 @@ const styles = () => ({
     justifyContent: 'center',
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)'
   },
-  cardHeaderButton: {
+  cardHeaderButtonLeft: {
     position: 'absolute',
     left: 24
+  },
+  cardHeaderButtonRight: {
+    position: 'absolute',
+    right: 24
   },
   cardHeaderTitle: {
     textTransform: 'uppercase',

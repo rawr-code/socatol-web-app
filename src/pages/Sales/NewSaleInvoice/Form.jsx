@@ -1,78 +1,69 @@
 import React from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
-
-import { CardContent, Typography } from '@material-ui/core';
-
-// Atoms
-import CardContainer from '../../../components/Atoms/CardContainer';
-import ReduxInputField from '../../../components/Atoms/ReduxInputField';
+import { Stepper, Step, StepLabel } from '@material-ui/core';
 
 // Molecules
-import DataTableHeader from '../../../components/Molecules/DataTableHeader';
+import WizardFormPage from '../../../components/Molecules/WizardFormPage';
 
-import ProductsTable from './ProductsTable';
+// Fields
+import ClientForm from './ClientForm';
+import ProductsForm from './ProductsForm';
+import DetailsForm from './DetailsForm';
+
+// Validations
+// import validate from './FormValidations';
 
 const Form = props => {
-  const { handleSubmit } = props;
-  const headerProps = {
-    img: 'https://img.icons8.com/dusk/64/000000/planner.png',
-    title: 'Factura',
-    subtitle: 'Detalles de la factura'
-  };
-
+  const { handleSubmit, activeStep, nextPage, previousPage } = props;
+  const steps = [
+    {
+      label: 'Cliente',
+      title: 'Información del cliente'
+    },
+    {
+      label: 'Productos',
+      title: 'Lista de productos'
+    },
+    {
+      label: 'Información adicional',
+      title: 'Detalles de la factura'
+    },
+    {
+      label: 'Resumen',
+      title: 'Resumen'
+    }
+  ];
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
-      <CardContainer>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <DataTableHeader {...headerProps} noPaddingTop />
-          <CardContent>
-            <Field
-              component={ReduxInputField}
-              label="Fecha de emisión"
-              name="emitted"
-              variant="outlined"
-              dense
-            />
-            <Field
-              component={ReduxInputField}
-              label="Fecha de expiración"
-              name="expired"
-              variant="outlined"
-              dense
-            />
-          </CardContent>
-        </div>
-        <CardContent>
-          <Typography variant="h6" component="h1" color="primary">
-            Cliente
-          </Typography>
-          <Field
-            component={ReduxInputField}
-            name="client"
-            label="Tipo de cliente"
-            variant="outlined"
-            style={{ width: 350 }}
-            dense
-          />
-          <Field
-            component={ReduxInputField}
-            name="client1"
-            label="DNI"
-            variant="outlined"
-            style={{ width: 350 }}
-            dense
-          />
-        </CardContent>
-      </CardContainer>
-      <CardContainer>
-        <FieldArray name="products" component={ProductsTable} />
-      </CardContainer>
-      <div style={{ marginBottom: 64 }} />
-    </form>
+    <div>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map(item => (
+          <Step key={item.label}>
+            <StepLabel>{item.label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+
+      {activeStep === 0 && (
+        <WizardFormPage title={steps[activeStep].title}>
+          <ClientForm onSubmit={nextPage} />
+        </WizardFormPage>
+      )}
+      {activeStep === 1 && (
+        <WizardFormPage
+          noPadding
+          title={steps[activeStep].title}
+          previousPage={previousPage}>
+          <ProductsForm onSubmit={nextPage} />
+        </WizardFormPage>
+      )}
+      {activeStep === 2 && (
+        <WizardFormPage
+          title={steps[activeStep].title}
+          previousPage={previousPage}>
+          <DetailsForm onSubmit={handleSubmit} />
+        </WizardFormPage>
+      )}
+    </div>
   );
 };
 
-export default reduxForm({
-  form: 'NewSaleInvoice',
-  initialValues: { products: [{}] }
-})(Form);
+export default Form;

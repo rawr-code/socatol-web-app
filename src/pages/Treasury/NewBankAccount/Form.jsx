@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { CardContent, Button } from '@material-ui/core';
+import { CardContent, Button, MenuItem } from '@material-ui/core';
 
 // Atoms
 import CardContainer from '../../../components/Atoms/CardContainer';
@@ -40,15 +40,13 @@ const Form = props => {
             label="Banco"
             name="bank"
             fullWidth
-            options={[
-              'Banco de Venezuela',
-              'Banco Provincial',
-              'Banco Mercantil'
-            ]}
             variant="outlined"
             select
-            dense
-          />
+            dense>
+            <MenuItem value="Banco de Venezuela">Banco de Venezuela,</MenuItem>
+            <MenuItem value="Banco Provincial">Banco Provincial,</MenuItem>
+            <MenuItem value="Banco Mercantil">Banco Mercantil</MenuItem>
+          </Field>
           <Field
             component={ReduxInputField}
             label="Tipo de cuenta"
@@ -57,8 +55,10 @@ const Form = props => {
             variant="outlined"
             select
             fullWidth
-            dense
-          />
+            dense>
+            <MenuItem value="ahorro">Ahorro</MenuItem>
+            <MenuItem value="corriente">Corriente</MenuItem>
+          </Field>
           <Field
             component={ReduxInputField}
             label="Número de cuenta"

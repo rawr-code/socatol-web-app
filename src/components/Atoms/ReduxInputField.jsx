@@ -9,7 +9,6 @@ const ReduxMuiTextField = props => {
     meta: { touched, invalid, error },
     ...rest
   } = props;
-
   return (
     <InputField
       {...rest}
