@@ -74,7 +74,7 @@ export const ActionsCreatorsCreator = (Actions, name) => {
         const result = await API.post(url, payload);
         if (result) {
           dispatch(ActionsList.Success());
-          dispatch(ActionsList.GetAll());
+          dispatch(ActionsList.GetAll);
           return result.data;
         }
       } catch (err) {
