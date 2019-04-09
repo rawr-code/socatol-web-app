@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { CardContent, Button } from '@material-ui/core';
+import { CardContent, Button, MenuItem } from '@material-ui/core';
 
 // Atoms
 import CardContainer from '../../../components/Atoms/CardContainer';
@@ -14,7 +14,7 @@ import DataTableHeader from '../../../components/Molecules/DataTableHeader';
 import validate from './FormValidations';
 
 const Form = props => {
-  const { handleSubmit, valid, pristine, submitting } = props;
+  const { handleSubmit, valid, pristine, submitting, warehouses } = props;
   const headerProps = {
     img: 'https://img.icons8.com/dusk/64/000000/product.png',
     title: 'Producto',
@@ -52,9 +52,11 @@ const Form = props => {
               placeholder="0"
               fullWidth
               dense
-              select
-              options={['Excento', '5%', '12%']}
-            />
+              select>
+              <MenuItem value="0">Excento</MenuItem>
+              <MenuItem value="5">5%</MenuItem>
+              <MenuItem value="12">12%</MenuItem>
+            </Field>
           </div>
 
           <Field
@@ -69,14 +71,18 @@ const Form = props => {
           <Field
             component={ReduxInputField}
             label="Almacén"
-            name="warehouse"
+            name="warehouseId"
             variant="outlined"
             placeholder="Almacén"
             fullWidth
             dense
-            select
-            options={['almacen uno']}
-          />
+            select>
+            {warehouses.map(({ _id, name }) => (
+              <MenuItem value={_id} key={_id}>
+                {name}
+              </MenuItem>
+            ))}
+          </Field>
         </CardContent>
         <FormActions>
           <Button color="primary">Limpiar campos</Button>
