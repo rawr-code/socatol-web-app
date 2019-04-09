@@ -14,7 +14,7 @@ import DataTableHeader from '../../../components/Molecules/DataTableHeader';
 import validate from './FormValidations';
 
 const Form = props => {
-  const { handleSubmit, valid, pristine, submitting } = props;
+  const { handleSubmit, valid, pristine, submitting, bankList } = props;
   const headerProps = {
     img: 'https://img.icons8.com/dusk/64/000000/conference.png',
     title: 'Cuenta Bancaria',
@@ -43,9 +43,12 @@ const Form = props => {
             variant="outlined"
             select
             dense>
+            {bankList.map(bank => (
+              <MenuItem value={bank.code} key={bank.code}>
+                {bank.name}
+              </MenuItem>
+            ))}
             <MenuItem value="Banco de Venezuela">Banco de Venezuela,</MenuItem>
-            <MenuItem value="Banco Provincial">Banco Provincial,</MenuItem>
-            <MenuItem value="Banco Mercantil">Banco Mercantil</MenuItem>
           </Field>
           <Field
             component={ReduxInputField}

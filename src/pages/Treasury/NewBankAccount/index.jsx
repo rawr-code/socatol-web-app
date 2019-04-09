@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { SubmissionError } from 'redux-form';
 import { connect } from 'react-redux';
 
 // Molecules
@@ -14,18 +15,29 @@ class NewBankAccount extends Component {
     console.log(values);
     const { newAccount } = this.props.actions;
     const result = await newAccount(values);
-    console.log(result);
+    if (result.error) {
+      throw new SubmissionError(result.validation);
+    }
   };
 
   render() {
+    const { banks } = this.props.state;
     return (
       <Fragment>
         <FeatureBar title="Nueva Cuenta" backArrow />
-        <Form onSubmit={this.onSubmit} />
+        <Form onSubmit={this.onSubmit} bankList={banks} />
       </Fragment>
     );
   }
 }
+
+const mapStateToProps = ({
+  Treasury: {
+    BankAccount: { banks }
+  }
+}) => ({
+  state: { banks }
+});
 
 const mapDispatchToProps = dispatch => ({
   actions: {
@@ -34,6 +46,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(NewBankAccount);
