@@ -5,7 +5,7 @@ import banks from '../banks';
 const INITIAL_STATE = {
   loading: false,
   banks: banks,
-  bankAccounts: null,
+  bankAccounts: [],
   selectedAccount: null,
   error: null
 };

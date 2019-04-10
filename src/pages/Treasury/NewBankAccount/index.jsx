@@ -11,7 +11,7 @@ import { NEW } from '../../../store/actions/BankAccount';
 import Form from './Form';
 
 class NewBankAccount extends Component {
-  onSubmit = async values => {
+  handleSubmit = async values => {
     console.log(values);
     const { newAccount } = this.props.actions;
     const result = await newAccount(values);
@@ -20,12 +20,20 @@ class NewBankAccount extends Component {
     }
   };
 
+  handleOnSubmitSuccess = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { banks } = this.props.state;
     return (
       <Fragment>
         <FeatureBar title="Nueva Cuenta" backArrow />
-        <Form onSubmit={this.onSubmit} bankList={banks} />
+        <Form
+          onSubmit={this.handleSubmit}
+          onSubmitSuccess={this.handleOnSubmitSuccess}
+          bankList={banks}
+        />
       </Fragment>
     );
   }

@@ -24,9 +24,9 @@ let theme = createMuiTheme({
       textTransform: 'initial'
     }
   },
-  // shape: {
-  //   borderRadius: 8
-  // },
+  shape: {
+    borderRadius: 8
+  },
   drawerWidth: 260
 });
 

@@ -44,7 +44,7 @@ const Form = props => {
             select
             dense>
             {bankList.map(bank => (
-              <MenuItem value={bank.code} key={bank.code}>
+              <MenuItem value={bank.name} key={bank.code}>
                 {bank.name}
               </MenuItem>
             ))}

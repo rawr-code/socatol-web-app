@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+// Actions
+import { GET_ALL } from '../../store/actions/BankAccount';
 
 // Organisms
 import FullDataTable from '../../components/Organisms/FullDataTable';
 
 class BankAccounts extends Component {
+  componentDidMount = () => {
+    const { getAllBankAccounts } = this.props.actions;
+    getAllBankAccounts();
+  };
+
   render() {
+    const { bankAccounts } = this.props.state;
     const header = {
       img: 'https://img.icons8.com/dusk/64/000000/merchant-account.png',
       title: 'Cuentas Bancarias',
@@ -23,17 +33,36 @@ class BankAccounts extends Component {
         title: 'Banco'
       },
       {
-        name: 'number',
-        title: 'Número de cuenta'
-      },
-      {
         name: 'type',
         title: 'Tipo'
+      },
+      {
+        name: 'number',
+        title: 'Número de cuenta'
       }
     ];
 
-    return <FullDataTable header={header} table={{ rows: [], columns }} />;
+    return (
+      <FullDataTable header={header} table={{ rows: bankAccounts, columns }} />
+    );
   }
 }
 
-export default BankAccounts;
+const mapStateToProps = ({
+  Treasury: {
+    BankAccount: { bankAccounts }
+  }
+}) => ({
+  state: { bankAccounts }
+});
+
+const mapDispatchToProps = dispatch => ({
+  actions: {
+    getAllBankAccounts: () => dispatch(GET_ALL)
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BankAccounts);

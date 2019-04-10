@@ -21,8 +21,8 @@ const FormValidations = values => {
     errors.price = 'Este campo es requerido';
   }
 
-  if (!values.warehouse) {
-    errors.warehouse = 'Este campo es requerido';
+  if (!values.warehouseId) {
+    errors.warehouseId = 'Este campo es requerido';
   }
 
   return errors;

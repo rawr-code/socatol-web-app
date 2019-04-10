@@ -34,43 +34,17 @@ const ProductsTable = props => {
     noMargin: true,
     dense: true
   };
-  const productss = [
-    {
-      name: 'prueba 1',
-      _id: '1',
-      price: 2001,
-      stock: 88
-    },
-    {
-      name: 'prueba 2',
-      _id: '2',
-      price: 2002,
-      stock: 188
-    },
-    {
-      name: 'prueba 3',
-      _id: '3',
-      price: 2003,
-      stock: 828
-    },
-    {
-      name: 'prueba 4',
-      _id: '4',
-      price: 2004,
-      stock: 838
-    }
-  ];
   const dataInfo = [];
-  if (data.products.length > 0) {
-    data.products.forEach((item, itemIndex) => {
+  if (data.productArray.length > 0) {
+    data.productArray.forEach((item, itemIndex) => {
       if (item.product) {
-        const info = getValue(productss, item.product);
+        const info = getValue(data.products, item.product);
         const total =
           item.quantity && item.quantity > 0 ? info.price * item.quantity : 0;
         const iva = item.iva && item.iva > 0 ? (total * item.iva) / 100 : 0;
         const totalIva = total + iva;
         dataInfo[itemIndex] = {
-          stock: info.stock,
+          stock: info.quantity,
           price: info.price,
           total: totalIva
         };
@@ -122,10 +96,11 @@ const ProductsTable = props => {
                   name={`${product}.product`}
                   select
                   {...fieldProps}>
-                  <MenuItem value="1">Persona natural 1</MenuItem>
-                  <MenuItem value="2">Persona juridica 2</MenuItem>
-                  <MenuItem value="3">Persona juridica 3</MenuItem>
-                  <MenuItem value="4">Persona juridica 4</MenuItem>
+                  {data.products.map(product => (
+                    <MenuItem value={product._id} key={product._id}>
+                      {product.name}
+                    </MenuItem>
+                  ))}
                 </Field>
               </TableCell>
               <TableCell align="center" padding="none">
