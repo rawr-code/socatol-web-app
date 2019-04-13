@@ -1,34 +1,49 @@
 import React from 'react';
-
-// Material UI
+import { withRouter } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
   Grid,
   Typography,
-  Button,
-  Tooltip,
+  // Button,
+  // Tooltip,
   IconButton,
   withStyles
 } from '@material-ui/core';
 
-// Icons
-import { Help } from '@material-ui/icons';
-
+// import { Help } from '@material-ui/icons';
+import { ArrowLeft } from 'react-feather';
 import styles from './styles';
+import Crumbs from './Crumbs';
 
 const FeatureBar = props => {
-  const { classes } = props;
+  const { classes, backArrow, title, history } = props;
   return (
     <AppBar component="div" color="primary" position="static" elevation={0}>
-      <Toolbar className={classes.toolbar}>
-        <Grid container alignItems="center" spacing={0}>
+      {backArrow && (
+        <Crumbs
+          classes={classes}
+          data={[{ name: 'Inicio' }, { name: 'Facturación' }]}
+        />
+      )}
+      <Toolbar className={backArrow ? classes.toolbar : ''}>
+        <Grid container alignItems="center" spacing={8}>
           <Grid item xs>
-            <Typography color="inherit" variant="h5">
-              Authentication
-            </Typography>
+            <Grid container direction="row" alignItems="center">
+              {backArrow && (
+                <IconButton
+                  color="inherit"
+                  className={classes.backArrow}
+                  onClick={history.goBack}>
+                  <ArrowLeft siez={24} />
+                </IconButton>
+              )}
+              <Typography color="inherit" variant="h5">
+                {title ? title : ''}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <Button
               className={classes.button}
               variant="outlined"
@@ -36,21 +51,18 @@ const FeatureBar = props => {
               size="small">
               Web setup
             </Button>
-          </Grid>
-          <Grid item>
+          </Grid> */}
+          {/* <Grid item>
             <Tooltip title="Help">
               <IconButton color="inherit">
                 <Help />
               </IconButton>
             </Tooltip>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Toolbar>
     </AppBar>
   );
 };
 
-// Apply styles
-const _FeatureBar = withStyles(styles)(FeatureBar);
-
-export default _FeatureBar;
+export default withRouter(withStyles(styles)(FeatureBar));
