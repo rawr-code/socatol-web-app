@@ -2,47 +2,40 @@
 import { createMuiTheme } from '@material-ui/core';
 
 let theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#2196f3',
-      light: '#64b5f6',
-      dark: '#1976d2',
-      contrastText: '#fff'
-    }
-  },
   typography: {
     useNextVariants: true,
     h5: {
-      fontFamily: 'Google Sans',
       fontWeight: 500,
-      fontSize: 26
+      fontSize: 26,
+      letterSpacing: 0.5
+    }
+  },
+  palette: {
+    primary: {
+      light: '#63ccff',
+      main: '#009be5',
+      dark: '#006db3'
     }
   },
   shape: {
     borderRadius: 8
-  },
-
-  // other
-  drawerWidth: 256
+  }
 });
 
 const overrides = {
+  MuiDrawer: {
+    paper: {
+      backgroundColor: '#18202c'
+    }
+  },
   MuiButton: {
     label: {
-      textTransform: 'initial'
+      textTransform: 'none'
     },
     contained: {
       boxShadow: 'none',
       '&:active': {
         boxShadow: 'none'
-      }
-    }
-  },
-  MuiIconButton: {
-    root: {
-      padding: theme.spacing.unit,
-      '&:hover': {
-        backgroundColor: 'transparent'
       }
     }
   },
@@ -59,12 +52,12 @@ const overrides = {
   },
   MuiTab: {
     root: {
-      textTransform: 'initial',
+      textTransform: 'none',
       margin: '0 16px',
       minWidth: 0,
-      letterSpacing: '.25px',
+      padding: 0,
       [theme.breakpoints.up('md')]: {
-        fontSize: 14,
+        padding: 0,
         minWidth: 0
       }
     },
@@ -75,9 +68,19 @@ const overrides = {
       }
     }
   },
+  MuiIconButton: {
+    root: {
+      padding: theme.spacing.unit
+    }
+  },
   MuiTooltip: {
     tooltip: {
       borderRadius: 4
+    }
+  },
+  MuiDivider: {
+    root: {
+      backgroundColor: '#404854'
     }
   },
   MuiListItemText: {
@@ -114,6 +117,7 @@ const mixins = {
     minHeight: 48
   }
 };
+
 theme = { ...theme, overrides, props, mixins };
 
 export default theme;
