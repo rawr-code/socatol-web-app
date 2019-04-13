@@ -21,7 +21,7 @@ import styles from './styles';
 const HeaderBar = props => {
   const { classes } = props;
   return (
-    <AppBar color="primary" position="static">
+    <AppBar color="primary" position="fixed" className={classes.root}>
       <Toolbar>
         <Grid container spacing={0} alignItems="center">
           <Hidden mdUp implementation="css">
