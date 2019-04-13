@@ -1,22 +1,40 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
-// Components
-import HeaderBar from './HeaderBar';
+// Material UI
+import { CssBaseline, withStyles } from '@material-ui/core';
 
-class LayoutContainer extends Component {
+import SideNav from './SideNav';
+
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    minHeight: '100vh'
+  },
+  content: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  toolbar: theme.mixins.toolbar
+});
+
+class Layout extends Component {
   render() {
+    const { classes, children } = this.props;
     return (
-      <Fragment>
-        <HeaderBar openSideNav={false} />
-        {/* <SideNav
-          selectedItem={menuSelectedItem}
-          handleClick={selectItem}
-          mobileOpen={sideNavOpen}
-          handleClose={closeNav}
-        /> */}
-      </Fragment>
+      <div className={classes.root}>
+        <CssBaseline />
+        <SideNav />
+        <div className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </div>
+      </div>
     );
   }
 }
 
-export default LayoutContainer;
+// Apply styles
+const _Layout = withStyles(styles)(Layout);
+
+export default _Layout;
