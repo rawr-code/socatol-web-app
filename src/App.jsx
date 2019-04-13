@@ -1,48 +1,37 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 // Material UI Custom Theme
 import { CssBaseline } from '@material-ui/core';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from './themes/Blue';
 
-// Routes
-import { PublicRoute, PrivateRoute } from './routes';
-
 // Layout
-import Layout from './components/Layout';
+// import Layout from './components/Layout';
 
 // Atoms
 import MainContainer from './components/Atoms/MainContainer';
 
-// Molecules
-// Organisms
+// Layout
+import HeaderBar from './components/Layout/HeaderBar';
+import FeatureBar from './components/Layout/FeatureBar';
+import FeatureBarTabs from './components/Layout/FeatureBarTabs';
 
-// Pages
-import Login from './pages/Auth/Login';
-import Sales from './pages/Sales';
-import Purchases from './pages/Purchases';
-import Inventory from './pages/Inventory';
-import Treasury from './pages/Treasury';
+import PaperBase from './components/paperbase/Paperbase';
 
 const Home = () => <div>Home</div>;
 
 const App = () => {
+  console.log(theme);
   return (
     <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <MainContainer>
-        <Layout />
-        <Switch>
-          <PrivateRoute exact path="/" component={Home} />
-          <PublicRoute exact path="/login" component={Login} />
-          <PrivateRoute path="/ventas" component={Sales} />
-          <PrivateRoute path="/compras" component={Purchases} />
-          <PrivateRoute path="/tesoreria" component={Treasury} />
-          <PrivateRoute path="/inventario" component={Inventory} />
-          <PrivateRoute component={() => <div>error 404 no match </div>} />
-        </Switch>
-      </MainContainer>
+      <>
+        <CssBaseline />
+        <HeaderBar />
+        <FeatureBar title="Authentication" />
+        <FeatureBarTabs />
+        <PaperBase />
+      </>
     </MuiThemeProvider>
   );
 };
