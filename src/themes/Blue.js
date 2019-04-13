@@ -4,10 +4,15 @@ import { createMuiTheme } from '@material-ui/core';
 let theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#2196f3',
+      // Firebase main color
+      main: '#039be5',
       light: '#64b5f6',
       dark: '#1976d2',
       contrastText: '#fff'
+    },
+    // Firebase background color
+    background: {
+      default: '#eceff1'
     }
   },
   typography: {
