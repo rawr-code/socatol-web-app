@@ -1,60 +1,50 @@
 const styles = theme => ({
   root: {
-    display: 'flex'
-  },
-  drawer: {
     [theme.breakpoints.up('sm')]: {
       width: theme.drawerWidth,
       flexShrink: 0
     }
   },
-  drawerPaper: {
+  drawer: {
     width: theme.drawerWidth
   },
-  logoWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 8,
-    marginBottom: 20
+  categoryHeader: {
+    padding: '20px 24px 8px'
   },
-  username: {
-    fontFamily: 'Google Sans',
-    fontSize: 16,
-    marginTop: 8
+  categoryHeaderPrimary: {
+    color: theme.palette.text.secondary
   },
-  userType: {
-    fontFamily: 'monospace',
-    fontSize: 14,
-    lineHeight: 1
+  item: {
+    padding: '12px 24px',
+    color: theme.palette.text.secondary
   },
-  list: {
-    padding: 15
+  itemCategory: {
+    // backgroundColor: '#232f3e',
+    backgroundColor: 'rgba(250, 250, 250, 0.7)',
+    boxShadow: `0 -1px 0 ${theme.palette.divider} inset`,
+    paddingTop: 16,
+    paddingBottom: 16
   },
-  navLink: {
-    textDecoration: 'none'
+  itemActionable: {
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.08)'
+    }
   },
-  selected: {
-    backgroundColor: `${theme.palette.primary.main} !important`,
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: `0 3px 0 0 ${theme.palette.primary.main}, 0 2px 8px 0 ${
-      theme.palette.primary.main
-    }, 0 4px 10px 0 rgba(33,7,77,.5)`
+  itemActiveItem: {
+    color: theme.palette.primary.main
   },
-  icon: {
-    color: 'white'
+  itemPrimary: {
+    color: 'inherit',
+    fontSize: theme.typography.fontSize,
+    '&$textDense': {
+      fontSize: theme.typography.fontSize
+    }
   },
-  text: {
-    fontSize: 16,
-    fontFamily: 'Google Sans'
-  },
-  textWhite: {
-    color: 'white'
-  },
-  listItemText: {
-    color: '#4b4b4b'
+  textDense: {},
+  divider: {
+    marginTop: theme.spacing.unit
   },
   toolbar: theme.mixins.toolbar
 });
+
 export default styles;

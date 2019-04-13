@@ -1,138 +1,118 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 // Material UI
 import {
-  Hidden,
   Drawer,
+  Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography,
   withStyles
 } from '@material-ui/core';
 
 // Icons
 import {
-  PieChart,
-  Package,
-  Printer,
-  ShoppingCart,
-  ShoppingBag
-} from 'react-feather';
-import { AccountBalanceOutlined } from '@material-ui/icons';
+  Home,
+  People,
+  DnsRounded,
+  PermMediaOutlined,
+  Public,
+  SettingsEthernet,
+  SettingsInputComponent,
+  Timer,
+  Settings,
+  PhonelinkSetup
+} from '@material-ui/icons';
 
 import styles from './styles';
 
-const navigation = [
+const categories = [
   {
-    label: 'Resumen',
-    to: '/',
-    icon: <PieChart />
+    id: 'Menu',
+    children: [
+      { id: 'Usuarios', icon: <People />, active: true },
+      { id: 'Ventas', icon: <DnsRounded /> },
+      { id: 'Compras', icon: <PermMediaOutlined /> },
+      { id: 'Inventario', icon: <Public /> },
+      { id: 'Tesorería', icon: <SettingsEthernet /> },
+      { id: 'Reportes', icon: <SettingsInputComponent /> }
+    ]
   },
   {
-    label: 'Ventas',
-    to: '/ventas',
-    icon: <ShoppingBag />
-  },
-  {
-    label: 'Compras',
-    to: '/compras',
-    icon: <ShoppingCart />
-  },
-  {
-    label: 'Tesorería',
-    to: '/tesoreria',
-    icon: <AccountBalanceOutlined />
-  },
-  {
-    label: 'Inventario',
-    to: '/inventario',
-    icon: <Package />
-  },
-  {
-    label: 'Reportes',
-    to: '/reportes',
-    icon: <Printer />
+    id: 'Quality',
+    children: [
+      { id: 'Analytics', icon: <Settings /> },
+      { id: 'Performance', icon: <Timer /> },
+      { id: 'Test Lab', icon: <PhonelinkSetup /> }
+    ]
   }
 ];
 
 const SideNav = props => {
-  const { classes, selectedItem, handleClick, mobileOpen, handleClose } = props;
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <div className={classes.logoWrapper}>
-        <img
-          src="https://img.icons8.com/cotton/64/000000/computer.png"
-          alt="logo"
-          width={80}
-          height={80}
-        />
-        <Typography variant="h6" color="primary" className={classes.username}>
-          Emmanuel Villegas
-        </Typography>
-        <Typography variant="subtitle2" className={classes.userType}>
-          Adminitrador
-        </Typography>
-      </div>
-      <List component="nav" className={classes.list}>
-        {navigation.map((item, index) => (
-          <NavLink to={item.to} className={classes.navLink} key={item.label}>
-            <ListItem
-              component="div"
-              selected={selectedItem === index}
-              onClick={() => handleClick(index)}
-              classes={{ selected: classes.selected }}>
-              <ListItemIcon className={classes.icon}>{item.icon}</ListItemIcon>
-
-              <ListItemText
-                primary={item.label}
-                className={classes.text}
-                classes={{
-                  primary: classNames(
-                    classes.text,
-                    selectedItem === index
-                      ? classes.textWhite
-                      : classes.listItemText
-                  )
-                }}
-              />
-            </ListItem>
-          </NavLink>
-        ))}
-      </List>
-    </div>
-  );
+  const { classes } = props;
   return (
-    <nav className={classes.drawer}>
-      {/* MobileNav */}
-      <Hidden smUp implementation="css">
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleClose}
-          classes={{
-            paper: classes.drawerPaper
-          }}>
-          {drawer}
-        </Drawer>
-      </Hidden>
-      {/* DesktopNav */}
-      <Hidden mdDown implementation="css">
-        <Drawer
-          classes={{
-            paper: classes.drawerPaper
-          }}
-          variant="permanent"
-          open>
-          {drawer}
-        </Drawer>
-      </Hidden>
+    <nav className={classes.root}>
+      <Drawer variant="permanent" classes={{ paper: classes.drawer }}>
+        <div className={classes.toolbar} />
+        <List disablePadding>
+          <ListItem className={classNames(classes.item, classes.itemCategory)}>
+            <ListItemIcon>
+              <Home />
+            </ListItemIcon>
+            <ListItemText
+              classes={{
+                primary: classes.itemPrimary
+              }}>
+              Emmanuel Villegas
+            </ListItemText>
+          </ListItem>
+          {categories.map(({ id, children }) => (
+            <div key={id}>
+              <ListItem className={classes.categoryHeader}>
+                <ListItemText
+                  classes={{
+                    primary: classes.categoryHeaderPrimary
+                  }}>
+                  {id}
+                </ListItemText>
+              </ListItem>
+              {children.map(({ id: childId, icon, active }) => (
+                <ListItem
+                  button
+                  dense
+                  key={childId}
+                  className={classNames(
+                    classes.item,
+                    classes.itemActionable,
+                    active && classes.itemActiveItem
+                  )}>
+                  <ListItemIcon>{icon}</ListItemIcon>
+                  <ListItemText
+                    classes={{
+                      primary: classes.itemPrimary,
+                      textDense: classes.textDense
+                    }}>
+                    {childId}
+                  </ListItemText>
+                </ListItem>
+              ))}
+              <Divider className={classes.divider} />
+            </div>
+          ))}
+        </List>
+      </Drawer>
     </nav>
   );
 };
 
-export default withStyles(styles)(SideNav);
+SideNav.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+// Apply styles
+const _SideNav = withStyles(styles)(SideNav);
+
+export default _SideNav;
