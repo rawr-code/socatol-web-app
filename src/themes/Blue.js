@@ -12,22 +12,18 @@ let theme = createMuiTheme({
   },
   typography: {
     useNextVariants: true,
-    fontFamily: 'Roboto, Google Sans',
     h5: {
       fontFamily: 'Google Sans',
       fontWeight: 500,
-      fontSize: '1.625rem',
-      letterSpacing: 0
-    },
-    body1: {
-      fontSize: '0.875rem',
-      textTransform: 'initial'
+      fontSize: 26
     }
   },
   shape: {
     borderRadius: 8
   },
-  drawerWidth: 260
+
+  // other
+  drawerWidth: 256
 });
 
 const overrides = {
@@ -36,6 +32,7 @@ const overrides = {
       textTransform: 'initial'
     },
     contained: {
+      boxShadow: 'none',
       '&:active': {
         boxShadow: 'none'
       }
@@ -63,11 +60,11 @@ const overrides = {
   MuiTab: {
     root: {
       textTransform: 'initial',
-      fontSize: '14px !important',
-      letterSpacing: '.25px',
       margin: '0 16px',
       minWidth: 0,
+      letterSpacing: '.25px',
       [theme.breakpoints.up('md')]: {
+        fontSize: 14,
         minWidth: 0
       }
     },
@@ -81,6 +78,26 @@ const overrides = {
   MuiTooltip: {
     tooltip: {
       borderRadius: 4
+    }
+  },
+  MuiListItemText: {
+    primary: {
+      fontWeight: theme.typography.fontWeightMedium
+    }
+  },
+  MuiListItemIcon: {
+    root: {
+      color: 'inherit',
+      marginRight: 0,
+      '& svg': {
+        fontSize: 20
+      }
+    }
+  },
+  MuiAvatar: {
+    root: {
+      width: 32,
+      height: 32
     }
   }
 };
