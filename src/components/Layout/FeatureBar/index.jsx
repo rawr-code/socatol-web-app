@@ -38,7 +38,7 @@ const FeatureBar = props => {
             </Button>
           </Grid>
           <Grid item>
-            <Tooltip title="Help">
+            <Tooltip title="Ayuda">
               <IconButton color="inherit">
                 <Help />
               </IconButton>

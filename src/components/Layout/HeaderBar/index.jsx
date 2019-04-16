@@ -34,6 +34,9 @@ const HeaderBar = props => {
               </IconButton>
             </Grid>
           </Hidden>
+          <Typography variant="h6" color="inherit" component="span">
+            SOCATOL
+          </Typography>
           <Grid item xs />
           <Grid item>
             <Typography className={classes.link} component="a" href="#">
@@ -41,7 +44,7 @@ const HeaderBar = props => {
             </Typography>
           </Grid>
           <Grid item>
-            <Tooltip title="Alerts • No alters">
+            <Tooltip title="No hay notificaciones">
               <IconButton color="inherit" className={classes.link}>
                 <Notifications />
               </IconButton>
