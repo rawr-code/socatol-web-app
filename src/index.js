@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient from 'apollo-boost';
+
 // import jwt from 'jsonwebtoken';
 
 // Utils
@@ -21,9 +23,18 @@ import App from './App';
 //   }
 // }
 
+// Apollo Config
+const client = new ApolloClient({
+  uri: 'http://localhost:5000/graphql',
+  onError: ({ networkError, graphQLErrors }) => {
+    console.log('graphQlErrors', graphQLErrors);
+    console.log('networkError', networkError);
+  }
+});
+
 ReactDOM.render(
-  <BrowserRouter>
+  <ApolloProvider client={client}>
     <App />
-  </BrowserRouter>,
+  </ApolloProvider>,
   document.getElementById('root')
 );
