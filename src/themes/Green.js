@@ -5,34 +5,31 @@ import { createMuiTheme } from '@material-ui/core/styles';
 let theme = createMuiTheme({
   palette: {
     primary: {
+      // Socatol Colors
       main: '#27c24c',
       light: '#69f67b',
-      dark: '#00901b',
-      contrastText: '#ffffff'
+      dark: '#00d435',
+      contrastText: '#fff'
     }
-  },
-  secondary: {
-    main: '#ffffff',
-    light: '#ffffff',
-    dark: '#cccccc',
-    contrastText: 'rgba(0,0,0,0.65)'
   },
   typography: {
     useNextVariants: true,
-    fontFamily: 'Roboto, Google Sans'
+    h5: {
+      fontFamily: 'Google Sans',
+      fontWeight: 500,
+      fontSize: 26
+    }
   },
-  drawerWidth: 260
+  shape: {
+    borderRadius: 6
+  },
+  drawerWidth: 256
 });
 
 const overrides = {
   MuiButton: {
     label: {
       textTransform: 'initial'
-    },
-    contained: {
-      '&:active': {
-        boxShadow: 'none'
-      }
     }
   },
   MuiIconButton: {
@@ -57,11 +54,11 @@ const overrides = {
   MuiTab: {
     root: {
       textTransform: 'initial',
-      fontSize: '14px !important',
-      letterSpacing: '.25px',
       margin: '0 16px',
       minWidth: 0,
+      letterSpacing: '.25px',
       [theme.breakpoints.up('md')]: {
+        fontSize: 14,
         minWidth: 0
       }
     },
@@ -75,6 +72,26 @@ const overrides = {
   MuiTooltip: {
     tooltip: {
       borderRadius: 4
+    }
+  },
+  MuiListItemText: {
+    primary: {
+      fontWeight: theme.typography.fontWeightMedium
+    }
+  },
+  MuiListItemIcon: {
+    root: {
+      color: 'inherit',
+      marginRight: 0,
+      '& svg': {
+        fontSize: 20
+      }
+    }
+  },
+  MuiAvatar: {
+    root: {
+      width: 32,
+      height: 32
     }
   }
 };
