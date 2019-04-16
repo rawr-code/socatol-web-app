@@ -116,7 +116,7 @@ const props = {
 const mixins = {
   ...theme.mixins,
   toolbar: {
-    minHeight: 48
+    minHeight: 56
   }
 };
 theme = { ...theme, overrides, props, mixins };
