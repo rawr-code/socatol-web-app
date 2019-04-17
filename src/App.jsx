@@ -10,7 +10,9 @@ import theme from './themes/Blue';
 import Layout from './components/Layout';
 
 // Views
+import Incomes from './views/Incomes';
 import Inventory from './views/Inventory';
+import Expenses from './views/Expenses';
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
       <MuiThemeProvider theme={theme}>
         <Layout>
           <Switch>
+            <Route path="/ingresos" component={Incomes} />
+            <Route path="/gastos" component={Expenses} />
             <Route path="/inventario" component={Inventory} />
           </Switch>
         </Layout>
