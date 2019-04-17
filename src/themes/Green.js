@@ -29,7 +29,13 @@ let theme = createMuiTheme({
 const overrides = {
   MuiButton: {
     label: {
-      textTransform: 'initial'
+      textTransform: 'initial',
+      contained: {
+        boxShadow: 'none',
+        '&:active': {
+          boxShadow: 'none'
+        }
+      }
     }
   },
   MuiIconButton: {

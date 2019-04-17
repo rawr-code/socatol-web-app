@@ -23,9 +23,9 @@ let theme = createMuiTheme({
       fontSize: 26
     }
   },
-  // shape: {
-  //   borderRadius: 8
-  // },
+  shape: {
+    borderRadius: 8
+  },
 
   // other
   drawerWidth: 256
@@ -35,13 +35,13 @@ const overrides = {
   MuiButton: {
     label: {
       textTransform: 'initial'
-    },
-    contained: {
-      boxShadow: 'none',
-      '&:active': {
-        boxShadow: 'none'
-      }
     }
+    // contained: {
+    //   boxShadow: 'none',
+    //   '&:active': {
+    //     boxShadow: 'none'
+    //   }
+    // }
   },
   MuiIconButton: {
     root: {
