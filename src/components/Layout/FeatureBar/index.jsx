@@ -37,14 +37,14 @@ const FeatureBar = props => {
               size="small">
               Web setup
             </Button>
-          </Grid> */}
+          </Grid>
           <Grid item>
             <Tooltip title="Ayuda">
               <IconButton color="inherit">
                 <Help />
               </IconButton>
             </Tooltip>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Toolbar>
     </AppBar>

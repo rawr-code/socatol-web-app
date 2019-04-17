@@ -39,7 +39,7 @@ const HeaderBar = props => {
             SOCATOL
           </Typography>
           <Grid item xs />
-          <Grid item>
+          {/* <Grid item>
             <Typography className={classes.link} component="a" href="#">
               Ir a la documentación
             </Typography>
@@ -58,7 +58,7 @@ const HeaderBar = props => {
                 src="/static/images/avatar/1.jpg"
               />
             </IconButton>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Toolbar>
     </AppBar>

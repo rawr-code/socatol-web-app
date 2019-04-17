@@ -34,8 +34,8 @@ const categories = [
     id: 'Menu',
     children: [
       { id: 'Usuarios', icon: <People />, active: true },
-      { id: 'Ventas', icon: <DnsRounded /> },
-      { id: 'Compras', icon: <PermMediaOutlined /> },
+      { id: 'Ingresos', icon: <DnsRounded /> },
+      { id: 'Gastos', icon: <PermMediaOutlined /> },
       { id: 'Inventario', icon: <Public /> },
       { id: 'Tesorería', icon: <SettingsEthernet /> },
       { id: 'Reportes', icon: <SettingsInputComponent /> }

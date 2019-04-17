@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI
@@ -6,39 +6,28 @@ import { AppBar, Tabs, Tab, withStyles } from '@material-ui/core';
 
 import styles from './styles';
 
-class FeatureBarTabs extends Component {
-  state = {
-    value: 0
-  };
-
-  handleOnChange = (e, value) => {
-    this.setState({ value });
-  };
-
-  render() {
-    const { classes, tabs } = this.props;
-    const { value } = this.state;
-    return (
-      <AppBar
-        component="div"
-        className={classes.root}
-        color="primary"
-        position="static"
-        elevation={0}>
-        <Tabs textColor="inherit" value={value} onChange={this.handleOnChange}>
-          {tabs.map(item => (
-            <Tab
-              textColor="inherit"
-              label={item.label}
-              className={classes.root}
-              key={item.label}
-            />
-          ))}
-        </Tabs>
-      </AppBar>
-    );
-  }
-}
+const FeatureBarTabs = props => {
+  const { classes, tabs, value = 0, onChange } = props;
+  return (
+    <AppBar
+      component="div"
+      className={classes.root}
+      color="primary"
+      position="static"
+      elevation={0}>
+      <Tabs textColor="inherit" value={value} onChange={onChange}>
+        {tabs.map(item => (
+          <Tab
+            textColor="inherit"
+            label={item.label}
+            className={classes.root}
+            key={item.label}
+          />
+        ))}
+      </Tabs>
+    </AppBar>
+  );
+};
 
 FeatureBarTabs.propTypes = {
   classes: PropTypes.object.isRequired,
