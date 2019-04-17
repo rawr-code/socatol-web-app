@@ -8,27 +8,19 @@ import theme from './themes/Blue';
 
 // Layout
 import Layout from './components/Layout';
-import HeaderBar from './components/Layout/HeaderBar';
-import FeatureBar from './components/Layout/FeatureBar';
-import FeatureBarTabs from './components/Layout/FeatureBarTabs';
-import MainContainer from './components/Layout/MainContainer';
 
-const Example = (
-  <div>
-    <HeaderBar />
-    <FeatureBar title="Authentication" />
-    <FeatureBarTabs />
-    <MainContainer>
-      <h1>Content</h1>
-    </MainContainer>
-  </div>
-);
+// Views
+import Inventory from './views/Inventory';
 
 const App = () => {
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <Layout>{Example}</Layout>
+        <Layout>
+          <Switch>
+            <Route path="/inventario" component={Inventory} />
+          </Switch>
+        </Layout>
       </MuiThemeProvider>
     </BrowserRouter>
   );
