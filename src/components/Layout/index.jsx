@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Material UI
 import { CssBaseline, withStyles } from '@material-ui/core';
 
+import HeaderBar from './HeaderBar';
 import SideNav from './SideNav';
 
 const styles = theme => ({
@@ -24,6 +25,7 @@ class Layout extends Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
+        <HeaderBar />
         <SideNav />
         <div className={classes.content}>
           <div className={classes.toolbar} />
