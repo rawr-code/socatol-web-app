@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Material UI
 import {
@@ -62,6 +63,10 @@ const HeaderBar = props => {
       </Toolbar>
     </AppBar>
   );
+};
+
+HeaderBar.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 // Apply styles
