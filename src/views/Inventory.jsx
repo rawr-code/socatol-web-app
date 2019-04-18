@@ -5,9 +5,9 @@ import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 
 // Tabs Views
 import { AllWarehouses } from './Warehouse';
-import { AllProducts } from './Product';
+import { AllProducts, NewProduct } from './Product';
 
-const Inventory = props => {
+const Inventory = () => {
   const tabs = [
     {
       label: 'Almacenes',
@@ -29,7 +29,12 @@ const Inventory = props => {
 const InventoryContainer = ({ match }) => {
   return (
     <>
-      <Route path={match.path} component={Inventory} />
+      <Route exact path={match.path} component={Inventory} />
+      <Route
+        exact
+        path={`${match.path}/productos/nuevo`}
+        component={NewProduct}
+      />
     </>
   );
 };
