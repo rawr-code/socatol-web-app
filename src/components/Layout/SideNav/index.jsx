@@ -22,10 +22,7 @@ import {
   PermMediaOutlined,
   Public,
   SettingsEthernet,
-  SettingsInputComponent,
-  Timer,
-  Settings,
-  PhonelinkSetup
+  SettingsInputComponent
 } from '@material-ui/icons';
 
 import styles from './styles';
@@ -37,19 +34,11 @@ const categories = [
       { id: 'Usuarios', to: '/usuarios', icon: <People />, active: true },
       { id: 'Ingresos', to: '/ingresos', icon: <DnsRounded /> },
       { id: 'Gastos', to: '/gastos', icon: <PermMediaOutlined /> },
-      { id: 'Inventario', to: '/inventario', icon: <Public /> },
       { id: 'Tesorería', to: '/tesoreria', icon: <SettingsEthernet /> },
+      { id: 'Inventario', to: '/inventario', icon: <Public /> },
       { id: 'Reportes', to: '/reportes', icon: <SettingsInputComponent /> }
     ]
   }
-  // {
-  //   id: 'Quality',
-  //   children: [
-  //     { id: 'Analytics', icon: <Settings /> },
-  //     { id: 'Performance', icon: <Timer /> },
-  //     { id: 'Test Lab', icon: <PhonelinkSetup /> }
-  //   ]
-  // }
 ];
 
 const SideNav = props => {

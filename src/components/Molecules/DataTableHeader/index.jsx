@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // Material UI
 import { Button, Typography, withStyles } from '@material-ui/core';
@@ -7,7 +8,7 @@ import { Button, Typography, withStyles } from '@material-ui/core';
 import styles from './styles';
 
 const DataTableHeader = props => {
-  const { classes, title, button, buttonLabel } = props;
+  const { classes, title, button } = props;
   return (
     <header className={classes.root}>
       <Typography
@@ -17,24 +18,22 @@ const DataTableHeader = props => {
         {title}
       </Typography>
       {button && (
-        <Button variant="contained" color="primary">
-          {buttonLabel}
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          to={button.to}>
+          {button.label}
         </Button>
       )}
     </header>
   );
 };
 
-DataTableHeader.defaultProps = {
-  button: false,
-  buttonLabel: 'Button'
-};
-
 DataTableHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
-  button: PropTypes.bool.isRequired,
-  buttonLabel: PropTypes.string
+  button: PropTypes.object
 };
 
 // Apply styles
