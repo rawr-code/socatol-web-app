@@ -10,7 +10,8 @@ let theme = createMuiTheme({
       light: '#69f67b',
       dark: '#00d435',
       contrastText: '#fff'
-    }
+    },
+    light: 'rgba(255, 255, 255, 0.7)'
   },
   typography: {
     useNextVariants: true,
@@ -21,7 +22,7 @@ let theme = createMuiTheme({
     }
   },
   shape: {
-    borderRadius: 6
+    borderRadius: 8
   },
   drawerWidth: 256
 });
@@ -29,13 +30,25 @@ let theme = createMuiTheme({
 const overrides = {
   MuiButton: {
     label: {
-      textTransform: 'initial',
-      contained: {
-        boxShadow: 'none',
-        '&:active': {
-          boxShadow: 'none'
-        }
-      }
+      textTransform: 'initial'
+    }
+    // contained: {
+    //   boxShadow: 'none',
+    //   '&:active': {
+    //     boxShadow: 'none'
+    //   }
+    // }
+  },
+  MuiCardContent: {
+    root: {
+      padding: 24
+    }
+  },
+  MuiCardActions: {
+    root: {
+      justifyContent: 'flex-end',
+      padding: 24,
+      paddingTop: 0
     }
   },
   MuiIconButton: {
@@ -44,6 +57,16 @@ const overrides = {
       '&:hover': {
         backgroundColor: 'transparent'
       }
+    }
+  },
+  MuiFormControlLabel: {
+    root: {
+      marginLeft: 0
+    }
+  },
+  MuiFormHelperText: {
+    root: {
+      marginTop: 0
     }
   },
   MuiTabs: {

@@ -13,7 +13,8 @@ let theme = createMuiTheme({
     // Firebase background color
     background: {
       default: '#eceff1'
-    }
+    },
+    light: 'rgba(255, 255, 255, 0.7)'
   },
   typography: {
     useNextVariants: true,
@@ -43,12 +44,34 @@ const overrides = {
     //   }
     // }
   },
+  MuiCardContent: {
+    root: {
+      padding: 24
+    }
+  },
+  MuiCardActions: {
+    root: {
+      justifyContent: 'flex-end',
+      padding: 24,
+      paddingTop: 0
+    }
+  },
   MuiIconButton: {
     root: {
       padding: theme.spacing.unit,
       '&:hover': {
         backgroundColor: 'transparent'
       }
+    }
+  },
+  MuiFormControlLabel: {
+    root: {
+      marginLeft: 0
+    }
+  },
+  MuiFormHelperText: {
+    root: {
+      marginTop: 0
     }
   },
   MuiTabs: {
