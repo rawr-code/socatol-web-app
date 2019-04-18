@@ -37,7 +37,6 @@ const AllProducts = props => {
         }
 
         if (Object.keys(data).length > 0) {
-          console.log(data);
           rows = data.getProducts;
         }
 
@@ -45,8 +44,10 @@ const AllProducts = props => {
           <>
             <DataTableHeader
               title="Lista de productos"
-              button
-              buttonLabel="Añadir producto"
+              button={{
+                label: 'Añadir producto',
+                to: '/inventario/productos/nuevo'
+              }}
             />
             <DataTable columns={columns} rows={rows} isLoading={isLoading} />
           </>

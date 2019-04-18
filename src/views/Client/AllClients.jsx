@@ -41,7 +41,6 @@ const AllClients = props => {
         }
 
         if (Object.keys(data).length > 0) {
-          console.log(data);
           rows = data.getClients;
         }
 
