@@ -11,8 +11,9 @@ import Layout from './components/Layout';
 
 // Views
 import Incomes from './views/Incomes';
-import Inventory from './views/Inventory';
 import Expenses from './views/Expenses';
+import Inventory from './views/Inventory';
+import Treasury from './views/Treasury';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/ingresos" component={Incomes} />
             <Route path="/gastos" component={Expenses} />
             <Route path="/inventario" component={Inventory} />
+            <Route path="/tesoreria" component={Treasury} />
           </Switch>
         </Layout>
       </MuiThemeProvider>
