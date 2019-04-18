@@ -1,33 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI
 import { AppBar, Tabs, Tab, withStyles } from '@material-ui/core';
 
+// Layout
+import MainContainer from '../MainContainer';
+
 import styles from './styles';
 
-const FeatureBarTabs = props => {
-  const { classes, tabs, value = 0, onChange } = props;
-  return (
-    <AppBar
-      component="div"
-      className={classes.root}
-      color="primary"
-      position="static"
-      elevation={0}>
-      <Tabs textColor="inherit" value={value} onChange={onChange}>
-        {tabs.map(item => (
-          <Tab
+class FeatureBarTabs extends Component {
+  state = {
+    value: 0
+  };
+
+  handleOnChange = (e, value) => {
+    this.setState({ value });
+  };
+
+  render() {
+    const { classes, tabs } = this.props;
+    const { value } = this.state;
+    const ContentTab = tabs[value].component;
+    return (
+      <>
+        <AppBar
+          component="div"
+          className={classes.root}
+          color="primary"
+          position="static"
+          elevation={0}>
+          <Tabs
             textColor="inherit"
-            label={item.label}
-            className={classes.root}
-            key={item.label}
-          />
-        ))}
-      </Tabs>
-    </AppBar>
-  );
-};
+            value={value}
+            onChange={this.handleOnChange}>
+            {tabs.map(item => (
+              <Tab
+                textColor="inherit"
+                label={item.label}
+                className={classes.root}
+                key={item.label}
+              />
+            ))}
+          </Tabs>
+        </AppBar>
+        <MainContainer>{ContentTab && <ContentTab />}</MainContainer>
+      </>
+    );
+  }
+}
 
 FeatureBarTabs.propTypes = {
   classes: PropTypes.object.isRequired,

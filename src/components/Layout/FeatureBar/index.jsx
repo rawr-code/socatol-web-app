@@ -29,7 +29,7 @@ const FeatureBar = props => {
               {title}
             </Typography>
           </Grid>
-          {/* <Grid item>
+          <Grid item>
             <Button
               className={classes.button}
               variant="outlined"
@@ -44,7 +44,7 @@ const FeatureBar = props => {
                 <Help />
               </IconButton>
             </Tooltip>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Toolbar>
     </AppBar>

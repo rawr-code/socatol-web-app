@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 // Material UI
@@ -33,22 +34,22 @@ const categories = [
   {
     id: 'Menu',
     children: [
-      { id: 'Usuarios', icon: <People />, active: true },
-      { id: 'Ingresos', icon: <DnsRounded /> },
-      { id: 'Gastos', icon: <PermMediaOutlined /> },
-      { id: 'Inventario', icon: <Public /> },
-      { id: 'Tesorería', icon: <SettingsEthernet /> },
-      { id: 'Reportes', icon: <SettingsInputComponent /> }
-    ]
-  },
-  {
-    id: 'Quality',
-    children: [
-      { id: 'Analytics', icon: <Settings /> },
-      { id: 'Performance', icon: <Timer /> },
-      { id: 'Test Lab', icon: <PhonelinkSetup /> }
+      { id: 'Usuarios', to: '/usuarios', icon: <People />, active: true },
+      { id: 'Ingresos', to: '/ingresos', icon: <DnsRounded /> },
+      { id: 'Gastos', to: '/gastos', icon: <PermMediaOutlined /> },
+      { id: 'Inventario', to: '/inventario', icon: <Public /> },
+      { id: 'Tesorería', to: '/tesoreria', icon: <SettingsEthernet /> },
+      { id: 'Reportes', to: '/reportes', icon: <SettingsInputComponent /> }
     ]
   }
+  // {
+  //   id: 'Quality',
+  //   children: [
+  //     { id: 'Analytics', icon: <Settings /> },
+  //     { id: 'Performance', icon: <Timer /> },
+  //     { id: 'Test Lab', icon: <PhonelinkSetup /> }
+  //   ]
+  // }
 ];
 
 const SideNav = props => {
@@ -79,11 +80,13 @@ const SideNav = props => {
                   {id}
                 </ListItemText>
               </ListItem>
-              {children.map(({ id: childId, icon, active }) => (
+              {children.map(({ id: childId, icon, active, to }) => (
                 <ListItem
                   button
                   dense
                   key={childId}
+                  component={Link}
+                  to={to}
                   className={classNames(
                     classes.item,
                     classes.itemActionable,
