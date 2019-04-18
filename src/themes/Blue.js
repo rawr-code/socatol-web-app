@@ -23,9 +23,9 @@ let theme = createMuiTheme({
       fontSize: 26
     }
   },
-  // shape: {
-  //   borderRadius: 8
-  // },
+  shape: {
+    borderRadius: 8
+  },
 
   // other
   drawerWidth: 256
