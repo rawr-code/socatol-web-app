@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Query, Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 // Material UI
 import {
@@ -27,21 +29,30 @@ import FormHeader from '../../../components/Molecules/FormHeader';
 // Queries
 import { GET_WAREHOUSES_QUERY } from '../../../queries/Warehouse';
 
-// Mutations
-import { NEW_PRODUCT_MUTATION } from '../../../mutations/Product';
-
 import styles from './styles';
 
-class NewProduct extends Component {
+class ProductForm extends Component {
   state = {
+    id: '',
     name: '',
     price: '',
     quantity: '',
-    iva: '',
     description: '',
     warehouse: '',
     active: true
   };
+
+  static propTypes = {
+    classes: PropTypes.object.isRequired,
+    mutation: PropTypes.object.isRequired
+  };
+
+  componentWillMount() {
+    const { product } = this.props;
+    if (product) {
+      this.setState({ ...product, warehouse: product.warehouse.id });
+    }
+  }
 
   handleChange = e => {
     const { type, name, value, checked } = e.target;
@@ -50,48 +61,42 @@ class NewProduct extends Component {
   };
 
   handleValidate = () => {
-    const { name, price, quantity, iva, warehouse } = this.state;
-    const isValid = !name || !price || !quantity || !iva || !warehouse;
+    const { name, price, quantity, warehouse } = this.state;
+    const isValid = !name || !price || !quantity || !warehouse;
 
     return isValid;
   };
 
-  handleSubmit = async (e, onSubmit) => {
-    e.preventDefault();
-    const result = await onSubmit();
-    console.log(result);
-  };
-
   generateInput = () => {
-    const {
-      name,
-      price,
-      quantity,
-      iva,
-      description,
-      warehouse,
-      active
-    } = this.state;
-
     const input = {
-      name,
-      price: Number(price),
-      quantity: Number(quantity),
-      iva: Number(iva),
-      description,
-      warehouse,
-      active
+      id: this.state.id,
+      name: this.state.name,
+      price: Number(this.state.price),
+      quantity: Number(this.state.quantity),
+      description: this.state.description,
+      warehouse: this.state.warehouse,
+      active: this.state.active
     };
 
     return input;
   };
 
+  handleSubmit = onSubmit => async e => {
+    e.preventDefault();
+    const result = await onSubmit();
+    console.log(result);
+  };
+
+  updateState = data => {
+    this.setState({ ...data });
+  };
+
   render() {
-    const { classes, history } = this.props;
+    const { classes, mutation, history, product } = this.props;
     return (
       <MainContainer>
         <Mutation
-          mutation={NEW_PRODUCT_MUTATION}
+          mutation={mutation}
           variables={{ input: this.generateInput() }}
           onCompleted={() => history.push('/inventario')}>
           {onSubmit => {
@@ -99,9 +104,9 @@ class NewProduct extends Component {
               <form
                 className={classes.root}
                 autoComplete="off"
-                onSubmit={e => this.handleSubmit(e, onSubmit)}>
+                onSubmit={this.handleSubmit(onSubmit)}>
                 <FormHeader
-                  title="Nuevo Producto"
+                  title={product ? 'Editar Producto' : 'Nuevo Producto'}
                   subtitle="Información del producto"
                 />
                 <Card className={classes.content}>
@@ -113,6 +118,7 @@ class NewProduct extends Component {
                           label="Nombre*"
                           name="name"
                           onChange={this.handleChange}
+                          defaultValue={this.state.name}
                           fullWidth
                           dense
                         />
@@ -123,6 +129,7 @@ class NewProduct extends Component {
                           label="Precio*"
                           name="price"
                           onChange={this.handleChange}
+                          defaultValue={this.state.price}
                           fullWidth
                           dense
                         />
@@ -133,16 +140,7 @@ class NewProduct extends Component {
                           label="Cantidad*"
                           name="quantity"
                           onChange={this.handleChange}
-                          fullWidth
-                          dense
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <InputField
-                          variant="outlined"
-                          label="IVA*"
-                          name="iva"
-                          onChange={this.handleChange}
+                          defaultValue={this.state.quantity}
                           fullWidth
                           dense
                         />
@@ -153,6 +151,7 @@ class NewProduct extends Component {
                           label="Descripción*"
                           name="description"
                           onChange={this.handleChange}
+                          defaultValue={this.state.description}
                           multiline
                           rows="4"
                           rowsMax="4"
@@ -236,6 +235,7 @@ class NewProduct extends Component {
 }
 
 // Apply styles
-const _NewProduct = withStyles(styles)(NewProduct);
+const _ProductForm = withStyles(styles)(ProductForm);
 
-export default _NewProduct;
+// connect to router
+export default withRouter(_ProductForm);
