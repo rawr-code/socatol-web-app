@@ -37,6 +37,7 @@ const AllProducts = props => {
         }
 
         if (Object.keys(data).length > 0) {
+          isLoading = false;
           rows = data.getProducts;
         }
 
