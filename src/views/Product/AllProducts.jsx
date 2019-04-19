@@ -19,12 +19,16 @@ const AllProducts = props => {
       title: 'Precio'
     },
     {
-      name: 'stock',
+      name: 'quantity',
       title: 'Almacenado'
+    },
+    {
+      name: 'quantity1',
+      title: 'Disponible'
     }
   ];
   return (
-    <Query query={GET_PRODUCTS_QUERY}>
+    <Query query={GET_PRODUCTS_QUERY} pollInterval={3000}>
       {({ loading, error, data }) => {
         let isLoading = false;
         let rows = [];
