@@ -1,6 +1,6 @@
 import AllProducts from './AllProducts';
 import NewProduct from './NewProduct';
 import UpdateProduct from './UpdateProduct';
-import ProductDetails from './ProductDetails';
+import DetailsProduct from './DetailsProduct';
 
-export { AllProducts, NewProduct, UpdateProduct, ProductDetails };
+export { AllProducts, NewProduct, UpdateProduct, DetailsProduct };

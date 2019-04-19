@@ -1,11 +1,20 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import FeatureBar from '../components/Layout/FeatureBar';
 import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 
 // Tabs Views
+
+// Warehouse
 import { AllWarehouses } from './Warehouse';
-import { AllProducts, NewProduct, UpdateProduct } from './Product';
+
+// Product
+import {
+  AllProducts,
+  NewProduct,
+  UpdateProduct,
+  DetailsProduct
+} from './Product';
 
 const Inventory = () => {
   const tabs = [
@@ -28,7 +37,7 @@ const Inventory = () => {
 
 const InventoryContainer = ({ match }) => {
   return (
-    <>
+    <Switch>
       <Route exact path={match.path} component={Inventory} />
       <Route
         exact
@@ -37,10 +46,16 @@ const InventoryContainer = ({ match }) => {
       />
       <Route
         exact
+        path={`${match.path}/productos/:id`}
+        component={DetailsProduct}
+      />
+      <Route
+        exact
         path={`${match.path}/productos/:id/editar`}
         component={UpdateProduct}
       />
-    </>
+      <Route component={() => <div>404</div>} />
+    </Switch>
   );
 };
 
