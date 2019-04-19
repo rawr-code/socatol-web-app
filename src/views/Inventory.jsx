@@ -5,7 +5,7 @@ import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 
 // Tabs Views
 import { AllWarehouses } from './Warehouse';
-import { AllProducts, NewProduct } from './Product';
+import { AllProducts, NewProduct, UpdateProduct } from './Product';
 
 const Inventory = () => {
   const tabs = [
@@ -34,6 +34,11 @@ const InventoryContainer = ({ match }) => {
         exact
         path={`${match.path}/productos/nuevo`}
         component={NewProduct}
+      />
+      <Route
+        exact
+        path={`${match.path}/productos/:id/editar`}
+        component={UpdateProduct}
       />
     </>
   );
