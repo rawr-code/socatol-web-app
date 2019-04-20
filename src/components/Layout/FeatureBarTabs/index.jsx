@@ -15,11 +15,12 @@ class FeatureBarTabs extends Component {
   componentWillMount() {
     const {
       tabs,
+      match: { path },
       location: { pathname }
     } = this.props;
 
     tabs.forEach((tab, index) => {
-      if (tab.to === pathname) {
+      if (`${path}${tab.to}` === pathname) {
         this.setState({ value: index });
       }
     });
