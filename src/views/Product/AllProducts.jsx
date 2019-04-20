@@ -1,12 +1,15 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 
-// Queries
-import { GET_PRODUCTS_QUERY } from '../../queries/Product';
+// Layout
+import { MainContainer } from '../../components/Layout';
 
 // Molecules
 import DataTable from '../../components/Molecules/DataTable';
 import DataTableHeader from '../../components/Molecules/DataTableHeader';
+
+// Queries
+import { GET_PRODUCTS_QUERY } from '../../queries/Product';
 
 const AllProducts = props => {
   const columns = [
@@ -46,16 +49,16 @@ const AllProducts = props => {
         }
 
         return (
-          <>
+          <MainContainer>
             <DataTableHeader
               title="Lista de productos"
               button={{
                 label: 'Añadir producto',
-                to: '/inventario/productos/nuevo'
+                to: '/inventario/producto/nuevo'
               }}
             />
             <DataTable columns={columns} rows={rows} isLoading={isLoading} />
-          </>
+          </MainContainer>
         );
       }}
     </Query>

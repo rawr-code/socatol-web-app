@@ -1,12 +1,15 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 
+// Layout
+import { MainContainer } from '../../components/Layout';
+
 // Queries
 import { GET_WAREHOUSES_QUERY } from '../../queries/Warehouse';
 
 const AllWarehouses = props => {
   return (
-    <div>
+    <MainContainer>
       <Query query={GET_WAREHOUSES_QUERY}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...';
@@ -17,7 +20,7 @@ const AllWarehouses = props => {
         }}
       </Query>
       <p>Warehouses</p>
-    </div>
+    </MainContainer>
   );
 };
 

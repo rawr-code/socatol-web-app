@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import FeatureBar from '../components/Layout/FeatureBar';
 import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 
@@ -25,13 +25,14 @@ const Inventory = () => {
   const tabs = [
     {
       label: 'Almacenes',
-      component: AllWarehouses
+      to: '/almacenes'
     },
     {
       label: 'Productos',
-      component: AllProducts
+      to: '/productos'
     }
   ];
+
   return (
     <>
       <FeatureBar title="Inventario" />
@@ -40,42 +41,42 @@ const Inventory = () => {
   );
 };
 
-const InventoryContainer = ({ match }) => {
+const InventoryContainer = ({ match: { path }, location: { pathname } }) => {
+  const showHeader =
+    pathname === `${path}/almacenes` || pathname === `${path}/productos`;
+
   return (
-    <Switch>
-      <Route exact path={match.path} component={Inventory} />
-      <Route
-        exact
-        path={`${match.path}/almacen/nuevo`}
-        component={NewWarehouse}
-      />
-      <Route
-        exact
-        path={`${match.path}/almacen/:id`}
-        component={DetailsWarehouse}
-      />
-      <Route
-        exact
-        path={`${match.path}/almacen/:id/editar`}
-        component={UpdateWarehouse}
-      />
-      <Route
-        exact
-        path={`${match.path}/producto/nuevo`}
-        component={NewProduct}
-      />
-      <Route
-        exact
-        path={`${match.path}/producto/:id`}
-        component={DetailsProduct}
-      />
-      <Route
-        exact
-        path={`${match.path}/producto/:id/editar`}
-        component={UpdateProduct}
-      />
-      <Route component={() => <div>404</div>} />
-    </Switch>
+    <>
+      {showHeader && <Route path={path} component={Inventory} />}
+      <Switch>
+        <Redirect from={path} to={`${path}/almacenes`} exact />
+
+        {/* Warehouse Routes */}
+        <Route exact path={`${path}/almacenes`} component={AllWarehouses} />
+        <Route exact path={`${path}/almacen/nuevo`} component={NewWarehouse} />
+        <Route
+          exact
+          path={`${path}/almacen/:id`}
+          component={DetailsWarehouse}
+        />
+        <Route
+          exact
+          path={`${path}/almacen/:id/editar`}
+          component={UpdateWarehouse}
+        />
+
+        {/* Product Routes*/}
+        <Route exact path={`${path}/productos`} component={AllProducts} />
+        <Route exact path={`${path}/producto/nuevo`} component={NewProduct} />
+        <Route exact path={`${path}/producto/:id`} component={DetailsProduct} />
+        <Route
+          exact
+          path={`${path}/producto/:id/editar`}
+          component={UpdateProduct}
+        />
+        <Route component={() => <div>404</div>} />
+      </Switch>
+    </>
   );
 };
 
