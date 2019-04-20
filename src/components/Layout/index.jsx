@@ -3,8 +3,15 @@ import React, { Component } from 'react';
 // Material UI
 import { CssBaseline, withStyles } from '@material-ui/core';
 
+// Layout Components
+
 import HeaderBar from './HeaderBar';
 import SideNav from './SideNav';
+import FeatureBar from './FeatureBar';
+import FeatureBarTabs from './FeatureBarTabs';
+import MainContainer from './MainContainer';
+
+export { HeaderBar, SideNav, FeatureBar, FeatureBarTabs, MainContainer };
 
 const styles = theme => ({
   root: {
