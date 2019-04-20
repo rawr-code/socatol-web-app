@@ -6,7 +6,7 @@ import { MainContainer } from '../../components/Layout';
 
 // Molecules
 import DataTable from '../../components/Molecules/DataTable';
-import DataTableHeader from '../../components/Molecules/DataTableHeader';
+import ContentHeader from '../../components/Molecules/ContentHeader';
 
 // Queries
 import { GET_PRODUCTS_QUERY } from '../../queries/Product';
@@ -48,9 +48,10 @@ const AllProducts = props => {
           rows = data.getProducts;
         }
 
+        console.log(data);
         return (
           <MainContainer>
-            <DataTableHeader
+            <ContentHeader
               title="Lista de productos"
               button={{
                 label: 'Añadir producto',

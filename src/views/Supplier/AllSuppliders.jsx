@@ -6,7 +6,7 @@ import { GET_SUPPLIER_QUERY } from '../../queries/Supplier';
 
 // Molecules
 import DataTable from '../../components/Molecules/DataTable';
-import DataTableHeader from '../../components/Molecules/DataTableHeader';
+import ContentHeader from '../../components/Molecules/ContentHeader';
 
 const AllSuppliders = props => {
   const columns = [
@@ -47,7 +47,7 @@ const AllSuppliders = props => {
 
         return (
           <>
-            <DataTableHeader title="Lista de proveedores" />
+            <ContentHeader title="Lista de proveedores" />
             <DataTable columns={columns} rows={rows} isLoading={isLoading} />
           </>
         );

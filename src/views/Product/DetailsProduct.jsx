@@ -2,7 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Layout
-import FeatureBar from '../../components/Layout/FeatureBar';
+import { FeatureBar } from '../../components/Layout';
 
 // Queries
 import { GET_PRODUCT_QUERY } from '../../queries/Product';

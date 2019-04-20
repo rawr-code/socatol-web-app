@@ -7,7 +7,7 @@ import { Button, Typography, withStyles } from '@material-ui/core';
 
 import styles from './styles';
 
-const DataTableHeader = props => {
+const ContentHeader = props => {
   const { classes, title, button } = props;
   return (
     <header className={classes.root}>
@@ -30,13 +30,13 @@ const DataTableHeader = props => {
   );
 };
 
-DataTableHeader.propTypes = {
+ContentHeader.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   button: PropTypes.object
 };
 
 // Apply styles
-const _DataTableHeader = withStyles(styles)(DataTableHeader);
+const _ContentHeader = withStyles(styles)(ContentHeader);
 
-export default _DataTableHeader;
+export default _ContentHeader;

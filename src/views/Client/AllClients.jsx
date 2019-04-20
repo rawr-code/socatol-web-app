@@ -6,7 +6,7 @@ import { GET_CLIENTS_QUERY } from '../../queries/Client';
 
 // Molecules
 import DataTable from '../../components/Molecules/DataTable';
-import DataTableHeader from '../../components/Molecules/DataTableHeader';
+import ContentHeader from '../../components/Molecules/ContentHeader';
 
 const AllClients = props => {
   const columns = [
@@ -46,7 +46,7 @@ const AllClients = props => {
 
         return (
           <>
-            <DataTableHeader title="Lista de clientes" />
+            <ContentHeader title="Lista de clientes" />
             <DataTable columns={columns} rows={rows} isLoading={isLoading} />
           </>
         );
