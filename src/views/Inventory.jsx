@@ -6,7 +6,12 @@ import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 // Tabs Views
 
 // Warehouse
-import { AllWarehouses } from './Warehouse';
+import {
+  AllWarehouses,
+  NewWarehouse,
+  UpdateWarehouse,
+  DetailsWarehouse
+} from './Warehouse';
 
 // Product
 import {
@@ -41,17 +46,32 @@ const InventoryContainer = ({ match }) => {
       <Route exact path={match.path} component={Inventory} />
       <Route
         exact
-        path={`${match.path}/productos/nuevo`}
+        path={`${match.path}/almacen/nuevo`}
+        component={NewWarehouse}
+      />
+      <Route
+        exact
+        path={`${match.path}/almacen/:id`}
+        component={DetailsWarehouse}
+      />
+      <Route
+        exact
+        path={`${match.path}/almacen/:id/editar`}
+        component={UpdateWarehouse}
+      />
+      <Route
+        exact
+        path={`${match.path}/producto/nuevo`}
         component={NewProduct}
       />
       <Route
         exact
-        path={`${match.path}/productos/:id`}
+        path={`${match.path}/producto/:id`}
         component={DetailsProduct}
       />
       <Route
         exact
-        path={`${match.path}/productos/:id/editar`}
+        path={`${match.path}/producto/:id/editar`}
         component={UpdateProduct}
       />
       <Route component={() => <div>404</div>} />
