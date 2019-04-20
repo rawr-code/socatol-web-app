@@ -105,18 +105,19 @@ class WarehouseForm extends Component {
                       <Grid item xs={12}>
                         <InputField
                           variant="outlined"
-                          label="Nombre*"
+                          label="Nombre"
                           name="name"
                           onChange={this.handleChange}
                           defaultValue={this.state.name}
                           fullWidth
                           dense
+                          helperText="Requerido"
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <InputField
                           variant="outlined"
-                          label="Descripción*"
+                          label="Descripción"
                           name="description"
                           onChange={this.handleChange}
                           defaultValue={this.state.description}
@@ -124,6 +125,7 @@ class WarehouseForm extends Component {
                           rows="4"
                           rowsMax="4"
                           fullWidth
+                          helperText="Requerido"
                         />
                       </Grid>
                       <Grid item xs={12}>

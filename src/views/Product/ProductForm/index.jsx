@@ -115,7 +115,7 @@ class ProductForm extends Component {
                       <Grid item xs={12}>
                         <InputField
                           variant="outlined"
-                          label="Nombre*"
+                          label="Nombre"
                           name="name"
                           onChange={this.handleChange}
                           defaultValue={this.state.name}
@@ -126,7 +126,7 @@ class ProductForm extends Component {
                       <Grid item xs={8}>
                         <InputField
                           variant="outlined"
-                          label="Precio*"
+                          label="Precio"
                           name="price"
                           onChange={this.handleChange}
                           defaultValue={this.state.price}
@@ -137,7 +137,7 @@ class ProductForm extends Component {
                       <Grid item xs={4}>
                         <InputField
                           variant="outlined"
-                          label="Cantidad*"
+                          label="Cantidad"
                           name="quantity"
                           onChange={this.handleChange}
                           defaultValue={this.state.quantity}
@@ -148,7 +148,7 @@ class ProductForm extends Component {
                       <Grid item xs={12}>
                         <InputField
                           variant="outlined"
-                          label="Descripción*"
+                          label="Descripción"
                           name="description"
                           onChange={this.handleChange}
                           defaultValue={this.state.description}
@@ -179,7 +179,7 @@ class ProductForm extends Component {
                               <InputField
                                 disabled={isLoading}
                                 variant="outlined"
-                                label="Almacén*"
+                                label="Almacén"
                                 name="warehouse"
                                 select
                                 value={this.state.warehouse}
