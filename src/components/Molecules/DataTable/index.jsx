@@ -48,7 +48,7 @@ class DataTable extends Component {
   };
 
   render() {
-    const { classes, columns, rows } = this.props;
+    const { classes, columns, rows, path, history } = this.props;
     return (
       <Paper>
         <Grid rows={rows} columns={columns}>
@@ -66,7 +66,10 @@ class DataTable extends Component {
           <VirtualTable
             height={500}
             rowComponent={({ children, row }) => (
-              <TableRow hover style={{ cursor: 'pointer' }}>
+              <TableRow
+                hover
+                style={{ cursor: 'pointer' }}
+                onClick={() => history.push(`${path}/${row.id}`)}>
                 {children}
               </TableRow>
             )}

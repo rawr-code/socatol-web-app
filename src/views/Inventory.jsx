@@ -9,16 +9,16 @@ import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 import {
   AllWarehouses,
   NewWarehouse,
-  UpdateWarehouse,
-  DetailsWarehouse
+  DetailsWarehouse,
+  UpdateWarehouse
 } from './Warehouse';
 
 // Product
 import {
   AllProducts,
   NewProduct,
-  UpdateProduct,
-  DetailsProduct
+  DetailsProduct,
+  UpdateProduct
 } from './Product';
 
 const Inventory = () => {
@@ -53,25 +53,33 @@ const InventoryContainer = ({ match: { path }, location: { pathname } }) => {
 
         {/* Warehouse Routes */}
         <Route exact path={`${path}/almacenes`} component={AllWarehouses} />
-        <Route exact path={`${path}/almacen/nuevo`} component={NewWarehouse} />
         <Route
           exact
-          path={`${path}/almacen/:id`}
+          path={`${path}/almacenes/nuevo`}
+          component={NewWarehouse}
+        />
+        <Route
+          exact
+          path={`${path}/almacenes/:id`}
           component={DetailsWarehouse}
         />
         <Route
           exact
-          path={`${path}/almacen/:id/editar`}
+          path={`${path}/almacenes/:id/editar`}
           component={UpdateWarehouse}
         />
 
         {/* Product Routes*/}
         <Route exact path={`${path}/productos`} component={AllProducts} />
-        <Route exact path={`${path}/producto/nuevo`} component={NewProduct} />
-        <Route exact path={`${path}/producto/:id`} component={DetailsProduct} />
+        <Route exact path={`${path}/productos/nuevo`} component={NewProduct} />
         <Route
           exact
-          path={`${path}/producto/:id/editar`}
+          path={`${path}/productos/:id`}
+          component={DetailsProduct}
+        />
+        <Route
+          exact
+          path={`${path}/productos/:id/editar`}
           component={UpdateProduct}
         />
         <Route component={() => <div>404</div>} />

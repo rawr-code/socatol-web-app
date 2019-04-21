@@ -17,12 +17,17 @@ import {
 // Icons
 import {
   Home,
-  People,
+  // People,
+  // CalendarToday,
   DnsRounded,
   PermMediaOutlined,
   Public,
   SettingsEthernet,
-  SettingsInputComponent
+  SettingsInputComponent,
+  Settings,
+  Timer,
+  PhonelinkSetup,
+  Print
 } from '@material-ui/icons';
 
 import styles from './styles';
@@ -31,12 +36,22 @@ const categories = [
   {
     id: 'Menu',
     children: [
-      { id: 'Usuarios', to: '/usuarios', icon: <People />, active: true },
-      { id: 'Ingresos', to: '/ingresos', icon: <DnsRounded /> },
+      { id: 'Ingresos', to: '/ingresos', icon: <DnsRounded />, active: true },
       { id: 'Gastos', to: '/gastos', icon: <PermMediaOutlined /> },
       { id: 'Tesorería', to: '/tesoreria', icon: <SettingsEthernet /> },
+      // { id: 'Calendario', to: '/ingresos', icon: <CalendarToday /> },
       { id: 'Inventario', to: '/inventario', icon: <Public /> },
-      { id: 'Reportes', to: '/reportes', icon: <SettingsInputComponent /> }
+      // { id: 'Contactos', to: '/ingresos', icon: <People /> },
+      { id: 'Reportes', to: '/reportes', icon: <Print /> }
+    ]
+  },
+  {
+    id: 'Sistema',
+    children: [
+      { id: 'Configuración', to: '/ingresos', icon: <Settings /> },
+      { id: 'Rendimiento', to: '/ingresos', icon: <Timer /> },
+      { id: 'Base de datos', to: '/ingresos', icon: <PhonelinkSetup /> },
+      { id: 'Servidor', to: '/ingresos', icon: <SettingsInputComponent /> }
     ]
   }
 ];
