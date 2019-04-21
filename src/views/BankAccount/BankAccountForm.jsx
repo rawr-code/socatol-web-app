@@ -5,11 +5,12 @@ import { withRouter } from 'react-router-dom';
 
 // Material UI
 import {
-  Grid,
   CardContent,
+  Grid,
   FormControlLabel,
   FormHelperText,
-  Checkbox
+  Checkbox,
+  MenuItem
 } from '@material-ui/core';
 
 // Layout
@@ -18,14 +19,18 @@ import MainContainer from '../../components/Layout/MainContainer';
 // Atoms
 import InputField from '../../components/Atoms/InputField';
 
-// Organisms
+// Molecules
 import { FormMaterial } from '../../components/Organisms';
 
-class WarehouseForm extends Component {
+import bankList from './bankList';
+
+class BankAccountForm extends Component {
   state = {
     id: '',
     name: '',
-    description: '',
+    bank: '',
+    type: '',
+    number: '',
     active: true
   };
 
@@ -47,8 +52,8 @@ class WarehouseForm extends Component {
   };
 
   handleValidate = () => {
-    const { name, description } = this.state;
-    const isValid = !name || !description;
+    const { name, bank, type, number } = this.state;
+    const isValid = !name || !bank || !type || !number;
 
     return isValid;
   };
@@ -63,7 +68,9 @@ class WarehouseForm extends Component {
     const input = {
       id: this.state.id,
       name: this.state.name,
-      description: this.state.description,
+      bank: this.state.bank,
+      type: this.state.type,
+      number: this.state.number,
       active: this.state.active
     };
 
@@ -77,14 +84,14 @@ class WarehouseForm extends Component {
         <Mutation
           mutation={mutation}
           variables={{ input: this.generateInput() }}
-          onCompleted={() => history.push('/inventario')}>
+          onCompleted={() => history.push('/tesoreria')}>
           {onSubmit => {
             return (
               <FormMaterial
                 validate={this.handleValidate}
                 onSubmit={this.handleSubmit(onSubmit)}
-                title={data ? 'Editar Almacén' : 'Nuevo Almacén'}
-                subtitle="Información del almacén">
+                title={data ? 'Editar Cuenta' : 'Nueva Cuenta Bancaria'}
+                subtitle="Información de la cuenta">
                 <CardContent>
                   <Grid container spacing={8}>
                     <Grid item xs={12}>
@@ -96,21 +103,48 @@ class WarehouseForm extends Component {
                         defaultValue={this.state.name}
                         fullWidth
                         dense
-                        helperText="Requerido"
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <InputField
                         variant="outlined"
-                        label="Descripción"
-                        name="description"
+                        label="Banco"
+                        name="bank"
                         onChange={this.handleChange}
-                        defaultValue={this.state.description}
-                        multiline
-                        rows="4"
-                        rowsMax="4"
+                        value={this.state.bank}
                         fullWidth
-                        helperText="Requerido"
+                        dense
+                        select>
+                        {bankList.map(bank => (
+                          <MenuItem value={bank.name} key={bank.name}>
+                            {bank.name}
+                          </MenuItem>
+                        ))}
+                      </InputField>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <InputField
+                        variant="outlined"
+                        label="Tipo de cuenta"
+                        name="type"
+                        onChange={this.handleChange}
+                        value={this.state.type}
+                        fullWidth
+                        dense
+                        select>
+                        <MenuItem value="CURRENT">Corriente</MenuItem>
+                        <MenuItem value="SAVING">Ahorro</MenuItem>
+                      </InputField>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <InputField
+                        variant="outlined"
+                        label="Número de cuenta"
+                        name="number"
+                        onChange={this.handleChange}
+                        defaultValue={this.state.number}
+                        fullWidth
+                        dense
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -124,7 +158,7 @@ class WarehouseForm extends Component {
                             color="primary"
                           />
                         }
-                        label={<FormHelperText>Activar almacén</FormHelperText>}
+                        label={<FormHelperText>Activar cuenta</FormHelperText>}
                       />
                     </Grid>
                   </Grid>
@@ -139,4 +173,4 @@ class WarehouseForm extends Component {
 }
 
 // connect to router
-export default withRouter(WarehouseForm);
+export default withRouter(BankAccountForm);

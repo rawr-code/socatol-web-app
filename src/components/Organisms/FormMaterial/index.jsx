@@ -2,13 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Material UI
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  withStyles
-} from '@material-ui/core';
+import { Card, CardActions, Button, withStyles } from '@material-ui/core';
 
 // Molecules
 import FormHeader from '../../../components/Molecules/FormHeader';
@@ -21,7 +15,7 @@ const FormMaterial = props => {
     <form className={classes.root} autoComplete="off" onSubmit={onSubmit}>
       <FormHeader title={title} subtitle={subtitle} />
       <Card className={classes.content}>
-        <CardContent>{children}</CardContent>
+        {children}
         <CardActions>
           <Button color="primary">Cancelar</Button>
           <Button
@@ -44,6 +38,7 @@ FormMaterial.propTypes = {
   validate: PropTypes.func,
   onSubmit: PropTypes.func
 };
+
 // Apply styles
 const _FormMaterial = withStyles(styles)(FormMaterial);
 

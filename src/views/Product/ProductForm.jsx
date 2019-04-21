@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Mutation } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
 // Material UI
 import {
-  Grid,
   CardContent,
+  Grid,
+  MenuItem,
   FormControlLabel,
   FormHelperText,
   Checkbox
@@ -18,14 +19,20 @@ import MainContainer from '../../components/Layout/MainContainer';
 // Atoms
 import InputField from '../../components/Atoms/InputField';
 
-// Organisms
+// Molecules
 import { FormMaterial } from '../../components/Organisms';
 
-class WarehouseForm extends Component {
+// Queries
+import { GET_WAREHOUSES_QUERY } from '../../queries/Warehouse';
+
+class ProductForm extends Component {
   state = {
     id: '',
     name: '',
+    price: '',
+    quantity: '',
     description: '',
+    warehouse: '',
     active: true
   };
 
@@ -36,7 +43,7 @@ class WarehouseForm extends Component {
   componentWillMount() {
     const { data } = this.props;
     if (data) {
-      this.setState({ ...data });
+      this.setState({ ...data, warehouse: data.warehouse.id });
     }
   }
 
@@ -47,8 +54,8 @@ class WarehouseForm extends Component {
   };
 
   handleValidate = () => {
-    const { name, description } = this.state;
-    const isValid = !name || !description;
+    const { name, price, quantity, warehouse } = this.state;
+    const isValid = !name || !price || !quantity || !warehouse;
 
     return isValid;
   };
@@ -63,7 +70,10 @@ class WarehouseForm extends Component {
     const input = {
       id: this.state.id,
       name: this.state.name,
+      price: Number(this.state.price),
+      quantity: Number(this.state.quantity),
       description: this.state.description,
+      warehouse: this.state.warehouse,
       active: this.state.active
     };
 
@@ -83,8 +93,8 @@ class WarehouseForm extends Component {
               <FormMaterial
                 validate={this.handleValidate}
                 onSubmit={this.handleSubmit(onSubmit)}
-                title={data ? 'Editar Almacén' : 'Nuevo Almacén'}
-                subtitle="Información del almacén">
+                title={data ? 'Editar Producto' : 'Nuevo Producto'}
+                subtitle="Información del producto">
                 <CardContent>
                   <Grid container spacing={8}>
                     <Grid item xs={12}>
@@ -96,7 +106,28 @@ class WarehouseForm extends Component {
                         defaultValue={this.state.name}
                         fullWidth
                         dense
-                        helperText="Requerido"
+                      />
+                    </Grid>
+                    <Grid item xs={8}>
+                      <InputField
+                        variant="outlined"
+                        label="Precio"
+                        name="price"
+                        onChange={this.handleChange}
+                        defaultValue={this.state.price}
+                        fullWidth
+                        dense
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <InputField
+                        variant="outlined"
+                        label="Cantidad"
+                        name="quantity"
+                        onChange={this.handleChange}
+                        defaultValue={this.state.quantity}
+                        fullWidth
+                        dense
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -110,8 +141,45 @@ class WarehouseForm extends Component {
                         rows="4"
                         rowsMax="4"
                         fullWidth
-                        helperText="Requerido"
                       />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Query query={GET_WAREHOUSES_QUERY}>
+                        {({ loading, error, data }) => {
+                          let isLoading = false;
+                          let options = [];
+
+                          if (loading) isLoading = true;
+
+                          if (error) {
+                            isLoading = false;
+                            return `Error: ${error.message}`;
+                          }
+
+                          if (Object.keys(data).length > 0) {
+                            isLoading = false;
+                            options = data.getWarehouses;
+                          }
+                          return (
+                            <InputField
+                              disabled={isLoading}
+                              variant="outlined"
+                              label="Almacén"
+                              name="warehouse"
+                              select
+                              value={this.state.warehouse}
+                              onChange={this.handleChange}
+                              fullWidth
+                              dense>
+                              {options.map(item => (
+                                <MenuItem value={item.id} key={item.id}>
+                                  {item.name}
+                                </MenuItem>
+                              ))}
+                            </InputField>
+                          );
+                        }}
+                      </Query>
                     </Grid>
                     <Grid item xs={12}>
                       <FormControlLabel
@@ -124,7 +192,9 @@ class WarehouseForm extends Component {
                             color="primary"
                           />
                         }
-                        label={<FormHelperText>Activar almacén</FormHelperText>}
+                        label={
+                          <FormHelperText>Activar producto</FormHelperText>
+                        }
                       />
                     </Grid>
                   </Grid>
@@ -139,4 +209,4 @@ class WarehouseForm extends Component {
 }
 
 // connect to router
-export default withRouter(WarehouseForm);
+export default withRouter(ProductForm);

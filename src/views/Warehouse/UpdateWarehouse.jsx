@@ -23,7 +23,7 @@ const UpdateWarehouse = props => {
         return (
           <WarehouseForm
             mutation={UPDATE_WAREHOUSE_MUTATION}
-            warehouse={data.getWarehouse}
+            data={data.getWarehouse}
           />
         );
       }}
