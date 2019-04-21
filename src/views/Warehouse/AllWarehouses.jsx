@@ -31,7 +31,7 @@ const AllWarehouses = props => {
         title="Todos los almacenes"
         button={{
           label: 'Añadir almacén',
-          to: '/inventario/almacen/nuevo'
+          to: '/inventario/almacenes/nuevo'
         }}
       />
       <Query query={GET_WAREHOUSES_QUERY}>
@@ -63,7 +63,7 @@ const AllWarehouses = props => {
                         color="primary"
                         fullWidth
                         component={Link}
-                        to={`/inventario/almacen/${warehouse.id}`}
+                        to={`/inventario/almacenes/${warehouse.id}`}
                         //
                       >
                         Administrar

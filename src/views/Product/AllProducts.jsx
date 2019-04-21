@@ -55,10 +55,16 @@ const AllProducts = props => {
               title="Lista de productos"
               button={{
                 label: 'Añadir producto',
-                to: '/inventario/producto/nuevo'
+                to: '/inventario/productos/nuevo'
               }}
             />
-            <DataTable columns={columns} rows={rows} isLoading={isLoading} />
+            <DataTable
+              columns={columns}
+              rows={rows}
+              isLoading={isLoading}
+              path="/inventario/productos"
+              history={props.history}
+            />
           </MainContainer>
         );
       }}
