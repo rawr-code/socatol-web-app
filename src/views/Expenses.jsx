@@ -1,19 +1,25 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import FeatureBar from '../components/Layout/FeatureBar';
 import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 
 // Tabs Views
+
+// Sales Invoice
+import PurchaseInvoce from './Invoice/PurchaseInvoice';
+
+// Client
 import AllSuppliders from './Supplier/AllSuppliders';
 
-const Expenses = props => {
+const Expenses = () => {
   const tabs = [
     {
-      label: 'Facturas de compra'
+      label: 'Facturas de compra',
+      to: '/facturas/compra'
     },
     {
       label: 'Proveedores',
-      component: AllSuppliders
+      to: '/proveedores'
     }
   ];
   return (
@@ -24,10 +30,23 @@ const Expenses = props => {
   );
 };
 
-const ExpensesContainer = ({ match }) => {
+const ExpensesContainer = ({ match: { path }, location: { pathname } }) => {
+  const showHeader =
+    pathname === `${path}/facturas/compra` ||
+    pathname === `${path}/proveedores`;
+
   return (
     <>
-      <Route path={match.path} component={Expenses} />
+      {showHeader && <Route path={path} component={Expenses} />}
+      <Switch>
+        <Redirect from={path} to={`${path}/facturas/compra`} exact />
+        <Route
+          exact
+          path={`${path}/facturas/compra`}
+          component={PurchaseInvoce}
+        />
+        <Route exact path={`${path}/proveedores`} component={AllSuppliders} />
+      </Switch>
     </>
   );
 };

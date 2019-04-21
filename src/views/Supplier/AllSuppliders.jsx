@@ -1,14 +1,13 @@
 import React from 'react';
-import { Query } from 'react-apollo';
 
-// Queries
-import { GET_SUPPLIER_QUERY } from '../../queries/Supplier';
+// Layout
+import { MainContainer } from '../../components/Layout';
 
 // Molecules
 import DataTable from '../../components/Molecules/DataTable';
 import ContentHeader from '../../components/Molecules/ContentHeader';
 
-const AllSuppliders = props => {
+const AllSuppliders = () => {
   const columns = [
     {
       name: 'dni',
@@ -28,31 +27,10 @@ const AllSuppliders = props => {
     }
   ];
   return (
-    <Query query={GET_SUPPLIER_QUERY}>
-      {({ loading, error, data }) => {
-        let isLoading = false;
-        let rows = [];
-
-        if (loading) isLoading = true;
-
-        if (error) {
-          isLoading = false;
-          return `Error: ${error.message}`;
-        }
-
-        if (Object.keys(data).length > 0) {
-          console.log(data);
-          rows = data.getClients;
-        }
-
-        return (
-          <>
-            <ContentHeader title="Lista de proveedores" />
-            <DataTable columns={columns} rows={rows} isLoading={isLoading} />
-          </>
-        );
-      }}
-    </Query>
+    <MainContainer>
+      <ContentHeader title="Lista de proveedores" />
+      <DataTable columns={columns} rows={[]} />
+    </MainContainer>
   );
 };
 

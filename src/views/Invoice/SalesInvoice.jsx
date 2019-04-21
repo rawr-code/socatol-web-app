@@ -7,7 +7,7 @@ import { MainContainer } from '../../components/Layout';
 import DataTable from '../../components/Molecules/DataTable';
 import ContentHeader from '../../components/Molecules/ContentHeader';
 
-const AllClients = () => {
+const SalesInvoice = () => {
   const columns = [
     {
       name: 'dni',
@@ -28,10 +28,10 @@ const AllClients = () => {
   ];
   return (
     <MainContainer>
-      <ContentHeader title="Lista de clientes" />
+      <ContentHeader title="Lista de facturas de venta" />
       <DataTable columns={columns} rows={[]} />
     </MainContainer>
   );
 };
 
-export default AllClients;
+export default SalesInvoice;
