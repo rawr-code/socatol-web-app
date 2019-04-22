@@ -5,7 +5,7 @@ export const GET_PRODUCTS_QUERY = gql`
     getProducts {
       id
       name
-      quantity
+      stock
       price
     }
   }
@@ -17,7 +17,7 @@ export const GET_PRODUCT_QUERY = gql`
       id
       name
       price
-      quantity
+      stock
       description
       active
       warehouse {
