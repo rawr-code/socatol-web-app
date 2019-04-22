@@ -19,7 +19,7 @@ let theme = createMuiTheme({
   typography: {
     useNextVariants: true,
     h5: {
-      fontFamily: 'Google Sans',
+      fontFamily: '"Google Sans"',
       fontWeight: 500,
       fontSize: 26
     }
