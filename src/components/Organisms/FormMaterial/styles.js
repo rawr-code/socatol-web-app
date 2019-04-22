@@ -5,6 +5,9 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main,
     borderRadius: 8
   },
+  md: {
+    maxWidth: 700
+  },
   content: {
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16
