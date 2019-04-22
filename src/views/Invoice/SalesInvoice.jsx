@@ -28,7 +28,13 @@ const SalesInvoice = () => {
   ];
   return (
     <MainContainer>
-      <ContentHeader title="Lista de facturas de venta" />
+      <ContentHeader
+        title="Lista de facturas de venta"
+        button={{
+          label: 'Facturar venta',
+          to: '/ingresos/facturas/venta/nuevo'
+        }}
+      />
       <DataTable columns={columns} rows={[]} />
     </MainContainer>
   );

@@ -28,7 +28,13 @@ const PurchaseInvoice = () => {
   ];
   return (
     <MainContainer>
-      <ContentHeader title="Lista de facturas de compra" />
+      <ContentHeader
+        title="Lista de facturas de compra"
+        button={{
+          label: 'Facturar compra',
+          to: '/gastos/facturar/compra/nuevo'
+        }}
+      />
       <DataTable columns={columns} rows={[]} />
     </MainContainer>
   );
