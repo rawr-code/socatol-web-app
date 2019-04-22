@@ -7,6 +7,7 @@ import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
 
 // Sales Invoice
 import SalesInvoce from './Invoice/SalesInvoice';
+import NewSalesInvoce from './Invoice/InvoiceForm';
 
 // Client
 import AllClients from './Client/AllClients';
@@ -39,7 +40,16 @@ const IncomesContainer = ({ match: { path }, location: { pathname } }) => {
       {showHeader && <Route path={path} component={Incomes} />}
       <Switch>
         <Redirect from={path} to={`${path}/facturas/venta`} exact />
+
+        {/* Invoices */}
         <Route exact path={`${path}/facturas/venta`} component={SalesInvoce} />
+        <Route
+          exact
+          path={`${path}/facturas/venta/nuevo`}
+          component={NewSalesInvoce}
+        />
+
+        {/* Clients */}
         <Route exact path={`${path}/clientes`} component={AllClients} />
       </Switch>
     </>
