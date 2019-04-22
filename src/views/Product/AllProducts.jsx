@@ -22,7 +22,7 @@ const AllProducts = props => {
       title: 'Precio'
     },
     {
-      name: 'quantity',
+      name: 'stock',
       title: 'Almacenado'
     },
     {

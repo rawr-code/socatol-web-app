@@ -23,7 +23,7 @@ const UpdateProduct = props => {
         return (
           <ProductForm
             mutation={UPDATE_PRODUCT_MUTATION}
-            product={data.getProduct}
+            data={data.getProduct}
           />
         );
       }}

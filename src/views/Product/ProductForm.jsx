@@ -30,7 +30,7 @@ class ProductForm extends Component {
     id: '',
     name: '',
     price: '',
-    quantity: '',
+    stock: '',
     description: '',
     warehouse: '',
     active: true
@@ -54,8 +54,8 @@ class ProductForm extends Component {
   };
 
   handleValidate = () => {
-    const { name, price, quantity, warehouse } = this.state;
-    const isValid = !name || !price || !quantity || !warehouse;
+    const { name, price, stock, warehouse } = this.state;
+    const isValid = !name || !price || !stock || !warehouse;
 
     return isValid;
   };
@@ -71,7 +71,7 @@ class ProductForm extends Component {
       id: this.state.id,
       name: this.state.name,
       price: Number(this.state.price),
-      quantity: Number(this.state.quantity),
+      stock: Number(this.state.stock),
       description: this.state.description,
       warehouse: this.state.warehouse,
       active: this.state.active
@@ -123,9 +123,9 @@ class ProductForm extends Component {
                       <InputField
                         variant="outlined"
                         label="Cantidad"
-                        name="quantity"
+                        name="stock"
                         onChange={this.handleChange}
-                        defaultValue={this.state.quantity}
+                        defaultValue={this.state.stock}
                         fullWidth
                         dense
                       />
