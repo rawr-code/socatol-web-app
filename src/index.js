@@ -1,35 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from 'react-apollo';
-import ApolloClient from 'apollo-boost';
-
-// import jwt from 'jsonwebtoken';
-
-// Utils
-// import setAuthorizationToken from './utils/setAuthorizationToken';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { onError } from 'apollo-link-error';
+import { ApolloLink } from 'apollo-link';
 
 import App from './App';
 
-// if (localStorage.token) {
-//   setAuthorizationToken(localStorage.token);
-//   const decoded = jwt.decode(localStorage.token);
-//   const currentTime = Date.now() / 1000;
-
-//   if (decoded.exp < currentTime) {
-//     localStorage.removeItem('token');
-//     console.log('Token removido!');
-//   } else {
-//     console.log('Agregando Token');
-//   }
-// }
-
 // Apollo Config
-const client = new ApolloClient({
+
+// Create Cache
+const cache = new InMemoryCache();
+
+const Errors = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
+// Create an http link
+const httpLink = new HttpLink({
   uri: 'http://localhost:5000/graphql',
-  onError: ({ networkError, graphQLErrors }) => {
-    console.log('graphQlErrors', graphQLErrors);
-    console.log('networkError', networkError);
-  }
+  credentials: 'same-origin'
+});
+
+// Create an Apollo Client
+const client = new ApolloClient({
+  link: ApolloLink.from([Errors, httpLink]),
+  cache
 });
 
 ReactDOM.render(
