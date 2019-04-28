@@ -33,6 +33,7 @@ import { GET_PRODUCTS_QUERY } from '../../queries/Product';
 const ProductListForm = props => {
   const {
     handleAddProduct,
+    handleQuantityProduct,
     handleRemoveProduct,
     next,
     back,
@@ -104,7 +105,7 @@ const ProductListForm = props => {
                 <TableCell
                   align="right"
                   style={{ width: 150, padding: '0 8px' }}>
-                  Total
+                  Subtotal
                 </TableCell>
                 <TableCell
                   align="center"
@@ -114,7 +115,7 @@ const ProductListForm = props => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map(row => (
+              {rows.map((row, index) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row" padding="dense">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -139,13 +140,14 @@ const ProductListForm = props => {
                     <InputField
                       variant="outlined"
                       name="quantity"
-                      onChange={e => console.log(e.target.value)}
+                      onChange={handleQuantityProduct(index)}
                       dense
                       style={{ margin: '8px 0' }}
+                      defaultValue={row.quantity}
                     />
                   </TableCell>
                   <TableCell align="right" style={{ padding: '0 8px' }}>
-                    {row.price} Bs. S
+                    {row.total ? row.total : 0} Bs. S
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <IconButton onClick={handleRemoveProduct(row.id)}>
@@ -157,14 +159,6 @@ const ProductListForm = props => {
             </TableBody>
           </Table>
         )}
-        {/* <Typography gutterBottom variant="body1">
-          $4.50
-        </Typography> */}
-        {/* <CardContent>
-          <Button variant="contained" color="primary">
-            Añadir producto
-          </Button>
-        </CardContent> */}
       </FormMaterial>
     </MainContainer>
   );

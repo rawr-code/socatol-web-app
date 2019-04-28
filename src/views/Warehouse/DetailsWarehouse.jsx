@@ -21,7 +21,7 @@ const DetailsWarehouse = props => {
 
         return (
           <>
-            <FeatureBar title={warehouse.name} />
+            <FeatureBar title={warehouse.name} back />
             <p>Descripción: {warehouse.description}</p>
             <p>Activo: {`${warehouse.active}`}</p>
           </>

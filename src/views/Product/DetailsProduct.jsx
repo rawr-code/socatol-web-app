@@ -21,7 +21,11 @@ const DetailsProduct = props => {
 
         return (
           <>
-            <FeatureBar title={product.name} />
+            <FeatureBar
+              title={product.name}
+              subtitle={product.warehouse.name}
+              back
+            />
             <p>Precio: {product.price}</p>
             <p>Almacenado: {product.stock}</p>
             <p>Descripción: {product.description}</p>

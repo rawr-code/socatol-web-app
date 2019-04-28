@@ -1,7 +1,18 @@
 import React from 'react';
 
 // Material UI
-import { Grid, CardContent, Button, MenuItem } from '@material-ui/core';
+import {
+  Grid,
+  CardContent,
+  Button,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
+  FormHelperText,
+  FormControl,
+  // FormLabel,
+  Typography
+} from '@material-ui/core';
 
 // Layout
 import MainContainer from '../../components/Layout/MainContainer';
@@ -14,7 +25,7 @@ import { FormMaterial } from '../../components/Organisms';
 
 const InvoiceDetailsForm = props => {
   const { handleChange, back, data, onSubmit } = props;
-  const { paymentType, note } = data;
+  const { paymentType, note, dispatch } = data;
   return (
     <MainContainer>
       <FormMaterial
@@ -58,8 +69,31 @@ const InvoiceDetailsForm = props => {
                 rows="4"
                 rowsMax="4"
                 fullWidth
-                helperText="Opcional"
               />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl component="fieldset">
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={dispatch}
+                      onChange={handleChange}
+                      value={'dispatch'}
+                      name="dispatch"
+                      color="primary"
+                    />
+                  }
+                  label={
+                    <Typography variant="body2" component="label">
+                      Despachado
+                    </Typography>
+                  }
+                />
+                <FormHelperText style={{ marginLeft: 8 }}>
+                  Deshabilite esta opción si el pedido no será despachado al
+                  generar la factura
+                </FormHelperText>
+              </FormControl>
             </Grid>
           </Grid>
         </CardContent>

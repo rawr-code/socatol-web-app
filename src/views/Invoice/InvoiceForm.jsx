@@ -34,7 +34,9 @@ class InvoiceForm extends Component {
     products: [],
     invoice: {
       paymentType: '',
-      note: ''
+      note: '',
+      dispatch: true,
+      total: 0
     }
   };
 
@@ -45,9 +47,38 @@ class InvoiceForm extends Component {
     this.setState({ [stateName]: { ...data, [name]: result } });
   };
 
-  handleAddProduct = products => {
+  handleAddProduct = productsList => {
+    const products = productsList.map(product => ({ ...product, quantity: 0 }));
     this.setState({
       products
+    });
+  };
+
+  handleQuantityProduct = index => e => {
+    let { products, invoice } = this.state;
+    let product = products[index];
+    let total = 0;
+
+    if (products.length === 0) {
+      total = 0;
+    }
+
+    const { value } = e.target;
+
+    product.quantity = Number(value);
+    product.total = product.price * value;
+
+    products[index] = product;
+
+    products.map(
+      product => (total += Number(product.price) * Number(product.quantity))
+    );
+
+    console.log(total);
+
+    this.setState({
+      products,
+      invoice: { ...invoice, total }
     });
   };
 
@@ -59,6 +90,7 @@ class InvoiceForm extends Component {
       products
     });
   };
+
   handleNext = () => {
     const { activeStep, steps } = this.state;
     if (activeStep < steps.length - 1) {
@@ -91,13 +123,15 @@ class InvoiceForm extends Component {
   };
 
   generateInput = () => {
-    const { person, products, invoice } = this.state;
-    const { isNew, id: personId, ...personInfo } = person;
+    const {
+      person: { isNew, id: personId, ...personInfo },
+      products,
+      invoice: { paymentType, note }
+    } = this.state;
+
     const productsList = products.map(product => ({
       product: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 5
+      quantity: product.quantity
     }));
 
     const input = {
@@ -105,7 +139,8 @@ class InvoiceForm extends Component {
         ? { ...personInfo, dni: Number(personInfo.dni) }
         : { id: personId },
       products: productsList,
-      ...invoice
+      paymentType,
+      note
     };
 
     return input;
@@ -146,6 +181,7 @@ class InvoiceForm extends Component {
               {activeStep === 1 && (
                 <ProductsListForm
                   handleAddProduct={this.handleAddProduct}
+                  handleQuantityProduct={this.handleQuantityProduct}
                   handleRemoveProduct={this.handleRemoveProduct}
                   data={products}
                   back={this.handleBack}
