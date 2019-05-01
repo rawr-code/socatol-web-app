@@ -1,7 +1,7 @@
 const styles = () => ({
   root: {
     flex: 1,
-    padding: '40px 24px 0'
+    padding: '40px 24px'
   }
 });
 

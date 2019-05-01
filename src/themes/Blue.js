@@ -52,8 +52,7 @@ const overrides = {
   MuiCardActions: {
     root: {
       justifyContent: 'flex-end',
-      padding: 24,
-      paddingTop: 0
+      padding: 24
     }
   },
   MuiIconButton: {

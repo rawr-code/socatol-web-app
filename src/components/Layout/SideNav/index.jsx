@@ -17,8 +17,8 @@ import {
 // Icons
 import {
   Home,
-  // People,
-  // CalendarToday,
+  People,
+  CalendarToday,
   DnsRounded,
   PermMediaOutlined,
   Public,
@@ -39,15 +39,15 @@ const categories = [
       { id: 'Ingresos', to: '/ingresos', icon: <DnsRounded />, active: true },
       { id: 'Gastos', to: '/gastos', icon: <PermMediaOutlined /> },
       { id: 'Tesorería', to: '/tesoreria', icon: <SettingsEthernet /> },
-      // { id: 'Calendario', to: '/ingresos', icon: <CalendarToday /> },
       { id: 'Inventario', to: '/inventario', icon: <Public /> },
-      // { id: 'Contactos', to: '/ingresos', icon: <People /> },
       { id: 'Reportes', to: '/reportes', icon: <Print /> }
     ]
   },
   {
     id: 'Sistema',
     children: [
+      { id: 'Calendario', to: '/ingresos', icon: <CalendarToday /> },
+      { id: 'Contactos', to: '/ingresos', icon: <People /> },
       { id: 'Configuración', to: '/ingresos', icon: <Settings /> },
       { id: 'Rendimiento', to: '/ingresos', icon: <Timer /> },
       { id: 'Base de datos', to: '/ingresos', icon: <PhonelinkSetup /> },

@@ -12,10 +12,10 @@ import styles from './styles';
 
 const FormMaterial = props => {
   const { classes, title, subtitle, children, onSubmit, actions } = props;
-  const { md } = props;
+  const { sm, md } = props;
   return (
     <form
-      className={classNames(classes.root, md && classes.md)}
+      className={classNames(classes.root, sm && classes.sm, md && classes.md)}
       autoComplete="off"
       onSubmit={onSubmit}>
       <FormHeader title={title} subtitle={subtitle} />

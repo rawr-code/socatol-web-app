@@ -50,8 +50,7 @@ const overrides = {
   MuiCardActions: {
     root: {
       justifyContent: 'flex-end',
-      padding: 24,
-      paddingTop: 0
+      padding: 24
     }
   },
   MuiIconButton: {
@@ -60,6 +59,11 @@ const overrides = {
       '&:hover': {
         backgroundColor: 'transparent'
       }
+    }
+  },
+  MuiInputLabel: {
+    outlined: {
+      zIndex: 0
     }
   },
   MuiFormControlLabel: {
