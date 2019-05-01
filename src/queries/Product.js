@@ -7,6 +7,7 @@ export const GET_PRODUCTS_QUERY = gql`
       name
       stock
       price
+      iva
     }
   }
 `;
@@ -17,9 +18,9 @@ export const GET_PRODUCT_QUERY = gql`
       id
       name
       price
+      iva
       stock
       description
-      active
       warehouse {
         id
         name

@@ -6,7 +6,6 @@ export const GET_WAREHOUSES_QUERY = gql`
       id
       name
       description
-      active
     }
   }
 `;
@@ -17,7 +16,6 @@ export const GET_WAREHOUSE_QUERY = gql`
       id
       name
       description
-      active
     }
   }
 `;
