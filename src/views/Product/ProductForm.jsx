@@ -4,14 +4,7 @@ import { Query, Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
 // Material UI
-import {
-  CardContent,
-  Grid,
-  MenuItem,
-  FormControlLabel,
-  FormHelperText,
-  Checkbox
-} from '@material-ui/core';
+import { CardContent, Grid, MenuItem, InputAdornment } from '@material-ui/core';
 
 // Layout
 import MainContainer from '../../components/Layout/MainContainer';
@@ -30,10 +23,10 @@ class ProductForm extends Component {
     id: '',
     name: '',
     price: '',
+    iva: '',
     stock: '',
     description: '',
-    warehouse: '',
-    active: true
+    warehouse: ''
   };
 
   static propTypes = {
@@ -54,8 +47,8 @@ class ProductForm extends Component {
   };
 
   handleValidate = () => {
-    const { name, price, stock, warehouse } = this.state;
-    const isValid = !name || !price || !stock || !warehouse;
+    const { name, price, iva, stock, warehouse } = this.state;
+    const isValid = !name || !price || !iva || !stock || !warehouse;
 
     return isValid;
   };
@@ -71,10 +64,10 @@ class ProductForm extends Component {
       id: this.state.id,
       name: this.state.name,
       price: Number(this.state.price),
+      iva: Number(this.state.iva),
       stock: Number(this.state.stock),
       description: this.state.description,
-      warehouse: this.state.warehouse,
-      active: this.state.active
+      warehouse: this.state.warehouse
     };
 
     return input;
@@ -108,7 +101,7 @@ class ProductForm extends Component {
                         dense
                       />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12}>
                       <InputField
                         variant="outlined"
                         label="Precio"
@@ -117,9 +110,32 @@ class ProductForm extends Component {
                         defaultValue={this.state.price}
                         fullWidth
                         dense
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment
+                              position="end"
+                              style={{ width: 40 }}>
+                              Bs. S
+                            </InputAdornment>
+                          )
+                        }}
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
+                      <InputField
+                        variant="outlined"
+                        label="IVA"
+                        name="iva"
+                        onChange={this.handleChange}
+                        value={this.state.iva}
+                        fullWidth
+                        dense
+                        select>
+                        <MenuItem value={0}>Excento</MenuItem>
+                        <MenuItem value={12}>12 %</MenuItem>
+                      </InputField>
+                    </Grid>
+                    <Grid item xs={6}>
                       <InputField
                         variant="outlined"
                         label="Cantidad"
@@ -170,7 +186,8 @@ class ProductForm extends Component {
                               value={this.state.warehouse}
                               onChange={this.handleChange}
                               fullWidth
-                              dense>
+                              dense
+                              required>
                               {options.map(item => (
                                 <MenuItem value={item.id} key={item.id}>
                                   {item.name}
@@ -180,22 +197,6 @@ class ProductForm extends Component {
                           );
                         }}
                       </Query>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={this.state.active}
-                            onChange={this.handleChange}
-                            value={'active'}
-                            name="active"
-                            color="primary"
-                          />
-                        }
-                        label={
-                          <FormHelperText>Activar producto</FormHelperText>
-                        }
-                      />
                     </Grid>
                   </Grid>
                 </CardContent>

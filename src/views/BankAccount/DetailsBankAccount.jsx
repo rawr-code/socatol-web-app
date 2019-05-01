@@ -21,7 +21,11 @@ const DetailsBankAccount = props => {
 
         return (
           <>
-            <FeatureBar title={bankAccount.name} />
+            <FeatureBar
+              title={bankAccount.name}
+              subtitle={bankAccount.bank}
+              back
+            />
             <p>Banco: {bankAccount.bank}</p>
             <p>Tipo de cuenta: {bankAccount.type}</p>
             <p>Número de cuenta: {bankAccount.number}</p>

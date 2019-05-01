@@ -54,7 +54,7 @@ const AllWarehouses = props => {
                         </Avatar>
                       }
                       title={warehouse.name}
-                      subheader={warehouse.active ? 'Activo' : 'Inactivo'}
+                      subheader="Productos"
                     />
 
                     <CardActions>

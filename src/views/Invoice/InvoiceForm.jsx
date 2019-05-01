@@ -22,11 +22,11 @@ class InvoiceForm extends Component {
       invoice: {}
     },
     person: {
-      isNew: false,
-      id: '',
+      personId: '',
       dni: '',
-      firstname: '',
-      lastname: '',
+      name: '',
+      state: '',
+      municipality: '',
       address: '',
       phone: '',
       email: ''
@@ -47,6 +47,12 @@ class InvoiceForm extends Component {
     this.setState({ [stateName]: { ...data, [name]: result } });
   };
 
+  handleSelect = value => {
+    const { person } = this.state;
+    this.setState({
+      person: { ...person, personId: value }
+    });
+  };
   handleAddProduct = productsList => {
     const products = productsList.map(product => ({ ...product, quantity: 0 }));
     this.setState({
@@ -124,7 +130,7 @@ class InvoiceForm extends Component {
 
   generateInput = () => {
     const {
-      person: { isNew, id: personId, ...personInfo },
+      person: { personId, ...personInfo },
       products,
       invoice: { paymentType, note }
     } = this.state;
@@ -135,14 +141,14 @@ class InvoiceForm extends Component {
     }));
 
     const input = {
-      person: isNew
-        ? { ...personInfo, dni: Number(personInfo.dni) }
-        : { id: personId },
+      person:
+        personId.id === 'new'
+          ? { ...personInfo, dni: Number(personInfo.dni) }
+          : { id: personId.id },
       products: productsList,
       paymentType,
       note
     };
-
     return input;
   };
 
@@ -173,6 +179,7 @@ class InvoiceForm extends Component {
               </Stepper>
               {activeStep === 0 && (
                 <PersonForm
+                  handleSelect={this.handleSelect}
                   handleChange={this.handleChange('person')}
                   data={person}
                   next={this.handleNext}

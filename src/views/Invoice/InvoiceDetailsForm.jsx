@@ -54,8 +54,8 @@ const InvoiceDetailsForm = props => {
                 dense
                 select
                 helperText="Requerido">
-                <MenuItem value="CASH">Efectivo</MenuItem>
-                <MenuItem value="TRANSFERENCE">Transferencia</MenuItem>
+                <MenuItem value="EFECTIVO">Efectivo</MenuItem>
+                <MenuItem value="TRANSFERENCIA">Transferencia</MenuItem>
               </InputField>
             </Grid>
             <Grid item xs={12}>

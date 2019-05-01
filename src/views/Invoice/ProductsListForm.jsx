@@ -1,6 +1,4 @@
 import React from 'react';
-import Select from 'react-select';
-import Animated from 'react-select/lib/animated';
 import { Query } from 'react-apollo';
 
 // Material UI
@@ -14,7 +12,8 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  FormHelperText
+  FormHelperText,
+  Icon
 } from '@material-ui/core';
 
 import { Box, X } from 'react-feather';
@@ -23,6 +22,7 @@ import MainContainer from '../../components/Layout/MainContainer';
 
 // Atoms
 import InputField from '../../components/Atoms/InputField';
+import SelectField from '../../components/Atoms/SelectField';
 
 // Organisms
 import { FormMaterial } from '../../components/Organisms';
@@ -67,12 +67,13 @@ const ProductListForm = props => {
                   if (data.getProducts) options = data.getProducts;
 
                   return (
-                    <Select
+                    <SelectField
                       options={options}
                       isLoading={loading}
+                      isClearable={false}
                       isMulti
+                      noOptionsMessage={() => 'No se contraron datos'}
                       loadingMessage={() => 'Cargando...'}
-                      components={Animated()}
                       placeholder="Seleccionar productos"
                       getOptionValue={option => option.id}
                       getOptionLabel={option => option.name}
@@ -119,7 +120,9 @@ const ProductListForm = props => {
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row" padding="dense">
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <Box size={24} style={{ color: '#039be5' }} />
+                      <Icon color="primary">
+                        <Box size={24} />
+                      </Icon>
                       <div
                         style={{
                           marginLeft: 20,

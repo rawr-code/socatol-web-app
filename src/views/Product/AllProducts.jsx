@@ -31,33 +31,33 @@ const AllProducts = props => {
     }
   ];
   return (
-    <Query query={GET_PRODUCTS_QUERY} pollInterval={3000}>
-      {({ loading, error, data }) => {
-        let isLoading = false;
-        let rows = [];
+    <MainContainer>
+      <ContentHeader
+        title="Lista de productos"
+        button={{
+          label: 'Añadir producto',
+          to: '/inventario/productos/nuevo'
+        }}
+      />
+      <Query query={GET_PRODUCTS_QUERY} pollInterval={3000}>
+        {({ loading, error, data }) => {
+          let isLoading = false;
+          let rows = [];
 
-        if (loading) isLoading = true;
+          if (loading) isLoading = true;
 
-        if (error) {
-          isLoading = false;
-          return `Error: ${error.message}`;
-        }
+          if (error) {
+            isLoading = false;
+            return `Error: ${error.message}`;
+          }
 
-        if (Object.keys(data).length > 0) {
-          isLoading = false;
-          rows = data.getProducts;
-        }
+          if (Object.keys(data).length > 0) {
+            isLoading = false;
+            rows = data.getProducts;
+          }
 
-        console.log(data);
-        return (
-          <MainContainer>
-            <ContentHeader
-              title="Lista de productos"
-              button={{
-                label: 'Añadir producto',
-                to: '/inventario/productos/nuevo'
-              }}
-            />
+          console.log(data);
+          return (
             <DataTable
               columns={columns}
               rows={rows}
@@ -65,10 +65,10 @@ const AllProducts = props => {
               path="/inventario/productos"
               history={props.history}
             />
-          </MainContainer>
-        );
-      }}
-    </Query>
+          );
+        }}
+      </Query>
+    </MainContainer>
   );
 };
 

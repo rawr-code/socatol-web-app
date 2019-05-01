@@ -4,13 +4,7 @@ import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
 
 // Material UI
-import {
-  Grid,
-  CardContent,
-  FormControlLabel,
-  FormHelperText,
-  Checkbox
-} from '@material-ui/core';
+import { Grid, CardContent } from '@material-ui/core';
 
 // Layout
 import MainContainer from '../../components/Layout/MainContainer';
@@ -25,8 +19,7 @@ class WarehouseForm extends Component {
   state = {
     id: '',
     name: '',
-    description: '',
-    active: true
+    description: ''
   };
 
   static propTypes = {
@@ -63,8 +56,7 @@ class WarehouseForm extends Component {
     const input = {
       id: this.state.id,
       name: this.state.name,
-      description: this.state.description,
-      active: this.state.active
+      description: this.state.description
     };
 
     return input;
@@ -96,7 +88,7 @@ class WarehouseForm extends Component {
                         defaultValue={this.state.name}
                         fullWidth
                         dense
-                        helperText="Requerido"
+                        required
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -110,21 +102,6 @@ class WarehouseForm extends Component {
                         rows="4"
                         rowsMax="4"
                         fullWidth
-                        helperText="Requerido"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={this.state.active}
-                            onChange={this.handleChange}
-                            value={'active'}
-                            name="active"
-                            color="primary"
-                          />
-                        }
-                        label={<FormHelperText>Activar almacén</FormHelperText>}
                       />
                     </Grid>
                   </Grid>

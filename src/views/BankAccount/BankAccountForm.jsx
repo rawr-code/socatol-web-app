@@ -125,6 +125,17 @@ class BankAccountForm extends Component {
                     <Grid item xs={12}>
                       <InputField
                         variant="outlined"
+                        label="Número de cuenta"
+                        name="number"
+                        onChange={this.handleChange}
+                        defaultValue={this.state.number}
+                        fullWidth
+                        dense
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <InputField
+                        variant="outlined"
                         label="Tipo de cuenta"
                         name="type"
                         onChange={this.handleChange}
@@ -135,17 +146,6 @@ class BankAccountForm extends Component {
                         <MenuItem value="CURRENT">Corriente</MenuItem>
                         <MenuItem value="SAVING">Ahorro</MenuItem>
                       </InputField>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <InputField
-                        variant="outlined"
-                        label="Número de cuenta"
-                        name="number"
-                        onChange={this.handleChange}
-                        defaultValue={this.state.number}
-                        fullWidth
-                        dense
-                      />
                     </Grid>
                     <Grid item xs={12}>
                       <FormControlLabel

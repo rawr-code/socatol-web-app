@@ -2,21 +2,14 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material UI
-import {
-  Grid,
-  CardContent,
-  Button,
-  Checkbox,
-  MenuItem,
-  FormHelperText,
-  FormControlLabel
-} from '@material-ui/core';
+import { Grid, CardContent, Button } from '@material-ui/core';
 
 // Layout
 import MainContainer from '../../components/Layout/MainContainer';
 
 // Atoms
 import InputField from '../../components/Atoms/InputField';
+import SelectField from '../../components/Atoms/SelectField';
 
 // Organisms
 import { FormMaterial } from '../../components/Organisms';
@@ -25,11 +18,21 @@ import { FormMaterial } from '../../components/Organisms';
 import { GET_PERSONS_QUERY } from '../../queries/Person';
 
 const ClientForm = props => {
-  const { handleChange, next, data } = props;
-  const { isNew, id, dni, firstname, lastname, address, phone, email } = data;
+  const { handleSelect, handleChange, next, data } = props;
+  const {
+    personId,
+    dni,
+    name,
+    state,
+    municipality,
+    address,
+    phone,
+    email
+  } = data;
   return (
     <MainContainer>
       <FormMaterial
+        sm={personId.id === 'new'}
         title={'Cliente'}
         subtitle="Información del cliente"
         actions={
@@ -40,22 +43,38 @@ const ClientForm = props => {
         <CardContent>
           <Grid container spacing={8}>
             <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isNew}
-                    onChange={handleChange}
-                    value={'Nuevo'}
-                    name="isNew"
-                    color="primary"
-                  />
-                }
-                label={<FormHelperText>¿Nuevo cliente?</FormHelperText>}
-              />
+              <Query query={GET_PERSONS_QUERY}>
+                {({ loading, error, data }) => {
+                  let persons = [];
+                  if (loading) console.log('loading...');
+                  if (error) console.log(error);
+                  if (data.getPersonalInformations)
+                    persons = [
+                      { id: 'new', name: 'Nuevo Cliente' },
+                      ...data.getPersonalInformations
+                    ];
+
+                  return (
+                    <SelectField
+                      options={persons}
+                      isLoading={loading}
+                      isClearable={false}
+                      label="Cliente"
+                      noOptionsMessage={() => 'No se contraron datos'}
+                      loadingMessage={() => 'Cargando...'}
+                      placeholder="Seleccione un cliente"
+                      getOptionValue={option => option.id}
+                      getOptionLabel={option => option.name}
+                      onChange={handleSelect}
+                      value={personId}
+                    />
+                  );
+                }}
+              </Query>
             </Grid>
-            {isNew === true ? (
+            {personId.id === 'new' && (
               <>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <InputField
                     variant="outlined"
                     label="Cedula"
@@ -66,24 +85,35 @@ const ClientForm = props => {
                     dense
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <InputField
                     variant="outlined"
                     label="Nombre"
-                    name="firstname"
+                    name="name"
                     onChange={handleChange}
-                    defaultValue={firstname}
+                    defaultValue={name}
                     fullWidth
                     dense
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <InputField
                     variant="outlined"
-                    label="Apellido"
-                    name="lastname"
+                    label="Estado"
+                    name="state"
                     onChange={handleChange}
-                    defaultValue={lastname}
+                    defaultValue={state}
+                    fullWidth
+                    dense
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <InputField
+                    variant="outlined"
+                    label="Municipio"
+                    name="municipality"
+                    onChange={handleChange}
+                    defaultValue={municipality}
                     fullWidth
                     dense
                   />
@@ -99,7 +129,7 @@ const ClientForm = props => {
                     dense
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <InputField
                     variant="outlined"
                     label="Telefono"
@@ -110,7 +140,7 @@ const ClientForm = props => {
                     dense
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <InputField
                     variant="outlined"
                     label="Correo"
@@ -122,53 +152,6 @@ const ClientForm = props => {
                   />
                 </Grid>
               </>
-            ) : (
-              <Grid item xs={12}>
-                <Query query={GET_PERSONS_QUERY}>
-                  {({ loading, error, data }) => {
-                    let persons = [];
-                    console.log(data);
-                    if (loading) console.log('loading...');
-
-                    if (error) console.log(error);
-
-                    if (data.getPersonalInformations)
-                      persons = data.getPersonalInformations;
-
-                    if (persons.length > 0) {
-                      return (
-                        <InputField
-                          variant="outlined"
-                          label="Cliente"
-                          name="id"
-                          onChange={handleChange}
-                          value={id}
-                          fullWidth
-                          dense
-                          select>
-                          {persons.map(person => (
-                            <MenuItem value={person.id} key={person.id}>
-                              {person.firstname} {person.lastname}
-                            </MenuItem>
-                          ))}
-                        </InputField>
-                      );
-                    }
-                    return (
-                      <InputField
-                        variant="outlined"
-                        label="Cliente"
-                        name="id"
-                        onChange={handleChange}
-                        value={id}
-                        fullWidth
-                        dense
-                        select
-                      />
-                    );
-                  }}
-                </Query>
-              </Grid>
             )}
           </Grid>
         </CardContent>
