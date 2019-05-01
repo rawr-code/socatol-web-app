@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 // Material UI Custom Theme
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import theme from './themes/Blue';
+import theme from './themes/Green';
 
 // Layout
 import Layout from './components/Layout';
