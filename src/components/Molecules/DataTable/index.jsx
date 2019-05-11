@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // DX React Grid
 import {
@@ -10,13 +10,16 @@ import {
   IntegratedFiltering,
   // GroupRow
   GroupingState,
-  IntegratedGrouping
+  IntegratedGrouping,
+  // Pagination
+  PagingState,
+  IntegratedPaging
 } from '@devexpress/dx-react-grid';
 
 // DX React Grid Material
 import {
   Grid,
-  VirtualTable,
+  Table,
   Toolbar,
   TableHeaderRow,
   // Search
@@ -24,87 +27,109 @@ import {
   // GroupRow
   TableGroupRow,
   GroupingPanel,
-  DragDropProvider
+  DragDropProvider,
+  // Pagination
+  PagingPanel
 } from '@devexpress/dx-react-grid-material-ui';
 
 // Material UI
-import {
-  TableRow,
-  TableCell,
-  Toolbar as MuiToolbar,
-  Paper,
-  withStyles
-} from '@material-ui/core';
+import { TableRow, Paper, withStyles } from '@material-ui/core';
+
 import styles from './styles';
 
-class DataTable extends Component {
-  state = {
-    rows: [],
-    columns: [],
-    tableColumnExtensions: [
-      // { columnName: 'price', align: 'right' },
-      { columnName: 'options', width: 70 }
-    ]
-  };
+const DataTable = props => {
+  const { columns, rows, handleClick } = props;
+  const onClick = handleClick ? value => () => handleClick(value) : null;
+  const tableColumnExtensions = [
+    {
+      columnName: 'name',
+      align: 'left'
+    },
+    {
+      columnName: 'iva',
+      align: 'right'
+    },
+    {
+      columnName: 'stock',
+      align: 'right'
+    },
+    {
+      columnName: 'price',
+      align: 'right'
+    },
+    {
+      columnName: 'date',
+      align: 'left',
+      width: 116
+    },
+    {
+      columnName: 'ref',
+      align: 'left',
+      width: 150
+    },
+    {
+      columnName: 'concept',
+      align: 'left'
+    },
+    {
+      columnName: 'amount',
+      align: 'right'
+    }
+  ];
+  return (
+    <Paper>
+      <Grid rows={rows} columns={columns}>
+        <DragDropProvider />
+        <SearchState />
+        <SortingState
+          defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
+        />
+        <GroupingState />
+        <PagingState defaultCurrentPage={0} defaultPageSize={10} />
 
-  render() {
-    const { classes, columns, rows, path, history } = this.props;
-    return (
-      <Paper>
-        <Grid rows={rows} columns={columns}>
-          <DragDropProvider />
-          <SearchState />
-          <SortingState
-            defaultSorting={[{ columnName: 'name', direction: 'asc' }]}
-          />
-          <GroupingState />
+        <IntegratedSorting />
+        <IntegratedFiltering />
+        <IntegratedGrouping />
+        <IntegratedPaging />
 
-          <IntegratedSorting />
-          <IntegratedFiltering />
-          <IntegratedGrouping />
+        <Table
+          rowComponent={({ children, row }) => (
+            <TableRow
+              hover
+              style={{ cursor: 'pointer' }}
+              onClick={onClick && onClick(row)}>
+              {children}
+            </TableRow>
+          )}
+          messages={{ noData: 'No se encontraron datos' }}
+          columnExtensions={tableColumnExtensions}
+        />
 
-          <VirtualTable
-            height={500}
-            rowComponent={({ children, row }) => (
-              <TableRow
-                hover
-                style={{ cursor: 'pointer' }}
-                onClick={() => history.push(`${path}/${row.id}`)}>
-                {children}
-              </TableRow>
-            )}
-            noDataRowComponent={() => (
-              <TableRow>
-                <TableCell className={classes.noData}>
-                  <big>No se encontraron datos</big>
-                </TableCell>
-              </TableRow>
-            )}
-          />
-          {/* rowComponent */}
-          <TableHeaderRow
-            showSortingControls
-            messages={{ sortingHint: 'Ordenar' }}
-          />
-          <TableGroupRow />
+        <TableHeaderRow
+          showSortingControls
+          messages={{ sortingHint: 'Ordenar' }}
+        />
+        <PagingPanel
+          pageSizes={[10, 25, 50, 100]}
+          messages={{
+            rowsPerPage: 'Filas por página',
+            info: '{from}-{to} de {count}'
+          }}
+        />
+        <TableGroupRow />
 
-          <Toolbar
-            rootComponent={({ children }) => (
-              <MuiToolbar className={classes.toolbar}>{children}</MuiToolbar>
-            )}
-          />
-          <SearchPanel messages={{ searchPlaceholder: 'Buscar...' }} />
-          <GroupingPanel
-            showGroupingControls
-            messages={{
-              groupByColumn:
-                'Arrastre un encabezado de columna aquí para agrupar por esa columna'
-            }}
-          />
-        </Grid>
-      </Paper>
-    );
-  }
-}
+        <Toolbar />
+        <SearchPanel messages={{ searchPlaceholder: 'Buscar...' }} />
+        <GroupingPanel
+          showGroupingControls
+          messages={{
+            groupByColumn:
+              'Arrastre un encabezado de columna aquí para agrupar por esa columna'
+          }}
+        />
+      </Grid>
+    </Paper>
+  );
+};
 
 export default withStyles(styles)(DataTable);

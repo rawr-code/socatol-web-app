@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 // Material UI
-import { Button, Typography, withStyles } from '@material-ui/core';
+import { Typography, withStyles } from '@material-ui/core';
 
 import styles from './styles';
 
 const ContentHeader = props => {
-  const { classes, title, button } = props;
+  const { classes, title, children } = props;
   return (
     <header className={classes.root}>
       <Typography
@@ -17,23 +16,14 @@ const ContentHeader = props => {
         color="textSecondary">
         {title}
       </Typography>
-      {button && (
-        <Button
-          variant="contained"
-          color="primary"
-          component={Link}
-          to={button.to}>
-          {button.label}
-        </Button>
-      )}
+      <div>{children}</div>
     </header>
   );
 };
 
 ContentHeader.propTypes = {
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  button: PropTypes.object
+  title: PropTypes.string.isRequired
 };
 
 // Apply styles
