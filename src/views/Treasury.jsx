@@ -1,25 +1,21 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import FeatureBar from '../components/Layout/FeatureBar';
-import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
+import { Switch, Route } from 'react-router-dom';
 
-// Tabs Views
+// Layout
+import FeatureBar from '../Layout/FeatureBar';
+import FeatureBarTabs from '../Layout/FeatureBarTabs';
 
 // BankAccount
-import {
-  AllBankAccounts,
-  NewBankAccount,
-  DetailsBankAccount,
-  UpdateBankAccount
-} from './BankAccount';
+import { AllBankAccounts, BankAccount } from './BankAccount';
 
 const Treasury = props => {
   const tabs = [
     {
       label: 'Cuentas bancarias',
-      to: '/cuentas-bancarias'
+      component: AllBankAccounts
     }
   ];
+
   return (
     <>
       <FeatureBar title="Tesorería" />
@@ -28,39 +24,24 @@ const Treasury = props => {
   );
 };
 
-const TreasuryContainer = ({ match: { path }, location: { pathname } }) => {
-  const showHeader = pathname === `${path}/cuentas-bancarias`;
-
+const TreasuryContainer = ({ match: { path } }) => {
   return (
-    <>
-      {showHeader && <Route path={path} component={Treasury} />}
-      <Switch>
-        <Redirect from={path} to={`${path}/cuentas-bancarias`} exact />
+    <Switch>
+      <Route exact path={path} component={Treasury} />
+      <Route
+        exact
+        path={`${path}/cuentas-bancarias`}
+        component={AllBankAccounts}
+      />
 
-        {/* Warehouse Routes */}
-        <Route
-          exact
-          path={`${path}/cuentas-bancarias`}
-          component={AllBankAccounts}
-        />
-        <Route
-          exact
-          path={`${path}/cuentas-bancarias/nuevo`}
-          component={NewBankAccount}
-        />
-        <Route
-          exact
-          path={`${path}/cuentas-bancarias/:id`}
-          component={DetailsBankAccount}
-        />
-        <Route
-          exact
-          path={`${path}/cuentas-bancarias/:id/editar`}
-          component={UpdateBankAccount}
-        />
-        <Route component={() => <div>404</div>} />
-      </Switch>
-    </>
+      <Route
+        exact
+        path={`${path}/cuentas-bancarias/:id`}
+        component={BankAccount}
+      />
+
+      <Route component={() => <div>404</div>} />
+    </Switch>
   );
 };
 

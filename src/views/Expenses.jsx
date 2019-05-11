@@ -1,12 +1,13 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import FeatureBar from '../components/Layout/FeatureBar';
-import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
+import { Switch, Route } from 'react-router-dom';
 
-// Tabs Views
+// Layout
+import FeatureBar from '../Layout/FeatureBar';
+import FeatureBarTabs from '../Layout/FeatureBarTabs';
 
-// Sales Invoice
-import PurchaseInvoce from './Invoice/PurchaseInvoice';
+// Expenses Invoice
+import PurchasesInvoce from './Invoice/Purchase/PurchasesInvoice';
+import NewPurchaseInvoce from './Invoice/Purchase/InvoiceForm';
 
 // Client
 import AllSuppliders from './Supplier/AllSuppliders';
@@ -15,13 +16,14 @@ const Expenses = () => {
   const tabs = [
     {
       label: 'Facturas de compra',
-      to: '/facturas/compra'
+      component: PurchasesInvoce
     },
     {
       label: 'Proveedores',
-      to: '/proveedores'
+      component: AllSuppliders
     }
   ];
+
   return (
     <>
       <FeatureBar title="Gastos" />
@@ -30,24 +32,17 @@ const Expenses = () => {
   );
 };
 
-const ExpensesContainer = ({ match: { path }, location: { pathname } }) => {
-  const showHeader =
-    pathname === `${path}/facturas/compra` ||
-    pathname === `${path}/proveedores`;
-
+const ExpensesContainer = ({ match: { path } }) => {
   return (
-    <>
-      {showHeader && <Route path={path} component={Expenses} />}
-      <Switch>
-        <Redirect from={path} to={`${path}/facturas/compra`} exact />
-        <Route
-          exact
-          path={`${path}/facturas/compra`}
-          component={PurchaseInvoce}
-        />
-        <Route exact path={`${path}/proveedores`} component={AllSuppliders} />
-      </Switch>
-    </>
+    <Switch>
+      <Route exact path={path} component={Expenses} />
+
+      <Route
+        exact
+        path={`${path}/facturas/compra/nuevo`}
+        component={NewPurchaseInvoce}
+      />
+    </Switch>
   );
 };
 

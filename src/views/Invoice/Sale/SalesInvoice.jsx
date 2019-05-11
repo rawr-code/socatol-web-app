@@ -2,43 +2,44 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Layout
-import { MainContainer } from '../../Layout';
+import { MainContainer } from '../../../Layout';
 
 // Molecules
-import DataTable from '../../components/Molecules/DataTable';
-import ContentHeader from '../../components/Molecules/ContentHeader';
+import DataTable from '../../../components/Molecules/DataTable';
+import ContentHeader from '../../../components/Molecules/ContentHeader';
 
 // Queries
-import { GET_CLIENTS_QUERY } from '../../queries/Person';
+import { GET_SALES_INVOICES_QUERY } from '../../../queries/Invoice';
 
-const AllClients = () => {
+const SalesInvoice = () => {
   const columns = [
     {
-      name: 'dni',
-      title: 'Cedula'
+      name: 'dateEmit',
+      title: 'Fecha'
     },
     {
-      name: 'name',
-      title: 'Nombre'
+      name: 'person',
+      title: 'Cliente'
     },
     {
-      name: 'phone',
-      title: 'Telefono'
+      name: 'number',
+      title: 'Número'
     },
     {
-      name: 'state',
-      title: 'Estado'
-    },
-    {
-      name: 'municipality',
-      title: 'Municipio'
+      name: 'paymentType',
+      title: 'Tipo de pago'
     }
   ];
-
   return (
     <MainContainer>
-      <ContentHeader title="Lista de clientes" />
-      <Query query={GET_CLIENTS_QUERY}>
+      <ContentHeader
+        title="Lista de facturas de venta"
+        button={{
+          label: 'Facturar venta',
+          to: '/ingresos/facturas/venta/nuevo'
+        }}
+      />
+      <Query query={GET_SALES_INVOICES_QUERY}>
         {({ loading, error, data }) => {
           let isLoading = false;
           let rows = [];
@@ -52,7 +53,7 @@ const AllClients = () => {
 
           if (Object.keys(data).length > 0) {
             isLoading = false;
-            rows = data.getPersonalInformations;
+            rows = data.getInvoices;
           }
 
           console.log(data);
@@ -61,7 +62,7 @@ const AllClients = () => {
               columns={columns}
               rows={rows}
               isLoading={isLoading}
-              // path="/inventario/productos"
+              path="/inventario/productos"
               // history={props.history}
             />
           );
@@ -71,4 +72,4 @@ const AllClients = () => {
   );
 };
 
-export default AllClients;
+export default SalesInvoice;

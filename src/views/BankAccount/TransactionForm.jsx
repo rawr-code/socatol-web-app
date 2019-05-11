@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import Formsy from 'formsy-react';
 
 // Material UI
-import { MenuItem, CardActions, Button } from '@material-ui/core';
+import { CardActions, Button } from '@material-ui/core';
 
 // Atoms
 import { InputField } from '../../components/Atoms';
@@ -12,9 +12,7 @@ import { InputField } from '../../components/Atoms';
 // Molecules
 import { FormMaterial } from '../../components/Molecules';
 
-import bankList from './bankList';
-
-class BankAccountForm extends Component {
+class TransactionForm extends Component {
   state = {
     isValid: false
   };
@@ -28,10 +26,10 @@ class BankAccountForm extends Component {
   };
 
   handleSubmit = mutate => async model => {
-    const { data } = this.props;
+    const { id } = this.props;
     let input = {};
-    if (data) {
-      input = { id: data.id, ...model };
+    if (id) {
+      input = { bankAccount: id, ...model };
     } else {
       input = model;
     }
@@ -42,15 +40,15 @@ class BankAccountForm extends Component {
 
   render() {
     const { isValid } = this.state;
-    const { mutation, data, handleClose } = this.props;
+    const { mutation, handleClose } = this.props;
 
     return (
       <Mutation mutation={mutation} onCompleted={handleClose}>
         {mutate => {
           return (
             <FormMaterial
-              title={data ? 'Editar Cuenta' : 'Nueva Cuenta Bancaria'}
-              subtitle="Información de la cuenta">
+              title="Nueva Transacción"
+              subtitle="Información de la trasacción">
               <Formsy
                 autoComplete="off"
                 onValidSubmit={this.handleSubmit(mutate)}
@@ -58,45 +56,32 @@ class BankAccountForm extends Component {
                 onInvalid={this.disableButton}>
                 <InputField
                   variant="outlined"
-                  label="Nombre"
-                  name="name"
+                  label="Fecha"
+                  name="date"
                   fullWidth
                   required
-                  value={data && data.name ? data.name : null}
                 />
                 <InputField
                   variant="outlined"
-                  label="Banco"
-                  name="bank"
+                  label="Referencia"
+                  name="ref"
                   fullWidth
                   required
-                  value={data && data.bank ? data.bank : null}
-                  select>
-                  {bankList.map(bank => (
-                    <MenuItem value={bank.name} key={bank.name}>
-                      {bank.name}
-                    </MenuItem>
-                  ))}
-                </InputField>
-                <InputField
-                  variant="outlined"
-                  label="Número de cuenta"
-                  name="number"
-                  fullWidth
-                  required
-                  value={data && data.number ? data.number : null}
                 />
                 <InputField
                   variant="outlined"
-                  label="Tipo de cuenta"
-                  name="type"
+                  label="Concepto"
+                  name="concept"
                   fullWidth
                   required
-                  value={data && data.type ? data.type : null}
-                  select>
-                  <MenuItem value="CORRIENTE">Corriente</MenuItem>
-                  <MenuItem value="AHORRO">Ahorro</MenuItem>
-                </InputField>
+                />
+                <InputField
+                  variant="outlined"
+                  label="Importe"
+                  name="amount"
+                  fullWidth
+                  required
+                />
                 <CardActions>
                   <Button color="primary" onClick={handleClose}>
                     Cancelar
@@ -118,4 +103,4 @@ class BankAccountForm extends Component {
   }
 }
 
-export default BankAccountForm;
+export default TransactionForm;

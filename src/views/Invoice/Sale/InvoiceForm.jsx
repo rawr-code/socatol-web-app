@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-
+import { withRouter } from 'react-router-dom';
 // Material UI
 import { Stepper, Step, StepLabel } from '@material-ui/core';
 
 // Mutations
-import { NEW_INVOICE_MUTATION } from '../../mutations/Invoice';
+import { NEW_INVOICE_MUTATION } from '../../../mutations/Invoice';
 
 // Forms
 import PersonForm from './PersonForm';
@@ -47,13 +47,14 @@ class InvoiceForm extends Component {
     this.setState({ [stateName]: { ...data, [name]: result } });
   };
 
-  handleSelect = value => {
+  handleSelectPerson = value => {
     const { person } = this.state;
     this.setState({
       person: { ...person, personId: value }
     });
   };
-  handleAddProduct = productsList => {
+
+  handleAddProducts = productsList => {
     const products = productsList.map(product => ({ ...product, quantity: 0 }));
     this.setState({
       products
@@ -64,23 +65,19 @@ class InvoiceForm extends Component {
     let { products, invoice } = this.state;
     let product = products[index];
     let total = 0;
+    const { value } = e.target;
 
     if (products.length === 0) {
       total = 0;
     }
 
-    const { value } = e.target;
-
     product.quantity = Number(value);
     product.total = product.price * value;
-
     products[index] = product;
 
     products.map(
       product => (total += Number(product.price) * Number(product.quantity))
     );
-
-    console.log(total);
 
     this.setState({
       products,
@@ -88,7 +85,7 @@ class InvoiceForm extends Component {
     });
   };
 
-  handleRemoveProduct = id => e => {
+  handleRemoveProduct = id => () => {
     let { products } = this.state;
     products = products.filter(product => product.id !== id);
 
@@ -124,7 +121,9 @@ class InvoiceForm extends Component {
 
   handleSubmit = onSubmit => async e => {
     e.preventDefault();
-    const result = await onSubmit();
+    const result = await onSubmit({
+      variables: { input: this.generateInput(), type: 'SALE' }
+    });
     console.log(result);
   };
 
@@ -137,6 +136,8 @@ class InvoiceForm extends Component {
 
     const productsList = products.map(product => ({
       product: product.id,
+      name: product.name,
+      price: product.price,
       quantity: product.quantity
     }));
 
@@ -149,37 +150,30 @@ class InvoiceForm extends Component {
       paymentType,
       note
     };
+
     return input;
   };
 
   render() {
     const { activeStep, steps, person, products, invoice } = this.state;
+    const { history } = this.props;
     return (
       <Mutation
         mutation={NEW_INVOICE_MUTATION}
-        variables={{ input: this.generateInput(), type: 'SALE' }}>
+        onCompleted={() => history.push('/ingresos/facturas/venta')}>
         {onSubmit => {
           return (
             <>
               <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map(label => (
                   <Step key={label}>
-                    <StepLabel
-                    // optional={
-                    //   <Typography variant="caption" color="error" align="center">
-                    //     Alert message
-                    //   </Typography>
-                    // }
-                    // error
-                    >
-                      {label}
-                    </StepLabel>
+                    <StepLabel>{label}</StepLabel>
                   </Step>
                 ))}
               </Stepper>
               {activeStep === 0 && (
                 <PersonForm
-                  handleSelect={this.handleSelect}
+                  handleSelect={this.handleSelectPerson}
                   handleChange={this.handleChange('person')}
                   data={person}
                   next={this.handleNext}
@@ -187,7 +181,9 @@ class InvoiceForm extends Component {
               )}
               {activeStep === 1 && (
                 <ProductsListForm
-                  handleAddProduct={this.handleAddProduct}
+                  handleTest={this.handleTest}
+                  handleNewProduct={this.handleNewProduct}
+                  handleSelect={this.handleAddProducts}
                   handleQuantityProduct={this.handleQuantityProduct}
                   handleRemoveProduct={this.handleRemoveProduct}
                   data={products}
@@ -212,4 +208,4 @@ class InvoiceForm extends Component {
   }
 }
 
-export default InvoiceForm;
+export default withRouter(InvoiceForm);

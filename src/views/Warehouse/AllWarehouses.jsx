@@ -16,32 +16,43 @@ import {
 import { Home } from '@material-ui/icons';
 
 // Layout
-import { MainContainer } from '../../components/Layout';
+import { MainContainer } from '../../Layout';
 
 // Molecules
-import ContentHeader from '../../components/Molecules/ContentHeader';
+import { ContentHeader, ButtonDialogForm } from '../../components/Molecules';
 
 // Queries
 import { GET_WAREHOUSES_QUERY } from '../../queries/Warehouse';
 
+// Mutations
+import { NEW_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
+
+// Form
+import WarehouseForm from './WarehouseForm';
+
 const AllWarehouses = props => {
   return (
     <MainContainer>
-      <ContentHeader
-        title="Todos los almacenes"
-        button={{
-          label: 'Añadir almacén',
-          to: '/inventario/almacenes/nuevo'
-        }}
-      />
+      <ContentHeader title="Todos los almacenes">
+        <ButtonDialogForm
+          title="Añadir almacén"
+          form={WarehouseForm}
+          mutation={NEW_WAREHOUSE_MUTATION}
+        />
+      </ContentHeader>
       <Query query={GET_WAREHOUSES_QUERY}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error:${error.message}`;
+          if (error) {
+            console.error(error.message);
+            return null;
+          }
 
-          const warehouses = data.getWarehouses;
-          console.log(warehouses);
-          if (warehouses.length < 1) return null;
+          let warehouses = [];
+
+          if (data && data.getWarehouses) {
+            warehouses = data.getWarehouses;
+          }
+
           return (
             <Grid container spacing={24}>
               {warehouses.map(warehouse => (

@@ -2,14 +2,23 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Layout
-import { MainContainer } from '../../components/Layout';
+import { MainContainer } from '../../Layout';
 
 // Molecules
-import DataTable from '../../components/Molecules/DataTable';
-import ContentHeader from '../../components/Molecules/ContentHeader';
+import {
+  ContentHeader,
+  ButtonDialogForm,
+  DataTable
+} from '../../components/Molecules';
 
 // Queries
 import { GET_PRODUCTS_QUERY } from '../../queries/Product';
+
+// Mutations
+import { NEW_PRODUCT_MUTATION } from '../../mutations/Product';
+
+// Form
+import ProductForm from './ProductForm';
 
 const AllProducts = props => {
   const columns = [
@@ -18,51 +27,42 @@ const AllProducts = props => {
       title: 'Nombre'
     },
     {
-      name: 'price',
-      title: 'Precio'
-    },
-    {
       name: 'stock',
       title: 'Almacenado'
     },
     {
-      name: 'quantity1',
-      title: 'Disponible'
+      name: 'price',
+      title: 'Precio'
     }
   ];
   return (
     <MainContainer>
-      <ContentHeader
-        title="Lista de productos"
-        button={{
-          label: 'Añadir producto',
-          to: '/inventario/productos/nuevo'
-        }}
-      />
+      <ContentHeader title="Lista de productos">
+        <ButtonDialogForm
+          title="Añadir producto"
+          form={ProductForm}
+          mutation={NEW_PRODUCT_MUTATION}
+        />
+      </ContentHeader>
       <Query query={GET_PRODUCTS_QUERY} pollInterval={3000}>
         {({ loading, error, data }) => {
-          let isLoading = false;
-          let rows = [];
-
-          if (loading) isLoading = true;
-
           if (error) {
-            isLoading = false;
-            return `Error: ${error.message}`;
+            console.error(error.message);
+            return null;
           }
 
-          if (Object.keys(data).length > 0) {
-            isLoading = false;
-            rows = data.getProducts;
+          let products = [];
+
+          if (data && data.getProducts) {
+            products = data.getProducts;
           }
 
           console.log(data);
           return (
             <DataTable
               columns={columns}
-              rows={rows}
-              isLoading={isLoading}
-              path="/inventario/productos"
+              rows={products}
+              pathTab="/inventario/productos"
               history={props.history}
             />
           );

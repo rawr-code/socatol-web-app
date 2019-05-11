@@ -16,32 +16,43 @@ import {
 import { Home } from '@material-ui/icons';
 
 // Layout
-import { MainContainer } from '../../components/Layout';
+import { MainContainer } from '../../Layout';
 
 // Molecules
-import ContentHeader from '../../components/Molecules/ContentHeader';
+import { ContentHeader, ButtonDialogForm } from '../../components/Molecules';
 
 // Queries
 import { GET_BANKACCOUNTS_QUERY } from '../../queries/BankAccount';
 
+// Mutations
+import { NEW_BANKACCOUNT_MUTATION } from '../../mutations/BankAccount';
+
+// Form
+import BankAccountForm from './BankAccountForm';
+
 const AllBankAccounts = props => {
   return (
     <MainContainer>
-      <ContentHeader
-        title="Todas las cuentas bancarias"
-        button={{
-          label: 'Añadir cuenta',
-          to: '/tesoreria/cuentas-bancarias/nuevo'
-        }}
-      />
+      <ContentHeader title="Todas las cuentas bancarias">
+        <ButtonDialogForm
+          title="Añadir cuenta"
+          form={BankAccountForm}
+          mutation={NEW_BANKACCOUNT_MUTATION}
+        />
+      </ContentHeader>
       <Query query={GET_BANKACCOUNTS_QUERY}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error:${error.message}`;
+          if (error) {
+            console.error(error.message);
+            return null;
+          }
 
-          const bankAccounts = data.getBankAccounts;
-          console.log(bankAccounts);
-          if (bankAccounts.length < 1) return null;
+          let bankAccounts = [];
+
+          if (data && data.getBankAccounts) {
+            bankAccounts = data.getBankAccounts;
+          }
+
           return (
             <Grid container spacing={24}>
               {bankAccounts.map(bankAccount => (

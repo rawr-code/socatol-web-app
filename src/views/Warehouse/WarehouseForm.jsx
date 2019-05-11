@@ -1,119 +1,90 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Mutation } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
+
+import Formsy from 'formsy-react';
 
 // Material UI
-import { Grid, CardContent } from '@material-ui/core';
-
-// Layout
-import MainContainer from '../../components/Layout/MainContainer';
+import { CardActions, Button } from '@material-ui/core';
 
 // Atoms
-import InputField from '../../components/Atoms/InputField';
+import { InputField } from '../../components/Atoms';
 
-// Organisms
-import { FormMaterial } from '../../components/Organisms';
+// Molecules
+import { FormMaterial } from '../../components/Molecules';
 
 class WarehouseForm extends Component {
   state = {
-    id: '',
-    name: '',
-    description: ''
+    isValid: false
   };
 
-  static propTypes = {
-    mutation: PropTypes.object.isRequired
+  disableButton = () => {
+    this.setState({ isValid: false });
   };
 
-  componentWillMount() {
-    const { data } = this.props;
-    if (data) {
-      this.setState({ ...data });
-    }
-  }
-
-  handleChange = e => {
-    const { type, name, value, checked } = e.target;
-    const result = type === 'checkbox' ? checked : value;
-    this.setState({ [name]: result });
+  enableButton = () => {
+    this.setState({ isValid: true });
   };
 
-  handleValidate = () => {
-    const { name, description } = this.state;
-    const isValid = !name || !description;
-
-    return isValid;
-  };
-
-  handleSubmit = onSubmit => async e => {
-    e.preventDefault();
-    const result = await onSubmit();
+  handleSubmit = mutate => async model => {
+    console.log(model);
+    const result = await mutate({ variables: { input: model } });
     console.log(result);
   };
 
-  generateInput = () => {
-    const input = {
-      id: this.state.id,
-      name: this.state.name,
-      description: this.state.description
-    };
-
-    return input;
-  };
-
   render() {
-    const { mutation, history, data } = this.props;
+    const { isValid } = this.state;
+    const { mutation, data, handleClose } = this.props;
     return (
-      <MainContainer>
-        <Mutation
-          mutation={mutation}
-          variables={{ input: this.generateInput() }}
-          onCompleted={() => history.push('/inventario')}>
-          {onSubmit => {
-            return (
-              <FormMaterial
-                validate={this.handleValidate}
-                onSubmit={this.handleSubmit(onSubmit)}
-                title={data ? 'Editar Almacén' : 'Nuevo Almacén'}
-                subtitle="Información del almacén">
-                <CardContent>
-                  <Grid container spacing={8}>
-                    <Grid item xs={12}>
-                      <InputField
-                        variant="outlined"
-                        label="Nombre"
-                        name="name"
-                        onChange={this.handleChange}
-                        defaultValue={this.state.name}
-                        fullWidth
-                        dense
-                        required
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <InputField
-                        variant="outlined"
-                        label="Descripción"
-                        name="description"
-                        onChange={this.handleChange}
-                        defaultValue={this.state.description}
-                        multiline
-                        rows="4"
-                        rowsMax="4"
-                        fullWidth
-                      />
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </FormMaterial>
-            );
-          }}
-        </Mutation>
-      </MainContainer>
+      <Mutation mutation={mutation} onCompleted={handleClose}>
+        {mutate => {
+          return (
+            <FormMaterial
+              title={data ? 'Editar Almacén' : 'Nuevo Almacén'}
+              subtitle="Información del almacén">
+              <Formsy
+                autoComplete="off"
+                onValidSubmit={this.handleSubmit(mutate)}
+                onValid={this.enableButton}
+                onInvalid={this.disableButton}>
+                <InputField
+                  label="Nombre"
+                  name="name"
+                  placeholder="Nombre del almacén"
+                  autoFocus
+                  fullWidth
+                  required
+                  value={data && data.name ? data.name : null}
+                />
+                <InputField
+                  label="Descripción"
+                  name="description"
+                  placeholder="Descripción del almacén"
+                  multiline
+                  rows="4"
+                  rowsMax="4"
+                  fullWidth
+                  required
+                  value={data && data.description ? data.description : null}
+                />
+                <CardActions>
+                  <Button color="primary" onClick={handleClose}>
+                    Cancelar
+                  </Button>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    type="submit"
+                    disabled={!isValid}>
+                    Guardar
+                  </Button>
+                </CardActions>
+              </Formsy>
+            </FormMaterial>
+          );
+        }}
+      </Mutation>
     );
   }
 }
 
-// connect to router
-export default withRouter(WarehouseForm);
+export default WarehouseForm;

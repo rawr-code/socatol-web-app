@@ -5,17 +5,17 @@ import { Query } from 'react-apollo';
 import { Grid, CardContent, Button } from '@material-ui/core';
 
 // Layout
-import MainContainer from '../../components/Layout/MainContainer';
+import MainContainer from '../../../Layout/MainContainer';
 
 // Atoms
-import InputField from '../../components/Atoms/InputField';
-import SelectField from '../../components/Atoms/SelectField';
+import InputFieldOld from '../../../components/Atoms/InputFieldOld';
+import SelectField from '../../../components/Atoms/SelectField';
 
-// Organisms
-import { FormMaterial } from '../../components/Organisms';
+// Molecules
+import { FormMaterial } from '../../../components/Molecules';
 
 // Queries
-import { GET_PERSONS_QUERY } from '../../queries/Person';
+import { GET_PERSONS_QUERY } from '../../../queries/Person';
 
 const ClientForm = props => {
   const { handleSelect, handleChange, next, data } = props;
@@ -33,8 +33,8 @@ const ClientForm = props => {
     <MainContainer>
       <FormMaterial
         sm={personId.id === 'new'}
-        title={'Cliente'}
-        subtitle="Información del cliente"
+        title={'Proveedor'}
+        subtitle="Información del proveedor"
         actions={
           <Button variant="contained" color="primary" onClick={next}>
             Siguiente
@@ -50,7 +50,7 @@ const ClientForm = props => {
                   if (error) console.log(error);
                   if (data.getPersonalInformations)
                     persons = [
-                      { id: 'new', name: 'Nuevo Cliente' },
+                      { id: 'new', name: 'Nuevo Proveedor' },
                       ...data.getPersonalInformations
                     ];
 
@@ -59,10 +59,10 @@ const ClientForm = props => {
                       options={persons}
                       isLoading={loading}
                       isClearable={false}
-                      label="Cliente"
+                      label="Proveedor"
                       noOptionsMessage={() => 'No se contraron datos'}
                       loadingMessage={() => 'Cargando...'}
-                      placeholder="Seleccione un cliente"
+                      placeholder="Seleccione un proveedor"
                       getOptionValue={option => option.id}
                       getOptionLabel={option => option.name}
                       onChange={handleSelect}
@@ -75,7 +75,7 @@ const ClientForm = props => {
             {personId.id === 'new' && (
               <>
                 <Grid item xs={12} sm={6}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Cedula"
                     name="dni"
@@ -86,7 +86,7 @@ const ClientForm = props => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Nombre"
                     name="name"
@@ -97,7 +97,7 @@ const ClientForm = props => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Estado"
                     name="state"
@@ -108,7 +108,7 @@ const ClientForm = props => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Municipio"
                     name="municipality"
@@ -119,7 +119,7 @@ const ClientForm = props => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Dirección"
                     name="address"
@@ -130,7 +130,7 @@ const ClientForm = props => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Telefono"
                     name="phone"
@@ -141,7 +141,7 @@ const ClientForm = props => {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <InputField
+                  <InputFieldOld
                     variant="outlined"
                     label="Correo"
                     name="email"

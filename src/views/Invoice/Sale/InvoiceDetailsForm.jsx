@@ -15,13 +15,13 @@ import {
 } from '@material-ui/core';
 
 // Layout
-import MainContainer from '../../components/Layout/MainContainer';
+import MainContainer from '../../../Layout/MainContainer';
 
 // Atoms
-import InputField from '../../components/Atoms/InputField';
+import InputFieldOld from '../../../components/Atoms/InputFieldOld';
 
-// Organisms
-import { FormMaterial } from '../../components/Organisms';
+// Molecules
+import { FormMaterial } from '../../../components/Molecules';
 
 const InvoiceDetailsForm = props => {
   const { handleChange, back, data, onSubmit } = props;
@@ -44,7 +44,7 @@ const InvoiceDetailsForm = props => {
         <CardContent>
           <Grid container spacing={8}>
             <Grid item xs={12}>
-              <InputField
+              <InputFieldOld
                 variant="outlined"
                 label="Metodo de pago"
                 name="paymentType"
@@ -52,14 +52,13 @@ const InvoiceDetailsForm = props => {
                 value={paymentType}
                 fullWidth
                 dense
-                select
-                helperText="Requerido">
+                select>
                 <MenuItem value="EFECTIVO">Efectivo</MenuItem>
                 <MenuItem value="TRANSFERENCIA">Transferencia</MenuItem>
-              </InputField>
+              </InputFieldOld>
             </Grid>
             <Grid item xs={12}>
-              <InputField
+              <InputFieldOld
                 variant="outlined"
                 label="Notas adicionales"
                 name="note"
@@ -85,12 +84,12 @@ const InvoiceDetailsForm = props => {
                   }
                   label={
                     <Typography variant="body2" component="label">
-                      Despachado
+                      Retirado
                     </Typography>
                   }
                 />
                 <FormHelperText style={{ marginLeft: 8 }}>
-                  Deshabilite esta opción si el pedido no será despachado al
+                  Deshabilite esta opción si el pedido no será retirado al
                   generar la factura
                 </FormHelperText>
               </FormControl>

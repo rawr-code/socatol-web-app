@@ -17,22 +17,23 @@ import {
 } from '@material-ui/core';
 
 import { Box, X } from 'react-feather';
+
 // Layout
-import MainContainer from '../../components/Layout/MainContainer';
+import MainContainer from '../../../Layout/MainContainer';
 
 // Atoms
-import InputField from '../../components/Atoms/InputField';
-import SelectField from '../../components/Atoms/SelectField';
+import InputFieldOld from '../../../components/Atoms/InputFieldOld';
+import SelectField from '../../../components/Atoms/SelectField';
 
-// Organisms
-import { FormMaterial } from '../../components/Organisms';
+// Molecules
+import { FormMaterial } from '../../../components/Molecules';
 
 // Queries
-import { GET_PRODUCTS_QUERY } from '../../queries/Product';
+import { GET_PRODUCTS_QUERY } from '../../../queries/Product';
 
 const ProductListForm = props => {
   const {
-    handleAddProduct,
+    handleSelect,
     handleQuantityProduct,
     handleRemoveProduct,
     next,
@@ -70,14 +71,14 @@ const ProductListForm = props => {
                     <SelectField
                       options={options}
                       isLoading={loading}
-                      isClearable={false}
+                      // isClearable={false}
                       isMulti
                       noOptionsMessage={() => 'No se contraron datos'}
                       loadingMessage={() => 'Cargando...'}
                       placeholder="Seleccionar productos"
                       getOptionValue={option => option.id}
                       getOptionLabel={option => option.name}
-                      onChange={handleAddProduct}
+                      onChange={handleSelect}
                       value={rows}
                     />
                   );
@@ -86,6 +87,7 @@ const ProductListForm = props => {
             </Grid>
           </Grid>
         </CardContent>
+
         {rows.length > 0 && (
           <Table>
             <TableHead>
@@ -95,7 +97,7 @@ const ProductListForm = props => {
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ width: 150, padding: '0 8px' }}>
+                  style={{ width: 200, padding: '0 8px' }}>
                   Precio
                 </TableCell>
                 <TableCell
@@ -105,7 +107,7 @@ const ProductListForm = props => {
                 </TableCell>
                 <TableCell
                   align="right"
-                  style={{ width: 150, padding: '0 8px' }}>
+                  style={{ width: 200, padding: '0 8px' }}>
                   Subtotal
                 </TableCell>
                 <TableCell
@@ -140,7 +142,7 @@ const ProductListForm = props => {
                     {row.price} Bs. S
                   </TableCell>
                   <TableCell align="right" style={{ padding: '0 8px' }}>
-                    <InputField
+                    <InputFieldOld
                       variant="outlined"
                       name="quantity"
                       onChange={handleQuantityProduct(index)}
@@ -167,5 +169,4 @@ const ProductListForm = props => {
   );
 };
 
-// connect to router
 export default ProductListForm;

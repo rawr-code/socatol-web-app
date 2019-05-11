@@ -1,13 +1,13 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
-import FeatureBar from '../components/Layout/FeatureBar';
-import FeatureBarTabs from '../components/Layout/FeatureBarTabs';
+import { Switch, Route } from 'react-router-dom';
 
-// Tabs Views
+//Layout
+import FeatureBar from '../Layout/FeatureBar';
+import FeatureBarTabs from '../Layout/FeatureBarTabs';
 
 // Sales Invoice
-import SalesInvoce from './Invoice/SalesInvoice';
-import NewSalesInvoce from './Invoice/InvoiceForm';
+import SalesInvoce from './Invoice/Sale/SalesInvoice';
+import NewSalesInvoce from './Invoice/Sale/InvoiceForm';
 
 // Client
 import AllClients from './Client/AllClients';
@@ -16,13 +16,14 @@ const Incomes = () => {
   const tabs = [
     {
       label: 'Facturas de venta',
-      to: '/facturas/venta'
+      component: SalesInvoce
     },
     {
       label: 'Clientes',
-      to: '/clientes'
+      component: AllClients
     }
   ];
+
   return (
     <>
       <FeatureBar title="Ingresos" />
@@ -31,28 +32,17 @@ const Incomes = () => {
   );
 };
 
-const IncomesContainer = ({ match: { path }, location: { pathname } }) => {
-  const showHeader =
-    pathname === `${path}/facturas/venta` || pathname === `${path}/clientes`;
-
+const IncomesContainer = ({ match: { path } }) => {
   return (
-    <>
-      {showHeader && <Route path={path} component={Incomes} />}
-      <Switch>
-        <Redirect from={path} to={`${path}/facturas/venta`} exact />
+    <Switch>
+      <Route exact path={path} component={Incomes} />
 
-        {/* Invoices */}
-        <Route exact path={`${path}/facturas/venta`} component={SalesInvoce} />
-        <Route
-          exact
-          path={`${path}/facturas/venta/nuevo`}
-          component={NewSalesInvoce}
-        />
-
-        {/* Clients */}
-        <Route exact path={`${path}/clientes`} component={AllClients} />
-      </Switch>
-    </>
+      <Route
+        exact
+        path={`${path}/facturas/venta/nuevo`}
+        component={NewSalesInvoce}
+      />
+    </Switch>
   );
 };
 
