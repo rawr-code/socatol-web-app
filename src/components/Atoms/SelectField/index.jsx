@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import Animated from 'react-select/lib/animated';
 import classNames from 'classnames';
 
 // Material UI
@@ -152,7 +151,7 @@ const SelectField = props => {
         }
       }}
       menuPosition="fixed"
-      components={Animated(components)}
+      components={components}
       onChange={handleChange}
       {...selectProps}
     />
