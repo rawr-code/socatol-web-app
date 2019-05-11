@@ -20,7 +20,6 @@ export const GET_PRODUCT_QUERY = gql`
       price
       iva
       stock
-      description
       warehouse {
         id
         name

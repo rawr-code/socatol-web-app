@@ -16,6 +16,13 @@ export const GET_WAREHOUSE_QUERY = gql`
       id
       name
       description
+      products {
+        id
+        name
+        stock
+        price
+        iva
+      }
     }
   }
 `;

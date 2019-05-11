@@ -8,7 +8,6 @@ export const GET_BANKACCOUNTS_QUERY = gql`
       bank
       type
       number
-      active
     }
   }
 `;
@@ -21,7 +20,17 @@ export const GET_BANKACCOUNT_QUERY = gql`
       bank
       type
       number
-      active
+    }
+  }
+`;
+
+export const GET_BANKACCOUNT_TRANSACTIONS_QUERY = gql`
+  query getBankAccountTransactions($id: ID!, $limit: Int, $offset: Int) {
+    getBankAccountTransactions(id: $id, limit: $limit, offset: $offset) {
+      date
+      ref
+      concept
+      amount
     }
   }
 `;
