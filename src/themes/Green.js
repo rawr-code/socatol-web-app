@@ -24,9 +24,9 @@ let theme = createMuiTheme({
       fontSize: 26
     }
   },
-  shape: {
-    borderRadius: 8
-  },
+  // shape: {
+  //   borderRadius: 8
+  // },
   drawerWidth: 256
 });
 
@@ -50,7 +50,7 @@ const overrides = {
   MuiCardActions: {
     root: {
       justifyContent: 'flex-end',
-      padding: 24
+      padding: '16px 0'
     }
   },
   MuiIconButton: {
@@ -61,11 +61,11 @@ const overrides = {
       }
     }
   },
-  MuiInputLabel: {
-    outlined: {
-      zIndex: 0
-    }
-  },
+  // MuiInputLabel: {
+  //   outlined: {
+  //     zIndex: 0
+  //   }
+  // },
   MuiFormControlLabel: {
     root: {
       marginLeft: 0
