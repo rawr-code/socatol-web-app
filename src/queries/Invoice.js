@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_SALES_INVOICES_QUERY = gql`
-  {
-    getInvoices(type: SALE) {
+  query invoices {
+    invoices(type: VENTA) {
       number
       dateEmit
       paymentType
@@ -12,8 +12,8 @@ export const GET_SALES_INVOICES_QUERY = gql`
 `;
 
 export const GET_PURCHASES_INVOICES_QUERY = gql`
-  {
-    getInvoices(type: PURCHASE) {
+  query invoices {
+    invoices(type: COMPRA) {
       number
       dateEmit
       paymentType

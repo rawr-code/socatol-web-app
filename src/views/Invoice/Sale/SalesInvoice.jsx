@@ -41,31 +41,13 @@ const SalesInvoice = () => {
       />
       <Query query={GET_SALES_INVOICES_QUERY}>
         {({ loading, error, data }) => {
-          let isLoading = false;
-          let rows = [];
+          if (loading) return null;
+          if (error) console.error(error);
 
-          if (loading) isLoading = true;
-
-          if (error) {
-            isLoading = false;
-            return `Error: ${error.message}`;
-          }
-
-          if (Object.keys(data).length > 0) {
-            isLoading = false;
-            rows = data.getInvoices;
-          }
+          let { invoices } = data;
 
           console.log(data);
-          return (
-            <DataTable
-              columns={columns}
-              rows={rows}
-              isLoading={isLoading}
-              path="/inventario/productos"
-              // history={props.history}
-            />
-          );
+          return <DataTable columns={columns} rows={invoices} />;
         }}
       </Query>
     </MainContainer>

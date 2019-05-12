@@ -39,31 +39,13 @@ const AllSuppliders = () => {
       <ContentHeader title="Lista de proveedores" />
       <Query query={GET_SUPPLIDERS_QUERY}>
         {({ loading, error, data }) => {
-          let isLoading = false;
-          let rows = [];
+          if (loading) return null;
+          if (error) console.error(error);
 
-          if (loading) isLoading = true;
-
-          if (error) {
-            isLoading = false;
-            return `Error: ${error.message}`;
-          }
-
-          if (Object.keys(data).length > 0) {
-            isLoading = false;
-            rows = data.getPersonalInformations;
-          }
+          let { persons } = data;
 
           console.log(data);
-          return (
-            <DataTable
-              columns={columns}
-              rows={rows}
-              isLoading={isLoading}
-              // path="/inventario/productos"
-              // history={props.history}
-            />
-          );
+          return <DataTable columns={columns} rows={persons} />;
         }}
       </Query>
     </MainContainer>

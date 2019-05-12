@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_PERSONS_QUERY = gql`
-  {
-    getPersonalInformations {
+  query persons {
+    persons {
       id
       name
     }
@@ -10,8 +10,8 @@ export const GET_PERSONS_QUERY = gql`
 `;
 
 export const GET_CLIENTS_QUERY = gql`
-  {
-    getPersonalInformations(type: CLIENT) {
+  query persons {
+    persons(type: CLIENT) {
       dni
       name
       phone
@@ -23,8 +23,8 @@ export const GET_CLIENTS_QUERY = gql`
 `;
 
 export const GET_SUPPLIDERS_QUERY = gql`
-  {
-    getPersonalInformations(type: SUPPLIER) {
+  query persons {
+    persons(type: SUPPLIER) {
       dni
       name
       phone

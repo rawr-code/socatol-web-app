@@ -40,31 +40,13 @@ const AllClients = () => {
       <ContentHeader title="Lista de clientes" />
       <Query query={GET_CLIENTS_QUERY}>
         {({ loading, error, data }) => {
-          let isLoading = false;
-          let rows = [];
+          if (loading) return null;
+          if (error) console.error(error);
 
-          if (loading) isLoading = true;
-
-          if (error) {
-            isLoading = false;
-            return `Error: ${error.message}`;
-          }
-
-          if (Object.keys(data).length > 0) {
-            isLoading = false;
-            rows = data.getPersonalInformations;
-          }
+          let { persons } = data;
 
           console.log(data);
-          return (
-            <DataTable
-              columns={columns}
-              rows={rows}
-              isLoading={isLoading}
-              // path="/inventario/productos"
-              // history={props.history}
-            />
-          );
+          return <DataTable columns={columns} rows={persons} />;
         }}
       </Query>
     </MainContainer>
