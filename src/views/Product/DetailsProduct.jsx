@@ -12,12 +12,11 @@ const DetailsProduct = props => {
   return (
     <Query query={GET_PRODUCT_QUERY} variables={{ id }}>
       {({ loading, error, data }) => {
-        if (loading) return 'Loading...';
+        if (loading) return null;
 
-        if (error) return `Error: ${error.message}`;
+        if (error) console.error(error);
 
-        const product = data.getProduct;
-        console.log(product);
+        const { product } = data;
 
         return (
           <>

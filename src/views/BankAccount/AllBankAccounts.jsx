@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
@@ -27,8 +27,58 @@ import { GET_BANKACCOUNTS_QUERY } from '../../queries/BankAccount';
 // Mutations
 import { NEW_BANKACCOUNT_MUTATION } from '../../mutations/BankAccount';
 
+// Subscriptions
+import { BANKACCOUNT_ADDED_SUBSCRIPTION } from '../../subscriptions/BankAccount';
+
 // Form
 import BankAccountForm from './BankAccountForm';
+
+class DataContainer extends Component {
+  componentDidMount() {
+    this.props.subscribe();
+  }
+
+  render() {
+    const { loading, error, data } = this.props;
+    if (loading) return null;
+    if (error) console.error(error.message);
+
+    const { bankAccounts } = data;
+
+    return (
+      <Grid container spacing={24}>
+        {bankAccounts.map(bankAccount => (
+          <Grid item xs={12} md={3} key={bankAccount.id}>
+            <Card>
+              <CardHeader
+                avatar={
+                  <Avatar style={{ backgroundColor: '#039be5' }}>
+                    <Home />
+                  </Avatar>
+                }
+                title={bankAccount.name}
+                subheader={bankAccount.bank}
+              />
+
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  component={Link}
+                  to={`/tesoreria/cuentas-bancarias/${bankAccount.id}`}
+                  //
+                >
+                  Administrar
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+}
 
 const AllBankAccounts = props => {
   return (
@@ -41,49 +91,25 @@ const AllBankAccounts = props => {
         />
       </ContentHeader>
       <Query query={GET_BANKACCOUNTS_QUERY}>
-        {({ loading, error, data }) => {
-          if (error) {
-            console.error(error.message);
-            return null;
-          }
-
-          let bankAccounts = [];
-
-          if (data && data.getBankAccounts) {
-            bankAccounts = data.getBankAccounts;
-          }
-
+        {({ subscribeToMore, ...rest }) => {
           return (
-            <Grid container spacing={24}>
-              {bankAccounts.map(bankAccount => (
-                <Grid item xs={12} md={3} key={bankAccount.id}>
-                  <Card>
-                    <CardHeader
-                      avatar={
-                        <Avatar style={{ backgroundColor: '#039be5' }}>
-                          <Home />
-                        </Avatar>
-                      }
-                      title={bankAccount.name}
-                      subheader={bankAccount.bank}
-                    />
+            <DataContainer
+              {...rest}
+              subscribe={() =>
+                subscribeToMore({
+                  document: BANKACCOUNT_ADDED_SUBSCRIPTION,
+                  updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    console.log(subscriptionData);
+                    const { bankAccountAdded } = subscriptionData.data;
 
-                    <CardActions>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        component={Link}
-                        to={`/tesoreria/cuentas-bancarias/${bankAccount.id}`}
-                        //
-                      >
-                        Administrar
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
+                    return {
+                      bankAccounts: [...prev.bankAccounts, bankAccountAdded]
+                    };
+                  }
+                })
+              }
+            />
           );
         }}
       </Query>

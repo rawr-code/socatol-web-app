@@ -17,13 +17,10 @@ const BankAccount = props => {
   return (
     <Query query={GET_BANKACCOUNT_QUERY} variables={{ id }}>
       {({ loading, error, data }) => {
-        if (loading) return 'Loading...';
-
+        if (loading) return null;
         if (error) console.error(error.message);
 
-        const bankAccount = data.getBankAccount;
-
-        console.log(bankAccount);
+        const { bankAccount } = data;
 
         return (
           <>

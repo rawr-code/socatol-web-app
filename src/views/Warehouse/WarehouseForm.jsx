@@ -26,7 +26,6 @@ class WarehouseForm extends Component {
   };
 
   handleSubmit = mutate => async model => {
-    console.log(model);
     const result = await mutate({ variables: { input: model } });
     console.log(result);
   };

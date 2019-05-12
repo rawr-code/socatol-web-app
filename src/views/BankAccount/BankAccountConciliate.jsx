@@ -37,7 +37,7 @@ const BankAccount = props => {
   return (
     <MainContainer>
       <Grid container spacing={24}>
-        <Grid item xs={12} md={7}>
+        <Grid item xs={12} md={6}>
           <ContentHeader title="Extracto Bancario" />
           <Query query={GET_BANKACCOUNT_TRANSACTIONS_QUERY} variables={{ id }}>
             {({ loading, error, data }) => {
@@ -60,7 +60,7 @@ const BankAccount = props => {
             }}
           </Query>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6}>
           <ContentHeader title="Facturas" />
           <DataTable
             columns={[

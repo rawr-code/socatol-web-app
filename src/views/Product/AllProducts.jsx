@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 
 // Layout
@@ -17,24 +17,49 @@ import { GET_PRODUCTS_QUERY } from '../../queries/Product';
 // Mutations
 import { NEW_PRODUCT_MUTATION } from '../../mutations/Product';
 
+// Subscriptions
+import { PRODUCT_ADDED_SUBSCRIPTION } from '../../subscriptions/Product';
+
 // Form
 import ProductForm from './ProductForm';
 
-const AllProducts = props => {
-  const columns = [
-    {
-      name: 'name',
-      title: 'Nombre'
-    },
-    {
-      name: 'stock',
-      title: 'Almacenado'
-    },
-    {
-      name: 'price',
-      title: 'Precio'
-    }
-  ];
+class DataContainer extends Component {
+  componentDidMount() {
+    this.props.subscribe();
+  }
+
+  render() {
+    const { loading, error, data } = this.props;
+    if (loading) return null;
+    if (error) console.error(error.message);
+
+    const { products } = data;
+
+    const columns = [
+      {
+        name: 'name',
+        title: 'Nombre'
+      },
+      {
+        name: 'stock',
+        title: 'Almacenado'
+      },
+      {
+        name: 'price',
+        title: 'Precio'
+      }
+    ];
+    return (
+      <DataTable
+        columns={columns}
+        rows={products}
+        handleClick={e => console.log(e)}
+      />
+    );
+  }
+}
+
+const AllProducts = () => {
   return (
     <MainContainer>
       <ContentHeader title="Lista de productos">
@@ -44,26 +69,23 @@ const AllProducts = props => {
           mutation={NEW_PRODUCT_MUTATION}
         />
       </ContentHeader>
-      <Query query={GET_PRODUCTS_QUERY} pollInterval={3000}>
-        {({ loading, error, data }) => {
-          if (error) {
-            console.error(error.message);
-            return null;
-          }
 
-          let products = [];
-
-          if (data && data.getProducts) {
-            products = data.getProducts;
-          }
-
-          console.log(data);
+      <Query query={GET_PRODUCTS_QUERY}>
+        {({ subscribeToMore, ...rest }) => {
           return (
-            <DataTable
-              columns={columns}
-              rows={products}
-              pathTab="/inventario/productos"
-              history={props.history}
+            <DataContainer
+              {...rest}
+              subscribe={() =>
+                subscribeToMore({
+                  document: PRODUCT_ADDED_SUBSCRIPTION,
+                  updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    const { productAdded } = subscriptionData.data;
+
+                    return { products: [...prev.products, productAdded] };
+                  }
+                })
+              }
             />
           );
         }}

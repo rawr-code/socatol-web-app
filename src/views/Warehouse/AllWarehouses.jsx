@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
@@ -27,10 +27,60 @@ import { GET_WAREHOUSES_QUERY } from '../../queries/Warehouse';
 // Mutations
 import { NEW_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
 
+// Subscriptions
+import { WAREHOUSE_ADDED_SUBSCRIPTION } from '../../subscriptions/Warehouse';
+
 // Form
 import WarehouseForm from './WarehouseForm';
 
-const AllWarehouses = props => {
+class DataContainer extends Component {
+  componentDidMount() {
+    this.props.subscribe();
+  }
+
+  render() {
+    const { loading, error, data } = this.props;
+    if (loading) return null;
+    if (error) console.error(error.message);
+
+    const { warehouses } = data;
+
+    return (
+      <Grid container spacing={24}>
+        {warehouses.map(warehouse => (
+          <Grid item xs={12} md={3} key={warehouse.id}>
+            <Card>
+              <CardHeader
+                avatar={
+                  <Avatar style={{ backgroundColor: '#039be5' }}>
+                    <Home />
+                  </Avatar>
+                }
+                title={warehouse.name}
+                subheader="Productos"
+              />
+
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  component={Link}
+                  to={`/inventario/almacenes/${warehouse.id}`}
+                  //
+                >
+                  Administrar
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
+}
+
+const AllWarehouses = () => {
   return (
     <MainContainer>
       <ContentHeader title="Todos los almacenes">
@@ -41,49 +91,22 @@ const AllWarehouses = props => {
         />
       </ContentHeader>
       <Query query={GET_WAREHOUSES_QUERY}>
-        {({ loading, error, data }) => {
-          if (error) {
-            console.error(error.message);
-            return null;
-          }
-
-          let warehouses = [];
-
-          if (data && data.getWarehouses) {
-            warehouses = data.getWarehouses;
-          }
-
+        {({ subscribeToMore, ...rest }) => {
           return (
-            <Grid container spacing={24}>
-              {warehouses.map(warehouse => (
-                <Grid item xs={12} md={3} key={warehouse.id}>
-                  <Card>
-                    <CardHeader
-                      avatar={
-                        <Avatar style={{ backgroundColor: '#039be5' }}>
-                          <Home />
-                        </Avatar>
-                      }
-                      title={warehouse.name}
-                      subheader="Productos"
-                    />
+            <DataContainer
+              {...rest}
+              subscribe={() =>
+                subscribeToMore({
+                  document: WAREHOUSE_ADDED_SUBSCRIPTION,
+                  updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    const { warehouseAdded } = subscriptionData.data;
 
-                    <CardActions>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        component={Link}
-                        to={`/inventario/almacenes/${warehouse.id}`}
-                        //
-                      >
-                        Administrar
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
+                    return { warehouses: [...prev.warehouses, warehouseAdded] };
+                  }
+                })
+              }
+            />
           );
         }}
       </Query>

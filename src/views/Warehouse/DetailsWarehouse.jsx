@@ -45,11 +45,8 @@ const DetailsWarehouse = props => {
         if (loading) return 'Loading...';
         if (error) console.error(error.message);
         console.log(data);
-        let warehouse = {};
 
-        if (data && data.getWarehouse) {
-          warehouse = data.getWarehouse;
-        }
+        let { warehouse } = data;
 
         return (
           <>

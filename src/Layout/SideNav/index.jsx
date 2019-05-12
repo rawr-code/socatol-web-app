@@ -16,19 +16,15 @@ import {
 
 // Icons
 import {
+  TrendingUp,
+  TrendingDown,
   Home,
-  // People,
-  // CalendarToday,
-  DnsRounded,
-  PermMediaOutlined,
-  Public,
-  SettingsEthernet,
-  // SettingsInputComponent,
+  AccountBalance,
   Settings,
-  // Timer,
-  // PhonelinkSetup,
   Print
 } from '@material-ui/icons';
+
+// import { Box } from 'react-feather';
 
 import styles from './styles';
 
@@ -36,10 +32,10 @@ const categories = [
   {
     id: 'Menu',
     children: [
-      { id: 'Ingresos', to: '/ingresos', icon: <DnsRounded /> },
-      { id: 'Gastos', to: '/gastos', icon: <PermMediaOutlined /> },
-      { id: 'Tesorería', to: '/tesoreria', icon: <SettingsEthernet /> },
-      { id: 'Inventario', to: '/inventario', icon: <Public /> },
+      { id: 'Ingresos', to: '/ingresos', icon: <TrendingUp /> },
+      { id: 'Gastos', to: '/gastos', icon: <TrendingDown /> },
+      { id: 'Tesorería', to: '/tesoreria', icon: <AccountBalance /> },
+      { id: 'Inventario', to: '/inventario', icon: <Home /> },
       // { id: 'Contactos', to: '/contactos', icon: <People /> },
       // { id: 'Calendario', to: '/calendario', icon: <CalendarToday /> },
       { id: 'Reportes', to: '/reportes', icon: <Print /> }

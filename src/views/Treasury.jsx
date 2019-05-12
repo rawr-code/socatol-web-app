@@ -28,11 +28,11 @@ const TreasuryContainer = ({ match: { path } }) => {
   return (
     <Switch>
       <Route exact path={path} component={Treasury} />
-      <Route
+      {/* <Route
         exact
         path={`${path}/cuentas-bancarias`}
         component={AllBankAccounts}
-      />
+      /> */}
 
       <Route
         exact

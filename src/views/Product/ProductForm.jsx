@@ -19,8 +19,37 @@ import { InputField } from '../../components/Atoms';
 // Molecules
 import { FormMaterial } from '../../components/Molecules';
 
+// Subscriptions
+import { WAREHOUSE_ADDED_SUBSCRIPTION } from '../../subscriptions/Warehouse';
+
 // Queries
 import { GET_WAREHOUSES_QUERY } from '../../queries/Warehouse';
+
+class WarehousesField extends Component {
+  render() {
+    const { loading, error, data } = this.props;
+
+    if (error) console.error(error.message);
+
+    const { warehouses } = data;
+
+    return (
+      <InputField
+        disabled={loading}
+        label="Almacén"
+        name="warehouse"
+        select
+        fullWidth
+        required>
+        {warehouses.map(item => (
+          <MenuItem value={item.id} key={item.id}>
+            {item.name}
+          </MenuItem>
+        ))}
+      </InputField>
+    );
+  }
+}
 
 class ProductForm extends Component {
   state = {
@@ -77,13 +106,12 @@ class ProductForm extends Component {
                   placeholder="0"
                   fullWidth
                   required
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end" style={{ width: 40 }}>
-                        Bs. S
-                      </InputAdornment>
-                    )
-                  }}
+                  align="right"
+                  endAdornment={
+                    <InputAdornment position="end" style={{ width: 40 }}>
+                      Bs. S
+                    </InputAdornment>
+                  }
                 />
                 <Grid container spacing={8}>
                   <Grid item xs={6}>
@@ -94,6 +122,7 @@ class ProductForm extends Component {
                       placeholder="0"
                       fullWidth
                       required
+                      align="right"
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -109,36 +138,25 @@ class ProductForm extends Component {
                     </InputField>
                   </Grid>
                 </Grid>
-                <Query query={GET_WAREHOUSES_QUERY}>
-                  {({ loading, error, data }) => {
-                    let isLoading = false;
-                    let options = [];
-
-                    if (loading) isLoading = true;
-
-                    if (error) {
-                      isLoading = false;
-                      console.error(error.message);
-                    }
-
-                    if (data && Object.keys(data).length > 0) {
-                      isLoading = false;
-                      options = data.getWarehouses;
-                    }
+                <Query query={GET_WAREHOUSES_QUERY} pollInterval={500}>
+                  {({ subscribeToMore, ...rest }) => {
                     return (
-                      <InputField
-                        disabled={isLoading}
-                        label="Almacén"
-                        name="warehouse"
-                        select
-                        fullWidth
-                        required>
-                        {options.map(item => (
-                          <MenuItem value={item.id} key={item.id}>
-                            {item.name}
-                          </MenuItem>
-                        ))}
-                      </InputField>
+                      <WarehousesField
+                        {...rest}
+                        subscribe={() =>
+                          subscribeToMore({
+                            document: WAREHOUSE_ADDED_SUBSCRIPTION,
+                            updateQuery: (prev, { subscriptionData }) => {
+                              if (!subscriptionData.data) return prev;
+                              const { warehouseAdded } = subscriptionData.data;
+
+                              return {
+                                warehouses: [...prev.warehouses, warehouseAdded]
+                              };
+                            }
+                          })
+                        }
+                      />
                     );
                   }}
                 </Query>
