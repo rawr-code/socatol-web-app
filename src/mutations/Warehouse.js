@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const NEW_WAREHOUSE_MUTATION = gql`
-  mutation newWarehouse($input: WarehouseInput!) {
-    newWarehouse(input: $input)
+  mutation addWarehouse($input: WarehouseInput!) {
+    addWarehouse(input: $input)
   }
 `;
 

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const NEW_BANKACCOUNT_MUTATION = gql`
-  mutation newBankAccount($input: BankAccountInput!) {
-    newBankAccount(input: $input)
+  mutation addBankAccount($input: BankAccountInput!) {
+    addBankAccount(input: $input)
   }
 `;
 
