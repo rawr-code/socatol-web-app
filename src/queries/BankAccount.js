@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_BANKACCOUNTS_QUERY = gql`
-  {
-    getBankAccounts {
+  query bankAccounts {
+    bankAccounts {
       id
       name
       bank
@@ -13,8 +13,8 @@ export const GET_BANKACCOUNTS_QUERY = gql`
 `;
 
 export const GET_BANKACCOUNT_QUERY = gql`
-  query getBankAccount($id: ID!) {
-    getBankAccount(id: $id) {
+  query bankAccount($id: ID!) {
+    bankAccount(id: $id) {
       id
       name
       bank
@@ -25,8 +25,8 @@ export const GET_BANKACCOUNT_QUERY = gql`
 `;
 
 export const GET_BANKACCOUNT_TRANSACTIONS_QUERY = gql`
-  query getBankAccountTransactions($id: ID!, $limit: Int, $offset: Int) {
-    getBankAccountTransactions(id: $id, limit: $limit, offset: $offset) {
+  query bankAccountTransactions($id: ID!, $limit: Int, $offset: Int) {
+    bankAccountTransactions(id: $id, limit: $limit, offset: $offset) {
       date
       ref
       concept

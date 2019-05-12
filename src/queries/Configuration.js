@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_CONFIGURATION_QUERY = gql`
-  {
-    getConfiguration {
+  query configuration {
+    configuration {
       iva {
         product
       }
