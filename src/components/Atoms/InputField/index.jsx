@@ -34,7 +34,9 @@ let InputField = props => {
     value,
     mr,
     ml,
-    isPassword
+    isPassword,
+    align,
+    endAdornment
   } = props;
   const errorMessage = getErrorMessage();
 
@@ -53,16 +55,21 @@ let InputField = props => {
     rowsMax,
     fullWidth,
     required,
-    InputProps = isPassword && {
-      endAdornment: (
-        <InputAdornment position="end">
-          <IconButton
-            aria-label="Toggle password visibility"
-            onClick={handleShowPassword}>
-            {fieldType === 'text' ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      )
+    InputProps = {
+      endAdornment: endAdornment
+        ? endAdornment
+        : isPassword && (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="Toggle password visibility"
+                onClick={handleShowPassword}>
+                {fieldType === 'text' ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+      classes: {
+        input: align === 'right' && classes.textRight
+      }
     },
     select,
     disabled,
