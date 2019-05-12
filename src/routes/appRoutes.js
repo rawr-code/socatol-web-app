@@ -19,6 +19,7 @@ const publicRoutes = [
     refetch: true
   }
 ];
+
 const privateRoutes = [
   {
     path: '/',
@@ -29,26 +30,22 @@ const privateRoutes = [
   {
     path: '/ingresos',
     component: Incomes,
-    permissions: 'CONTABLE',
-    exact: true
+    permissions: 'CONTABLE'
   },
   {
     path: '/gastos',
     component: Expenses,
-    permissions: 'CONTABLE',
-    exact: true
+    permissions: 'CONTABLE'
   },
   {
     path: '/inventario',
     component: Inventory,
-    permissions: 'CONTABLE',
-    exact: true
+    permissions: 'CONTABLE'
   },
   {
     path: '/tesoreria',
     component: Treasury,
-    permissions: 'CONTABLE',
-    exact: true
+    permissions: 'CONTABLE'
   },
   {
     path: '/configuracion',

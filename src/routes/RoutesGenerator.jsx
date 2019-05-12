@@ -27,7 +27,7 @@ const RoutesGenerator = ({ session, refetch }) => {
                 key={index}
                 path={route.path}
                 component={route.component}
-                exact={route.exact ? true : false}
+                exact={route.exact && route.exact}
               />
             ))}
             <Route

@@ -11,11 +11,9 @@ const AppRouter = () => {
   const token = localStorage.getItem('token') || '';
   return (
     <Query query={AUTH_USER_QUERY} variables={{ token }}>
-      {({ loading, error, data, refetch, networkStatus }) => {
+      {({ loading, error, data, refetch }) => {
         if (loading) return null;
-        if (networkStatus === 4) return 'Refetching!';
         if (error) console.error(error);
-        console.log(networkStatus);
 
         return <RoutesGenerator session={data.authUser} refetch={refetch} />;
       }}
