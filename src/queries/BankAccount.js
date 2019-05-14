@@ -27,10 +27,13 @@ export const GET_BANKACCOUNT_QUERY = gql`
 export const GET_BANKACCOUNT_TRANSACTIONS_QUERY = gql`
   query bankAccountTransactions($id: ID!, $limit: Int, $offset: Int) {
     bankAccountTransactions(id: $id, limit: $limit, offset: $offset) {
+      id
       date
       ref
       concept
       amount
+      balance
+      status
     }
   }
 `;

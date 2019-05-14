@@ -49,7 +49,7 @@ const overrides = {
   },
   MuiCardActions: {
     root: {
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
       padding: '16px 0'
     }
   },
@@ -61,11 +61,11 @@ const overrides = {
       }
     }
   },
-  // MuiInputLabel: {
-  //   outlined: {
-  //     zIndex: 0
-  //   }
-  // },
+  MuiInputLabel: {
+    outlined: {
+      zIndex: 0
+    }
+  },
   MuiFormControlLabel: {
     root: {
       marginLeft: 0

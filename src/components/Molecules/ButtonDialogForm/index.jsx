@@ -14,7 +14,7 @@ const ButtonDialogForm = props => {
     setOpen(false);
   };
 
-  const { form: Form, title = 'Title', style, ...formProps } = props;
+  const { form: Form, title = 'Title', style, scroll, ...formProps } = props;
   return (
     <>
       <Button
@@ -24,7 +24,7 @@ const ButtonDialogForm = props => {
         style={style}>
         {title}
       </Button>
-      <Dialog open={open} onClose={handleClose} PaperComponent="div">
+      <Dialog open={open} PaperComponent="div" maxWidth="md" scroll={scroll}>
         <Form {...formProps} handleClose={handleClose} />
       </Dialog>
     </>

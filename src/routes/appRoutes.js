@@ -50,7 +50,7 @@ const privateRoutes = [
   {
     path: '/configuracion',
     component: Configuration,
-    permissions: 'ADMINISTRADOR',
+    permissions: 'CONTABLE',
     exact: true
   }
 ];

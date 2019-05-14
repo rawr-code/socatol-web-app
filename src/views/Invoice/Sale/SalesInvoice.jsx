@@ -5,11 +5,16 @@ import { Query } from 'react-apollo';
 import { MainContainer } from '../../../Layout';
 
 // Molecules
-import DataTable from '../../../components/Molecules/DataTable';
-import ContentHeader from '../../../components/Molecules/ContentHeader';
+import {
+  ContentHeader,
+  ButtonDialogForm,
+  DataTable
+} from '../../../components/Molecules';
 
 // Queries
 import { GET_SALES_INVOICES_QUERY } from '../../../queries/Invoice';
+
+import SalesInvoiceForm from './SalesInvoiceForm';
 
 const SalesInvoice = () => {
   const columns = [
@@ -32,13 +37,14 @@ const SalesInvoice = () => {
   ];
   return (
     <MainContainer>
-      <ContentHeader
-        title="Lista de facturas de venta"
-        button={{
-          label: 'Facturar venta',
-          to: '/ingresos/facturas/venta/nuevo'
-        }}
-      />
+      <ContentHeader title="Lista de facturas de venta">
+        <ButtonDialogForm
+          title="Facturar venta"
+          scroll="body"
+          form={SalesInvoiceForm}
+          mutation={'NEW_WAREHOUSE_MUTATION'}
+        />
+      </ContentHeader>
       <Query query={GET_SALES_INVOICES_QUERY}>
         {({ loading, error, data }) => {
           if (loading) return null;

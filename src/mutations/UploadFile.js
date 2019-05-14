@@ -1,11 +1,7 @@
 import gql from 'graphql-tag';
 
 export const UPLOADFILE_MUTATION = gql`
-  mutation singleUpload($input: FileInput!) {
-    singleUpload(input: $input) {
-      filename
-      mimetype
-      encoding
-    }
+  mutation uploadTransactions($input: FileInput!) {
+    uploadTransactions(input: $input)
   }
 `;

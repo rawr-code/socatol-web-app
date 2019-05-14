@@ -63,6 +63,11 @@ const DataTable = props => {
       width: 116
     },
     {
+      columnName: 'dateEmit',
+      align: 'left',
+      width: 116
+    },
+    {
       columnName: 'ref',
       align: 'left',
       width: 150
@@ -73,6 +78,10 @@ const DataTable = props => {
     },
     {
       columnName: 'amount',
+      align: 'right'
+    },
+    {
+      columnName: 'balance',
       align: 'right'
     }
   ];

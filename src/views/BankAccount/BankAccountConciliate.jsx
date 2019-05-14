@@ -2,7 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 
 // Material UI
-import { Grid } from '@material-ui/core';
+import { Grid, Tabs, Tab } from '@material-ui/core';
 
 // Layout
 import { MainContainer } from '../../Layout';
@@ -13,7 +13,19 @@ import { ContentHeader, DataTable } from '../../components/Molecules';
 // Queries
 import { GET_BANKACCOUNT_TRANSACTIONS_QUERY } from '../../queries/BankAccount';
 
+import { GET_SALES_INVOICES_QUERY } from '../../queries/Invoice';
+
 const BankAccount = props => {
+  const [value, setValue] = React.useState(0);
+  const [value1, setValue1] = React.useState(0);
+
+  function handleChange(event, newValue) {
+    setValue(newValue);
+  }
+  function handleChange1(event, newValue) {
+    setValue1(newValue);
+  }
+
   const { id } = props.data;
   const columns = [
     {
@@ -38,49 +50,185 @@ const BankAccount = props => {
     <MainContainer>
       <Grid container spacing={24}>
         <Grid item xs={12} md={6}>
-          <ContentHeader title="Extracto Bancario" />
-          <Query query={GET_BANKACCOUNT_TRANSACTIONS_QUERY} variables={{ id }}>
-            {({ loading, error, data }) => {
-              if (loading) return 'Loading...';
-              if (error) console.error(error.message);
+          {/* <ContentHeader title="Extracto Bancario" /> */}
+          <Tabs value={value1} onChange={handleChange1}>
+            <Tab label="Todas las transacciones" />
+            <Tab label="Pendientes" />
+            <Tab label="Conciliadas" />
+          </Tabs>
+          {value1 === 0 && (
+            <Query
+              query={GET_BANKACCOUNT_TRANSACTIONS_QUERY}
+              variables={{ id }}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.error(error.message);
 
-              let rows = [];
+                let { bankAccountTransactions: rows } = data;
 
-              if (data && data.getBankAccountTransactions) {
-                rows = data.getBankAccountTransactions;
-              }
+                return (
+                  <DataTable
+                    columns={columns}
+                    rows={rows}
+                    handleClick={e => console.log(e)}
+                  />
+                );
+              }}
+            </Query>
+          )}
+          {value1 === 1 && (
+            <Query
+              query={GET_BANKACCOUNT_TRANSACTIONS_QUERY}
+              variables={{ id }}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.error(error.message);
 
-              return (
-                <DataTable
-                  columns={columns}
-                  rows={rows}
-                  handleClick={value => console.log(value)}
-                />
-              );
-            }}
-          </Query>
+                let { bankAccountTransactions: rows } = data;
+
+                return (
+                  <DataTable
+                    columns={columns}
+                    rows={[]}
+                    handleClick={e => console.log(e)}
+                  />
+                );
+              }}
+            </Query>
+          )}
+          {value1 === 2 && (
+            <Query
+              query={GET_BANKACCOUNT_TRANSACTIONS_QUERY}
+              variables={{ id }}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.error(error.message);
+
+                let { bankAccountTransactions: rows } = data;
+
+                return (
+                  <DataTable
+                    columns={columns}
+                    rows={[]}
+                    handleClick={e => console.log(e)}
+                  />
+                );
+              }}
+            </Query>
+          )}
         </Grid>
         <Grid item xs={12} md={6}>
-          <ContentHeader title="Facturas" />
-          <DataTable
-            columns={[
-              {
-                name: 'name',
-                title: 'Fecha'
-              },
-              {
-                name: 'name1',
-                title: 'Número'
-              },
-              {
-                name: 'name2',
-                title: 'Monto'
-              }
-            ]}
-            rows={[]}
-            pathTab="/inventario/productos"
-            history={props.history ? null : null}
-          />
+          {/* <ContentHeader title="Facturas" /> */}
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label="Todas las facturas" />
+            <Tab label="Compra" />
+            <Tab label="Venta" />
+          </Tabs>
+          {value === 0 && (
+            <Query query={GET_SALES_INVOICES_QUERY}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.error(error.message);
+
+                let { invoices: rows } = data;
+
+                return (
+                  <DataTable
+                    columns={[
+                      {
+                        name: 'dateEmit',
+                        title: 'Fecha'
+                      },
+                      {
+                        name: 'person',
+                        title: 'Cliente'
+                      },
+                      {
+                        name: 'number',
+                        title: 'Número'
+                      },
+                      {
+                        name: 'amount',
+                        title: 'Monto'
+                      }
+                    ]}
+                    rows={rows}
+                    handleClick={e => console.log(e)}
+                  />
+                );
+              }}
+            </Query>
+          )}
+          {value === 1 && (
+            <Query query={GET_SALES_INVOICES_QUERY}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.error(error.message);
+
+                let { invoices: rows } = data;
+
+                return (
+                  <DataTable
+                    columns={[
+                      {
+                        name: 'dateEmit',
+                        title: 'Fecha'
+                      },
+                      {
+                        name: 'person',
+                        title: 'Cliente'
+                      },
+                      {
+                        name: 'number',
+                        title: 'Número'
+                      },
+                      {
+                        name: 'amount',
+                        title: 'Monto'
+                      }
+                    ]}
+                    rows={[]}
+                    handleClick={e => console.log(e)}
+                  />
+                );
+              }}
+            </Query>
+          )}
+          {value === 2 && (
+            <Query query={GET_SALES_INVOICES_QUERY}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.error(error.message);
+
+                let { invoices: rows } = data;
+
+                return (
+                  <DataTable
+                    columns={[
+                      {
+                        name: 'dateEmit',
+                        title: 'Fecha'
+                      },
+                      {
+                        name: 'person',
+                        title: 'Cliente'
+                      },
+                      {
+                        name: 'number',
+                        title: 'Número'
+                      },
+                      {
+                        name: 'amount',
+                        title: 'Monto'
+                      }
+                    ]}
+                    rows={[]}
+                    handleClick={e => console.log(e)}
+                  />
+                );
+              }}
+            </Query>
+          )}
         </Grid>
       </Grid>
     </MainContainer>

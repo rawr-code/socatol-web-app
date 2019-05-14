@@ -6,6 +6,14 @@ export const NEW_BANKACCOUNT_MUTATION = gql`
   }
 `;
 
+export const CONCILIATE_MUTATION = gql`
+  mutation bankAccountTransactionConciliate(
+    $input: bankAccountTransactionConciliateInput!
+  ) {
+    bankAccountTransactionConciliate(input: $input)
+  }
+`;
+
 export const UPDATE_BANKACCOUNT_MUTATION = gql`
   mutation updateBankAccount($input: BankAccountInput!) {
     updateBankAccount(input: $input)

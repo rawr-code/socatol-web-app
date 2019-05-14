@@ -1,162 +1,172 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 
+import Formsy from 'formsy-react';
+
 // Material UI
 import { Grid, CardContent, Button } from '@material-ui/core';
 
-// Layout
-import MainContainer from '../../../Layout/MainContainer';
-
 // Atoms
-import InputFieldOld from '../../../components/Atoms/InputFieldOld';
+import InputField from '../../../components/Atoms/InputField';
 import SelectField from '../../../components/Atoms/SelectField';
-
-// Molecules
-import { FormMaterial } from '../../../components/Molecules';
 
 // Queries
 import { GET_PERSONS_QUERY } from '../../../queries/Person';
 
 const ClientForm = props => {
-  const { handleSelect, handleChange, next, data } = props;
   const {
-    personId,
-    dni,
-    name,
-    state,
-    municipality,
-    address,
-    phone,
-    email
-  } = data;
-  return (
-    <MainContainer>
-      <FormMaterial
-        sm={personId.id === 'new'}
-        title={'Cliente'}
-        subtitle="Información del cliente"
-        actions={
-          <Button variant="contained" color="primary" onClick={next}>
-            Siguiente
-          </Button>
-        }>
-        <CardContent>
-          <Grid container spacing={8}>
-            <Grid item xs={12}>
-              <Query query={GET_PERSONS_QUERY}>
-                {({ loading, error, data }) => {
-                  let persons = [];
-                  if (loading) console.log('loading...');
-                  if (error) console.log(error);
-                  if (data.getPersonalInformations)
-                    persons = [
-                      { id: 'new', name: 'Nuevo Cliente' },
-                      ...data.getPersonalInformations
-                    ];
+    handleChange,
+    data,
+    handleChangeSelect,
+    dataSelect,
+    handleNext
+  } = props;
 
-                  return (
-                    <SelectField
-                      options={persons}
-                      isLoading={loading}
-                      isClearable={false}
-                      label="Cliente"
-                      noOptionsMessage={() => 'No se contraron datos'}
-                      loadingMessage={() => 'Cargando...'}
-                      placeholder="Seleccione un cliente"
-                      getOptionValue={option => option.id}
-                      getOptionLabel={option => option.name}
-                      onChange={handleSelect}
-                      value={personId}
-                    />
-                  );
-                }}
-              </Query>
-            </Grid>
-            {personId.id === 'new' && (
-              <>
-                <Grid item xs={12} sm={6}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Cedula"
-                    name="dni"
-                    onChange={handleChange}
-                    defaultValue={dni}
-                    fullWidth
-                    dense
+  const handleSubmit = values => {
+    handleChange(values);
+    handleNext();
+  };
+
+  return (
+    <Formsy autoComplete="off" onValidSubmit={handleSubmit}>
+      <CardContent style={{ minWidth: 400, maxWidth: 600 }}>
+        <Grid container spacing={8}>
+          <Grid item xs={12}>
+            <Query query={GET_PERSONS_QUERY}>
+              {({ loading, error, data }) => {
+                if (loading) return null;
+                if (error) console.log(error);
+
+                let { persons } = data;
+                persons = [{ id: 'new', name: 'Nuevo Cliente' }, ...persons];
+
+                return (
+                  <SelectField
+                    options={persons}
+                    isClearable={false}
+                    label="Cliente"
+                    noOptionsMessage={() => 'No se contraron datos'}
+                    loadingMessage={() => 'Cargando...'}
+                    placeholder="Seleccione un cliente"
+                    getOptionValue={option => option.id}
+                    getOptionLabel={option => option.name}
+                    onChange={handleChangeSelect}
+                    value={dataSelect && dataSelect ? dataSelect : null}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Nombre"
-                    name="name"
-                    onChange={handleChange}
-                    defaultValue={name}
-                    fullWidth
-                    dense
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Estado"
-                    name="state"
-                    onChange={handleChange}
-                    defaultValue={state}
-                    fullWidth
-                    dense
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Municipio"
-                    name="municipality"
-                    onChange={handleChange}
-                    defaultValue={municipality}
-                    fullWidth
-                    dense
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Dirección"
-                    name="address"
-                    onChange={handleChange}
-                    defaultValue={address}
-                    fullWidth
-                    dense
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Telefono"
-                    name="phone"
-                    onChange={handleChange}
-                    defaultValue={phone}
-                    fullWidth
-                    dense
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <InputFieldOld
-                    variant="outlined"
-                    label="Correo"
-                    name="email"
-                    onChange={handleChange}
-                    defaultValue={email}
-                    fullWidth
-                    dense
-                  />
-                </Grid>
-              </>
-            )}
+                );
+              }}
+            </Query>
           </Grid>
-        </CardContent>
-      </FormMaterial>
-    </MainContainer>
+          {dataSelect && dataSelect.id === 'new' && (
+            <>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  label="Cedula"
+                  name="dni"
+                  placeholder="Cedula"
+                  fullWidth
+                  required
+                  value={data && data.dni ? data.dni : null}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  label="Nombre"
+                  name="name"
+                  placeholder="Nombre"
+                  fullWidth
+                  required
+                  value={data && data.name ? data.name : null}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  label="Estado"
+                  name="state"
+                  placeholder="Estado"
+                  fullWidth
+                  required
+                  value={data && data.state ? data.state : null}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  label="Municipio"
+                  name="municipality"
+                  placeholder="Municipio"
+                  fullWidth
+                  required
+                  value={data && data.municipality ? data.municipality : null}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputField
+                  label="Dirección"
+                  name="address"
+                  placeholder="Dirección"
+                  fullWidth
+                  required
+                  value={data && data.address ? data.address : null}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  label="Telefono"
+                  name="phone"
+                  placeholder="Telefono"
+                  fullWidth
+                  required
+                  value={data && data.phone ? data.phone : null}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <InputField
+                  label="Correo"
+                  name="email"
+                  placeholder="Correo"
+                  fullWidth
+                  required
+                  value={data && data.email ? data.email : null}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputField
+                  label="Notas"
+                  name="notes"
+                  placeholder="Información adicional sobre el cliente"
+                  multiline
+                  rows="4"
+                  rowsMax="4"
+                  fullWidth
+                  required
+                  value={data && data.notes ? data.notes : null}
+                />
+              </Grid>
+            </>
+          )}
+        </Grid>
+      </CardContent>
+      {dataSelect && dataSelect.id === 'new' ? (
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          // disabled={!dataSelect}
+        >
+          Siguiente
+        </Button>
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          type="button"
+          onClick={handleSubmit}
+          // disabled={!dataSelect}
+        >
+          Siguiente
+        </Button>
+      )}
+    </Formsy>
   );
 };
 

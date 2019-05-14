@@ -17,7 +17,7 @@ import {
 // Icons
 import {
   TrendingUp,
-  TrendingDown,
+  CreditCard,
   Home,
   AccountBalance,
   Settings,
@@ -33,7 +33,7 @@ const categories = [
     id: 'Menu',
     children: [
       { id: 'Ingresos', to: '/ingresos', icon: <TrendingUp /> },
-      { id: 'Gastos', to: '/gastos', icon: <TrendingDown /> },
+      { id: 'Gastos', to: '/gastos', icon: <CreditCard /> },
       { id: 'Tesorería', to: '/tesoreria', icon: <AccountBalance /> },
       { id: 'Inventario', to: '/inventario', icon: <Home /> },
       // { id: 'Contactos', to: '/contactos', icon: <People /> },

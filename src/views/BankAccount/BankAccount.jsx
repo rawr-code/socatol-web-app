@@ -9,7 +9,7 @@ import { GET_BANKACCOUNT_QUERY } from '../../queries/BankAccount';
 
 import BankAccountDetails from './BankAccountDetails';
 import BankAccountTransactions from './BankAccountTransactions';
-import BankAccountConciliate from './BankAccountConciliate';
+// import BankAccountConciliate from './BankAccountConciliate';
 
 const BankAccount = props => {
   const { id } = props.match.params;
@@ -38,15 +38,15 @@ const BankAccount = props => {
                   props: { data: bankAccount }
                 },
                 {
-                  label: 'Transacciones',
+                  label: 'Extracto bancario',
                   component: BankAccountTransactions,
                   props: { data: bankAccount }
-                },
-                {
-                  label: 'Conciliar',
-                  component: BankAccountConciliate,
-                  props: { data: bankAccount }
                 }
+                // {
+                //   label: 'Conciliar',
+                //   component: BankAccountConciliate,
+                //   props: { data: bankAccount }
+                // }
               ]}
             />
           </>

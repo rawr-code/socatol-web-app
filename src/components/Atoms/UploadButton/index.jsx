@@ -35,6 +35,7 @@ const UploadButton = props => {
           className={classNames(classes.button, ml && classes.ml)}>
           {title}
         </Button>
+        texto adicional
       </label>
     </>
   );

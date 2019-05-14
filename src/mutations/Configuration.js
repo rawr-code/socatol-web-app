@@ -1,23 +1,19 @@
 import gql from 'graphql-tag';
 
 export const UPDATE_PRODUCT_IVA_MUTATION = gql`
-  mutation updateConfigurationProductIVA($input: ConfigurationProductIVA!) {
-    updateConfigurationProductIVA(input: $input)
+  mutation updateProductIVA($input: ConfigurationProductIVA!) {
+    updateProductIVA(input: $input)
   }
 `;
 
 export const UPDATE_INVOICE_SALE_NUMBER_MUTATION = gql`
-  mutation updateConfigurationSaleInvoiceNumber(
-    $input: ConfigurationSaleInvoiceNumber!
-  ) {
-    updateConfigurationSaleInvoiceNumber(input: $input)
+  mutation updateSaleInvoiceNumber($input: ConfigurationInvoiceNumber!) {
+    updateSaleInvoiceNumber(input: $input)
   }
 `;
 
 export const UPDATE_INVOICE_PURCHASE_NUMBER_MUTATION = gql`
-  mutation updateConfigurationPurchaseInvoiceNumber(
-    $input: ConfigurationPurchaseInvoiceNumber!
-  ) {
-    updateConfigurationPurchaseInvoiceNumber(input: $input)
+  mutation updatePurchaseInvoiceNumber($input: ConfigurationInvoiceNumber!) {
+    updatePurchaseInvoiceNumber(input: $input)
   }
 `;

@@ -32,6 +32,7 @@ const LoginContainer = props => {
   const handleSubmit = mutate => async model => {
     const { data } = await mutate({ variables: { input: model } });
     const { userToken } = data;
+    console.log(data);
 
     if (userToken) {
       const { token } = userToken;

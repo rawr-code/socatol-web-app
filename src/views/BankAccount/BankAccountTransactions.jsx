@@ -1,14 +1,11 @@
-import React from 'react';
-import { Query, Mutation } from 'react-apollo';
+import React, { useState } from 'react';
+import { Query } from 'react-apollo';
 
 // Material UI
-import { Grid } from '@material-ui/core';
+import { Grid, Dialog } from '@material-ui/core';
 
 // Layout
 import { MainContainer } from '../../Layout';
-
-// Atoms
-import { UploadButton } from '../../components/Atoms';
 
 // Molecules
 import {
@@ -21,14 +18,26 @@ import {
 import { GET_BANKACCOUNT_TRANSACTIONS_QUERY } from '../../queries/BankAccount';
 
 // Mutations
-import { NEW_BANKACCOUNT_TRANSACTION_MUTATION } from '../../mutations/BankAccount';
 import { UPLOADFILE_MUTATION } from '../../mutations/UploadFile';
 
 // Forms
-import TransactionForm from './TransactionForm';
+import ExtractForm from './ExtractForm';
+import ConciliateForm from './ConciliateForm';
 
 const BankAccountTransactions = props => {
   const { id } = props.data;
+  const [open, setOpen] = useState(false);
+  const [itemSelect, setItemSelect] = useState('');
+
+  const handleClickOpen = ({ id }) => {
+    setItemSelect(id);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setItemSelect('');
+    setOpen(false);
+  };
 
   const columns = [
     {
@@ -44,8 +53,16 @@ const BankAccountTransactions = props => {
       title: 'Concepto'
     },
     {
+      name: 'status',
+      title: 'Estado'
+    },
+    {
       name: 'amount',
       title: 'Importe'
+    },
+    {
+      name: 'balance',
+      title: 'Saldo'
     }
   ];
 
@@ -54,36 +71,30 @@ const BankAccountTransactions = props => {
       <Grid container spacing={24}>
         <Grid item xs={12}>
           <ContentHeader title="Extracto Bancario">
-            <Mutation mutation={UPLOADFILE_MUTATION}>
-              {mutate => (
-                <UploadButton
-                  fileTypes=".csv"
-                  title="Cargar extracto bancario"
-                  onUpload={mutate}
-                  id={id}
-                />
-              )}
-            </Mutation>
             <ButtonDialogForm
-              title="Añadir transacción"
-              form={TransactionForm}
-              mutation={NEW_BANKACCOUNT_TRANSACTION_MUTATION}
-              style={{ marginLeft: 8 }}
+              title="Cargar extracto bancario"
+              form={ExtractForm}
+              mutation={UPLOADFILE_MUTATION}
               id={id}
             />
           </ContentHeader>
+          <Dialog open={open} PaperComponent="div" maxWidth="md">
+            <ConciliateForm handleClose={handleClose} id={itemSelect} />
+          </Dialog>
           <Query query={GET_BANKACCOUNT_TRANSACTIONS_QUERY} variables={{ id }}>
-            {({ loading, error, data }) => {
-              if (loading) return 'Loading...';
+            {({ loading, error, data, refetch }) => {
+              if (loading) return null;
               if (error) console.error(error.message);
 
-              let rows = [];
+              let { bankAccountTransactions: rows } = data;
 
-              if (data && data.getBankAccountTransactions) {
-                rows = data.getBankAccountTransactions;
-              }
-
-              return <DataTable columns={columns} rows={rows} />;
+              return (
+                <DataTable
+                  columns={columns}
+                  rows={rows}
+                  handleClick={values => handleClickOpen(values, refetch)}
+                />
+              );
             }}
           </Query>
         </Grid>
