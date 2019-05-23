@@ -1,6 +1,5 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
 
 // Material UI
 import { Grid, Typography, Card, CardContent } from '@material-ui/core';
@@ -16,17 +15,16 @@ import {
 } from '../../components/Molecules';
 
 // Queries
-import { GET_WAREHOUSE_QUERY } from '../../queries/Warehouse';
+import { GET_PERSON_QUERY } from '../../queries/Person';
 
 // Mutations
 import { UPDATE_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
 
 // Forms
-import WarehouseForm from './WarehouseForm';
+import WarehouseForm from '../Warehouse/WarehouseForm';
 
 const DetailsWarehouse = props => {
   const { id } = props.match.params;
-  const { history } = props;
   const columns = [
     {
       name: 'name',
@@ -42,24 +40,24 @@ const DetailsWarehouse = props => {
     }
   ];
   return (
-    <Query query={GET_WAREHOUSE_QUERY} variables={{ id }}>
+    <Query query={GET_PERSON_QUERY} variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) console.error(error.message);
         console.log(data);
 
-        let { warehouse } = data;
+        let { person } = data;
 
         return (
           <>
-            <FeatureBar title={warehouse.name} back />
+            <FeatureBar title={person.name} back />
             <MainContainer>
-              <ContentHeader title="Información del almacén">
+              <ContentHeader title="Información del proveedor">
                 <ButtonDialogForm
-                  title="Editar almacén"
+                  title="Editar ínformación"
                   form={WarehouseForm}
                   mutation={UPDATE_WAREHOUSE_MUTATION}
-                  data={warehouse}
+                  // data={warehouse}
                 />
               </ContentHeader>
               <Grid container spacing={24}>
@@ -69,10 +67,22 @@ const DetailsWarehouse = props => {
                       <Card>
                         <CardContent>
                           <Typography variant="subtitle1" color="textSecondary">
-                            <b>Nombre:</b> {warehouse.name}
+                            <b>Nombre:</b> {person.name}
                           </Typography>
                           <Typography variant="subtitle1" color="textSecondary">
-                            <b>Descripción:</b> {warehouse.description}
+                            <b>Cedula:</b> {person.dni}
+                          </Typography>
+                          <Typography variant="subtitle1" color="textSecondary">
+                            <b>Telefono:</b> {person.phone}
+                          </Typography>
+                          <Typography variant="subtitle1" color="textSecondary">
+                            <b>Estado:</b> {person.state}
+                          </Typography>
+                          <Typography variant="subtitle1" color="textSecondary">
+                            <b>Municipio:</b> {person.municipality}
+                          </Typography>
+                          <Typography variant="subtitle1" color="textSecondary">
+                            <b>Dirección:</b> {person.address}
                           </Typography>
                         </CardContent>
                       </Card>
@@ -80,13 +90,7 @@ const DetailsWarehouse = props => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} md={8}>
-                  <DataTable
-                    columns={columns}
-                    rows={warehouse.products}
-                    handleClick={({ id }) =>
-                      history.push(`/inventario/productos/${id}`)
-                    }
-                  />
+                  <DataTable columns={columns} rows={[]} />
                 </Grid>
               </Grid>
             </MainContainer>
@@ -97,4 +101,4 @@ const DetailsWarehouse = props => {
   );
 };
 
-export default withRouter(DetailsWarehouse);
+export default DetailsWarehouse;

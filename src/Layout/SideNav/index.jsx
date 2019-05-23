@@ -19,6 +19,7 @@ import {
   TrendingUp,
   CreditCard,
   Home,
+  People,
   AccountBalance,
   Settings,
   Print
@@ -36,7 +37,6 @@ const categories = [
       { id: 'Gastos', to: '/gastos', icon: <CreditCard /> },
       { id: 'Tesorería', to: '/tesoreria', icon: <AccountBalance /> },
       { id: 'Inventario', to: '/inventario', icon: <Home /> },
-      // { id: 'Contactos', to: '/contactos', icon: <People /> },
       // { id: 'Calendario', to: '/calendario', icon: <CalendarToday /> },
       { id: 'Reportes', to: '/reportes', icon: <Print /> }
     ]
@@ -44,6 +44,7 @@ const categories = [
   {
     id: 'Sistema',
     children: [
+      { id: 'Usuarios', to: '/usuarios', icon: <People /> },
       { id: 'Configuración', to: '/configuracion', icon: <Settings /> }
       // { id: 'Rendimiento', to: '/', icon: <Timer /> },
       // { id: 'Base de datos', to: '/', icon: <PhonelinkSetup /> },

@@ -52,7 +52,7 @@ class DataContainer extends Component {
             <Card>
               <CardHeader
                 avatar={
-                  <Avatar style={{ backgroundColor: '#039be5' }}>
+                  <Avatar style={{ backgroundColor: '#27c24c' }}>
                     <Home />
                   </Avatar>
                 }

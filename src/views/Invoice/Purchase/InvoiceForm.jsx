@@ -36,6 +36,8 @@ class InvoiceForm extends Component {
     invoice: {
       paymentType: '',
       note: '',
+      number: '',
+      ref: '',
       dispatch: true,
       total: 0
     }
@@ -161,7 +163,7 @@ class InvoiceForm extends Component {
     const {
       person: { personId, ...personInfo },
       products,
-      invoice: { paymentType, note }
+      invoice: { paymentType, note, number, ref }
     } = this.state;
 
     const productsList = products.map(product => {
@@ -189,7 +191,9 @@ class InvoiceForm extends Component {
           : { id: personId.id },
       products: productsList,
       paymentType,
-      note
+      note,
+      number,
+      ref
     };
     return input;
   };

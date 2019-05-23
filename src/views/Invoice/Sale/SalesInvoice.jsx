@@ -13,10 +13,12 @@ import {
 
 // Queries
 import { GET_SALES_INVOICES_QUERY } from '../../../queries/Invoice';
+import Notification from '../../../components/Notification';
 
 import SalesInvoiceForm from './SalesInvoiceForm';
 
 const SalesInvoice = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const columns = [
     {
       name: 'dateEmit',
@@ -33,6 +35,10 @@ const SalesInvoice = () => {
     {
       name: 'paymentType',
       title: 'Tipo de pago'
+    },
+    {
+      name: 'amount',
+      title: 'Monto'
     }
   ];
   return (
@@ -43,6 +49,12 @@ const SalesInvoice = () => {
           scroll="body"
           form={SalesInvoiceForm}
           mutation={'NEW_WAREHOUSE_MUTATION'}
+          success={setIsOpen}
+        />
+        <Notification
+          open={isOpen}
+          handleOpen={setIsOpen}
+          message="Guardado con exito!"
         />
       </ContentHeader>
       <Query query={GET_SALES_INVOICES_QUERY}>

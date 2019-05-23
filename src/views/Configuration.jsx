@@ -293,42 +293,30 @@ class ConfigurationContainer extends Component {
     return (
       <Query query={GET_CONFIGURATION_QUERY}>
         {({ loading, error, data }) => {
-          let iva = {
-              product: 0
-            },
-            invoice = {
-              sale: {
-                number: 0
-              },
-              purchase: {
-                number: 0
-              }
-            };
           if (loading) return 'Cargando configuracion';
 
           if (error) console.log('error', error);
 
-          if (data.getConfiguration) {
-            iva = data.getConfiguration.iva;
-            invoice = data.getConfiguration.invoice;
-          }
-          console.log(iva, invoice);
+          const { configuration } = data;
+
           return (
             <MainContainer>
               <DialogFormProductIva
                 open={open === 'product'}
                 handleClose={this.handleClose}
-                value={iva.product}
+                value={configuration ? configuration.iva.product : 0}
               />
               <DialogFormSaleInvoice
                 open={open === 'saleInvoice'}
                 handleClose={this.handleClose}
-                value={invoice.sale.number}
+                value={configuration ? configuration.invoice.sale.number : 0}
               />
               <DialogFormPurchaseInvoice
                 open={open === 'purchaseInvoice'}
                 handleClose={this.handleClose}
-                value={invoice.purchase.number}
+                value={
+                  configuration ? configuration.invoice.purchase.number : 0
+                }
               />
               <Grid container spacing={24}>
                 <Grid item xs={12} sm={6} md={4}>

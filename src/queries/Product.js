@@ -20,6 +20,24 @@ export const GET_PRODUCT_QUERY = gql`
       price
       iva
       stock
+      clients {
+        id
+        dni
+        name
+        phone
+        state
+        municipality
+        address
+      }
+      suppliders {
+        id
+        dni
+        name
+        phone
+        state
+        municipality
+        address
+      }
       warehouse {
         id
         name

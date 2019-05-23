@@ -9,6 +9,9 @@ import Expenses from '../views/Expenses';
 import Inventory from '../views/Inventory';
 import Treasury from '../views/Treasury';
 import Configuration from '../views/Configuration';
+import Reportes from '../views/Reportes';
+
+import Usuarios from '../views/Users';
 
 const publicRoutes = [
   {
@@ -46,6 +49,18 @@ const privateRoutes = [
     path: '/tesoreria',
     component: Treasury,
     permissions: 'CONTABLE'
+  },
+  {
+    path: '/reportes',
+    component: Reportes,
+    permissions: 'CONTABLE',
+    exact: true
+  },
+  {
+    path: '/usuarios',
+    component: Usuarios,
+    permissions: 'CONTABLE',
+    exact: true
   },
   {
     path: '/configuracion',

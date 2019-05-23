@@ -6,6 +6,9 @@ export const GET_WAREHOUSES_QUERY = gql`
       id
       name
       description
+      products {
+        id
+      }
     }
   }
 `;

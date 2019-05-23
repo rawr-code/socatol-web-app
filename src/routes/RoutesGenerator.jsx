@@ -15,7 +15,9 @@ const RoutesGenerator = ({ session, refetch }) => {
       if (role === 'ADMINISTRADOR') {
         userRoutes = privateRoutes;
       }
-      userRoutes = privateRoutes.filter(route => route.permissions === role);
+      userRoutes = privateRoutes;
+
+      // userRoutes = privateRoutes.filter(route => route.permissions === role);
     }
 
     return (
@@ -33,7 +35,7 @@ const RoutesGenerator = ({ session, refetch }) => {
             <Route
               component={() => (
                 <div>
-                  <h1>Error 404</h1>
+                  <h1>not found 404</h1>
                 </div>
               )}
             />
@@ -70,7 +72,7 @@ const RoutesGenerator = ({ session, refetch }) => {
         <Route
           component={() => (
             <div>
-              <h1>Error 404</h1>
+              <h1>not found 404</h1>
             </div>
           )}
         />

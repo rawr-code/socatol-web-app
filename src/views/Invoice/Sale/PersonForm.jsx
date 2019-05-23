@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import Formsy from 'formsy-react';
 
 // Material UI
-import { Grid, CardContent, Button } from '@material-ui/core';
+import { Grid, CardContent, Button, MenuItem } from '@material-ui/core';
 
 // Atoms
 import InputField from '../../../components/Atoms/InputField';
@@ -13,7 +13,11 @@ import SelectField from '../../../components/Atoms/SelectField';
 // Queries
 import { GET_PERSONS_QUERY } from '../../../queries/Person';
 
+import estados from '../est';
+import munici from '../mun';
+
 const ClientForm = props => {
+  const [est, setEst] = React.useState([]);
   const {
     handleChange,
     data,
@@ -27,8 +31,30 @@ const ClientForm = props => {
     handleNext();
   };
 
+  const handleChangeData = model => {
+    if (model.state) {
+      // console.log(model.state);
+      setEst(model.state);
+      // console.log(munici);
+      let key = '';
+      Object.keys(estados).forEach(item => {
+        if (estados[item] === model.state) {
+          key = item;
+        }
+      });
+
+      const muni = Object.values(munici[key]);
+
+      setEst(muni);
+    }
+    return model;
+  };
+
   return (
-    <Formsy autoComplete="off" onValidSubmit={handleSubmit}>
+    <Formsy
+      autoComplete="off"
+      onValidSubmit={handleSubmit}
+      onChange={handleChangeData}>
       <CardContent style={{ minWidth: 400, maxWidth: 600 }}>
         <Grid container spacing={8}>
           <Grid item xs={12}>
@@ -87,7 +113,13 @@ const ClientForm = props => {
                   fullWidth
                   required
                   value={data && data.state ? data.state : null}
-                />
+                  select>
+                  {Object.keys(estados).map((est, index) => (
+                    <MenuItem value={estados[est]} key={index}>
+                      {estados[est]}
+                    </MenuItem>
+                  ))}
+                </InputField>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <InputField
@@ -97,7 +129,13 @@ const ClientForm = props => {
                   fullWidth
                   required
                   value={data && data.municipality ? data.municipality : null}
-                />
+                  select>
+                  {est.map(municipio => (
+                    <MenuItem value={municipio} key={municipio}>
+                      {municipio}
+                    </MenuItem>
+                  ))}
+                </InputField>
               </Grid>
               <Grid item xs={12}>
                 <InputField

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-
+import { withRouter } from 'react-router-dom';
 // Layout
 import { MainContainer } from '../../Layout';
 
@@ -11,7 +11,7 @@ import ContentHeader from '../../components/Molecules/ContentHeader';
 // Queries
 import { GET_SUPPLIDERS_QUERY } from '../../queries/Person';
 
-const AllSuppliders = () => {
+const AllSuppliders = ({ history }) => {
   const columns = [
     {
       name: 'dni',
@@ -45,11 +45,19 @@ const AllSuppliders = () => {
           let { persons } = data;
 
           console.log(data);
-          return <DataTable columns={columns} rows={persons} />;
+          return (
+            <DataTable
+              columns={columns}
+              rows={persons}
+              handleClick={({ id }) =>
+                history.push(`/gastos/proveedores/${id}`)
+              }
+            />
+          );
         }}
       </Query>
     </MainContainer>
   );
 };
 
-export default AllSuppliders;
+export default withRouter(AllSuppliders);

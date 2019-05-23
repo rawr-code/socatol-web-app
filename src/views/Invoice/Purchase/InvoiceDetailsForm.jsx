@@ -1,76 +1,75 @@
 import React from 'react';
 
+import Formsy from 'formsy-react';
+
 // Material UI
 import {
   Grid,
   CardContent,
-  Button,
-  MenuItem,
-  FormControlLabel,
-  Checkbox,
-  FormHelperText,
-  FormControl,
+  MenuItem
+  // FormControlLabel,
+  // Checkbox,
+  // FormHelperText,
+  // FormControl,
   // FormLabel,
-  Typography
+  // Typography
 } from '@material-ui/core';
 
-// Layout
-import MainContainer from '../../../Layout/MainContainer';
-
 // Atoms
-import InputFieldOld from '../../../components/Atoms/InputFieldOld';
-
-// Molecules
-import { FormMaterial } from '../../../components/Molecules';
+import InputField from '../../../components/Atoms/InputField';
 
 const InvoiceDetailsForm = props => {
-  const { handleChange, back, data, onSubmit } = props;
-  const { paymentType, note, dispatch } = data;
+  const { handleChange, data } = props;
   return (
-    <MainContainer>
-      <FormMaterial
-        title={'Detalles'}
-        subtitle="Información adicional de la factura"
-        actions={
-          <>
-            <Button color="primary" onClick={back}>
-              Volver
-            </Button>
-            <Button variant="contained" color="primary" onClick={onSubmit}>
-              Guardar
-            </Button>
-          </>
-        }>
-        <CardContent>
-          <Grid container spacing={8}>
-            <Grid item xs={12}>
-              <InputFieldOld
-                variant="outlined"
-                label="Metodo de pago"
-                name="paymentType"
-                onChange={handleChange}
-                value={paymentType}
-                fullWidth
-                dense
-                select>
-                <MenuItem value="EFECTIVO">Efectivo</MenuItem>
-                <MenuItem value="TRANSFERENCIA">Transferencia</MenuItem>
-              </InputFieldOld>
-            </Grid>
-            <Grid item xs={12}>
-              <InputFieldOld
-                variant="outlined"
-                label="Notas adicionales"
-                name="note"
-                onChange={handleChange}
-                defaultValue={note}
-                multiline
-                rows="4"
-                rowsMax="4"
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
+    <Formsy autoComplete="off" onChange={handleChange}>
+      <CardContent style={{ minWidth: 450, maxWidth: 600 }}>
+        <Grid container spacing={8}>
+          <Grid item xs={12}>
+            <InputField
+              label="Metodo de pago"
+              name="paymentType"
+              value={data && data.paymentType ? data.paymentType : null}
+              fullWidth
+              dense
+              required
+              select>
+              <MenuItem value="EFECTIVO">Efectivo</MenuItem>
+              <MenuItem value="TRANSFERENCIA">Transferencia</MenuItem>
+            </InputField>
+          </Grid>
+          <Grid item xs={12}>
+            <InputField
+              label="Numero de la factura"
+              name="number"
+              placeholder="Numero de la factura"
+              fullWidth
+              required
+              value={data && data.number ? data.number : null}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputField
+              label="Numero de referencia bancaria"
+              name="ref"
+              placeholder="Numero de referencia bancaria"
+              fullWidth
+              required
+              value={data && data.ref ? data.ref : null}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputField
+              label="Notas adicionales"
+              name="notes"
+              placeholder="Información adicional sobre la factura"
+              value={data && data.notes ? data.notes : null}
+              multiline
+              rows="4"
+              rowsMax="4"
+              fullWidth
+            />
+          </Grid>
+          {/* <Grid item xs={12}>
               <FormControl component="fieldset">
                 <FormControlLabel
                   control={
@@ -84,19 +83,19 @@ const InvoiceDetailsForm = props => {
                   }
                   label={
                     <Typography variant="body2" component="label">
-                      Recibido
+                      Retirado
                     </Typography>
                   }
                 />
                 <FormHelperText style={{ marginLeft: 8 }}>
-                  Deshabilite esta opción si aun no ha recibido el pedido
+                  Deshabilite esta opción si el pedido no será retirado al
+                  generar la factura
                 </FormHelperText>
               </FormControl>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </FormMaterial>
-    </MainContainer>
+            </Grid> */}
+        </Grid>
+      </CardContent>
+    </Formsy>
   );
 };
 

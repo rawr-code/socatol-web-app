@@ -78,7 +78,7 @@ const BankAccountTransactions = props => {
               id={id}
             />
           </ContentHeader>
-          <Dialog open={open} PaperComponent="div" maxWidth="md">
+          <Dialog open={open} PaperComponent="div" maxWidth="md" scroll="body">
             <ConciliateForm handleClose={handleClose} id={itemSelect} />
           </Dialog>
           <Query query={GET_BANKACCOUNT_TRANSACTIONS_QUERY} variables={{ id }}>

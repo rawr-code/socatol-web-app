@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
-
+import shortid from 'shortid';
 // Material UI
 import {
   Stepper,
@@ -62,6 +62,31 @@ const SalesInvoiceForm = props => {
     return null;
   };
 
+  const handleTest = () => {
+    let products = productsList;
+    products.push({
+      id: shortid.generate(),
+      name: '',
+      isNew: true,
+      price: 0,
+      quantity: 0
+    });
+    setProductsList(products);
+
+    handleChange('products')(products);
+  };
+
+  const handleNewProduct = index => e => {
+    let products = productsList;
+    const { value, name } = e.target;
+    products[index][name] = value;
+
+    console.log(products[index][name]);
+    setProductsList(products);
+
+    handleChange('products')(products);
+  };
+
   const handleOnSubmit = mutate => async () => {
     let person;
 
@@ -73,12 +98,23 @@ const SalesInvoiceForm = props => {
       person = { ...personInfo, dni: Number(personInfo.dni) };
     }
 
-    const products = productsList.map(({ id, name, price, quantity }) => ({
-      product: id,
-      name,
-      price,
-      quantity
-    }));
+    const products = productsList.map(
+      ({ id, name, price, quantity, isNew }) => {
+        if (isNew) {
+          return {
+            name,
+            price: Number(price),
+            quantity: Number(quantity)
+          };
+        }
+        return {
+          product: id,
+          name,
+          price: Number(price),
+          quantity: Number(quantity)
+        };
+      }
+    );
 
     const input = {
       ...detailsInfo,
@@ -88,7 +124,7 @@ const SalesInvoiceForm = props => {
     console.log(input);
 
     const result = await mutate({
-      variables: { input, type: 'VENTA' }
+      variables: { input, type: 'COMPRA' }
     });
     console.log(result);
     props.success(true);
@@ -102,14 +138,14 @@ const SalesInvoiceForm = props => {
       {mutate => (
         <FormMaterial
           md
-          title="Factura de venta"
+          title="Factura de compra"
           subtitle="Información de la factura">
           <Stepper
             activeStep={activeStep}
             orientation="vertical"
             style={{ padding: 0, paddingBottom: 24 }}>
             <Step>
-              <StepLabel>Cliente</StepLabel>
+              <StepLabel>Proveedor</StepLabel>
               <StepContent>
                 <PersonForm
                   handleChange={handleChange('person')}
@@ -124,6 +160,8 @@ const SalesInvoiceForm = props => {
               <StepLabel>Productos</StepLabel>
               <StepContent>
                 <ProductsListForm
+                  handleTest={handleTest}
+                  handleNewProduct={handleNewProduct}
                   handleChange={handleChange('products')}
                   data={productsList}
                 />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 // Layout
 import { MainContainer } from '../../Layout';
@@ -29,7 +30,7 @@ class DataContainer extends Component {
   }
 
   render() {
-    const { loading, error, data } = this.props;
+    const { loading, error, data, onClick } = this.props;
     if (loading) return null;
     if (error) console.error(error.message);
 
@@ -53,13 +54,13 @@ class DataContainer extends Component {
       <DataTable
         columns={columns}
         rows={products}
-        handleClick={e => console.log(e)}
+        handleClick={({ id }) => onClick(`/inventario/productos/${id}`)}
       />
     );
   }
 }
 
-const AllProducts = () => {
+const AllProducts = ({ history }) => {
   return (
     <MainContainer>
       <ContentHeader title="Lista de productos">
@@ -74,6 +75,7 @@ const AllProducts = () => {
         {({ subscribeToMore, ...rest }) => {
           return (
             <DataContainer
+              onClick={history.push}
               {...rest}
               subscribe={() =>
                 subscribeToMore({
@@ -94,4 +96,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default withRouter(AllProducts);

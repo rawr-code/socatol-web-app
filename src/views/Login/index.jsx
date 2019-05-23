@@ -7,9 +7,9 @@ import Formsy from 'formsy-react';
 import {
   Paper,
   Typography,
-  FormControlLabel,
-  Checkbox,
-  Link,
+  // FormControlLabel,
+  // Checkbox,
+  // Link,
   Button,
   withStyles
 } from '@material-ui/core';
@@ -82,7 +82,7 @@ const LoginContainer = props => {
                   required
                   isPassword
                 />
-                <div className={classes.formOptions}>
+                {/* <div className={classes.formOptions}>
                   <FormControlLabel
                     classes={{ root: classes.checkboxContainer }}
                     control={
@@ -99,7 +99,7 @@ const LoginContainer = props => {
                   <Link href={'#'} variant="body1">
                     ¿Olvido su contraseña?
                   </Link>
-                </div>
+                </div> */}
                 <Button
                   variant="contained"
                   color="primary"

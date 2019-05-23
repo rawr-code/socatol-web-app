@@ -11,6 +11,7 @@ import NewPurchaseInvoce from './Invoice/Purchase/InvoiceForm';
 
 // Client
 import AllSuppliders from './Supplier/AllSuppliders';
+import DetailsSupplier from './Supplier/DetailsSupplier';
 
 const Expenses = () => {
   const tabs = [
@@ -36,6 +37,11 @@ const ExpensesContainer = ({ match: { path } }) => {
   return (
     <Switch>
       <Route exact path={path} component={Expenses} />
+      <Route
+        exact
+        path={`${path}/proveedores/:id`}
+        component={DetailsSupplier}
+      />
 
       <Route
         exact
