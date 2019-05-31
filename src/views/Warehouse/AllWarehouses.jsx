@@ -3,17 +3,7 @@ import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 // Material UI
-import {
-  Grid,
-  Card,
-  CardHeader,
-  CardActions,
-  Avatar,
-  Button
-} from '@material-ui/core';
-
-// Icons
-import { Home } from '@material-ui/icons';
+import { Grid, Card, CardActions, Button, Typography } from '@material-ui/core';
 
 // Layout
 import { MainContainer } from '../../Layout';
@@ -33,6 +23,8 @@ import { WAREHOUSE_ADDED_SUBSCRIPTION } from '../../subscriptions/Warehouse';
 // Form
 import WarehouseForm from './WarehouseForm';
 
+import warehouseImg from '../../images/warehouse.png';
+
 class DataContainer extends Component {
   componentDidMount() {
     this.props.subscribe();
@@ -40,6 +32,7 @@ class DataContainer extends Component {
 
   render() {
     const { loading, error, data } = this.props;
+
     if (loading) return null;
     if (error) console.error(error.message);
 
@@ -50,15 +43,20 @@ class DataContainer extends Component {
         {warehouses.map(warehouse => (
           <Grid item xs={12} md={3} key={warehouse.id}>
             <Card>
-              <CardHeader
-                avatar={
-                  <Avatar style={{ backgroundColor: '#27c24c' }}>
-                    <Home />
-                  </Avatar>
-                }
-                title={warehouse.name}
-                // subheader="Productos"
-              />
+              <div
+                style={{
+                  padding: '24px 24px 0',
+                  display: 'flex'
+                  // justifyContent: 'center'
+                }}>
+                <img src={warehouseImg} alt="imagen" height={64} width={64} />
+                <div style={{ marginLeft: 16 }}>
+                  <Typography variant="h6">{warehouse.name}</Typography>
+                  <Typography variant="body1">
+                    {warehouse.description}
+                  </Typography>
+                </div>
+              </div>
 
               <CardActions>
                 <Button

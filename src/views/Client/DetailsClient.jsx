@@ -15,7 +15,7 @@ import {
 } from '../../components/Molecules';
 
 // Queries
-import { GET_SUPPLIER_QUERY } from '../../queries/Person';
+import { GET_CLIENT_QUERY } from '../../queries/Person';
 
 // Mutations
 import { UPDATE_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
@@ -44,7 +44,7 @@ const DetailsWarehouse = props => {
     }
   ];
   return (
-    <Query query={GET_SUPPLIER_QUERY} variables={{ id }}>
+    <Query query={GET_CLIENT_QUERY} variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return 'Loading...';
         if (error) console.error(error.message);
@@ -54,9 +54,9 @@ const DetailsWarehouse = props => {
 
         return (
           <>
-            <FeatureBar title={person.name} back subtitle="Proveedor" />
+            <FeatureBar title={person.name} back subtitle="Cliente" />
             <MainContainer>
-              <ContentHeader title="Información del proveedor">
+              <ContentHeader title="Información del cliente">
                 <ButtonDialogForm
                   title="Editar ínformación"
                   form={PersonForm}
@@ -94,10 +94,7 @@ const DetailsWarehouse = props => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} md={8}>
-                  <DataTable
-                    columns={columns}
-                    rows={person.invoices.purchase}
-                  />
+                  <DataTable columns={columns} rows={person.invoices.sale} />
                 </Grid>
               </Grid>
             </MainContainer>

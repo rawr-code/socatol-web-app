@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withFormsy } from 'formsy-react';
-
+import NumberFormat from 'react-number-format';
+import MaskedInput from 'react-text-mask';
 // Material UI
 import {
   TextField,
@@ -14,6 +15,64 @@ import classNames from 'classnames';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 import styles from './styles';
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value
+          }
+        });
+      }}
+      thousandSeparator
+    />
+  );
+}
+
+function TextMaskCustom(props) {
+  const { inputRef, ...other } = props;
+
+  return (
+    <MaskedInput
+      {...other}
+      ref={ref => {
+        inputRef(ref ? ref.inputElement : null);
+      }}
+      mask={[
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        '-',
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        '-',
+        /\d/,
+        /\d/,
+        '-',
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/
+      ]}
+      placeholderChar={'\u2000'}
+    />
+  );
+}
 
 let InputField = props => {
   const [fieldType, setFieldType] = useState('password');
@@ -44,7 +103,9 @@ let InputField = props => {
     setValue(e.target.value);
   };
 
-  const {
+  let {
+    cuenta,
+    number,
     name,
     type,
     label,
@@ -75,6 +136,13 @@ let InputField = props => {
     disabled,
     children
   } = props;
+
+  if (number) {
+    InputProps = { ...InputProps, inputComponent: NumberFormatCustom };
+  }
+  if (cuenta) {
+    InputProps = { ...InputProps, inputComponent: TextMaskCustom };
+  }
 
   const config = {
     className: classNames(classes.root, mr && classes.mr, ml && classes.ml),

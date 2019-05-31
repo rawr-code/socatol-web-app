@@ -10,8 +10,8 @@ import Inventory from '../views/Inventory';
 import Treasury from '../views/Treasury';
 import Configuration from '../views/Configuration';
 import Reportes from '../views/Reportes';
-
-import Usuarios from '../views/Users';
+import Contactos from '../views/Contactos';
+import Admin from '../views/Admin';
 
 const publicRoutes = [
   {
@@ -27,6 +27,12 @@ const privateRoutes = [
   {
     path: '/',
     component: Inventory,
+    permissions: 'CONTABLE',
+    exact: true
+  },
+  {
+    path: '/base-de-datos',
+    component: Admin,
     permissions: 'CONTABLE',
     exact: true
   },
@@ -57,8 +63,8 @@ const privateRoutes = [
     exact: true
   },
   {
-    path: '/usuarios',
-    component: Usuarios,
+    path: '/contactos',
+    component: Contactos,
     permissions: 'CONTABLE',
     exact: true
   },

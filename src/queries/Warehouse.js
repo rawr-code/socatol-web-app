@@ -6,8 +6,18 @@ export const GET_WAREHOUSES_QUERY = gql`
       id
       name
       description
+    }
+  }
+`;
+
+export const GET_WAREHOUSES1_QUERY = gql`
+  query warehouses {
+    warehouses {
+      id
+      name
+      description
       products {
-        id
+        name
       }
     }
   }

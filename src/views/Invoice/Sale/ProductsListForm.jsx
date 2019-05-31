@@ -30,7 +30,6 @@ const ProductListForm = props => {
   const handleRemove = id => () => {
     let products = rows;
     products = products.filter(product => product.id !== id);
-
     handleChange(products);
   };
 
@@ -134,6 +133,7 @@ const ProductListForm = props => {
                     dense
                     style={{ margin: '8px 0' }}
                     defaultValue={row.quantity}
+                    type="number"
                   />
                 </TableCell>
                 <TableCell align="right" style={{ padding: '0 8px' }}>

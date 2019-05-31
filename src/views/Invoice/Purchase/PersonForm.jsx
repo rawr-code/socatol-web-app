@@ -18,6 +18,7 @@ import munici from '../mun';
 
 const ClientForm = props => {
   const [est, setEst] = React.useState([]);
+  const [isValidForm, setIsValidForm] = React.useState(false);
   const {
     handleChange,
     data,
@@ -46,6 +47,19 @@ const ClientForm = props => {
       const muni = Object.values(munici[key]);
 
       setEst(muni);
+    }
+
+    if (dataSelect.id === 'new') {
+      if (
+        model.dni &&
+        model.name &&
+        model.state &&
+        model.municipality &&
+        model.address &&
+        model.phone
+      ) {
+        setIsValidForm(true);
+      }
     }
     return model;
   };
@@ -163,7 +177,6 @@ const ClientForm = props => {
                   name="email"
                   placeholder="Correo"
                   fullWidth
-                  required
                   value={data && data.email ? data.email : null}
                 />
               </Grid>
@@ -176,7 +189,6 @@ const ClientForm = props => {
                   rows="4"
                   rowsMax="4"
                   fullWidth
-                  required
                   value={data && data.notes ? data.notes : null}
                 />
               </Grid>
@@ -189,8 +201,7 @@ const ClientForm = props => {
           variant="contained"
           color="primary"
           type="submit"
-          // disabled={!dataSelect}
-        >
+          disabled={!isValidForm}>
           Siguiente
         </Button>
       ) : (
@@ -199,8 +210,7 @@ const ClientForm = props => {
           color="primary"
           type="button"
           onClick={handleSubmit}
-          // disabled={!dataSelect}
-        >
+          disabled={!dataSelect}>
           Siguiente
         </Button>
       )}

@@ -13,7 +13,8 @@ import {
   IntegratedGrouping,
   // Pagination
   PagingState,
-  IntegratedPaging
+  IntegratedPaging,
+  DataTypeProvider
 } from '@devexpress/dx-react-grid';
 
 // DX React Grid Material
@@ -36,6 +37,17 @@ import {
 import { TableRow, Paper, withStyles } from '@material-ui/core';
 
 import styles from './styles';
+
+const CurrencyFormatter = ({ value }) => {
+  if (value === 'PENDIENTE') {
+    return <b style={{ color: 'red' }}>{value}</b>;
+  }
+  return <b style={{ color: 'green' }}>{value}</b>;
+};
+
+const CurrencyTypeProvider = props => (
+  <DataTypeProvider formatterComponent={CurrencyFormatter} {...props} />
+);
 
 const DataTable = props => {
   const { columns, rows, handleClick } = props;
@@ -101,6 +113,7 @@ const DataTable = props => {
         <IntegratedGrouping />
         <IntegratedPaging />
 
+        <CurrencyTypeProvider for={['status']} />
         <Table
           rowComponent={({ children, row }) => (
             <TableRow

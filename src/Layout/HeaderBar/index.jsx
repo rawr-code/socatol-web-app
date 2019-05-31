@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { ApolloConsumer } from 'react-apollo';
 
 // Material UI
 import {
@@ -11,7 +13,8 @@ import {
   Typography,
   // Tooltip,
   // Avatar,
-  withStyles
+  withStyles,
+  Button
 } from '@material-ui/core';
 
 // Icons
@@ -22,8 +25,17 @@ import {
 
 import styles from './styles';
 
+const logout = (client, history) => {
+  localStorage.removeItem('token', '');
+  history.push('/');
+  window.location.reload();
+
+  // client.resetStore();
+};
+
 const HeaderBar = props => {
-  const { classes } = props;
+  const { classes, history } = props;
+
   return (
     <AppBar color="primary" position="fixed" className={classes.root}>
       <Toolbar>
@@ -43,9 +55,18 @@ const HeaderBar = props => {
           </Typography>
           <Grid item xs />
           <Grid item>
-            <Typography className={classes.link} component="a" href="#">
-              Cerrar sesión
-            </Typography>
+            <ApolloConsumer>
+              {client => {
+                return (
+                  <Typography
+                    className={classes.link}
+                    component={Button}
+                    onClick={() => logout(client, history)}>
+                    Cerrar sesión
+                  </Typography>
+                );
+              }}
+            </ApolloConsumer>
           </Grid>
           {/* <Grid item>
             <Tooltip title="No hay notificaciones">
@@ -75,4 +96,4 @@ HeaderBar.propTypes = {
 // Apply styles
 const _HeaderBar = withStyles(styles)(HeaderBar);
 
-export default _HeaderBar;
+export default withRouter(_HeaderBar);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-
+import { withRouter } from 'react-router-dom';
 // Layout
 import { MainContainer } from '../../Layout';
 
@@ -11,7 +11,7 @@ import ContentHeader from '../../components/Molecules/ContentHeader';
 // Queries
 import { GET_CLIENTS_QUERY } from '../../queries/Person';
 
-const AllClients = () => {
+const AllClients = ({ history }) => {
   const columns = [
     {
       name: 'dni',
@@ -46,11 +46,17 @@ const AllClients = () => {
           let { persons } = data;
 
           console.log(data);
-          return <DataTable columns={columns} rows={persons} />;
+          return (
+            <DataTable
+              columns={columns}
+              rows={persons}
+              handleClick={({ id }) => history.push(`/ingresos/clientes/${id}`)}
+            />
+          );
         }}
       </Query>
     </MainContainer>
   );
 };
 
-export default AllClients;
+export default withRouter(AllClients);

@@ -3,17 +3,7 @@ import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 // Material UI
-import {
-  Grid,
-  Card,
-  CardHeader,
-  CardActions,
-  Avatar,
-  Button
-} from '@material-ui/core';
-
-// Icons
-import { Home } from '@material-ui/icons';
+import { Grid, Card, CardActions, Button, Typography } from '@material-ui/core';
 
 // Layout
 import { MainContainer } from '../../Layout';
@@ -33,6 +23,8 @@ import { BANKACCOUNT_ADDED_SUBSCRIPTION } from '../../subscriptions/BankAccount'
 // Form
 import BankAccountForm from './BankAccountForm';
 
+import bankAccountImg from '../../images/bankAccount.png';
+
 class DataContainer extends Component {
   componentDidMount() {
     this.props.subscribe();
@@ -50,15 +42,18 @@ class DataContainer extends Component {
         {bankAccounts.map(bankAccount => (
           <Grid item xs={12} md={3} key={bankAccount.id}>
             <Card>
-              <CardHeader
-                avatar={
-                  <Avatar style={{ backgroundColor: '#27c24c' }}>
-                    <Home />
-                  </Avatar>
-                }
-                title={bankAccount.name}
-                subheader={bankAccount.bank}
-              />
+              <div
+                style={{
+                  padding: '24px 24px 0',
+                  display: 'flex'
+                  // justifyContent: 'center'
+                }}>
+                <img src={bankAccountImg} alt="imagen" height={64} width={64} />
+                <div style={{ marginLeft: 16 }}>
+                  <Typography variant="h6">{bankAccount.name}</Typography>
+                  <Typography variant="body1">{bankAccount.bank}</Typography>
+                </div>
+              </div>
 
               <CardActions>
                 <Button

@@ -22,10 +22,10 @@ import {
   People,
   AccountBalance,
   Settings,
-  Print
+  Print,
+  Person,
+  Dns
 } from '@material-ui/icons';
-
-// import { Box } from 'react-feather';
 
 import styles from './styles';
 
@@ -37,18 +37,10 @@ const categories = [
       { id: 'Gastos', to: '/gastos', icon: <CreditCard /> },
       { id: 'Tesorería', to: '/tesoreria', icon: <AccountBalance /> },
       { id: 'Inventario', to: '/inventario', icon: <Home /> },
-      // { id: 'Calendario', to: '/calendario', icon: <CalendarToday /> },
-      { id: 'Reportes', to: '/reportes', icon: <Print /> }
-    ]
-  },
-  {
-    id: 'Sistema',
-    children: [
-      { id: 'Usuarios', to: '/usuarios', icon: <People /> },
-      { id: 'Configuración', to: '/configuracion', icon: <Settings /> }
-      // { id: 'Rendimiento', to: '/', icon: <Timer /> },
-      // { id: 'Base de datos', to: '/', icon: <PhonelinkSetup /> },
-      // { id: 'Servidor', to: '/', icon: <SettingsInputComponent /> }
+      { id: 'Contactos', to: '/contactos', icon: <People /> },
+      { id: 'Reportes', to: '/reportes', icon: <Print /> },
+      { id: 'Configuración', to: '/configuracion', icon: <Settings /> },
+      { id: 'Base de datos', to: '/base-de-datos', icon: <Dns /> }
     ]
   }
 ];
@@ -62,7 +54,7 @@ const SideNav = props => {
         <List disablePadding>
           <ListItem className={classNames(classes.item, classes.itemCategory)}>
             <ListItemIcon>
-              <Home />
+              <Person />
             </ListItemIcon>
             <ListItemText
               classes={{

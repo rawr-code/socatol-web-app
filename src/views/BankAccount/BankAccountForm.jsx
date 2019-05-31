@@ -82,6 +82,8 @@ class BankAccountForm extends Component {
                   variant="outlined"
                   label="Número de cuenta"
                   name="number"
+                  minlength={20}
+                  cuenta
                   fullWidth
                   required
                   value={data && data.number ? data.number : null}

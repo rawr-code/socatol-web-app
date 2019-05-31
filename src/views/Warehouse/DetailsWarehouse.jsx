@@ -52,7 +52,7 @@ const DetailsWarehouse = props => {
 
         return (
           <>
-            <FeatureBar title={warehouse.name} back />
+            <FeatureBar title={warehouse.name} back subtitle="Almacén" />
             <MainContainer>
               <ContentHeader title="Información del almacén">
                 <ButtonDialogForm

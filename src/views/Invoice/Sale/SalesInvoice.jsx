@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-
+import { withRouter } from 'react-router-dom';
 // Layout
 import { MainContainer } from '../../../Layout';
 
@@ -17,7 +17,7 @@ import Notification from '../../../components/Notification';
 
 import SalesInvoiceForm from './SalesInvoiceForm';
 
-const SalesInvoice = () => {
+const SalesInvoice = ({ history }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const columns = [
     {
@@ -65,11 +65,19 @@ const SalesInvoice = () => {
           let { invoices } = data;
 
           console.log(data);
-          return <DataTable columns={columns} rows={invoices} />;
+          return (
+            <DataTable
+              columns={columns}
+              rows={invoices}
+              handleClick={({ id }) =>
+                history.push(`/ingresos/factura-venta/${id}`)
+              }
+            />
+          );
         }}
       </Query>
     </MainContainer>
   );
 };
 
-export default SalesInvoice;
+export default withRouter(SalesInvoice);

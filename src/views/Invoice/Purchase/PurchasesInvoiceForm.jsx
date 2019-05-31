@@ -52,11 +52,17 @@ const SalesInvoiceForm = props => {
       setDetailsInfo(value);
     }
     if (stateName === 'products') {
-      const products = value.map(product => ({
-        ...product,
-        quantity: product.quantity ? product.quantity : 0
-      }));
-      setProductsList(products);
+      let products;
+
+      if (value && value.length > 0) {
+        products = value.map(product => ({
+          ...product,
+          quantity: product.quantity ? product.quantity : 0
+        }));
+        setProductsList(products);
+      } else {
+        setProductsList([]);
+      }
     }
 
     return null;
@@ -79,9 +85,11 @@ const SalesInvoiceForm = props => {
   const handleNewProduct = index => e => {
     let products = productsList;
     const { value, name } = e.target;
+    // console.log(value);
     products[index][name] = value;
 
-    console.log(products[index][name]);
+    // console.log(products[index][name]);
+    console.log(name, products);
     setProductsList(products);
 
     handleChange('products')(products);
@@ -176,7 +184,8 @@ const SalesInvoiceForm = props => {
                     variant="contained"
                     color="primary"
                     onClick={handleNext}
-                    style={{ margin: '0 8px' }}>
+                    style={{ margin: '0 8px' }}
+                    disabled={!productsList.length > 0}>
                     Siguiente
                   </Button>
                 </div>
@@ -210,7 +219,12 @@ const SalesInvoiceForm = props => {
               color="primary"
               variant="contained"
               type="button"
-              onClick={handleOnSubmit(mutate)}>
+              onClick={handleOnSubmit(mutate)}
+              disabled={
+                !detailsInfo.paymentType ||
+                !detailsInfo.number ||
+                !detailsInfo.ref
+              }>
               Confirmar y enviar
             </Button>
           </CardActions>

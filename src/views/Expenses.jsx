@@ -8,6 +8,7 @@ import FeatureBarTabs from '../Layout/FeatureBarTabs';
 // Expenses Invoice
 import PurchasesInvoce from './Invoice/Purchase/PurchasesInvoice';
 import NewPurchaseInvoce from './Invoice/Purchase/InvoiceForm';
+import DetailsInvoice from './Invoice/DetailsInvoice';
 
 // Client
 import AllSuppliders from './Supplier/AllSuppliders';
@@ -41,6 +42,11 @@ const ExpensesContainer = ({ match: { path } }) => {
         exact
         path={`${path}/proveedores/:id`}
         component={DetailsSupplier}
+      />
+      <Route
+        exact
+        path={`${path}/factura-compra/:id`}
+        component={DetailsInvoice}
       />
 
       <Route

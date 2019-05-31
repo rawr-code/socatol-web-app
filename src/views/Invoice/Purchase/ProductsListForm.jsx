@@ -148,7 +148,7 @@ const ProductListForm = props => {
                         onChange={handleNewProduct(index)}
                         dense
                         style={{ margin: '8px 0' }}
-                        defaultValue={row.price}
+                        defaultValue={0}
                         InputProps={{
                           endAdornment: (
                             <InputAdornment
@@ -202,7 +202,23 @@ const ProductListForm = props => {
                     </div>
                   </TableCell>
                   <TableCell align="right" style={{ padding: '0 8px' }}>
-                    {row.price} Bs. S
+                    <InputFieldOld
+                      variant="outlined"
+                      name="price"
+                      onChange={handleNewProduct(index)}
+                      dense
+                      style={{ margin: '8px 0' }}
+                      defaultValue={0}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment
+                            position="end"
+                            style={{ minWidth: 40 }}>
+                            Bs. S
+                          </InputAdornment>
+                        )
+                      }}
+                    />
                   </TableCell>
                   <TableCell align="right" style={{ padding: '0 8px' }}>
                     <InputFieldOld

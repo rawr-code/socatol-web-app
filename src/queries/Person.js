@@ -14,11 +14,58 @@ export const GET_PERSON_QUERY = gql`
   }
 `;
 
+export const GET_SUPPLIER_QUERY = gql`
+  query person($id: ID!) {
+    person(id: $id) {
+      id
+      dni
+      name
+      phone
+      state
+      municipality
+      address
+      invoices {
+        purchase {
+          dateEmit
+          number
+          paymentType
+          amount
+        }
+      }
+    }
+  }
+`;
+
+export const GET_CLIENT_QUERY = gql`
+  query person($id: ID!) {
+    person(id: $id) {
+      id
+      dni
+      name
+      phone
+      state
+      municipality
+      address
+      invoices {
+        sale {
+          dateEmit
+          number
+          paymentType
+          amount
+        }
+      }
+    }
+  }
+`;
+
 export const GET_PERSONS_QUERY = gql`
   query persons {
     persons {
       id
       name
+      phone
+      state
+      municipality
     }
   }
 `;

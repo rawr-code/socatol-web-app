@@ -21,6 +21,9 @@ const styles = theme => ({
   },
   ml: {
     marginLeft: 8
+  },
+  tRight: {
+    textAlign: 'right'
   }
 });
 

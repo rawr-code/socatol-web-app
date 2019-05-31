@@ -158,7 +158,7 @@ const ProductoDetalles = ({ data: { id } }) => {
 
 const TableAlmacenes = () => {
   return (
-    <Query query={warehouseQueries.GET_WAREHOUSES_QUERY}>
+    <Query query={warehouseQueries.GET_WAREHOUSES1_QUERY}>
       {({ loading, error, data }) => {
         if (loading) return null;
         if (error) console.log(error);

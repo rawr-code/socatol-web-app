@@ -8,9 +8,11 @@ import FeatureBarTabs from '../Layout/FeatureBarTabs';
 // Sales Invoice
 import SalesInvoce from './Invoice/Sale/SalesInvoice';
 import NewSalesInvoce from './Invoice/Sale/InvoiceForm';
+import DetailsInvoice from './Invoice/DetailsInvoice';
 
 // Client
 import AllClients from './Client/AllClients';
+import DetailsClient from './Client/DetailsClient';
 
 const Incomes = () => {
   const tabs = [
@@ -36,6 +38,13 @@ const IncomesContainer = ({ match: { path } }) => {
   return (
     <Switch>
       <Route exact path={path} component={Incomes} />
+
+      <Route exact path={`${path}/clientes/:id`} component={DetailsClient} />
+      <Route
+        exact
+        path={`${path}/factura-venta/:id`}
+        component={DetailsInvoice}
+      />
 
       <Route
         exact

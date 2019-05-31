@@ -27,8 +27,9 @@ import { GET_WAREHOUSES_QUERY } from '../../queries/Warehouse';
 
 class WarehousesField extends Component {
   render() {
-    const { loading, error, data } = this.props;
+    const { loading, error, data, id } = this.props;
 
+    if (loading) return null;
     if (error) console.error(error.message);
 
     const { warehouses } = data;
@@ -40,6 +41,7 @@ class WarehousesField extends Component {
         name="warehouse"
         select
         fullWidth
+        value={id && id ? id : null}
         required>
         {warehouses.map(item => (
           <MenuItem value={item.id} key={item.id}>
@@ -98,15 +100,18 @@ class ProductForm extends Component {
                   autoFocus
                   fullWidth
                   required
+                  value={data && data.name ? data.name : null}
                 />
                 <InputField
                   variant="outlined"
                   label="Precio"
                   name="price"
+                  number
                   placeholder="0"
                   fullWidth
                   required
                   align="right"
+                  value={data && data.price ? data.price : null}
                   endAdornment={
                     <InputAdornment position="end" style={{ width: 40 }}>
                       Bs. S
@@ -120,9 +125,11 @@ class ProductForm extends Component {
                       label="Cantidad"
                       name="stock"
                       placeholder="0"
+                      number
                       fullWidth
                       required
                       align="right"
+                      value={data && data.stock ? data.stock : null}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -132,16 +139,18 @@ class ProductForm extends Component {
                       name="iva"
                       fullWidth
                       required
+                      value={data && data.iva ? data.iva : null}
                       select>
                       <MenuItem value="excento">Excento</MenuItem>
                       <MenuItem value="vigente">Vigente</MenuItem>
                     </InputField>
                   </Grid>
                 </Grid>
-                <Query query={GET_WAREHOUSES_QUERY} pollInterval={500}>
+                <Query query={GET_WAREHOUSES_QUERY}>
                   {({ subscribeToMore, ...rest }) => {
                     return (
                       <WarehousesField
+                        id={data.warehouse.id}
                         {...rest}
                         subscribe={() =>
                           subscribeToMore({

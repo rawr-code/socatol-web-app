@@ -41,6 +41,7 @@ const InvoiceDetailsForm = props => {
             <InputField
               label="Numero de la factura"
               name="number"
+              type="number"
               placeholder="Numero de la factura"
               fullWidth
               required
@@ -51,6 +52,7 @@ const InvoiceDetailsForm = props => {
             <InputField
               label="Numero de referencia bancaria"
               name="ref"
+              type="number"
               placeholder="Numero de referencia bancaria"
               fullWidth
               required

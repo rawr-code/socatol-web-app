@@ -19,7 +19,7 @@ import {
 } from '@material-ui/core';
 
 // Layout
-import MainContainer from '../Layout/MainContainer';
+import { MainContainer, FeatureBar } from '../Layout';
 
 // Atoms
 import InputFieldOld from '../components/Atoms/InputFieldOld';
@@ -300,79 +300,82 @@ class ConfigurationContainer extends Component {
           const { configuration } = data;
 
           return (
-            <MainContainer>
-              <DialogFormProductIva
-                open={open === 'product'}
-                handleClose={this.handleClose}
-                value={configuration ? configuration.iva.product : 0}
-              />
-              <DialogFormSaleInvoice
-                open={open === 'saleInvoice'}
-                handleClose={this.handleClose}
-                value={configuration ? configuration.invoice.sale.number : 0}
-              />
-              <DialogFormPurchaseInvoice
-                open={open === 'purchaseInvoice'}
-                handleClose={this.handleClose}
-                value={
-                  configuration ? configuration.invoice.purchase.number : 0
-                }
-              />
-              <Grid container spacing={24}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <ContentHeader title="Productos" />
-                  <Card>
-                    <CardActionArea onClick={this.handleClickOpen('product')}>
-                      <CardContent>
-                        <Typography component="h2" variant="h6">
-                          Producto
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="textSecondary"
-                          component="span">
-                          IVA vigente
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
+            <>
+              <FeatureBar title="Configuración" />
+              <MainContainer>
+                <DialogFormProductIva
+                  open={open === 'product'}
+                  handleClose={this.handleClose}
+                  value={configuration ? configuration.iva.product : 0}
+                />
+                <DialogFormSaleInvoice
+                  open={open === 'saleInvoice'}
+                  handleClose={this.handleClose}
+                  value={configuration ? configuration.invoice.sale.number : 0}
+                />
+                <DialogFormPurchaseInvoice
+                  open={open === 'purchaseInvoice'}
+                  handleClose={this.handleClose}
+                  value={
+                    configuration ? configuration.invoice.purchase.number : 0
+                  }
+                />
+                <Grid container spacing={24}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <ContentHeader title="Productos" />
+                    <Card>
+                      <CardActionArea onClick={this.handleClickOpen('product')}>
+                        <CardContent>
+                          <Typography component="h2" variant="h6">
+                            Producto
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            component="span">
+                            IVA vigente
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <ContentHeader title="Facturas" />
+                    <Card>
+                      <CardActionArea
+                        onClick={this.handleClickOpen('saleInvoice')}>
+                        <CardContent>
+                          <Typography component="h2" variant="h6">
+                            Factura de venta
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            component="span">
+                            Número inicial de factura
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                      <Divider variant="middle" />
+                      <CardActionArea
+                        onClick={this.handleClickOpen('purchaseInvoice')}>
+                        <CardContent>
+                          <Typography component="h2" variant="h6">
+                            Factura de compra
+                          </Typography>
+                          <Typography
+                            variant="subtitle1"
+                            color="textSecondary"
+                            component="span">
+                            Número inicial de factura
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <ContentHeader title="Facturas" />
-                  <Card>
-                    <CardActionArea
-                      onClick={this.handleClickOpen('saleInvoice')}>
-                      <CardContent>
-                        <Typography component="h2" variant="h6">
-                          Factura de venta
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="textSecondary"
-                          component="span">
-                          Número inicial de factura
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                    <Divider variant="middle" />
-                    <CardActionArea
-                      onClick={this.handleClickOpen('purchaseInvoice')}>
-                      <CardContent>
-                        <Typography component="h2" variant="h6">
-                          Factura de compra
-                        </Typography>
-                        <Typography
-                          variant="subtitle1"
-                          color="textSecondary"
-                          component="span">
-                          Número inicial de factura
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              </Grid>
-            </MainContainer>
+              </MainContainer>
+            </>
           );
         }}
       </Query>

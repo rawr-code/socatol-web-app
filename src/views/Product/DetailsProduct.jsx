@@ -21,7 +21,7 @@ import {
 import { UPDATE_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
 
 // Forms
-import WarehouseForm from '../Warehouse/WarehouseForm';
+import ProductForm from './ProductForm';
 
 const DetailsProduct = props => {
   const { id } = props.match.params;
@@ -55,18 +55,14 @@ const DetailsProduct = props => {
         const { product } = data;
         return (
           <>
-            <FeatureBar
-              title={product.name}
-              subtitle={product.warehouse.name}
-              back
-            />
+            <FeatureBar title={product.name} subtitle="Producto" back />
             <MainContainer>
               <ContentHeader title="Información del producto">
                 <ButtonDialogForm
                   title="Editar información"
-                  form={WarehouseForm}
+                  form={ProductForm}
                   mutation={UPDATE_WAREHOUSE_MUTATION}
-                  // data={warehouse}
+                  data={product}
                 />
               </ContentHeader>
               <Grid container spacing={24}>
