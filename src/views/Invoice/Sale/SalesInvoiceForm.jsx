@@ -28,6 +28,7 @@ const SalesInvoiceForm = props => {
   const [personInfo, setPersonInfo] = useState({});
   const [detailsInfo, setDetailsInfo] = useState({});
   const [productsList, setProductsList] = useState([]);
+  const [productsListOK, setProductsListOK] = useState(true);
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -61,6 +62,7 @@ const SalesInvoiceForm = props => {
         }));
         setProductsList(products);
       } else {
+        setProductsListOK(true);
         setProductsList([]);
       }
     }
@@ -131,6 +133,7 @@ const SalesInvoiceForm = props => {
               <StepContent>
                 <ProductsListForm
                   handleChange={handleChange('products')}
+                  handleActive={setProductsListOK}
                   data={productsList}
                 />
                 <div style={{ marginTop: 24 }}>
@@ -140,12 +143,13 @@ const SalesInvoiceForm = props => {
                     style={{ margin: '0 8px' }}>
                     Volver
                   </Button>
+
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={handleNext}
                     style={{ margin: '0 8px' }}
-                    disabled={!productsList.length > 0}>
+                    disabled={productsListOK}>
                     Siguiente
                   </Button>
                 </div>

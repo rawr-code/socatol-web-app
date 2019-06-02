@@ -150,7 +150,7 @@ class ProductForm extends Component {
                   {({ subscribeToMore, ...rest }) => {
                     return (
                       <WarehousesField
-                        id={data.warehouse.id}
+                        id={data && data.warehouse.id}
                         {...rest}
                         subscribe={() =>
                           subscribeToMore({
