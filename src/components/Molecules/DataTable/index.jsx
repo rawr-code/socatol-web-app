@@ -70,6 +70,10 @@ const DataTable = props => {
       align: 'right'
     },
     {
+      columnName: 'total',
+      align: 'right'
+    },
+    {
       columnName: 'stock',
       align: 'right'
     },
@@ -78,9 +82,14 @@ const DataTable = props => {
       align: 'right'
     },
     {
-      columnName: 'date',
+      columnName: 'date1',
       align: 'left',
       width: 116
+    },
+    {
+      columnName: 'datee',
+      align: 'left',
+      width: 175
     },
     {
       columnName: 'dateEmit',

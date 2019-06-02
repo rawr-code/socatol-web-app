@@ -27,6 +27,13 @@ const FeatureBar = props => {
       <Toolbar className={classes.toolbar}>
         <Grid container alignItems="center" spacing={0}>
           <Grid item xs>
+            {subtitle && (
+              <div className={classes.subtitleContainer}>
+                <Typography color="inherit" variant="body2">
+                  {subtitle}
+                </Typography>
+              </div>
+            )}
             <div className={classes.titleContainer}>
               {back && (
                 <IconButton
@@ -40,13 +47,6 @@ const FeatureBar = props => {
                 {title}
               </Typography>
             </div>
-            {subtitle && (
-              <div className={classes.subtitleContainer}>
-                <Typography color="inherit" variant="body2">
-                  {subtitle}
-                </Typography>
-              </div>
-            )}
           </Grid>
           {/* <Grid item>
             <Button

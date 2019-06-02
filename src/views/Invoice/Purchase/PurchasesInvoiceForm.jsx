@@ -67,14 +67,16 @@ const SalesInvoiceForm = props => {
         setProductsList([]);
       }
 
-      products = products.forEach(product => {
-        if (product.quantity > product.stock || product.quantity <= 0) {
-          product.error = true;
-          err = true;
-        } else {
-          product.error = false;
-        }
-      });
+      products =
+        products &&
+        products.forEach(product => {
+          if (product.quantity <= 0) {
+            product.error = true;
+            err = true;
+          } else {
+            product.error = false;
+          }
+        });
       if (err) {
         setProductsListOK(true);
       }

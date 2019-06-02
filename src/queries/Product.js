@@ -20,23 +20,58 @@ export const GET_PRODUCT_QUERY = gql`
       price
       iva
       stock
-      clients {
+      warehouse {
         id
-        dni
         name
-        phone
-        state
-        municipality
-        address
+      }
+    }
+  }
+`;
+
+export const GET_PRODUCT_OTHER_QUERY = gql`
+  query productsOther($id: ID!) {
+    productsOther(id: $id) {
+      id
+      name
+      price
+      iva
+      stock
+      clients {
+        person {
+          id
+          dni
+          name
+          phone
+          state
+          municipality
+          address
+        }
+        quantitys {
+          date
+          invoice {
+            id
+          }
+          quantity
+        }
       }
       suppliders {
-        id
-        dni
-        name
-        phone
-        state
-        municipality
-        address
+        person {
+          id
+          dni
+          name
+          phone
+          state
+          municipality
+          address
+        }
+        prices {
+          invoice {
+            number
+          }
+          date
+          amount
+          quantity
+        }
       }
       warehouse {
         id

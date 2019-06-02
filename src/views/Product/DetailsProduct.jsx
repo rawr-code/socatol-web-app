@@ -8,7 +8,7 @@ import { FeatureBar, MainContainer } from '../../Layout';
 import { Grid, Typography, Card, CardContent } from '@material-ui/core';
 
 // Queries
-import { GET_PRODUCT_QUERY } from '../../queries/Product';
+import { GET_PRODUCT_OTHER_QUERY } from '../../queries/Product';
 
 // Molecules
 import {
@@ -32,8 +32,34 @@ const DetailsProduct = props => {
       title: 'Nombre'
     },
     {
-      name: 'phone',
-      title: 'Telefono'
+      name: 'state',
+      title: 'Estado'
+    },
+    {
+      name: 'municipality',
+      title: 'Municipio'
+    },
+    {
+      name: 'ultima',
+      title: 'Ultima compra'
+    },
+    {
+      name: 'datee',
+      title: 'Fecha de ultima compra'
+    },
+    {
+      name: 'total',
+      title: 'Total comprado'
+    },
+    {
+      name: 'amount',
+      title: 'Monto'
+    }
+  ];
+  const columnsClients = [
+    {
+      name: 'name',
+      title: 'Nombre'
     },
     {
       name: 'state',
@@ -42,17 +68,84 @@ const DetailsProduct = props => {
     {
       name: 'municipality',
       title: 'Municipio'
+    },
+    {
+      name: 'datee',
+      title: 'Fecha de ultima venta'
+    },
+    {
+      name: 'ultima',
+      title: 'Ultima venta'
+    },
+    {
+      name: 'total',
+      title: 'Total vendido'
     }
   ];
   return (
-    <Query query={GET_PRODUCT_QUERY} variables={{ id }}>
+    <Query query={GET_PRODUCT_OTHER_QUERY} variables={{ id }}>
       {({ loading, error, data }) => {
         if (loading) return null;
 
         if (error) console.error(error);
 
         console.log(data);
-        const { product } = data;
+        const { productsOther: product } = data;
+
+        let clientsData = [];
+        let supplidersData = [];
+
+        product.clients.forEach(item => {
+          const { name, state, municipality, id } = item.person;
+          let total = 0;
+          let datee = '';
+          let ultima = '';
+          item.quantitys.forEach((i, index) => {
+            total += i.quantity;
+            if (index === item.quantitys.length - 1) {
+              datee = i.date;
+              ultima = i.quantity;
+            }
+          });
+
+          clientsData.push({
+            id,
+            name,
+            state,
+            municipality,
+            total,
+            datee,
+            ultima
+          });
+        });
+
+        product.suppliders.forEach(item => {
+          const { name, state, municipality, id } = item.person;
+          let amount = 0;
+          let datee = '';
+          let ultima = '';
+          let total = 0;
+          item.prices.forEach((i, index) => {
+            total += i.quantity;
+            if (index === item.prices.length - 1) {
+              ultima = i.quantity;
+              datee = i.date;
+              amount = i.amount;
+            }
+          });
+
+          supplidersData.push({
+            id,
+            name,
+            state,
+            municipality,
+            datee,
+            amount,
+            total,
+            ultima
+          });
+        });
+
         return (
           <>
             <FeatureBar title={product.name} subtitle="Producto" back />
@@ -85,26 +178,22 @@ const DetailsProduct = props => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={12} md={8}>
+                <Grid item xs={12}>
                   <Grid container spacing={8}>
                     <Grid item xs={12}>
                       <ContentHeader title="Proveedores" />
                       <DataTable
                         columns={columnsPersons}
-                        rows={product.suppliders}
-                        handleClick={({ id }) =>
-                          history.push(`/gastos/proveedores/${id}`)
-                        }
+                        rows={supplidersData}
+                        handleClick={data => console.log(data)}
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <ContentHeader title="Clientes" />
                       <DataTable
-                        columns={columnsPersons}
-                        rows={product.clients}
-                        handleClick={({ id }) =>
-                          history.push(`/gastos/proveedores/${id}`)
-                        }
+                        columns={columnsClients}
+                        rows={clientsData}
+                        handleClick={data => console.log(data)}
                       />
                     </Grid>
                   </Grid>

@@ -58,7 +58,7 @@ const ProductListForm = props => {
     products.forEach(item => {
       console.log('aqui');
       console.log(item);
-      if (item.quantity > item.stock || item.quantity <= 0) {
+      if (item.quantity <= 0) {
         product.error = true;
         handleActive(true);
       } else {
