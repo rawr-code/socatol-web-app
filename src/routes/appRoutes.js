@@ -33,7 +33,7 @@ const privateRoutes = [
   {
     path: '/base-de-datos',
     component: Admin,
-    permissions: 'CONTABLE',
+    permissions: 'ADMINISTRADOR',
     exact: true
   },
   {

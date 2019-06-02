@@ -28,6 +28,7 @@ const SalesInvoiceForm = props => {
   const [personInfo, setPersonInfo] = useState({});
   const [detailsInfo, setDetailsInfo] = useState({});
   const [productsList, setProductsList] = useState([]);
+  const [productsListOK, setProductsListOK] = useState(true);
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -53,7 +54,7 @@ const SalesInvoiceForm = props => {
     }
     if (stateName === 'products') {
       let products;
-
+      let err = false;
       if (value && value.length > 0) {
         products = value.map(product => ({
           ...product,
@@ -61,7 +62,21 @@ const SalesInvoiceForm = props => {
         }));
         setProductsList(products);
       } else {
+        console.log('else');
+        setProductsListOK(true);
         setProductsList([]);
+      }
+
+      products = products.forEach(product => {
+        if (product.quantity > product.stock || product.quantity <= 0) {
+          product.error = true;
+          err = true;
+        } else {
+          product.error = false;
+        }
+      });
+      if (err) {
+        setProductsListOK(true);
       }
     }
 
@@ -170,6 +185,7 @@ const SalesInvoiceForm = props => {
                 <ProductsListForm
                   handleTest={handleTest}
                   handleNewProduct={handleNewProduct}
+                  handleActive={setProductsListOK}
                   handleChange={handleChange('products')}
                   data={productsList}
                 />
@@ -185,7 +201,7 @@ const SalesInvoiceForm = props => {
                     color="primary"
                     onClick={handleNext}
                     style={{ margin: '0 8px' }}
-                    disabled={!productsList.length > 0}>
+                    disabled={productsListOK}>
                     Siguiente
                   </Button>
                 </div>

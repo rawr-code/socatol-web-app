@@ -8,21 +8,19 @@ import { publicRoutes, privateRoutes } from './appRoutes';
 
 const RoutesGenerator = ({ session, refetch }) => {
   let userRoutes;
-
   if (session) {
     const { role } = session;
     if (role && role !== '') {
       if (role === 'ADMINISTRADOR') {
         userRoutes = privateRoutes;
+      } else {
+        userRoutes = privateRoutes.filter(route => route.permissions === role);
       }
-      userRoutes = privateRoutes;
-
-      // userRoutes = privateRoutes.filter(route => route.permissions === role);
     }
 
     return (
       <BrowserRouter>
-        <Layout>
+        <Layout session={session}>
           <Switch>
             {userRoutes.map((route, index) => (
               <Route

@@ -27,7 +27,13 @@ import SelectField from '../../../components/Atoms/SelectField';
 import { GET_PRODUCTS_QUERY } from '../../../queries/Product';
 
 const ProductListForm = props => {
-  const { handleChange, data: rows, handleTest, handleNewProduct } = props;
+  const {
+    handleChange,
+    handleActive,
+    data: rows,
+    handleTest,
+    handleNewProduct
+  } = props;
 
   const handleRemove = id => () => {
     let products = rows;
@@ -48,6 +54,19 @@ const ProductListForm = props => {
       product.quantity = 0;
       product.total = 0;
     }
+
+    products.forEach(item => {
+      console.log('aqui');
+      console.log(item);
+      if (item.quantity > item.stock || item.quantity <= 0) {
+        product.error = true;
+        handleActive(true);
+      } else {
+        product.error = false;
+
+        handleActive(false);
+      }
+    });
 
     products[index] = product;
 
@@ -166,6 +185,8 @@ const ProductListForm = props => {
                         name="quantity"
                         onChange={handleQuantityProduct(index)}
                         dense
+                        type="number"
+                        error={row.error}
                         style={{ margin: '8px 0' }}
                         defaultValue={row.quantity}
                       />
@@ -224,8 +245,10 @@ const ProductListForm = props => {
                     <InputFieldOld
                       variant="outlined"
                       name="quantity"
+                      type="number"
                       onChange={handleQuantityProduct(index)}
                       dense
+                      error={row.error}
                       style={{ margin: '8px 0' }}
                       defaultValue={row.quantity}
                     />

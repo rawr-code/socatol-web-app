@@ -39,14 +39,19 @@ const categories = [
       { id: 'Inventario', to: '/inventario', icon: <Home /> },
       { id: 'Contactos', to: '/contactos', icon: <People /> },
       { id: 'Reportes', to: '/reportes', icon: <Print /> },
-      { id: 'Configuración', to: '/configuracion', icon: <Settings /> },
-      { id: 'Base de datos', to: '/base-de-datos', icon: <Dns /> }
+      { id: 'Configuración', to: '/configuracion', icon: <Settings /> }
     ]
+  },
+  {
+    permission: true,
+    id: 'Sistema',
+    children: [{ id: 'Base de datos', to: '/base-de-datos', icon: <Dns /> }]
   }
 ];
 
 const SideNav = props => {
-  const { classes } = props;
+  const { classes, session } = props;
+  console.log(session);
   return (
     <nav className={classes.root}>
       <Drawer variant="permanent" classes={{ paper: classes.drawer }}>
@@ -59,42 +64,90 @@ const SideNav = props => {
             <ListItemText
               classes={{
                 primary: classes.itemPrimary
-              }}>
-              Emmanuel Villegas
-            </ListItemText>
+              }}
+              primary={session.username}
+              secondary={session.role}
+            />
           </ListItem>
-          {categories.map(({ id, children }) => (
-            <div key={id}>
-              <ListItem className={classes.categoryHeader}>
-                <ListItemText
-                  classes={{
-                    primary: classes.categoryHeaderPrimary
-                  }}>
-                  {id}
-                </ListItemText>
-              </ListItem>
-              {children.map(({ id: childId, icon, to }) => (
-                <ListItem
-                  button
-                  dense
-                  key={childId}
-                  className={classNames(classes.item, classes.itemActionable)}
-                  component={NavLink}
-                  to={to}
-                  activeClassName={classes.itemActiveItem}>
-                  <ListItemIcon>{icon}</ListItemIcon>
-                  <ListItemText
-                    classes={{
-                      primary: classes.itemPrimary,
-                      textDense: classes.textDense
-                    }}>
-                    {childId}
-                  </ListItemText>
-                </ListItem>
-              ))}
-              <Divider className={classes.divider} />
-            </div>
-          ))}
+          {categories.map(({ id, children, permission }) => {
+            if (permission) {
+              if (id === 'Sistema' && session.role === 'ADMINISTRADOR') {
+                return (
+                  <div key={id}>
+                    <ListItem className={classes.categoryHeader}>
+                      <ListItemText
+                        classes={{
+                          primary: classes.categoryHeaderPrimary
+                        }}>
+                        {id}
+                      </ListItemText>
+                    </ListItem>
+                    {children.map(({ id: childId, icon, to }) => (
+                      <ListItem
+                        button
+                        dense
+                        key={childId}
+                        className={classNames(
+                          classes.item,
+                          classes.itemActionable
+                        )}
+                        component={NavLink}
+                        to={to}
+                        activeClassName={classes.itemActiveItem}>
+                        <ListItemIcon>{icon}</ListItemIcon>
+                        <ListItemText
+                          classes={{
+                            primary: classes.itemPrimary,
+                            textDense: classes.textDense
+                          }}>
+                          {childId}
+                        </ListItemText>
+                      </ListItem>
+                    ))}
+                    <Divider className={classes.divider} />
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            } else {
+              return (
+                <div key={id}>
+                  <ListItem className={classes.categoryHeader}>
+                    <ListItemText
+                      classes={{
+                        primary: classes.categoryHeaderPrimary
+                      }}>
+                      {id}
+                    </ListItemText>
+                  </ListItem>
+                  {children.map(({ id: childId, icon, to }) => (
+                    <ListItem
+                      button
+                      dense
+                      key={childId}
+                      className={classNames(
+                        classes.item,
+                        classes.itemActionable
+                      )}
+                      component={NavLink}
+                      to={to}
+                      activeClassName={classes.itemActiveItem}>
+                      <ListItemIcon>{icon}</ListItemIcon>
+                      <ListItemText
+                        classes={{
+                          primary: classes.itemPrimary,
+                          textDense: classes.textDense
+                        }}>
+                        {childId}
+                      </ListItemText>
+                    </ListItem>
+                  ))}
+                  <Divider className={classes.divider} />
+                </div>
+              );
+            }
+          })}
         </List>
       </Drawer>
     </nav>

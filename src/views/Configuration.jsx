@@ -8,7 +8,6 @@ import {
   CardActionArea,
   CardContent,
   Typography,
-  Divider,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -33,8 +32,8 @@ import { GET_CONFIGURATION_QUERY } from '../queries/Configuration';
 // Mutations
 import {
   UPDATE_PRODUCT_IVA_MUTATION,
-  UPDATE_INVOICE_SALE_NUMBER_MUTATION,
-  UPDATE_INVOICE_PURCHASE_NUMBER_MUTATION
+  UPDATE_INVOICE_SALE_NUMBER_MUTATION
+  // UPDATE_INVOICE_PURCHASE_NUMBER_MUTATION
 } from '../mutations/Configuration';
 
 class DialogFormProductIva extends Component {
@@ -195,85 +194,85 @@ class DialogFormSaleInvoice extends Component {
   }
 }
 
-class DialogFormPurchaseInvoice extends Component {
-  state = {
-    value: 0
-  };
+// class DialogFormPurchaseInvoice extends Component {
+//   state = {
+//     value: 0
+//   };
 
-  handleOnChange = ({ target: { value } }) => {
-    this.setState({ value });
-  };
+//   handleOnChange = ({ target: { value } }) => {
+//     this.setState({ value });
+//   };
 
-  handleSubmit = onSubmit => async e => {
-    e.preventDefault();
-    const { value } = this.state;
-    const result = await onSubmit({
-      variables: {
-        input: {
-          number: Number(value)
-        }
-      }
-    });
-    if (result) {
-      this.setState({ value: 0 });
-      this.props.handleClose();
-    }
-    console.log(result);
-  };
+//   handleSubmit = onSubmit => async e => {
+//     e.preventDefault();
+//     const { value } = this.state;
+//     const result = await onSubmit({
+//       variables: {
+//         input: {
+//           number: Number(value)
+//         }
+//       }
+//     });
+//     if (result) {
+//       this.setState({ value: 0 });
+//       this.props.handleClose();
+//     }
+//     console.log(result);
+//   };
 
-  render() {
-    const { open, handleClose, value } = this.props;
-    return (
-      <Mutation mutation={UPDATE_INVOICE_PURCHASE_NUMBER_MUTATION}>
-        {onSubmit => (
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="form-dialog-title">
-            <form autoComplete="off">
-              <DialogTitle id="form-dialog-title">
-                Factura de venta
-                <DialogContentText>
-                  Siguiente registro: #{value ? value : 0}
-                </DialogContentText>
-              </DialogTitle>
-              <DialogContent>
-                <InputFieldOld
-                  onChange={this.handleOnChange}
-                  autoFocus
-                  required
-                  defaultValue={value ? value : 0}
-                  variant="outlined"
-                  margin="dense"
-                  name="number"
-                  label="Número de factura"
-                  type="text"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">#</InputAdornment>
-                    )
-                  }}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  Cancelar
-                </Button>
-                <Button
-                  onClick={this.handleSubmit(onSubmit)}
-                  variant="contained"
-                  color="primary"
-                  type="submit">
-                  Actualizar
-                </Button>
-              </DialogActions>
-            </form>
-          </Dialog>
-        )}
-      </Mutation>
-    );
-  }
-}
+//   render() {
+//     const { open, handleClose, value } = this.props;
+//     return (
+//       <Mutation mutation={UPDATE_INVOICE_PURCHASE_NUMBER_MUTATION}>
+//         {onSubmit => (
+//           <Dialog
+//             open={open}
+//             onClose={handleClose}
+//             aria-labelledby="form-dialog-title">
+//             <form autoComplete="off">
+//               <DialogTitle id="form-dialog-title">
+//                 Factura de venta
+//                 <DialogContentText>
+//                   Siguiente registro: #{value ? value : 0}
+//                 </DialogContentText>
+//               </DialogTitle>
+//               <DialogContent>
+//                 <InputFieldOld
+//                   onChange={this.handleOnChange}
+//                   autoFocus
+//                   required
+//                   defaultValue={value ? value : 0}
+//                   variant="outlined"
+//                   margin="dense"
+//                   name="number"
+//                   label="Número de factura"
+//                   type="text"
+//                   InputProps={{
+//                     startAdornment: (
+//                       <InputAdornment position="start">#</InputAdornment>
+//                     )
+//                   }}
+//                 />
+//               </DialogContent>
+//               <DialogActions>
+//                 <Button onClick={handleClose} color="primary">
+//                   Cancelar
+//                 </Button>
+//                 <Button
+//                   onClick={this.handleSubmit(onSubmit)}
+//                   variant="contained"
+//                   color="primary"
+//                   type="submit">
+//                   Actualizar
+//                 </Button>
+//               </DialogActions>
+//             </form>
+//           </Dialog>
+//         )}
+//       </Mutation>
+//     );
+//   }
+// }
 
 class ConfigurationContainer extends Component {
   state = {
@@ -313,13 +312,13 @@ class ConfigurationContainer extends Component {
                   handleClose={this.handleClose}
                   value={configuration ? configuration.invoice.sale.number : 0}
                 />
-                <DialogFormPurchaseInvoice
+                {/* <DialogFormPurchaseInvoice
                   open={open === 'purchaseInvoice'}
                   handleClose={this.handleClose}
                   value={
                     configuration ? configuration.invoice.purchase.number : 0
                   }
-                />
+                /> */}
                 <Grid container spacing={24}>
                   <Grid item xs={12} sm={6} md={4}>
                     <ContentHeader title="Productos" />
@@ -352,11 +351,11 @@ class ConfigurationContainer extends Component {
                             variant="subtitle1"
                             color="textSecondary"
                             component="span">
-                            Número inicial de factura
+                            Número de factura
                           </Typography>
                         </CardContent>
                       </CardActionArea>
-                      <Divider variant="middle" />
+                      {/* <Divider variant="middle" />
                       <CardActionArea
                         onClick={this.handleClickOpen('purchaseInvoice')}>
                         <CardContent>
@@ -370,7 +369,7 @@ class ConfigurationContainer extends Component {
                             Número inicial de factura
                           </Typography>
                         </CardContent>
-                      </CardActionArea>
+                      </CardActionArea> */}
                     </Card>
                   </Grid>
                 </Grid>

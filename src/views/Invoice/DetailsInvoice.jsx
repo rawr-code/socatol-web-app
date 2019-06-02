@@ -69,7 +69,7 @@ const DetailsWarehouse = props => {
                           <Typography variant="subtitle1" color="textSecondary">
                             <b>Monto Total:</b> {invoice.amount} Bs. S
                           </Typography>
-                          <Typography variant="subtitle1" color="textSecondary">
+                          {/* <Typography variant="subtitle1" color="textSecondary">
                             <b>Estado:</b>{' '}
                             {invoice.status === 'CONCILIADO' ? (
                               <b style={{ color: '#27c24c' }}>
@@ -78,7 +78,7 @@ const DetailsWarehouse = props => {
                             ) : (
                               <b style={{ color: 'red' }}>{invoice.status}</b>
                             )}
-                          </Typography>
+                          </Typography> */}
                         </CardContent>
                       </Card>
                     </Grid>

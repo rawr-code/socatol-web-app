@@ -34,6 +34,7 @@ const styles = theme => ({
     color: theme.palette.primary.main
   },
   itemPrimary: {
+    textTransform: 'capitalize',
     color: 'inherit',
     fontSize: theme.typography.fontSize,
     '&$textDense': {

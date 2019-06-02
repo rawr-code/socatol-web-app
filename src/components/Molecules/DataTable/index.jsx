@@ -45,8 +45,16 @@ const CurrencyFormatter = ({ value }) => {
   return <b style={{ color: 'green' }}>{value}</b>;
 };
 
+const AmountFormatter = ({ value }) => {
+  return <b>{value} Bs. S</b>;
+};
+
 const CurrencyTypeProvider = props => (
   <DataTypeProvider formatterComponent={CurrencyFormatter} {...props} />
+);
+
+const AmountTypeProvider = props => (
+  <DataTypeProvider formatterComponent={AmountFormatter} {...props} />
 );
 
 const DataTable = props => {
@@ -114,6 +122,7 @@ const DataTable = props => {
         <IntegratedPaging />
 
         <CurrencyTypeProvider for={['status']} />
+        <AmountTypeProvider for={['amount', 'price', 'balance']} />
         <Table
           rowComponent={({ children, row }) => (
             <TableRow

@@ -28,11 +28,11 @@ const styles = theme => ({
 
 class Layout extends Component {
   render() {
-    const { classes, children } = this.props;
+    const { classes, children, session } = this.props;
     return (
       <div className={classes.root}>
         <HeaderBar />
-        <SideNav />
+        <SideNav session={session} />
         <div className={classes.content}>
           <div className={classes.toolbar} />
           {children}
