@@ -38,6 +38,7 @@ class BankAccountForm extends Component {
     console.log(input);
     const result = await mutate({ variables: { input } });
     console.log(result);
+    this.props.success(true);
   };
 
   render() {

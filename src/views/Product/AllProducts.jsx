@@ -24,6 +24,8 @@ import { PRODUCT_ADDED_SUBSCRIPTION } from '../../subscriptions/Product';
 // Form
 import ProductForm from './ProductForm';
 
+import Notification from '../../components/Notification';
+
 class DataContainer extends Component {
   componentDidMount() {
     this.props.subscribe();
@@ -61,6 +63,7 @@ class DataContainer extends Component {
 }
 
 const AllProducts = ({ history, session }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
     <MainContainer>
       <ContentHeader title="Lista de productos">
@@ -69,8 +72,14 @@ const AllProducts = ({ history, session }) => {
             title="Añadir producto"
             form={ProductForm}
             mutation={NEW_PRODUCT_MUTATION}
+            success={setIsOpen}
           />
         )}
+        <Notification
+          open={isOpen}
+          handleOpen={setIsOpen}
+          message="Guardado con exito!"
+        />
       </ContentHeader>
 
       <Query query={GET_PRODUCTS_QUERY}>

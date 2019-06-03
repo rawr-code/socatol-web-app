@@ -24,7 +24,10 @@ import { UPDATE_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
 // Forms
 import WarehouseForm from './WarehouseForm';
 
+import Notification from '../../components/Notification';
+
 const DetailsWarehouse = props => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const { id } = props.match.params;
   const { history, session } = props;
   const columns = [
@@ -43,8 +46,8 @@ const DetailsWarehouse = props => {
   ];
   return (
     <Query query={GET_WAREHOUSE_QUERY} variables={{ id }}>
-      {({ loading, error, data }) => {
-        if (loading) return 'Loading...';
+      {({ loading, error, data, refetch }) => {
+        if (loading) return null;
         if (error) console.error(error.message);
         console.log(data);
 
@@ -61,8 +64,15 @@ const DetailsWarehouse = props => {
                     form={WarehouseForm}
                     mutation={UPDATE_WAREHOUSE_MUTATION}
                     data={warehouse}
+                    success={setIsOpen}
+                    reload={refetch}
                   />
                 )}
+                <Notification
+                  open={isOpen}
+                  handleOpen={setIsOpen}
+                  message="Actualizado con exito!"
+                />
               </ContentHeader>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>

@@ -25,6 +25,8 @@ import WarehouseForm from './WarehouseForm';
 
 import warehouseImg from '../../images/warehouse.png';
 
+import Notification from '../../components/Notification';
+
 class DataContainer extends Component {
   componentDidMount() {
     this.props.subscribe();
@@ -46,11 +48,13 @@ class DataContainer extends Component {
               <div
                 style={{
                   padding: '24px 24px 0',
-                  display: 'flex'
-                  // justifyContent: 'center'
+                  display: 'flex',
+                  flexDirection: 'column',
+                  textAlign: 'center',
+                  alignItems: 'center'
                 }}>
                 <img src={warehouseImg} alt="imagen" height={64} width={64} />
-                <div style={{ marginLeft: 16 }}>
+                <div>
                   <Typography variant="h6">{warehouse.name}</Typography>
                   <Typography variant="body1">
                     {warehouse.description}
@@ -79,6 +83,8 @@ class DataContainer extends Component {
 }
 
 const AllWarehouses = ({ session }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <MainContainer>
       <ContentHeader title="Todos los almacenes">
@@ -87,8 +93,14 @@ const AllWarehouses = ({ session }) => {
             title="Añadir almacén"
             form={WarehouseForm}
             mutation={NEW_WAREHOUSE_MUTATION}
+            success={setIsOpen}
           />
         )}
+        <Notification
+          open={isOpen}
+          handleOpen={setIsOpen}
+          message="Guardado con exito!"
+        />
       </ContentHeader>
       <Query query={GET_WAREHOUSES_QUERY}>
         {({ subscribeToMore, ...rest }) => {

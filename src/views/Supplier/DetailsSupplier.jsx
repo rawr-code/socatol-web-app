@@ -63,7 +63,7 @@ const DetailsWarehouse = props => {
                     title="Editar ínformación"
                     form={PersonForm}
                     mutation={UPDATE_WAREHOUSE_MUTATION}
-                    // data={warehouse}
+                    data={person}
                   />
                 )}
               </ContentHeader>

@@ -36,6 +36,11 @@ class WarehouseForm extends Component {
     console.log(input);
     const result = await mutate({ variables: { input } });
     console.log(result);
+    this.props.success(true);
+    if (this.props.data) {
+      this.props.success(true);
+      this.props.reload();
+    }
   };
 
   render() {

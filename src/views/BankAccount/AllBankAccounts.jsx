@@ -25,6 +25,8 @@ import BankAccountForm from './BankAccountForm';
 
 import bankAccountImg from '../../images/bankAccount.png';
 
+import Notification from '../../components/Notification';
+
 class DataContainer extends Component {
   componentDidMount() {
     this.props.subscribe();
@@ -45,11 +47,13 @@ class DataContainer extends Component {
               <div
                 style={{
                   padding: '24px 24px 0',
-                  display: 'flex'
-                  // justifyContent: 'center'
+                  display: 'flex',
+                  flexDirection: 'column',
+                  textAlign: 'center',
+                  alignItems: 'center'
                 }}>
                 <img src={bankAccountImg} alt="imagen" height={64} width={64} />
-                <div style={{ marginLeft: 16 }}>
+                <div>
                   <Typography variant="h6">{bankAccount.name}</Typography>
                   <Typography variant="body1">{bankAccount.bank}</Typography>
                 </div>
@@ -76,6 +80,7 @@ class DataContainer extends Component {
 }
 
 const AllBankAccounts = ({ session }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
   return (
     <MainContainer>
       <ContentHeader title="Todas las cuentas bancarias">
@@ -84,8 +89,14 @@ const AllBankAccounts = ({ session }) => {
             title="Añadir cuenta"
             form={BankAccountForm}
             mutation={NEW_BANKACCOUNT_MUTATION}
+            success={setIsOpen}
           />
         )}
+        <Notification
+          open={isOpen}
+          handleOpen={setIsOpen}
+          message="Guardado con exito!"
+        />
       </ContentHeader>
       <Query query={GET_BANKACCOUNTS_QUERY}>
         {({ subscribeToMore, ...rest }) => {

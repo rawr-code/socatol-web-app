@@ -18,12 +18,14 @@ import {
 } from '../../components/Molecules';
 
 // Mutations
-import { UPDATE_WAREHOUSE_MUTATION } from '../../mutations/Warehouse';
+import { UPDATE_PRODUCT_MUTATION } from '../../mutations/Product';
 
 // Forms
 import ProductForm from './ProductForm';
+import Notification from '../../components/Notification';
 
 const DetailsProduct = props => {
+  const [isOpen, setIsOpen] = React.useState(false);
   const { id } = props.match.params;
   const { history, session } = props;
   const columnsPersons = [
@@ -84,7 +86,7 @@ const DetailsProduct = props => {
   ];
   return (
     <Query query={GET_PRODUCT_OTHER_QUERY} variables={{ id }}>
-      {({ loading, error, data }) => {
+      {({ loading, error, data, refetch }) => {
         if (loading) return null;
 
         if (error) console.error(error);
@@ -155,10 +157,17 @@ const DetailsProduct = props => {
                   <ButtonDialogForm
                     title="Editar información"
                     form={ProductForm}
-                    mutation={UPDATE_WAREHOUSE_MUTATION}
+                    mutation={UPDATE_PRODUCT_MUTATION}
                     data={product}
+                    success={setIsOpen}
+                    reload={refetch}
                   />
                 )}
+                <Notification
+                  open={isOpen}
+                  handleOpen={setIsOpen}
+                  message="Actualizado con exito!"
+                />
               </ContentHeader>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>

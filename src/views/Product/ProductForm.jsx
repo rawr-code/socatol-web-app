@@ -68,13 +68,26 @@ class ProductForm extends Component {
 
   handleSubmit = mutate => async model => {
     console.log(model);
-    const input = {
-      ...model,
-      price: Number(model.price),
-      stock: Number(model.stock)
-    };
+    const { data } = this.props;
+    let input = {};
+    if (data) {
+      input = {
+        id: data.id,
+        ...model,
+        price: Number(model.price),
+        stock: Number(model.stock)
+      };
+    } else {
+      input = model;
+    }
+
     const result = await mutate({ variables: { input } });
     console.log(result);
+    this.props.success(true);
+    if (this.props.data) {
+      this.props.success(true);
+      this.props.reload();
+    }
   };
 
   render() {
