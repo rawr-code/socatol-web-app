@@ -1,9 +1,25 @@
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    backgroundColor: theme.palette.primary.main
+  },
+  bigTitle: {
+    color: 'white',
+    fontSize: '7rem',
+    fontWeight: 'bold'
+  },
+  smallTitle: {
+    color: 'white',
+    fontFamily: 'Google Sans',
+    fontSize: '2rem',
+    margin: 0
   },
   textContent: {
-    flexGrow: 1
+    flexGrow: 1,
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   formRoot: {
     height: '100vh',

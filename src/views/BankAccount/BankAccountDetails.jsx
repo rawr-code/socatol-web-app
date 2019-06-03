@@ -16,17 +16,19 @@ import { UPDATE_BANKACCOUNT_MUTATION } from '../../mutations/BankAccount';
 import BankAccountForm from './BankAccountForm';
 
 const BankAccount = props => {
-  const { data } = props;
+  const { data, session } = props;
 
   return (
     <MainContainer>
       <ContentHeader title="Información de la cuenta">
-        <ButtonDialogForm
-          title="Editar información"
-          form={BankAccountForm}
-          mutation={UPDATE_BANKACCOUNT_MUTATION}
-          data={data}
-        />
+        {session.role !== 'CONSULTOR' && (
+          <ButtonDialogForm
+            title="Editar información"
+            form={BankAccountForm}
+            mutation={UPDATE_BANKACCOUNT_MUTATION}
+            data={data}
+          />
+        )}
       </ContentHeader>
       <Grid container spacing={24}>
         <Grid item xs={12}>

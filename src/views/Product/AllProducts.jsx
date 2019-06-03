@@ -60,15 +60,17 @@ class DataContainer extends Component {
   }
 }
 
-const AllProducts = ({ history }) => {
+const AllProducts = ({ history, session }) => {
   return (
     <MainContainer>
       <ContentHeader title="Lista de productos">
-        <ButtonDialogForm
-          title="Añadir producto"
-          form={ProductForm}
-          mutation={NEW_PRODUCT_MUTATION}
-        />
+        {session.role !== 'CONSULTOR' && (
+          <ButtonDialogForm
+            title="Añadir producto"
+            form={ProductForm}
+            mutation={NEW_PRODUCT_MUTATION}
+          />
+        )}
       </ContentHeader>
 
       <Query query={GET_PRODUCTS_QUERY}>

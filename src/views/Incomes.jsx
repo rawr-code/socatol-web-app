@@ -14,15 +14,15 @@ import DetailsInvoice from './Invoice/DetailsInvoice';
 import AllClients from './Client/AllClients';
 import DetailsClient from './Client/DetailsClient';
 
-const Incomes = () => {
+const Incomes = ({ session }) => {
   const tabs = [
     {
       label: 'Facturas de venta',
-      component: SalesInvoce
+      component: () => <SalesInvoce session={session} />
     },
     {
       label: 'Clientes',
-      component: AllClients
+      component: () => <AllClients session={session} />
     }
   ];
 
@@ -34,22 +34,36 @@ const Incomes = () => {
   );
 };
 
-const IncomesContainer = ({ match: { path } }) => {
+const IncomesContainer = ({ match: { path }, session }) => {
   return (
     <Switch>
-      <Route exact path={path} component={Incomes} />
+      <Route
+        exact
+        path={path}
+        render={routeProps => <Incomes {...routeProps} session={session} />}
+      />
 
-      <Route exact path={`${path}/clientes/:id`} component={DetailsClient} />
+      <Route
+        exact
+        path={`${path}/clientes/:id`}
+        render={routeProps => (
+          <DetailsClient {...routeProps} session={session} />
+        )}
+      />
       <Route
         exact
         path={`${path}/factura-venta/:id`}
-        component={DetailsInvoice}
+        render={routeProps => (
+          <DetailsInvoice {...routeProps} session={session} />
+        )}
       />
 
       <Route
         exact
         path={`${path}/facturas/venta/nuevo`}
-        component={NewSalesInvoce}
+        render={routeProps => (
+          <NewSalesInvoce {...routeProps} session={session} />
+        )}
       />
     </Switch>
   );

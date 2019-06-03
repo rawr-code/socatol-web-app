@@ -27,51 +27,51 @@ const privateRoutes = [
   {
     path: '/',
     component: Inventory,
-    permissions: 'CONTABLE',
+    permissions: ['CONTABLE', 'CONSULTOR'],
     exact: true
   },
   {
     path: '/base-de-datos',
     component: Admin,
-    permissions: 'ADMINISTRADOR',
+    permissions: ['ADMINISTRADOR'],
     exact: true
   },
   {
     path: '/ingresos',
     component: Incomes,
-    permissions: 'CONTABLE'
+    permissions: ['CONTABLE', 'CONSULTOR']
   },
   {
     path: '/gastos',
     component: Expenses,
-    permissions: 'CONTABLE'
+    permissions: ['CONTABLE', 'CONSULTOR']
   },
   {
     path: '/inventario',
     component: Inventory,
-    permissions: 'CONTABLE'
+    permissions: ['CONTABLE', 'CONSULTOR']
   },
   {
     path: '/tesoreria',
     component: Treasury,
-    permissions: 'CONTABLE'
+    permissions: ['CONTABLE']
   },
   {
     path: '/reportes',
     component: Reportes,
-    permissions: 'CONTABLE',
+    permissions: ['CONTABLE'],
     exact: true
   },
   {
     path: '/contactos',
     component: Contactos,
-    permissions: 'CONTABLE',
+    permissions: ['CONTABLE', 'CONSULTOR'],
     exact: true
   },
   {
     path: '/configuracion',
     component: Configuration,
-    permissions: 'CONTABLE',
+    permissions: ['CONTABLE'],
     exact: true
   }
 ];

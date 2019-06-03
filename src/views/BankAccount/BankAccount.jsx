@@ -13,6 +13,7 @@ import BankAccountTransactions from './BankAccountTransactions';
 
 const BankAccount = props => {
   const { id } = props.match.params;
+  const { session } = props;
 
   return (
     <Query query={GET_BANKACCOUNT_QUERY} variables={{ id }}>
@@ -34,12 +35,19 @@ const BankAccount = props => {
               tabs={[
                 {
                   label: 'Información',
-                  component: BankAccountDetails,
+                  component: routeProps => (
+                    <BankAccountDetails session={session} {...routeProps} />
+                  ),
                   props: { data: bankAccount }
                 },
                 {
                   label: 'Extracto bancario',
-                  component: BankAccountTransactions,
+                  component: routeProps => (
+                    <BankAccountTransactions
+                      session={session}
+                      {...routeProps}
+                    />
+                  ),
                   props: { data: bankAccount }
                 }
                 // {

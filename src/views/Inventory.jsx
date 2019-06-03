@@ -11,15 +11,15 @@ import { AllWarehouses, DetailsWarehouse } from './Warehouse';
 // Product
 import { AllProducts, DetailsProduct } from './Product';
 
-const Inventory = () => {
+const Inventory = ({ session }) => {
   const tabs = [
     {
       label: 'Almacenes',
-      component: AllWarehouses
+      component: () => <AllWarehouses session={session} />
     },
     {
       label: 'Productos',
-      component: AllProducts
+      component: () => <AllProducts session={session} />
     }
   ];
 
@@ -31,16 +31,25 @@ const Inventory = () => {
   );
 };
 
-const InventoryContainer = ({ match: { path } }) => {
+const InventoryContainer = ({ match: { path }, session }) => {
+  console.log(session);
   return (
     <Switch>
-      <Route exact path={path} component={Inventory} />
+      <Route
+        exact
+        path={path}
+        render={props => <Inventory {...props} session={session} />}
+      />
       <Route
         exact
         path={`${path}/almacenes/:id`}
-        component={DetailsWarehouse}
+        render={props => <DetailsWarehouse {...props} session={session} />}
       />
-      <Route exact path={`${path}/productos/:id`} component={DetailsProduct} />
+      <Route
+        exact
+        path={`${path}/productos/:id`}
+        render={props => <DetailsProduct {...props} session={session} />}
+      />
 
       <Route component={() => <div>404</div>} />
     </Switch>

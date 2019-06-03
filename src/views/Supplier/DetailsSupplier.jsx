@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-
+import { withRouter } from 'react-router-dom';
 // Material UI
 import { Grid, Typography, Card, CardContent } from '@material-ui/core';
 
@@ -25,6 +25,7 @@ import PersonForm from './PersonForm';
 
 const DetailsWarehouse = props => {
   const { id } = props.match.params;
+  const { history, session } = props;
   const columns = [
     {
       name: 'dateEmit',
@@ -57,12 +58,14 @@ const DetailsWarehouse = props => {
             <FeatureBar title={person.name} back subtitle="Proveedor" />
             <MainContainer>
               <ContentHeader title="Información del proveedor">
-                <ButtonDialogForm
-                  title="Editar ínformación"
-                  form={PersonForm}
-                  mutation={UPDATE_WAREHOUSE_MUTATION}
-                  // data={warehouse}
-                />
+                {session.role !== 'CONSULTOR' && (
+                  <ButtonDialogForm
+                    title="Editar ínformación"
+                    form={PersonForm}
+                    mutation={UPDATE_WAREHOUSE_MUTATION}
+                    // data={warehouse}
+                  />
+                )}
               </ContentHeader>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>
@@ -97,6 +100,9 @@ const DetailsWarehouse = props => {
                   <DataTable
                     columns={columns}
                     rows={person.invoices.purchase}
+                    handleClick={({ id }) =>
+                      history.push(`/gastos/factura-compra/${id}`)
+                    }
                   />
                 </Grid>
               </Grid>
@@ -108,4 +114,4 @@ const DetailsWarehouse = props => {
   );
 };
 
-export default DetailsWarehouse;
+export default withRouter(DetailsWarehouse);

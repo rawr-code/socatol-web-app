@@ -26,7 +26,7 @@ import WarehouseForm from './WarehouseForm';
 
 const DetailsWarehouse = props => {
   const { id } = props.match.params;
-  const { history } = props;
+  const { history, session } = props;
   const columns = [
     {
       name: 'name',
@@ -55,12 +55,14 @@ const DetailsWarehouse = props => {
             <FeatureBar title={warehouse.name} back subtitle="Almacén" />
             <MainContainer>
               <ContentHeader title="Información del almacén">
-                <ButtonDialogForm
-                  title="Editar almacén"
-                  form={WarehouseForm}
-                  mutation={UPDATE_WAREHOUSE_MUTATION}
-                  data={warehouse}
-                />
+                {session.role !== 'CONSULTOR' && (
+                  <ButtonDialogForm
+                    title="Editar almacén"
+                    form={WarehouseForm}
+                    mutation={UPDATE_WAREHOUSE_MUTATION}
+                    data={warehouse}
+                  />
+                )}
               </ContentHeader>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>

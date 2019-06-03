@@ -1,5 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 // Material UI
 import { Grid, Typography, Card, CardContent } from '@material-ui/core';
@@ -25,6 +26,7 @@ import PersonForm from './PersonForm';
 
 const DetailsWarehouse = props => {
   const { id } = props.match.params;
+  const { history, session } = props;
   const columns = [
     {
       name: 'dateEmit',
@@ -57,12 +59,13 @@ const DetailsWarehouse = props => {
             <FeatureBar title={person.name} back subtitle="Cliente" />
             <MainContainer>
               <ContentHeader title="Información del cliente">
-                <ButtonDialogForm
-                  title="Editar ínformación"
-                  form={PersonForm}
-                  mutation={UPDATE_WAREHOUSE_MUTATION}
-                  // data={warehouse}
-                />
+                {session.role !== 'CONSULTOR' && (
+                  <ButtonDialogForm
+                    title="Editar ínformación"
+                    form={PersonForm}
+                    mutation={UPDATE_WAREHOUSE_MUTATION}
+                  />
+                )}
               </ContentHeader>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>
@@ -94,7 +97,13 @@ const DetailsWarehouse = props => {
                   </Grid>
                 </Grid>
                 <Grid item xs={12} md={8}>
-                  <DataTable columns={columns} rows={person.invoices.sale} />
+                  <DataTable
+                    columns={columns}
+                    rows={person.invoices.sale}
+                    handleClick={({ id }) =>
+                      history.push(`/ingresos/factura-venta/${id}`)
+                    }
+                  />
                 </Grid>
               </Grid>
             </MainContainer>
@@ -105,4 +114,4 @@ const DetailsWarehouse = props => {
   );
 };
 
-export default DetailsWarehouse;
+export default withRouter(DetailsWarehouse);

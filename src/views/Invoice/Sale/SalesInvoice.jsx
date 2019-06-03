@@ -64,36 +64,28 @@ class DataContainer extends Component {
   }
 }
 
-const SalesInvoice = ({ history }) => {
+const SalesInvoice = ({ history, session }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <MainContainer>
       <ContentHeader title="Lista de facturas de venta">
-        <ButtonDialogForm
-          title="Facturar venta"
-          scroll="body"
-          form={SalesInvoiceForm}
-          mutation={'NEW_WAREHOUSE_MUTATION'}
-          success={setIsOpen}
-        />
+        {session.role !== 'CONSULTOR' && (
+          <ButtonDialogForm
+            title="Facturar venta"
+            scroll="body"
+            form={SalesInvoiceForm}
+            mutation={'NEW_WAREHOUSE_MUTATION'}
+            success={setIsOpen}
+          />
+        )}
         <Notification
           open={isOpen}
           handleOpen={setIsOpen}
           message="Guardado con exito!"
         />
       </ContentHeader>
-      {/* <Query query={GET_SALES_INVOICES_QUERY}>
-        {({ loading, error, data }) => {
-          if (loading) return null;
-          if (error) console.error(error);
 
-          let { invoices } = data;
-
-          console.log(data);
-          return null;
-        }}
-      </Query> */}
       <Query query={GET_SALES_INVOICES_QUERY}>
         {({ subscribeToMore, ...rest }) => {
           console.log(rest);

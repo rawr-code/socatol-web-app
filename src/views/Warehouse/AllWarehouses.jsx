@@ -78,15 +78,17 @@ class DataContainer extends Component {
   }
 }
 
-const AllWarehouses = () => {
+const AllWarehouses = ({ session }) => {
   return (
     <MainContainer>
       <ContentHeader title="Todos los almacenes">
-        <ButtonDialogForm
-          title="Añadir almacén"
-          form={WarehouseForm}
-          mutation={NEW_WAREHOUSE_MUTATION}
-        />
+        {session.role !== 'CONSULTOR' && (
+          <ButtonDialogForm
+            title="Añadir almacén"
+            form={WarehouseForm}
+            mutation={NEW_WAREHOUSE_MUTATION}
+          />
+        )}
       </ContentHeader>
       <Query query={GET_WAREHOUSES_QUERY}>
         {({ subscribeToMore, ...rest }) => {

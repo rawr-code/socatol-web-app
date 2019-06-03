@@ -75,15 +75,17 @@ class DataContainer extends Component {
   }
 }
 
-const AllBankAccounts = props => {
+const AllBankAccounts = ({ session }) => {
   return (
     <MainContainer>
       <ContentHeader title="Todas las cuentas bancarias">
-        <ButtonDialogForm
-          title="Añadir cuenta"
-          form={BankAccountForm}
-          mutation={NEW_BANKACCOUNT_MUTATION}
-        />
+        {session.role !== 'CONSULTOR' && (
+          <ButtonDialogForm
+            title="Añadir cuenta"
+            form={BankAccountForm}
+            mutation={NEW_BANKACCOUNT_MUTATION}
+          />
+        )}
       </ContentHeader>
       <Query query={GET_BANKACCOUNTS_QUERY}>
         {({ subscribeToMore, ...rest }) => {

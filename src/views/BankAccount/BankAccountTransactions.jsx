@@ -26,6 +26,7 @@ import ConciliateForm from './ConciliateForm';
 
 const BankAccountTransactions = props => {
   const { id } = props.data;
+  const { session } = props;
   const [open, setOpen] = useState(false);
   const [itemSelect, setItemSelect] = useState('');
 
@@ -71,12 +72,14 @@ const BankAccountTransactions = props => {
       <Grid container spacing={24}>
         <Grid item xs={12}>
           <ContentHeader title="Extracto Bancario">
-            <ButtonDialogForm
-              title="Cargar extracto bancario"
-              form={ExtractForm}
-              mutation={UPLOADFILE_MUTATION}
-              id={id}
-            />
+            {session.role !== 'CONSULTOR' && (
+              <ButtonDialogForm
+                title="Cargar extracto bancario"
+                form={ExtractForm}
+                mutation={UPLOADFILE_MUTATION}
+                id={id}
+              />
+            )}
           </ContentHeader>
           <Dialog open={open} PaperComponent="div" maxWidth="md" scroll="body">
             <ConciliateForm handleClose={handleClose} id={itemSelect} />

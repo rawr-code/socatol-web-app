@@ -16,7 +16,7 @@ import { GET_PURCHASES_INVOICES_QUERY } from '../../../queries/Invoice';
 import Notification from '../../../components/Notification';
 import PurchasesInvoiceForm from './PurchasesInvoiceForm';
 
-const SalesInvoice = ({ history }) => {
+const SalesInvoice = ({ history, session }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const columns = [
     {
@@ -43,13 +43,15 @@ const SalesInvoice = ({ history }) => {
   return (
     <MainContainer>
       <ContentHeader title="Lista de facturas de venta">
-        <ButtonDialogForm
-          title="Facturar compra"
-          scroll="body"
-          form={PurchasesInvoiceForm}
-          // mutation={'NEW_WAREHOUSE_MUTATION'}
-          success={setIsOpen}
-        />
+        {session.role !== 'CONSULTOR' && (
+          <ButtonDialogForm
+            title="Facturar compra"
+            scroll="body"
+            form={PurchasesInvoiceForm}
+            // mutation={'NEW_WAREHOUSE_MUTATION'}
+            success={setIsOpen}
+          />
+        )}
         <Notification
           open={isOpen}
           handleOpen={setIsOpen}

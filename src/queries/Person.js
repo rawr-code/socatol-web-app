@@ -26,6 +26,7 @@ export const GET_SUPPLIER_QUERY = gql`
       address
       invoices {
         purchase {
+          id
           dateEmit
           number
           paymentType
@@ -48,6 +49,7 @@ export const GET_CLIENT_QUERY = gql`
       address
       invoices {
         sale {
+          id
           dateEmit
           number
           paymentType

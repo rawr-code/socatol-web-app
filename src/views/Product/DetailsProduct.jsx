@@ -25,7 +25,7 @@ import ProductForm from './ProductForm';
 
 const DetailsProduct = props => {
   const { id } = props.match.params;
-  const { history } = props;
+  const { history, session } = props;
   const columnsPersons = [
     {
       name: 'name',
@@ -40,12 +40,12 @@ const DetailsProduct = props => {
       title: 'Municipio'
     },
     {
-      name: 'ultima',
-      title: 'Ultima compra'
-    },
-    {
       name: 'datee',
       title: 'Fecha de ultima compra'
+    },
+    {
+      name: 'ultima',
+      title: 'Ultima compra'
     },
     {
       name: 'total',
@@ -151,12 +151,14 @@ const DetailsProduct = props => {
             <FeatureBar title={product.name} subtitle="Producto" back />
             <MainContainer>
               <ContentHeader title="Información del producto">
-                <ButtonDialogForm
-                  title="Editar información"
-                  form={ProductForm}
-                  mutation={UPDATE_WAREHOUSE_MUTATION}
-                  data={product}
-                />
+                {session.role !== 'CONSULTOR' && (
+                  <ButtonDialogForm
+                    title="Editar información"
+                    form={ProductForm}
+                    mutation={UPDATE_WAREHOUSE_MUTATION}
+                    data={product}
+                  />
+                )}
               </ContentHeader>
               <Grid container spacing={24}>
                 <Grid item xs={12} md={4}>
@@ -185,7 +187,9 @@ const DetailsProduct = props => {
                       <DataTable
                         columns={columnsPersons}
                         rows={supplidersData}
-                        handleClick={data => console.log(data)}
+                        handleClick={({ id }) =>
+                          history.push(`/gastos/proveedores/${id}`)
+                        }
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -193,7 +197,9 @@ const DetailsProduct = props => {
                       <DataTable
                         columns={columnsClients}
                         rows={clientsData}
-                        handleClick={data => console.log(data)}
+                        handleClick={({ id }) =>
+                          history.push(`/ingresos/clientes/${id}`)
+                        }
                       />
                     </Grid>
                   </Grid>

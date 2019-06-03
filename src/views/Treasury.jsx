@@ -8,11 +8,11 @@ import FeatureBarTabs from '../Layout/FeatureBarTabs';
 // BankAccount
 import { AllBankAccounts, BankAccount } from './BankAccount';
 
-const Treasury = props => {
+const Treasury = ({ session }) => {
   const tabs = [
     {
       label: 'Cuentas bancarias',
-      component: AllBankAccounts
+      component: () => <AllBankAccounts session={session} />
     }
   ];
 
@@ -24,20 +24,19 @@ const Treasury = props => {
   );
 };
 
-const TreasuryContainer = ({ match: { path } }) => {
+const TreasuryContainer = ({ match: { path }, session }) => {
   return (
     <Switch>
-      <Route exact path={path} component={Treasury} />
-      {/* <Route
+      <Route
         exact
-        path={`${path}/cuentas-bancarias`}
-        component={AllBankAccounts}
-      /> */}
+        path={path}
+        render={props => <Treasury {...props} session={session} />}
+      />
 
       <Route
         exact
         path={`${path}/cuentas-bancarias/:id`}
-        component={BankAccount}
+        render={props => <BankAccount {...props} session={session} />}
       />
 
       <Route component={() => <div>404</div>} />

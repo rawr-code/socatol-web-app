@@ -14,15 +14,15 @@ import DetailsInvoice from './Invoice/DetailsInvoice';
 import AllSuppliders from './Supplier/AllSuppliders';
 import DetailsSupplier from './Supplier/DetailsSupplier';
 
-const Expenses = () => {
+const Expenses = ({ session }) => {
   const tabs = [
     {
       label: 'Facturas de compra',
-      component: PurchasesInvoce
+      component: () => <PurchasesInvoce session={session} />
     },
     {
       label: 'Proveedores',
-      component: AllSuppliders
+      component: () => <AllSuppliders session={session} />
     }
   ];
 
@@ -34,25 +34,35 @@ const Expenses = () => {
   );
 };
 
-const ExpensesContainer = ({ match: { path } }) => {
+const ExpensesContainer = ({ match: { path }, session }) => {
   return (
     <Switch>
-      <Route exact path={path} component={Expenses} />
+      <Route
+        exact
+        path={path}
+        render={routeProps => <Expenses {...routeProps} session={session} />}
+      />
       <Route
         exact
         path={`${path}/proveedores/:id`}
-        component={DetailsSupplier}
+        render={routeProps => (
+          <DetailsSupplier {...routeProps} session={session} />
+        )}
       />
       <Route
         exact
         path={`${path}/factura-compra/:id`}
-        component={DetailsInvoice}
+        render={routeProps => (
+          <DetailsInvoice {...routeProps} session={session} />
+        )}
       />
 
       <Route
         exact
         path={`${path}/facturas/compra/nuevo`}
-        component={NewPurchaseInvoce}
+        render={routeProps => (
+          <NewPurchaseInvoce {...routeProps} session={session} />
+        )}
       />
     </Switch>
   );

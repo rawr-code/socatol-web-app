@@ -7,14 +7,20 @@ import Layout from '../Layout';
 import { publicRoutes, privateRoutes } from './appRoutes';
 
 const RoutesGenerator = ({ session, refetch }) => {
-  let userRoutes;
+  let userRoutes = [];
   if (session) {
     const { role } = session;
     if (role && role !== '') {
       if (role === 'ADMINISTRADOR') {
         userRoutes = privateRoutes;
       } else {
-        userRoutes = privateRoutes.filter(route => route.permissions === role);
+        privateRoutes.forEach(route => {
+          const permissionIndex = route.permissions.indexOf(role);
+          console.log(permissionIndex);
+          if (permissionIndex >= 0) {
+            userRoutes.push(route);
+          }
+        });
       }
     }
 
@@ -26,7 +32,9 @@ const RoutesGenerator = ({ session, refetch }) => {
               <Route
                 key={index}
                 path={route.path}
-                component={route.component}
+                render={routeProps => (
+                  <route.component {...routeProps} session={session} />
+                )}
                 exact={route.exact && route.exact}
               />
             ))}
