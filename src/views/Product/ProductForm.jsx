@@ -78,7 +78,11 @@ class ProductForm extends Component {
         stock: Number(model.stock)
       };
     } else {
-      input = model;
+      input = {
+        ...model,
+        price: Number(model.price),
+        stock: Number(model.stock)
+      };
     }
 
     const result = await mutate({ variables: { input } });
