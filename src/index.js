@@ -29,13 +29,13 @@ const Errors = onError(({ graphQLErrors, networkError }) => {
 
 // Create an http link
 const httpLink = createUploadLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: 'http://192.168.43.230:5000/graphql',
   credentials: 'same-origin'
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:5000/graphql`,
+  uri: `ws://192.168.43.230:5000/graphql`,
   options: {
     reconnect: true
   }

@@ -11,7 +11,7 @@ const AdminContainer = () => {
       <FeatureBar title="Base de datos" />
 
       <Provider store={store}>
-        <Playground endpoint="http://10.42.0.61:5000/graphql" />
+        <Playground endpoint="http://192.168.43.230:5000/graphql" />
       </Provider>
     </>
   );

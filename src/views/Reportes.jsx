@@ -40,6 +40,156 @@ const categories = {
   Inventario: ['Almacenes', 'Productos']
 };
 
+const TableProveedores = () => {
+  return (
+    <Query query={personQueries.GET_SUPPLIDERS_QUERY}>
+      {({ loading, error, data }) => {
+        if (loading) return null;
+        if (error) console.log(error);
+
+        const { persons } = data;
+        console.log(persons);
+        return (
+          <>
+            <CardContent>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img src={personImg} alt="imageninvoice" />
+                <div style={{ marginLeft: 16 }}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <b>Lista de proveedores</b>
+                  </Typography>
+                </div>
+              </div>
+            </CardContent>
+            <Table style={{ minWidth: 700 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Cedula</TableCell>
+                  <TableCell>Nombre</TableCell>
+                  <TableCell>Telefono</TableCell>
+                  <TableCell>Estado</TableCell>
+                  <TableCell>Municipio</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {persons.map(item => (
+                  <TableRow key={item.id}>
+                    <TableCell>{item.dni}</TableCell>
+                    <TableCell>{item.name}</TableCell>
+                    <TableCell>{item.phone}</TableCell>
+                    <TableCell>{item.state}</TableCell>
+                    <TableCell>{item.municipality}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </>
+        );
+      }}
+    </Query>
+  );
+};
+
+const ProveedoresDetalles = ({ data: { id } }) => {
+  return (
+    <Query query={personQueries.GET_SUPPLIER_QUERY} variables={{ id }}>
+      {({ loading, error, data }) => {
+        if (loading) return null;
+        if (error) console.log(error);
+
+        const { person } = data;
+        console.log(person);
+        return (
+          <>
+            <CardContent>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <img src={personImg} alt="imagen" />
+                <div style={{ marginLeft: 16 }}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <b>Proveedor</b>
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Nombre: {person.name}
+                  </Typography>
+                </div>
+              </div>
+            </CardContent>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <CardContent>
+                <div>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <b>Información del proveedor</b>
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Nombre: {person.name}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Telefono: {person.phone}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Estado: {person.state}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Municipio: {person.municipality}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Dirección: {person.address}
+                  </Typography>
+                </div>
+              </CardContent>
+              {/* <CardContent>
+                <div style={{ marginLeft: 16 }}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <b>Tipo de pago</b>
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {invoice.paymentType}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    <b>Monto total</b>
+                  </Typography>
+                  <Typography variant="h4" color="textSecondary">
+                    <b>{invoice.amount} Bs. S</b>
+                  </Typography>
+                </div>
+              </CardContent> */}
+            </div>
+            <br />
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              style={{ marginLeft: 24 }}>
+              <b>Facturas de compra</b>
+            </Typography>
+            <Table style={{ minWidth: 700 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Fecha</TableCell>
+                  <TableCell align="left">Número</TableCell>
+                  <TableCell>Tipo de pago</TableCell>
+                  <TableCell align="right">Monto</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {person.invoices.purchase.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="left">{item.dateEmit}</TableCell>
+                    <TableCell align="left">{item.number}</TableCell>
+                    <TableCell>{item.paymentType}</TableCell>
+                    <TableCell align="right">
+                      <b>{item.amount} Bs. S</b>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </>
+        );
+      }}
+    </Query>
+  );
+};
+
 const TableClientes = () => {
   return (
     <Query query={personQueries.GET_CLIENTS_QUERY}>
@@ -159,7 +309,7 @@ const ClientesDetalles = ({ data: { id } }) => {
               variant="subtitle1"
               color="textSecondary"
               style={{ marginLeft: 24 }}>
-              <b>Facturas de compra</b>
+              <b>Facturas de venta</b>
             </Typography>
             <Table style={{ minWidth: 700 }}>
               <TableHead>
@@ -842,6 +992,9 @@ class ComponentToPrint extends React.Component {
     } else if (category === 'Clientes') {
       if (data) Vista = () => <ClientesDetalles data={data} />;
       else Vista = () => <TableClientes />;
+    } else if (category === 'Proveedores') {
+      if (data) Vista = () => <ProveedoresDetalles data={data} />;
+      else Vista = () => <TableProveedores />;
     }
 
     return (
@@ -930,6 +1083,12 @@ class ReportesContainer extends Component {
       query = personQueries.GET_CLIENTS_QUERY;
       label = 'Cliente';
       placeholder = 'Seleccione un cliente';
+      result = 'persons';
+    }
+    if (category === 'Proveedores') {
+      query = personQueries.GET_SUPPLIDERS_QUERY;
+      label = 'Proveedor';
+      placeholder = 'Seleccione un proveedor';
       result = 'persons';
     }
 
