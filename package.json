@@ -62,7 +62,7 @@
     "shortid": "^2.2.14",
     "subscriptions-transport-ws": "^0.9.16",
     "sweetalert-react": "^0.4.11",
-    "xlsx": "^0.14.1"
+    "xlsx": "^0.17.0"
   },
   "eslintConfig": {
     "extends": "react-app"
